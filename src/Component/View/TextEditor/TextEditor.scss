@@ -3,6 +3,10 @@
 .text-editor {
   position: relative;
 
+  [contenteditable="true"]:focus {
+    outline: none;
+  }
+  
   .edited-text-root {
     h2 {
       font-size: $size-4;
