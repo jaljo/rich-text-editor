@@ -7,21 +7,9 @@ import rootEpic from './Epic'
 import { applyMiddleware, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import { default as mainReducer, debug } from './Redux/State'
-import createBrowserHistory from 'history/createBrowserHistory'
-import { fetchApi } from './Util.js'
-import CropperBox from './CropperBox'
 
-const CropperJsBox   = CropperBox ([]);
-const cookies        = new Cookies();
-const history        = createBrowserHistory();
-const location       = window.location;
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
-    history,
-    location,
-    fetchApi: fetchApi(fetch, cookies),
-    cookies,
-    cropperBox: CropperJsBox,
     window: window,
   },
 });
@@ -33,8 +21,4 @@ const store          = createStore(reducer, reducer(), middleware);
 
 epicMiddleware.run(rootEpic);
 
-ReactDOM.render(<App
-  store={store}
-  location={location}
-  history={history}
-/>, document.getElementById('root'));
+ReactDOM.render(<App store={store}/>, document.getElementById('root'));

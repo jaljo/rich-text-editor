@@ -19,7 +19,6 @@ import {
   test,
 } from 'ramda'
 import parseUrl from 'url-parse'
-import { parseQueryString } from '../Util'
 
 // toArray :: [Node] -> [Object]
 const toArray = nodes => Object
@@ -169,24 +168,6 @@ const createYoutubeVideo = node => ({
   src: node.getAttribute('src'),
 })
 
-// isBrightcoveVideoBC :: Node -> Boolean
-const isBrightcoveVideoBC = node => 'IFRAME' === node.tagName
-  && test(/players\.brightcove\.net/, node.getAttribute('src'))
-
-// getVideoId :: String -> String
-const getVideoId = pipe(
-  parseUrl,
-  ifElse(prop('query'), prop('query'), prop('search')),
-  parseQueryString,
-  prop('videoId'),
-)
-
-// createBrightcoveVideoBC :: Node -> Object
-const createBrightcoveVideoBC = node => ({
-  component: 'BrightcoveVideo',
-  videoId: getVideoId(node.getAttribute('src')),
-})
-
 // isBrightcoveVideo :: Node -> Boolean
 const isBrightcoveVideo = node => node.tagName === 'DIV'
   && node.classList.contains('i24-rendered-video')
@@ -209,7 +190,6 @@ const createComponent = cond([
   [isEmphasis, createEmphasis],
   [isLink, createLink],
   [isHeading, createHeading],
-  [isBrightcoveVideoBC, createBrightcoveVideoBC],
   [isBrightcoveVideo, createBrightcoveVideo],
   [isItalic, createItalic],
   [isBold, createBold],
