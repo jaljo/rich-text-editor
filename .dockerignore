@@ -1,0 +1,10 @@
+*
+
+!.docker/app/nginx.conf
+!public/
+!src/
+!.env.dist
+!.env.preprod.dist
+!.env.prod.dist
+!package.json
+!yarn.lock

@@ -1,0 +1,71 @@
+@import '../../../Style/variables';
+
+.paragraph-toolbox {
+  position: absolute;
+  opacity: 0;
+  transition: ease 0.5s all;
+  z-index: $zindex-1;
+  pointer-events: none;
+
+  &:not(.rtl) {
+    left: -155px;
+
+    form.insert-tweet,
+    form.insert-youtube {
+      left: 155px;
+    }
+  }
+
+  &.rtl {
+    right: -155px;
+
+    form.insert-tweet,
+    form.insert-youtube {
+      right: 155px;
+    }
+  }
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  ul {
+    width: 150px;
+    height: 40px;
+
+    li {
+      display: inline-block;
+
+      button {
+        cursor: pointer;
+        padding: 0 5px 0 5px;
+        margin: 0;
+        color: $color-grey-light;
+        font-size: $font-xxl;
+        border: none;
+        background-color: $white;
+        outline: none;
+
+        &:hover {
+          color: $color-grey-dark;
+        }
+
+        &.active {
+          color: $black;
+        }
+      }
+    }
+  }
+
+  form.insert-tweet,
+  form.insert-youtube {
+    position: absolute;
+    top: -5px;
+
+    input {
+      width: 260px;
+      direction: ltr;
+    }
+  }
+}

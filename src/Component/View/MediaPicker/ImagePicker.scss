@@ -1,0 +1,88 @@
+@import '../../../Style/variables';
+@import '../../../Style/mixins';
+
+div[data-is="image-picker"] {
+  .left, .right {
+    position: absolute;
+    margin-left: $size-7;
+    margin-right: $size-7;
+    top: 220px;
+    opacity: 0;
+    pointer-events: none;
+
+    &.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .right {
+    right: 0px;
+  }
+
+  .container.images {
+    overflow-x: hidden;
+    overflow-y:hidden;
+    padding-bottom: $size-7;
+    height: 400px;
+
+    div.images-wrapper {
+      height: 100%;
+      width: 95%;
+      margin: auto;
+
+      .columns {
+        @media(min-width:$tablet) {
+          height: 50%;
+        }
+
+        .column.image {
+          position: relative;
+
+          @include animate-default();
+
+          cursor: pointer;
+          opacity: .5;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          img {
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+          }
+
+          .open-cropper {
+            position: absolute;
+            top: $size-6;
+            left: $size-6;
+            color: $white;
+            background-color: $gray;
+            width: $size-4;
+            height: $size-4;
+            border-radius: $size-7;
+            padding-left: 3px;
+
+            &:hover {
+              background-color: $black;
+            }
+          }
+        }
+      }
+    }
+
+    @media(max-width:$tablet) {
+      overflow-y: scroll;
+      .columns {
+        height: auto;
+        .column {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

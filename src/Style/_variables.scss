@@ -1,0 +1,90 @@
+@import 'bulma/sass/utilities/initial-variables';
+
+$font-i24: I24News;
+
+$black: #1c222e;
+$blue: #07244b;
+$light-blue: #1051a8;
+$white: #fff;
+$soft-white: #f7f7f7;
+$grey: #d6d6d6;
+$gray: darken($grey, 20%);
+$red: #e1151d;
+
+// Margins and paddings in REM
+$mp-xs: 0.2rem;
+$mp-s: 0.3rem;
+$mp-m: 0.4rem;
+$mp-l: 0.6rem;
+$mp-xl: 1rem;
+$mp-xxl: 1.3rem;
+
+// z indexes
+$zindex-neg: -1;
+$zindex-0: 1;
+$zindex-1: 100;
+$zindex-2: 200;
+$zindex-3: 300;
+$zindex-4: 400;
+$zindex-5: 500;
+
+// Container size
+$size-reader: 740px;
+$size-page: 1010px;
+
+// Element size
+$size-0: 4rem;
+
+// Header size
+$header-height: 50px;
+
+/**
+ * @deprecated The following variables are deprecated, try not to use them:
+ */
+// colors
+$color-black: #1c222e;
+$color-dark: #454d5d;
+$color-video-black: #141820;
+$color-deep-black: black;
+$color-deep-blue: #07244b;
+$color-grey: #f6f6f6;
+$color-border: #f1f1f1;
+$color-grey-light: darken($color-grey, 40%);
+$color-grey-dark: #4a4a4a;
+$color-red: #e1151d;
+$color-green: #5BB12F;
+$color-white: #fff;
+
+// spectre override
+$body-font-color: lighten($color-deep-black, 10%);
+
+// Responsive breakpoints
+$size-xxs: 360px;
+$size-xs: 480px;
+$size-sm: 600px;
+$size-md: 840px;
+$size-lg: 960px;
+$size-xl: 1280px;
+$size-2x: 1440px;
+
+// Container size
+$size-reader: 740px;
+$size-page: 1010px;
+
+// z indexes
+$zindex-neg: -1;
+$zindex-0: 1;
+$zindex-1: 100;
+$zindex-2: 200;
+$zindex-3: 300;
+$zindex-4: 400;
+
+// Normalized font sizes
+$font-xxs: 0.65em;
+$font-xs: 0.8em;
+$font-s: 0.9em;
+$font-m: 1.0em;
+$font-l: 1.1em;
+$font-xl: 1.3em;
+$font-xxl: 1.6em;
+$font-xxxl: 2em;

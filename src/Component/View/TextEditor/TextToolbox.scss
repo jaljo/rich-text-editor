@@ -1,0 +1,93 @@
+@import '../../../Style/variables';
+
+.text-toolbox {
+  position: absolute;
+  opacity: 0;
+  transition: ease 0.5s all;
+  z-index: $zindex-1;
+  background-color: $grey-darker;
+  border-radius: 5px;
+  width: 225px;
+  height: 40px;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  ul {
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      button {
+        cursor: pointer;
+        background-color: $grey-darker;
+        border: none;
+        font-size: $font-xxl;
+        margin: 0;
+        padding: 5px;
+        color: $gray;
+        outline: none;
+
+        &:hover {
+          color: $grey-lighter;
+        }
+
+        &.active {
+          color: $white;
+        }
+
+        &.disabled {
+          color: $grey-dark;
+        }
+      }
+    }
+  }
+
+  .link-creator {
+    form {
+      width: 195px;
+      display: inline-block;
+
+      input {
+        background-color: $grey-darker;
+        border: none;
+        caret-color: $white;
+        color: $white;
+        margin: 5px 10px 10px 0px;
+        margin-left: 10px;
+        margin-right: 5px;
+        height: 30px;
+        outline: none;
+        direction: ltr;
+      }
+    }
+
+    button.close {
+      display: inline-block;
+      color: $gray;
+      cursor: pointer;
+      font-size: .75rem;
+      background-color: $grey-darker;
+      border: none;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .arrow {
+    display: block;
+    position: absolute;
+    top: 35px;
+    left: calc((225px / 2) - (10px / 2));
+    height: 10px;
+    width: 10px;
+    transform: rotate(45deg);
+    background-color: $grey-darker;
+  }
+}

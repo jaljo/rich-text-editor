@@ -1,0 +1,207 @@
+@import './fonts';
+@import './variables';
+@import './mixins';
+@import './pagination';
+@import './list';
+@import './editor';
+@import 'bulma/bulma';
+
+html {
+  background-color: $soft-white;
+  height: 100%;
+}
+
+body, #root, .app, .page-content {
+  height: 100%;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.container.reader {
+  width: $size-reader;
+}
+
+.container.page {
+  width: $size-page;
+}
+
+.is-white-backgrounded {
+  background-color: $white;
+  box-shadow: 0px 0px 5px lighten($black, 70%);
+}
+
+[contenteditable="true"]:focus {
+  outline: none;
+}
+
+.btn-i24 {
+  @include animate-default();
+
+  line-height: 25px;
+  cursor: pointer;
+  color: $gray;
+  font-weight: $weight-normal;
+
+  .icomoon-font {
+    font-size: $size-6;
+    padding-top: 2px;
+    position: relative;
+    top: 1px;
+    font-weight: $weight-normal;
+    letter-spacing: 1px;
+  }
+
+  &:hover,
+  &.active {
+    color: $black;
+  }
+}
+
+button.btn-i24 {
+  background-color: $red;
+  color: $white;
+  border: none;
+
+  &:focus {
+    color: $white;
+    outline: none;
+  }
+
+  &:hover {
+    color: $white;
+    font-weight: bold;
+  }
+
+  &.create {
+    background-color: $blue;
+  }
+}
+
+/* custom checkbox */
+label.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+label.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: $size-4;
+  width: $size-4;
+  background-color: $grey;
+  border-radius: 20px;
+}
+
+label.checkbox:hover input ~ .checkmark {
+  background-color: $gray;
+}
+
+label.checkbox input:checked ~ .checkmark {
+  background-color: $blue;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+label.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+label.checkbox .checkmark:after {
+  left: 9px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+span.required {
+  color: $red;
+  font-size: $size-7;
+  font-weight: normal;
+}
+
+.placeholder {
+  @include animate-default();
+
+  border: 2px dashed $grey;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $gray;
+    background-color: $grey;
+  }
+}
+
+/* general style for panels like seo / metadata... */
+.sliding-panel {
+  @include animate-panel();
+
+  background-color: $white;
+  position: fixed;
+  width: 100%;
+  z-index: $zindex-1;
+  top: -1000px;
+
+  form {
+    padding-top: $size-7;
+  }
+
+  .close {
+    display: block;
+    margin: auto;
+    padding-top: $size-6;
+    padding-bottom: $size-6;
+    text-align: center;
+  }
+
+  &.opening {
+    top: 90px;
+  }
+}
+
+/* general style for inset panels line signature creator / media picker... */
+.inset-panel {
+  @include animate-default();
+
+  position: relative;
+  background-color: $white;
+  padding: $size-4 0 $size-4 0;
+  margin: $size-4 0 $size-4 0;
+  box-shadow: 0px 0px 5px lighten($black, 70%) inset;
+  overflow: hidden;
+
+  .close {
+    position: absolute;
+    top: $size-7;
+    right: $size-7;
+  }
+
+  &.closed {
+    max-height: 0px;
+    padding: 0;
+    margin: 0;
+  }
+}

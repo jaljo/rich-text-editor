@@ -1,0 +1,18 @@
+/* pagination */
+nav.pagination {
+  margin-top: $size-3;
+
+  .pagination-previous,
+  .pagination-next {
+      border: none;
+      box-shadow: none;
+  }
+
+  .pagination-link {
+    font-size: .9rem;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}

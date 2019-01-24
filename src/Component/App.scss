@@ -1,0 +1,26 @@
+@import '../Style/variables';
+
+html {
+  background-color: #3d3d3d;
+}
+
+div#root {
+  display: flex;
+  flex-direction:column;
+}
+
+main {
+  flex: 1;
+  width: 1024px;
+  margin: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  margin-top: $size-1;
+  background-color: $white;
+  filter:drop-shadow(5px 5px 10px black);
+}
+
+div.text-editor {
+  width: 65%;
+  margin: 5rem auto 5rem auto;
+}

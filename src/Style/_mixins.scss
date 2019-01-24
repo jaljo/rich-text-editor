@@ -1,0 +1,29 @@
+// Animation mixins
+@mixin animate-default() {
+  transition: all 0.2s ease-out;
+}
+
+@mixin animate-panel() {
+  transition: all 0.5s ease;
+}
+
+@mixin animate-all($duration, $type: linear) {
+  transition: all $duration $type;
+  -moz-transition: all $duration $type;
+  -ms-transition: all $duration $type;
+  -webkit-transition: all $duration $type;
+}
+
+@mixin animate($property, $duration, $type: linear) {
+  transition: $property $duration $type;
+  -moz-transition: $property $duration $type;
+  -ms-transition: $property $duration $type;
+  -webkit-transition: $property $duration $type;
+}
+
+@mixin rotate($degrees) {
+  transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -webkit-transform: rotate($degrees);
+}

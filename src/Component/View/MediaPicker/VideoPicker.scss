@@ -1,0 +1,69 @@
+@import '../../../Style/variables';
+@import '../../../Style/mixins';
+
+div[data-is="video-picker"] {
+  .left, .right {
+    position: absolute;
+    margin-left: $size-7;
+    margin-right: $size-7;
+    top: 220px;
+    opacity: 0;
+    pointer-events: none;
+
+    &.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .right {
+    right: 0px;
+  }  
+
+  .container.videos {
+    overflow-x: hidden;
+    overflow-y:hidden;
+    padding-bottom: $size-7;
+    height: 400px;
+
+    div.videos-wrapper {
+      height: 100%;
+
+      .columns {
+        @media(min-width:$tablet) {
+          height: 50%;
+        }
+
+        .column.video {
+          position: relative;
+          @include animate-default();
+
+          cursor: pointer;
+          opacity: .5;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          img {
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+
+    @media(max-width:$tablet) {
+      overflow-y: scroll;
+      .columns {
+        height: auto;
+        .column {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
