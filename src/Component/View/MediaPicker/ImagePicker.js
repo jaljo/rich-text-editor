@@ -1,6 +1,6 @@
 import React from 'react'
 import { compose, map, nth } from 'ramda'
-import { getImagePath, splitMedias, containsTenItems } from '../../../Util'
+import { splitMedias, containsTenItems } from '../../../Util'
 import './ImagePicker.css'
 import NoResult from '../List/NoResult'
 
@@ -49,7 +49,7 @@ const renderImages = (props) => map(image =>
   <div key={image.id} className="column is-one-fifth image">
     <img
       onClick={() => props.pickImage(image.id, props.domain, props.extra)}
-      src={getImagePath(image.href)}
+      src={image.href}
       alt={image.legend}
     />
   </div>
