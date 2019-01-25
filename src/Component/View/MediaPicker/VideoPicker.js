@@ -15,12 +15,12 @@ export default ({
     {/* scroll left */}
     <p
       onClick={scrollLeft}
-      className={`btn-i24 left is-pulled-left icomoon-font ${page > 1 ? 'show' : ''}`}
+      className={`btn-knp left is-pulled-left icomoon-font ${page > 1 ? 'show' : ''}`}
     >l</p>
     {/* scroll right */}
     <p
       onClick={scrollRight}
-      className={`btn-i24 right is-pulled-right icomoon-font ${containsTenItems(videos) ? 'show' : ''}`}
+      className={`btn-knp right is-pulled-right icomoon-font ${containsTenItems(videos) ? 'show' : ''}`}
     >r</p>
 
     {/* search result container */}

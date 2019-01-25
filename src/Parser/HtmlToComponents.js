@@ -16,7 +16,6 @@ import {
   prop,
   range,
   split,
-  test,
 } from 'ramda'
 import parseUrl from 'url-parse'
 
@@ -170,7 +169,7 @@ const createYoutubeVideo = node => ({
 
 // isBrightcoveVideo :: Node -> Boolean
 const isBrightcoveVideo = node => node.tagName === 'DIV'
-  && node.classList.contains('i24-rendered-video')
+  && node.classList.contains('knp-rendered-video')
 
 // createBrightcoveVideo :: Node -> Object
 const createBrightcoveVideo = node => ({

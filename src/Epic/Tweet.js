@@ -6,14 +6,7 @@ import { prop } from 'ramda'
 import { logObservableError } from '../Util'
 import { CLEAR } from './../Redux/State/TextEditor/TextEditor'
 
-/**
- * Renders an embed tweet markup to a fancy tweet.
- *
- * See this i24news article for a tweet :
- * /en/news/international/americas/157278-171009-top-republican-lawmaker-says-us-on-course-for-wwiii-with-trump-at-helm
- *
- * renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
- */
+// renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
 export const renderTweetEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(RENDER_TWEET),

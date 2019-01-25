@@ -14,11 +14,11 @@ export const INITIAL_STATE = {
 }
 
 // media picker action types
-export const OPEN = '@i24/MediaPicker/OPEN'
-export const CLOSE = '@i24/MediaPicker/CLOSE'
-export const OPEN_IMAGE_PICKER = '@i24/MediaPicker/OPEN_IMAGE_PICKER'
-export const OPEN_VIDEO_PICKER = '@i24/MediaPicker/OPEN_VIDEO_PICKER'
-export const CLEAR = '@i24/MediaPicker/CLEAR'
+export const OPEN = '@knp/MediaPicker/OPEN'
+export const CLOSE = '@knp/MediaPicker/CLOSE'
+export const OPEN_IMAGE_PICKER = '@knp/MediaPicker/OPEN_IMAGE_PICKER'
+export const OPEN_VIDEO_PICKER = '@knp/MediaPicker/OPEN_VIDEO_PICKER'
+export const CLEAR = '@knp/MediaPicker/CLEAR'
 
 // open :: (String, Object, String) -> Action
 export const open = (domain, extra, defaultOpenedComponent) => ({

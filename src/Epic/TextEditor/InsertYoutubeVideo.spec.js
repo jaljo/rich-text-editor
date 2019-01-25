@@ -55,7 +55,7 @@ beforeEach(() => {
   }, 1000);
 
   it('validate a youtube url : failure (wrong id)', done => {
-    validateYoutubeUrl('https://www.i24news.com')
+    validateYoutubeUrl('https://www.knplabs.com')
       .catch(error => {
         expect(error).toEqual(
           'The provided URL is not a valid youtube video.'

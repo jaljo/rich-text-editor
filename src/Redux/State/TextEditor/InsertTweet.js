@@ -10,12 +10,12 @@ export const INSTANCE_INITIAL_STATE = {
 export const INITIAL_STATE = {}
 
 // InsertTweet action types
-export const INITIALIZE = '@i24/TextEditor/InsertTweet/INITIALIZE'
-export const INSERT_TWEET = '@i24/TextEditor/InsertTweet/INSERT_TWEET'
-export const EMBED_TWEET_FETCHED = '@i24/TextEditor/InsertTweet/EMBED_TWEET_FETCHED'
-export const TWEET_INSERTED = '@i24/TextEditor/InsertTweet/TWEET_INSERTED'
-export const ERROR = '@i24/TextEditor/InsertTweet/ERROR'
-export const CLEAR = '@i24/TextEditor/InsertTweet/CLEAR'
+export const INITIALIZE = '@knp/TextEditor/InsertTweet/INITIALIZE'
+export const INSERT_TWEET = '@knp/TextEditor/InsertTweet/INSERT_TWEET'
+export const EMBED_TWEET_FETCHED = '@knp/TextEditor/InsertTweet/EMBED_TWEET_FETCHED'
+export const TWEET_INSERTED = '@knp/TextEditor/InsertTweet/TWEET_INSERTED'
+export const ERROR = '@knp/TextEditor/InsertTweet/ERROR'
+export const CLEAR = '@knp/TextEditor/InsertTweet/CLEAR'
 
 // initialize :: String -> Action
 export const initialize = editorName => ({

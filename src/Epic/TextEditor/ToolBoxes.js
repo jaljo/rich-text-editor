@@ -82,7 +82,7 @@ const getNodeIndex = (editorName, node) =>
 // notExcluded :: Node -> Boolean
 const notExcluded = allPass([
   compose(isNil, closestHavingClass('image-wrapper')),
-  compose(isNil, closestHavingClass('i24-rendered-tweet')),
+  compose(isNil, closestHavingClass('knp-rendered-tweet')),
 ])
 
 // showTextToolboxEpic :: Epic -> Observable Action.SHOW_TEXT_TOOLBOX

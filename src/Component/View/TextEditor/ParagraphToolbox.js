@@ -24,25 +24,25 @@ export default ({
     <ul>
       <li>
         <button
-          className={`btn-i24 icomoon-font ${mediaPickerOpened ? 'active' : ''}`}
+          className={`btn-knp icomoon-font ${mediaPickerOpened ? 'active' : ''}`}
           onClick={() => openMediaPicker('TEXT_EDITOR', { editorName })}
         >é</button>
       </li>
       <li>
         <button
-          className="btn-i24 icomoon-font"
+          className="btn-knp icomoon-font"
           onClick={() => openMediaPicker('TEXT_EDITOR', { editorName }, 'videoPicker')}
         >3</button>
       </li>
       <li>
         <button
-          className={`btn-i24 icomoon-font ${insertTweetOpened ? 'active' : ''}`}
+          className={`btn-knp icomoon-font ${insertTweetOpened ? 'active' : ''}`}
           onClick={ insertTweetOpened ? closeInsertTweet : openInsertTweet}
         >0</button>
       </li>
       <li>
         <button
-          className={`btn-i24 icomoon-font ${insertYoutubeVideoOpened ? 'active' : ''}`}
+          className={`btn-knp icomoon-font ${insertYoutubeVideoOpened ? 'active' : ''}`}
           onClick={ insertYoutubeVideoOpened ? closeInsertYoutubeVideo: openInsertYoutubeVideo }
         >Y</button>
       </li>

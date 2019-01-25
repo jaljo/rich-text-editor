@@ -42,13 +42,13 @@ export default ({
             <ul>
               <li>
                 <p
-                  className={`image-mode btn-i24 ${isImagePickerOpened ? 'active' : ''}`}
+                  className={`image-mode btn-knp ${isImagePickerOpened ? 'active' : ''}`}
                   onClick={e => isImagePickerOpened ? e.preventDefault() : openImagePicker()}
                 ><span className="icomoon-font">c</span></p>
               </li>
               <li>
                 <p
-                  className={`video-mode btn-i24 ${isVideoPickerOpened ? 'active' : ''}`}
+                  className={`video-mode btn-knp ${isVideoPickerOpened ? 'active' : ''}`}
                   onClick={e => isVideoPickerOpened ? e.preventDefault() : openVideoPicker()}
                 ><span className="icomoon-font">3</span></p>
               </li>
@@ -61,7 +61,7 @@ export default ({
     { isImagePickerOpened && <ImagePicker/> }
     { isVideoPickerOpened && <VideoPicker/>}
 
-    <p className="btn-i24 close">
+    <p className="btn-knp close">
       <span className="icomoon-font" onClick={close}>e</span>
     </p>
   </div>
