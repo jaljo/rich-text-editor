@@ -32,16 +32,16 @@ const sanitizeTweets = renderedTweets => pipe(
 // sanitizeVideo :: Element -> Element
 const sanitizeVideo = videoElement => videoElement.innerHTML = ''
 
-// sanitizeBrightcoveVideos :: State.BrightcovePlayer.renderedVideos -> String
-const sanitizeBrightcoveVideos = state => pipe(
+// sanitizeBrightcoveVideos :: Node -> String
+const sanitizeBrightcoveVideos = pipe(
   tap(wrapper => Array
     .from(wrapper.getElementsByClassName('i24-rendered-video'))
     .map(sanitizeVideo)
   )
 )
 
-// sanitizeContentBody :: (Object, [Object]) -> String -> String
-export const sanitizeContentBody = (renderedTweets, renderedVideos) => pipe(
+// sanitizeContentBody :: Object -> String -> String
+export const sanitizeContentBody = renderedTweets => pipe(
   createWrapper,
   sanitizeTweets(renderedTweets),
   sanitizeBrightcoveVideos(renderedVideos),
