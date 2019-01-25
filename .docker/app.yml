@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   app:
-    image: i24-bo:app-dev
+    image: knp-te:app-dev
     build:
       context: ../
       dockerfile: .docker/app/Dockerfile
@@ -26,7 +26,7 @@ services:
           memory: 800M
 
   server:
-    image: i24-bo:server-dev
+    image: knp-te:server-dev
     build:
       context: ../
       dockerfile: .docker/app/Dockerfile
@@ -39,14 +39,14 @@ services:
       - published: 5001
         target: 3001
         protocol: tcp
-        mode: host        
+        mode: host
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
 
   test:
-    image: i24-bo:test-dev
+    image: knp-te:test-dev
     build:
       context: ../
       dockerfile: .docker/app/Dockerfile

@@ -11,14 +11,14 @@ export const INITIAL_STATE = {
 }
 
 // image picker action types
-export const FETCH_IMAGES = '@i24/MediaPicker/ImagePicker/FETCH_IMAGES'
-export const RECEIVED_IMAGES = '@i24/MediaPicker/ImagePicker/RECEIVED_IMAGES'
-export const SCROLL_LEFT = '@i24/MediaPicker/ImagePicker/SCROLL_LEFT'
-export const SCROLL_RIGHT = '@i24/MediaPicker/ImagePicker/SCROLL_RIGHT'
-export const PICK_IMAGE = '@i24/MediaPicker/ImagePicker/PICK_IMAGE'
-export const PICK_IMAGE_WITH_CREDITS = '@i24/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS'
-export const ERROR = '@i24/MediaPicker/ImagePicker/ERROR'
-export const CLEAR = '@i24/MediaPicker/ImagePicker/CLEAR'
+export const FETCH_IMAGES = '@knp/MediaPicker/ImagePicker/FETCH_IMAGES'
+export const RECEIVED_IMAGES = '@knp/MediaPicker/ImagePicker/RECEIVED_IMAGES'
+export const SCROLL_LEFT = '@knp/MediaPicker/ImagePicker/SCROLL_LEFT'
+export const SCROLL_RIGHT = '@knp/MediaPicker/ImagePicker/SCROLL_RIGHT'
+export const PICK_IMAGE = '@knp/MediaPicker/ImagePicker/PICK_IMAGE'
+export const PICK_IMAGE_WITH_CREDITS = '@knp/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS'
+export const ERROR = '@knp/MediaPicker/ImagePicker/ERROR'
+export const CLEAR = '@knp/MediaPicker/ImagePicker/CLEAR'
 
 // fetchImages :: String -> Action
 export const fetchImages = (searchString = '') => ({

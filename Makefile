@@ -3,7 +3,7 @@ dev: build local-deploy install-deps
 
 .PHONY: kill
 kill:
-	docker stack rm bo
+	docker stack rm knp_rte
 
 .PHONY: install-deps
 install-deps:
@@ -11,7 +11,7 @@ install-deps:
 
 .PHONY: local-deploy
 local-deploy:
-	docker stack deploy -c .docker/app.yml --resolve-image=never --prune bo
+	docker stack deploy -c .docker/app.yml --resolve-image=never --prune knp_rte
 
 .PHONY: test
 test:

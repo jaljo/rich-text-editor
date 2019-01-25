@@ -29,13 +29,13 @@
       margin-bottom: $size-7;
       position: relative;
 
-      &.i24-rendered-tweet {
+      &.knp-rendered-tweet {
         border-left: 0.1rem solid $grey;
         margin-left: 0;
         padding: 0.4rem 0.8rem;
       }
 
-      &:not(.i24-rendered-tweet) {
+      &:not(.knp-rendered-tweet) {
         text-align: center;
         font-style: italic;
         font-size: $size-4;

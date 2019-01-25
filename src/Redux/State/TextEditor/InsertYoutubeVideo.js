@@ -9,11 +9,11 @@ export const INSTANCE_INITIAL_STATE = {
 }
 
 // InsertYoutube action types
-export const INSERT_YOUTUBE_VIDEO = '@i24/TextEditor/InsertYoutube/INSERT_YOUTUBE_VIDEO'
-export const YOUTUBE_VIDEO_INSERTED = '@i24/TextEditor/InsertYoutube/YOUTUBE_VIDEO_INSERTED'
-export const INITIALIZE = '@i24/TextEditor/InsertYoutube/INITIALIZE'
-export const CLEAR = '@i24/TextEditor/InsertYoutube/CLEAR'
-export const ERROR = '@i24/TextEditor/InsertYoutbe/ERROR'
+export const INSERT_YOUTUBE_VIDEO = '@knp/TextEditor/InsertYoutube/INSERT_YOUTUBE_VIDEO'
+export const YOUTUBE_VIDEO_INSERTED = '@knp/TextEditor/InsertYoutube/YOUTUBE_VIDEO_INSERTED'
+export const INITIALIZE = '@knp/TextEditor/InsertYoutube/INITIALIZE'
+export const CLEAR = '@knp/TextEditor/InsertYoutube/CLEAR'
+export const ERROR = '@knp/TextEditor/InsertYoutbe/ERROR'
 
 // insertYoutubeVideo :: (String, String)  -> Action.INSERT_YOUTUBE_VIDEO
 export const insertYoutubeVideo = (editorName, url) => ({

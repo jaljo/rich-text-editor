@@ -18,13 +18,13 @@ export const INITIAL_STATE = {
 }
 
 // VideoPicker action types
-export const FETCH_VIDEOS = '@i24/MediaPicker/VideoPicker/FETCH_VIDEOS'
-export const SEARCH_VIDEOS = '@i24/MediaPicker/VideoPicker/SEARCH_VIDEOS'
-export const VIDEOS_RECEIVED = '@i24/MediaPicker/VideoPicker/VIDEOS_RECEIVED'
-export const SCROLL_LEFT = '@i24/MediaPicker/VideoPicker/SCROLL_LEFT'
-export const SCROLL_RIGHT = '@i24/MediaPicker/VideoPicker/SCROLL_RIGHT'
-export const PICK_VIDEO = '@i24/MediaPicker/VideoPicker/PICK_VIDEO'
-export const CLEAR = '@i24/MediaPicker/VideoPicker/CLEAR'
+export const FETCH_VIDEOS = '@knp/MediaPicker/VideoPicker/FETCH_VIDEOS'
+export const SEARCH_VIDEOS = '@knp/MediaPicker/VideoPicker/SEARCH_VIDEOS'
+export const VIDEOS_RECEIVED = '@knp/MediaPicker/VideoPicker/VIDEOS_RECEIVED'
+export const SCROLL_LEFT = '@knp/MediaPicker/VideoPicker/SCROLL_LEFT'
+export const SCROLL_RIGHT = '@knp/MediaPicker/VideoPicker/SCROLL_RIGHT'
+export const PICK_VIDEO = '@knp/MediaPicker/VideoPicker/PICK_VIDEO'
+export const CLEAR = '@knp/MediaPicker/VideoPicker/CLEAR'
 
 // fetchVideos :: () -> Action.FETCH_VIDEOS
 export const fetchVideos = always({ type: FETCH_VIDEOS })

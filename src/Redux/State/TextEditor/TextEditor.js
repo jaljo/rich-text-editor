@@ -6,16 +6,16 @@ import { combineReducers } from 'redux'
 import { always } from 'ramda'
 
 // TextEditor actions types
-export const CLICK = '@i24/TextEditor/CLICK'
-export const KEY_DOWN = '@i24/TextEditor/KEY_DOWN'
-export const SELECT_TEXT = '@i24/TextEditor/SELECT_TEXT'
-export const PASTE = '@i24/TextEditor/PASTE'
-export const PASTE_GRANTED = '@i24/TextEditor/PASTE_GRANTED'
-export const DISPLAY_CLIPBOARD_WARNING = '@i24/TextEditor/DISPLAY_ERROR_WARNING'
-export const DISPLAY_CLIPBOARD_SUPPORT_ERROR = '@i24/TextEditor/DISPLAY_CLIPBOARD_SUPPORT_ERROR'
-export const TEXT_PASTED = '@i24/TextEditor/TEXT_PASTED'
-export const CLEAR = '@i24/TextEditor/CLEAR'
-export const INITIALIZE = '@i24/TextEditor/INITIALIZE'
+export const CLICK = '@knp/TextEditor/CLICK'
+export const KEY_DOWN = '@knp/TextEditor/KEY_DOWN'
+export const SELECT_TEXT = '@knp/TextEditor/SELECT_TEXT'
+export const PASTE = '@knp/TextEditor/PASTE'
+export const PASTE_GRANTED = '@knp/TextEditor/PASTE_GRANTED'
+export const DISPLAY_CLIPBOARD_WARNING = '@knp/TextEditor/DISPLAY_ERROR_WARNING'
+export const DISPLAY_CLIPBOARD_SUPPORT_ERROR = '@knp/TextEditor/DISPLAY_CLIPBOARD_SUPPORT_ERROR'
+export const TEXT_PASTED = '@knp/TextEditor/TEXT_PASTED'
+export const CLEAR = '@knp/TextEditor/CLEAR'
+export const INITIALIZE = '@knp/TextEditor/INITIALIZE'
 
 // click :: (String, Node) -> Action.CLICK
 export const click = (editorName, node) => ({

@@ -18,15 +18,15 @@ export const INSTANCE_INITIAL_STATE = {
 export const INITIAL_STATE = {}
 
 // text toolbox action types
-export const INITIALIZE = '@i24/TextEditor/TextToolbox/INITIALIZE'
-export const CLEAR = '@i24/TextEditor/TextToolbox/CLEAR'
-export const SHOW = '@i24/TextEditor/TextToolbox/SHOW'
-export const HIDE_ALL = '@i24/TextEditor/TextToolbox/HIDE_ALL'
-export const OPEN_LINK_CREATOR = '@i24/TextEditor/TextToolbox/OPEN_LINK_CREATOR'
-export const CLOSE_LINK_CREATOR = '@i24/TextEditor/TextToolbox/CLOSE_LINK_CREATOR'
-export const MUTATE = '@i24/TextEditor/TextToolbox/MUTATE'
-export const SAVE_RANGE = '@i24/TextEditor/TextToolbox/SAVE_RANGE'
-export const REFRESH_BUTTONS_STATE = '@i24/TextEditor/TextToolbox/REFRESH_BUTTONS_STATE'
+export const INITIALIZE = '@knp/TextEditor/TextToolbox/INITIALIZE'
+export const CLEAR = '@knp/TextEditor/TextToolbox/CLEAR'
+export const SHOW = '@knp/TextEditor/TextToolbox/SHOW'
+export const HIDE_ALL = '@knp/TextEditor/TextToolbox/HIDE_ALL'
+export const OPEN_LINK_CREATOR = '@knp/TextEditor/TextToolbox/OPEN_LINK_CREATOR'
+export const CLOSE_LINK_CREATOR = '@knp/TextEditor/TextToolbox/CLOSE_LINK_CREATOR'
+export const MUTATE = '@knp/TextEditor/TextToolbox/MUTATE'
+export const SAVE_RANGE = '@knp/TextEditor/TextToolbox/SAVE_RANGE'
+export const REFRESH_BUTTONS_STATE = '@knp/TextEditor/TextToolbox/REFRESH_BUTTONS_STATE'
 
 // initialize :: String -> Action.INITIALIZE
 export const initialize = editorName => ({

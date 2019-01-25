@@ -16,14 +16,14 @@ export default ({
   // brightcove SDK call wraps the video tag inside another element which breaks
   // react update. This uniqid key enforces this component to re-render itself.
   <div
-    className="video-wrapper i24-rendered-video"
+    className="video-wrapper knp-rendered-video"
     key={uniqid(videoId)}
     data-video-id={videoId}
     contentEditable={false}
   >
     {editable &&
       <p
-        className="i24-btn icomoon-font replace-video"
+        className="knp-btn icomoon-font replace-video"
         onClick={action}
       >p</p>
     }

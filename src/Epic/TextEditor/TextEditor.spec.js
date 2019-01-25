@@ -163,7 +163,7 @@ describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
 
 describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
   it('dispatches imageInserted', done => {
-    const imageMock = { href: 'cdn.i24.org/merkel.png', legend: 'merkel'};
+    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
     const insertImage$ = ActionsObservable.of(insertImage('editor-name', imageMock));
     const state$ = new StateObservable(new Subject, {
       TextEditor: {

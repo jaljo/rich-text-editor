@@ -5,9 +5,9 @@ export const INITIAL_STATE = {
   renderedTweets: {}, // key: tweetId, value: originalHtmlMarkup
 }
 
-export const RENDER_TWEET = '@i24/Tweet/RENDER_TWEET'
-export const TWEET_RENDERED = '@i24/Tweet/TWEET_RENDERED'
-export const CLEAR = '@i24/Tweet/CLEAR'
+export const RENDER_TWEET = '@knp/Tweet/RENDER_TWEET'
+export const TWEET_RENDERED = '@knp/Tweet/TWEET_RENDERED'
+export const CLEAR = '@knp/Tweet/CLEAR'
 
 // renderTweet :: (String, String, String) -> Action
 export const renderTweet = (tweetId, uid, originalHtmlMarkup) => ({

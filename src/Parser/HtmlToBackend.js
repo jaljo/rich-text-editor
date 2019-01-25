@@ -23,7 +23,7 @@ const sanitizeTweet = (tweetElement, originalHtmlMarkups) => tweetElement
 // Reverts rendered tweets to their embed markup.
 const sanitizeTweets = renderedTweets => pipe(
   tap(wrapper => Array
-    .from(wrapper.getElementsByClassName('i24-rendered-tweet'))
+    .from(wrapper.getElementsByClassName('knp-rendered-tweet'))
     .reverse()
     .map(tweetElement => sanitizeTweet(tweetElement, renderedTweets))
   )
@@ -35,7 +35,7 @@ const sanitizeVideo = videoElement => videoElement.innerHTML = ''
 // sanitizeBrightcoveVideos :: Node -> String
 const sanitizeBrightcoveVideos = pipe(
   tap(wrapper => Array
-    .from(wrapper.getElementsByClassName('i24-rendered-video'))
+    .from(wrapper.getElementsByClassName('knp-rendered-video'))
     .map(sanitizeVideo)
   )
 )

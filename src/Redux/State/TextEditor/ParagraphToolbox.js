@@ -13,18 +13,18 @@ export const INSTANCE_INITIAL_STATE = {
 export const INITIAL_STATE = {}
 
 // paragraph toolbox action types
-export const INITIALIZE = '@i24/TextEditor/ParagraphToolbox/INITIALIZE'
-export const SHOW = '@i24/TextEditor/ParagraphToolbox/SHOW'
-export const HIDE_ALL = '@i24/TextEditor/ParagraphToolbox/HIDE_ALL'
-export const INSERT_IMAGE = '@i24/TextEditor/ParagraphToolbox/INSERT_IMAGE'
-export const IMAGE_INSERTED = '@i24/TextEditor/ParagraphToolbox/IMAGE_INSERTED'
-export const OPEN_INSERT_TWEET = '@i24/TextEditor/ParagraphToolbox/OPEN_INSERT_TWEET'
-export const CLOSE_INSERT_TWEET = '@i24/TextEditor/ParagraphToolbox/CLOSE_INSERT_TWEET'
-export const CLEAR = '@i24/TextEditor/ParagraphToolbox/CLEAR'
-export const OPEN_INSERT_YOUTUBE_VIDEO = '@i24/TextEditor/ParagraphToolbox/OPEN_INSERT_YOUTUBE_VIDEO'
-export const CLOSE_INSERT_YOUTUBE_VIDEO = '@i24/TextEditor/ParagraphToolbox/CLOSE_INSERT_YOUTUBE_VIDEO'
-export const INSERT_VIDEO = '@i24/TextEditor/ParagraphToolbox/INSERT_VIDEO'
-export const VIDEO_INSERTED = '@i24/TextEditor/ParagraphToolbox/VIDEO_INSERTED'
+export const INITIALIZE = '@knp/TextEditor/ParagraphToolbox/INITIALIZE'
+export const SHOW = '@knp/TextEditor/ParagraphToolbox/SHOW'
+export const HIDE_ALL = '@knp/TextEditor/ParagraphToolbox/HIDE_ALL'
+export const INSERT_IMAGE = '@knp/TextEditor/ParagraphToolbox/INSERT_IMAGE'
+export const IMAGE_INSERTED = '@knp/TextEditor/ParagraphToolbox/IMAGE_INSERTED'
+export const OPEN_INSERT_TWEET = '@knp/TextEditor/ParagraphToolbox/OPEN_INSERT_TWEET'
+export const CLOSE_INSERT_TWEET = '@knp/TextEditor/ParagraphToolbox/CLOSE_INSERT_TWEET'
+export const CLEAR = '@knp/TextEditor/ParagraphToolbox/CLEAR'
+export const OPEN_INSERT_YOUTUBE_VIDEO = '@knp/TextEditor/ParagraphToolbox/OPEN_INSERT_YOUTUBE_VIDEO'
+export const CLOSE_INSERT_YOUTUBE_VIDEO = '@knp/TextEditor/ParagraphToolbox/CLOSE_INSERT_YOUTUBE_VIDEO'
+export const INSERT_VIDEO = '@knp/TextEditor/ParagraphToolbox/INSERT_VIDEO'
+export const VIDEO_INSERTED = '@knp/TextEditor/ParagraphToolbox/VIDEO_INSERTED'
 
 // initialize :: String -> Action
 export const initialize = editorName => ({

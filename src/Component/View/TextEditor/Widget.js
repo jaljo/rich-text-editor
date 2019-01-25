@@ -25,7 +25,7 @@ const Text = ({ component }) => component.text
 // Tweet :: Props -> React.Component
 const Tweet = ({ component }) =>
   <blockquote
-    className="i24-rendered-tweet"
+    className="knp-rendered-tweet"
     data-tweet-id={component.tweetId}
   >
     <TwitterWidget
@@ -42,7 +42,7 @@ const Tweet = ({ component }) =>
 // during text edition.
 export const UnconnectedTweet = (tweetId, uid) =>
   <blockquote
-    className="i24-rendered-tweet"
+    className="knp-rendered-tweet"
     data-tweet-id={tweetId}
   >
     <div id={`tweet-${uid}`}></div>
@@ -52,7 +52,7 @@ export const UnconnectedTweet = (tweetId, uid) =>
 // Same logic as above, for brightcove videos.
 export const UnconnectedVideo = (video, playerId, accountId) =>
   <div
-    className="video-wrapper i24-rendered-video"
+    className="video-wrapper knp-rendered-video"
     data-video-id={video.id}
     contentEditable={false}
   >

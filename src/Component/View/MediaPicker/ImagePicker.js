@@ -17,14 +17,14 @@ export default ({
     {/* scroll left */}
     <p
       onClick={scrollLeft}
-      className={`btn-i24 left is-pulled-left is-hidden-mobile ${page > 1 ? 'show' : ''}`}
+      className={`btn-knp left is-pulled-left is-hidden-mobile ${page > 1 ? 'show' : ''}`}
     >
       <span className="icomoon-font">l</span>
     </p>
     {/* scroll right */}
     <p
       onClick={scrollRight}
-      className={`btn-i24 right is-pulled-right is-hidden-mobile ${containsTenItems(images) ? 'show' : ''}`}
+      className={`btn-knp right is-pulled-right is-hidden-mobile ${containsTenItems(images) ? 'show' : ''}`}
     >
       <span className="icomoon-font">r</span>
     </p>
