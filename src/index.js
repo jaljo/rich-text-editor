@@ -1,6 +1,5 @@
 import './Style/Main.css'
 import App from './Component/App';
-import Cookies from 'universal-cookie'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import rootEpic from './Epic'

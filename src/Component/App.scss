@@ -30,3 +30,7 @@ div.text-editor {
   width: 65%;
   margin: 5rem auto 5rem auto;
 }
+
+[contenteditable="true"]:focus {
+  outline: none;
+}
