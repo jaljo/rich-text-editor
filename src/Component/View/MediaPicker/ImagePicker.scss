@@ -20,66 +20,36 @@ div[data-is="image-picker"] {
     right: 0px;
   }
 
-  .container.images {
+  .images {
     overflow-x: hidden;
     overflow-y:hidden;
-    padding-bottom: $size-7;
+    margin: $size-5 auto;
     height: 400px;
 
     div.images-wrapper {
       height: 100%;
-      width: 95%;
       margin: auto;
+      padding: 0 $size-1;
+      display: flex;
+      flex-direction: column;
 
-      .columns {
-        @media(min-width:$tablet) {
-          height: 50%;
-        }
+      .row {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: $size-7;
 
-        .column.image {
-          position: relative;
-
+        .image {
           @include animate-default();
+
+          &:not(:first-child) {
+            padding-left: $size-7;
+          }
 
           cursor: pointer;
           opacity: .5;
 
           &:hover {
             opacity: 1;
-          }
-
-          img {
-            width: auto;
-            max-width: 100%;
-            max-height: 100%;
-          }
-
-          .open-cropper {
-            position: absolute;
-            top: $size-6;
-            left: $size-6;
-            color: $white;
-            background-color: $darker-grey;
-            width: $size-4;
-            height: $size-4;
-            border-radius: $size-7;
-            padding-left: 3px;
-
-            &:hover {
-              background-color: $black;
-            }
-          }
-        }
-      }
-    }
-
-    @media(max-width:$tablet) {
-      overflow-y: scroll;
-      .columns {
-        height: auto;
-        .column {
-          img {
-            width: 100%;
           }
         }
       }

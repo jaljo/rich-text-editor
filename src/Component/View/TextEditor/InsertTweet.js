@@ -1,8 +1,7 @@
 import React from 'react'
 
 // InsertTweet :: Props -> React.Component
-export default ({
-  error = false,
+const InsertTweet = ({
   fetching = false,
   submit,
 }) =>
@@ -17,3 +16,5 @@ export default ({
       />
     </div>
   </form>
+
+export default InsertTweet;

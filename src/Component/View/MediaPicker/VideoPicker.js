@@ -3,8 +3,8 @@ import { map, isNil, isEmpty, compose, nth } from 'ramda'
 import { splitMedias, containsTenItems } from '../../../Util'
 import './VideoPicker.scss'
 
-// Props -> React.Component
-export default ({
+// VideoPicker :: Props -> React.Component
+const VideoPicker = ({
   videos,
   scrollLeft,
   scrollRight,
@@ -24,7 +24,7 @@ export default ({
     >r</p>
 
     {/* search result container */}
-    <div className="container videos">
+    <div className="videos">
       { isNil(videos) || isEmpty(videos) ?
         <div className="message is-info">
           <div className="message-body">
@@ -54,3 +54,5 @@ const renderVideos = props => map(video =>
     />
   </div>
 )
+
+export default VideoPicker;

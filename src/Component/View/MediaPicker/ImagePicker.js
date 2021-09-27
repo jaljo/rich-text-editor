@@ -1,17 +1,18 @@
 import React from 'react'
-import { compose, map, nth } from 'ramda'
-import { splitMedias, containsTenItems } from '../../../Util'
+import { containsTenItems } from '../../../Util'
 import './ImagePicker.scss'
 import NoResult from '../List/NoResult'
 
 // ImagePicker :: Props -> React.Component
-export default ({
+const ImagePicker = ({
   scrollLeft,
   scrollRight,
   images,
   page,
-  error,
-  ...restProps
+  isFetching,
+  domain,
+  extra,
+  pickImage,
 }) =>
   <div data-is="image-picker">
     {/* scroll left */}
@@ -30,27 +31,29 @@ export default ({
     </p>
 
     {/* search result container */}
-    <div className="container images">
-      <NoResult resource="image" collection={images} isLoading={restProps.isFetching}>
+    <div className="images">
+      <NoResult resource="image" collection={images} isLoading={isFetching}>
         <div className="images-wrapper">
-          <div className="columns">
-            {compose(renderImages(restProps), nth(0), splitMedias)(images)}
+          <div className="row">
+            {renderImages(images.slice(0, 5), pickImage, domain, extra)}
           </div>
-          <div className="columns">
-            {compose(renderImages(restProps), nth(1), splitMedias)(images)}
+          <div className="row">
+            {renderImages(images.slice(5, 10), pickImage, domain, extra)}
           </div>
         </div>
       </NoResult>
     </div>
   </div>
 
-// renderImages :: Props -> [Image] -> React.Component
-const renderImages = (props) => map(image =>
-  <div key={image.id} className="column is-one-fifth image">
+// renderImages :: ([Image], Function, String, Object) -> React.Component
+const renderImages = (images, pickImage, domain, extra) => images.map(image =>
+  <div key={image.id} className="image">
     <img
-      onClick={() => props.pickImage(image.id, props.domain, props.extra)}
+      onClick={() => pickImage(image.id, domain, extra)}
       src={image.href}
       alt={image.legend}
     />
   </div>
 )
+
+export default ImagePicker;

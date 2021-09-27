@@ -3,7 +3,7 @@ import './TextToolbox.scss'
 import { or } from 'ramda'
 
 // TextToolbox :: Props -> React.Component
-export default ({
+const TextToolbox = ({
   closeLinkCreator,
   handleLinkButton,
   handleLinkForm,
@@ -85,3 +85,5 @@ export default ({
     }
     <div className="arrow"></div>
   </aside>
+
+export default TextToolbox;

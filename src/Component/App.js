@@ -6,7 +6,7 @@ import TextEditor from './Container/TextEditor/TextEditor'
 import MediaPicker from './Container/MediaPicker/MediaPicker'
 
 // App :: Props -> React.Component
-export default ({
+const App = ({
   store,
 }) =>
   <Provider store={store}>
@@ -14,7 +14,18 @@ export default ({
       <BrightcovePlayer/>
       <MediaPicker/>
       <TextEditor editorName="article-editor" main>
-        <p></p>
+        <h2>Hello there !</h2>
+        <p>
+          I hope you are having a <b>good time</b> trying this text editor :)
+          To begin, try to select text and apply some modifications. If you focus
+          an empty paragraph (i.e. press enter at the end of a line), you will
+          be able to insert images or youtube videos.
+        </p>
+        <p>
+          I'm doing my best to have tweet insertion fixed asap. Happy testing !
+        </p>
       </TextEditor>
     </main>
   </Provider>
+
+export default App;

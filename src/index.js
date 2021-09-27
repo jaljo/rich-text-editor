@@ -7,8 +7,14 @@ import { applyMiddleware, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import { default as mainReducer, debug } from './Redux/State'
 
-const fetchApi = (url, options) => fetch(url, options)
+const defaultOptions = {
+  method: 'GET',
+  headers: {},
+}
+
+const fetchApi = (url, options = defaultOptions) => fetch(url, options)
   .then(response => response.json())
+;
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {

@@ -14,11 +14,10 @@ import {
   FETCH_VIDEOS,
 } from '../../Redux/State/MediaPicker/VideoPicker'
 
-describe.skip('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
+describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   it('dispatches videosReceived', done => {
     const fetchVideos$ = of(fetchVideos());
     const state$ = new StateObservable(new Subject(), {
-      Router: { params: { locale: 'en' }, },
       MediaPicker: {
         VideoPicker: {
           searchString: 'Netanyahu',
@@ -42,7 +41,7 @@ describe.skip('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: MediaPicker :: VideoPicker :: searchVideosEpic', () => {
+describe('Epic :: MediaPicker :: VideoPicker :: searchVideosEpic', () => {
   it('dispatches fetchVideos', () => {
     const testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);

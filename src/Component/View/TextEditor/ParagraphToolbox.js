@@ -4,7 +4,7 @@ import InsertYoutubeVideo from '../../Container/TextEditor/InsertYoutubeVideo'
 import './ParagraphToolbox.scss'
 
 // ParagraphToolbox :: Props -> React.Component
-export default ({
+const ParagraphToolbox = ({
   closeInsertTweet,
   editorName,
   insertTweetOpened = false,
@@ -28,6 +28,7 @@ export default ({
           onClick={() => openMediaPicker('TEXT_EDITOR', { editorName })}
         >é</button>
       </li>
+      {/* @TODO fix these features before re-enabling this
       <li>
         <button
           className="btn-knp icomoon-font"
@@ -40,6 +41,7 @@ export default ({
           onClick={ insertTweetOpened ? closeInsertTweet : openInsertTweet}
         >0</button>
       </li>
+      */}
       <li>
         <button
           className={`btn-knp icomoon-font ${insertYoutubeVideoOpened ? 'active' : ''}`}
@@ -50,3 +52,5 @@ export default ({
     { insertTweetOpened && <InsertTweet editorName={editorName} /> }
     { insertYoutubeVideoOpened && <InsertYoutubeVideo editorName={editorName} /> }
   </aside>
+
+export default ParagraphToolbox;

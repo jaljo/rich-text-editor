@@ -1,7 +1,7 @@
 import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 import { logObservableError, findById } from '../../Util'
-import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
+import { isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
 import {
   FETCH_IMAGES,
   SCROLL_LEFT,
@@ -24,7 +24,8 @@ const formatImage = image => ({
 const fetchImages = (fetchApi, page, searchString) =>
   fetchApi(join('', [
     `https://api.pexels.com/v1/search`,
-    `?query=${searchString}`,
+    // pexels doesn't support empty query parameters or no query parameters
+    `?query=${searchString === '' ? 'estonia' : searchString}`,
     `&per_page=10`,
     `&page=${page}`,
   ]), {
@@ -35,15 +36,14 @@ const fetchImages = (fetchApi, page, searchString) =>
   })
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
-export const searchImagesEpic = (action$, state$, { fetchApi }) =>
+export const searchImagesEpic = (action$, _, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_IMAGES),
-    withLatestFrom(state$),
     debounceTime(250),
-    mergeMap(([ action, state ]) => fetchImages(
+    mergeMap(({ searchString }) => fetchImages(
       fetchApi,
       1,
-      action.searchString
+      searchString
     )),
     map(pipe(
       prop('photos'),
@@ -54,15 +54,15 @@ export const searchImagesEpic = (action$, state$, { fetchApi }) =>
   )
 
 // changePageEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
-export const changePageEpic = (action$, state$) =>
+export const changePageEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(SCROLL_RIGHT, SCROLL_LEFT),
     withLatestFrom(state$),
-    map(([ action, state ]) => [
+    mergeMap(([ _, state ]) => fetchImages(
+      fetchApi,
       state.MediaPicker.ImagePicker.page,
       state.MediaPicker.ImagePicker.searchString,
-    ]),
-    mergeMap(apply(fetchImages)),
+    )),
     map(pipe(
       prop('photos'),
       fmap(formatImage),

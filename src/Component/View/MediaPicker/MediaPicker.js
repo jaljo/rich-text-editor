@@ -4,7 +4,7 @@ import ImagePicker from '../../Container/MediaPicker/ImagePicker'
 import VideoPicker from '../../Container/MediaPicker/VideoPicker'
 
 // MediaPicker :: Props -> React.Component
-export default ({
+const MediaPicker = ({
   isOpened,
   close,
   isFetchingImages,
@@ -17,44 +17,40 @@ export default ({
   openVideoPicker,
 }) =>
   <div data-is="media-picker" className={`${!isOpened ? 'closed' : ''}`}>
-    <div className="container search-images">
+    <div className="search-images">
       <form onSubmit={e => e.preventDefault()}>
-        <div className="columns">
-          <div className="column is-9">
-            { isImagePickerOpened &&
-              <div className="field">
-                <div className={`control has-icons-left ${isFetchingImages ? 'is-loading' : ''}`}>
-                  <input className="input" type="text" onKeyUp={searchImages} placeholder="Search images"/>
-                  <span className="icomoon-font icon is-small is-left">s</span>
-                </div>
-              </div>
-            }
-            { isVideoPickerOpened &&
-              <div className="field">
-                <div className={`control has-icons-left ${isFetchingVideos ? 'is-loading' : ''}`}>
-                  <input className="input" type="text" onKeyUp={searchVideos} placeholder="Search videos"/>
-                  <span className="icomoon-font icon is-small is-left">s</span>
-                </div>
-              </div>
-            }
+        { isImagePickerOpened &&
+          <div className="field">
+            <div className={`control has-icons-left ${isFetchingImages ? 'is-loading' : ''}`}>
+              <input className="input" type="text" onKeyUp={searchImages} placeholder="Search images (Estonia)"/>
+              <span className="icomoon-font icon is-small is-left">s</span>
+            </div>
           </div>
-          <div className="column is-3">
-            <ul>
-              <li>
-                <p
-                  className={`image-mode btn-knp ${isImagePickerOpened ? 'active' : ''}`}
-                  onClick={e => isImagePickerOpened ? e.preventDefault() : openImagePicker()}
-                ><span className="icomoon-font">c</span></p>
-              </li>
-              <li>
-                <p
-                  className={`video-mode btn-knp ${isVideoPickerOpened ? 'active' : ''}`}
-                  onClick={e => isVideoPickerOpened ? e.preventDefault() : openVideoPicker()}
-                ><span className="icomoon-font">3</span></p>
-              </li>
-            </ul>
+        }
+        { isVideoPickerOpened &&
+          <div className="field">
+            <div className={`control has-icons-left ${isFetchingVideos ? 'is-loading' : ''}`}>
+              <input className="input" type="text" onKeyUp={searchVideos} placeholder="Search videos"/>
+              <span className="icomoon-font icon is-small is-left">s</span>
+            </div>
           </div>
-        </div>
+        }
+        <ul className="picker-buttons">
+          <li>
+            <p
+              className={`image-mode btn-knp ${isImagePickerOpened ? 'active' : ''}`}
+              onClick={e => isImagePickerOpened ? e.preventDefault() : openImagePicker()}
+            ><span className="icomoon-font">c</span></p>
+          </li>
+          {/* @TODO fix this features before re-enabling
+          <li>
+            <p
+              className={`video-mode btn-knp ${isVideoPickerOpened ? 'active' : ''}`}
+              onClick={e => isVideoPickerOpened ? e.preventDefault() : openVideoPicker()}
+            ><span className="icomoon-font">3</span></p>
+          </li>
+          */}
+        </ul>
       </form>
     </div>
 
@@ -65,3 +61,5 @@ export default ({
       <span className="icomoon-font" onClick={close}>e</span>
     </p>
   </div>
+
+export default MediaPicker;

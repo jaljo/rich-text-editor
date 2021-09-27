@@ -1,9 +1,8 @@
 import React from 'react'
 
 // InsertYoutubeVideo :: Props -> React.Component
-export default ({
+const InsertYoutubeVideo = ({
   submit,
-  error = false,
 }) =>
   <form className="insert-youtube" onSubmit={submit}>
     <div className="control">
@@ -16,3 +15,5 @@ export default ({
       />
     </div>
   </form>
+
+export default InsertYoutubeVideo;

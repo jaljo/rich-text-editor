@@ -6,23 +6,11 @@
   transition: ease 0.5s all;
   z-index: $zindex-1;
   pointer-events: none;
+  left: -80px;
 
-  &:not(.rtl) {
-    left: -155px;
-
-    form.insert-tweet,
-    form.insert-youtube {
-      left: 155px;
-    }
-  }
-
-  &.rtl {
-    right: -155px;
-
-    form.insert-tweet,
-    form.insert-youtube {
-      right: 155px;
-    }
+  form.insert-tweet,
+  form.insert-youtube {
+    left: 80px;
   }
 
   &.visible {
@@ -31,7 +19,7 @@
   }
 
   ul {
-    width: 150px;
+    width: 60px;
     height: 40px;
 
     li {

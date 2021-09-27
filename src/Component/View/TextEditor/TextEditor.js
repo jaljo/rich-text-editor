@@ -4,7 +4,7 @@ import React from 'react'
 import './TextEditor.scss'
 
 // TextEditor :: Props -> React.Component
-export default ({
+const TextEditor = ({
   click,
   editorName,
   keyDown,
@@ -28,3 +28,5 @@ export default ({
       {children}
     </article>
   </div>
+
+export default TextEditor;

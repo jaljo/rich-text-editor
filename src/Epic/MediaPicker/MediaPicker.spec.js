@@ -8,7 +8,7 @@ import {
   openInsertYoutubeVideo,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
 
-describe.skip('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
+describe('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
 
   it('dispatches close', () => {
     const testScheduler = new TestScheduler((actual, expected) => {

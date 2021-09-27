@@ -32,16 +32,18 @@ import { of, from } from 'rxjs'
 export const fetchEmbedTweetEpic = (action$, state$, { fetchApi }) => action$.pipe(
   ofType(INSERT_TWEET),
   mergeMap(action => from(
-    fetch(`${process.env.REACT_APP_MOCK_SERVER_API_URL}/twitter?url=${action.url}`)
-      .then(response => response.json()),
-  ).pipe(
-    map(response => embedTweetFetched(
-      action.editorName,
-      response.html,
-      action.url,
-    )),
-    catchError(() => of(error(action.editorName))),
-  )),
+      fetchApi(
+        `${process.env.REACT_APP_MOCK_SERVER_API_URL}/twitter?url=${action.url}`
+      )
+    ).pipe(
+      map(response => embedTweetFetched(
+        action.editorName,
+        response.html,
+        action.url,
+      )),
+      catchError(() => of(error(action.editorName))),
+    )
+  ),
 )
 
 // insertTweetEpic :: Epic -> Observable Action.TWEET_INSERTED Action.ERROR
