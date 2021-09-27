@@ -1,7 +1,7 @@
 import React from 'react'
 import { map, isNil, isEmpty, compose, nth } from 'ramda'
 import { splitMedias, containsTenItems } from '../../../Util'
-import './VideoPicker.css'
+import './VideoPicker.scss'
 
 // Props -> React.Component
 export default ({
@@ -9,7 +9,7 @@ export default ({
   scrollLeft,
   scrollRight,
   page,
-  ...restProps,
+  ...restProps
 }) =>
   <div data-is="video-picker">
     {/* scroll left */}

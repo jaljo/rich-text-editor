@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose, map, nth } from 'ramda'
 import { splitMedias, containsTenItems } from '../../../Util'
-import './ImagePicker.css'
+import './ImagePicker.scss'
 import NoResult from '../List/NoResult'
 
 // ImagePicker :: Props -> React.Component
@@ -11,7 +11,7 @@ export default ({
   images,
   page,
   error,
-  ...restProps,
+  ...restProps
 }) =>
   <div data-is="image-picker">
     {/* scroll left */}

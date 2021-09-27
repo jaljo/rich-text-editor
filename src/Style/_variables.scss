@@ -1,5 +1,11 @@
 @import 'bulma/sass/utilities/initial-variables';
 
+// zindex
+$zindex-0: 0;
+$zindex-1: 1000;
+$zindex-2: 2000;
+
+// colors
 $black: #1c222e;
 $blue: #07244b;
 $light-blue: #1051a8;
@@ -8,3 +14,6 @@ $soft-white: #f7f7f7;
 $grey: #d6d6d6;
 $gray: darken($grey, 20%);
 $red: #e1151d;
+
+$color-grey-light: red;
+$color-grey-dark: green;

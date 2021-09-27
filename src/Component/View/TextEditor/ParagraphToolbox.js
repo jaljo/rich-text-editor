@@ -1,7 +1,7 @@
 import React from 'react'
 import InsertTweet from '../../Container/TextEditor/InsertTweet'
 import InsertYoutubeVideo from '../../Container/TextEditor/InsertYoutubeVideo'
-import './ParagraphToolbox.css'
+import './ParagraphToolbox.scss'
 
 // ParagraphToolbox :: Props -> React.Component
 export default ({

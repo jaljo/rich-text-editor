@@ -138,17 +138,18 @@ const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
 // hideAllParagraphToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
 export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
   merge(
-    action$.ofType(SELECT_TEXT).pipe(
+    action$.pipe(
+      ofType(SELECT_TEXT),
       map(() => window.getSelection()),
       filter(complement(isEmptyParagraph)),
     ),
-    action$.ofType(
+    action$.pipe(ofType(
       TWEET_INSERTED,
       IMAGE_INSERTED,
       YOUTUBE_VIDEO_INSERTED,
       VIDEO_INSERTED,
       TEXT_PASTED,
-    ),
+    )),
   ).pipe(
     map(hideAllParagraphToolboxes),
     logObservableError(),
@@ -159,7 +160,7 @@ const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(INITIALIZE),
     switchMap(() => fromEvent(window, 'mousedown').pipe(
-      takeUntil(action$.ofType(CLEAR)),
+      takeUntil(action$.pipe(ofType(CLEAR))),
     )),
     map(prop('target')),
     filter(compose(isNil, closestHavingClass('text-editor'))),
@@ -179,7 +180,10 @@ const closeInsertTweetFormEpic = action$ => action$.pipe(
   switchMap(editorName => fromEvent(window, 'keydown').pipe(
     filter(isEscapeKey),
   ).pipe(
-    takeUntil(action$.ofType(CLOSE_INSERT_TWEET, CLEAR_PARAGRAPH_TOOLBOX)),
+    takeUntil(action$.pipe(ofType(
+      CLOSE_INSERT_TWEET,
+      CLEAR_PARAGRAPH_TOOLBOX)
+    )),
     map(() => closeInsertTweet(editorName)),
   ))
 )
@@ -191,7 +195,10 @@ const closeInsertYoutubeFormEpic = action$ => action$.pipe(
   switchMap(editorName => fromEvent(window, 'keydown').pipe(
     filter(isEscapeKey),
   ).pipe(
-    takeUntil(action$.ofType(CLOSE_INSERT_YOUTUBE_VIDEO, CLEAR_PARAGRAPH_TOOLBOX)),
+    takeUntil(action$.pipe(ofType(
+      CLOSE_INSERT_YOUTUBE_VIDEO,
+      CLEAR_PARAGRAPH_TOOLBOX,
+    ))),
     map(() => closeInsertYoutubeVideo(editorName)),
   ))
 )
@@ -203,7 +210,10 @@ const closeLinkCreatorFormEpic = action$ => action$.pipe(
   switchMap(editorName => fromEvent(window, 'keydown').pipe(
     filter(isEscapeKey),
   ).pipe(
-    takeUntil(action$.ofType(CLOSE_LINK_CREATOR, CLEAR_TEXT_TOOLBOX)),
+    takeUntil(action$.pipe(ofType(
+      CLOSE_LINK_CREATOR,
+      CLEAR_TEXT_TOOLBOX,
+    ))),
     map(() => closeLinkCreator(editorName)),
   ))
 )

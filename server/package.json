@@ -1,5 +1,5 @@
 {
-  "name": "KNP_te-server",
+  "name": "te-server",
   "version": "1.0.0",
   "description": "A little server for twitter and brightcove.",
   "main": "index.js",

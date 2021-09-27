@@ -1,5 +1,5 @@
 import React from 'react'
-import './TextToolbox.css'
+import './TextToolbox.scss'
 import { or } from 'ramda'
 
 // TextToolbox :: Props -> React.Component

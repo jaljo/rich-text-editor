@@ -1,4 +1,4 @@
-import './Style/Main.css'
+import './Style/Main.scss'
 import App from './Component/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
