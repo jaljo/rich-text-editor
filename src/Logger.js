@@ -27,4 +27,6 @@ export const log = partial(
   [loggerHead('LOG')],
 )
 
-export default { info, error, warn, log }
+const Logger = { info, error, warn, log };
+
+export default Logger

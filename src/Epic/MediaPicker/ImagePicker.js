@@ -1,7 +1,7 @@
 import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 import { logObservableError, findById } from '../../Util'
-import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
+import { isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
 import {
   FETCH_IMAGES,
   SCROLL_LEFT,
@@ -24,7 +24,8 @@ const formatImage = image => ({
 const fetchImages = (fetchApi, page, searchString) =>
   fetchApi(join('', [
     `https://api.pexels.com/v1/search`,
-    `?query=${searchString}`,
+    // pexels doesn't support empty query parameters or no query parameters
+    `?query=${searchString === '' ? 'estonia' : searchString}`,
     `&per_page=10`,
     `&page=${page}`,
   ]), {

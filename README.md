@@ -7,8 +7,8 @@ aspects of
 :warning: __It is no longer maintained.__
 
 At the moment, a few things have to be fixed:
-- Some tests are broken
 - The tweet insertion no longer works
+- The brightcove video insertion no longer works
 
 You can still build the projet and run it localy to test the editing features :)
 

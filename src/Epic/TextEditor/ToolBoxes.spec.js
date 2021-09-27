@@ -13,27 +13,19 @@ import {
   HIDE_ALL as HIDE_PARAGRAPH_TOOLBOX,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
 import {
-  show as showTextToolbox,
   SHOW as SHOW_TEXT_TOOLBOX,
   HIDE_ALL as HIDE_TEXT_TOOLBOX,
 } from '../../Redux/State/TextEditor/TextToolbox'
 import { selectText } from '../../Redux/State/TextEditor/TextEditor'
 import { tweetInserted } from '../../Redux/State/TextEditor/InsertTweet'
 
-const containerMock = {
-  parentNode: {
-    closest: jest.fn(),
-  },
-};
 const rangeMock = {
-  startContainer: containerMock,
-  endContainer: containerMock,
-  cloneRange: jest.fn(),
+  startContainer: {},
+  endContainer: {},
+  cloneRange: () => null,
 };
 const selectionMock = {
-  getRangeAt: jest.fn().mockReturnValue(rangeMock),
-  removeAllRanges: jest.fn(),
-  addRange: jest.fn(),
+  getRangeAt: () => rangeMock,
   type: 'Range',
   anchorNode: {
     data: 'bla bla',
@@ -42,7 +34,7 @@ const selectionMock = {
 };
 const dependencies = {
   window: {
-    getSelection: jest.fn().mockReturnValue(selectionMock)
+    getSelection: () => selectionMock
   }
 };
 
@@ -53,11 +45,11 @@ beforeEach(() => {
       <p>This is a little pargraph</p>
     </div>
   `;
-  document.queryCommandState = jest.fn();
-  document.execCommand = jest.fn();
+  document.queryCommandState = () => null;
+  document.execCommand = () => null;
 });
 
-describe.skip('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
+describe('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   const selectText$ = of(selectText('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
@@ -75,7 +67,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   it('dont dispatches showTextToolbox (empty selection)', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({ type: 'Char'})
+        getSelection: () => ({ type: 'Char'})
       }
     };
 
@@ -90,7 +82,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () => {
+describe('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () => {
   const selectText$ = of(selectText('editor-name'));
   const state$ = new StateObservable(new Subject(), {
     TextEditor: {
@@ -105,7 +97,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () 
   it('dispatches hideTextToolbox', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({ type: 'Char'})
+        getSelection: () => ({ type: 'Char'})
       }
     };
 
@@ -131,14 +123,14 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () 
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
+describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
   const selectText$ = of(selectText('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
   it('dispatches showParagraphToolbox', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({
+        getSelection: () => ({
           anchorNode: {
             data: null,
             tagName: 'P',
@@ -160,7 +152,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () 
   it('does not dispatch showParagraphToolbox (not empty paragraph)', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({
+        getSelection: () => ({
           anchorNode: {
             data: 'bla bla',
             tagName: 'P'
@@ -182,7 +174,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () 
   it('does not dispatch showParagraphToolbox (not in a paragraph)', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({
+        getSelection: () => ({
           anchorNode: {
             data: null,
             tagName: 'FIGURE'
@@ -202,7 +194,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () 
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () => {
+describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () => {
   const state$ = new StateObservable(new Subject(), {});
   const selectText$ = of(selectText('editor-name'));
 
@@ -212,7 +204,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic'
     const videoInserted$ = of(videoInserted('editor-name'))
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({
+        getSelection: () => ({
           anchorNode: {
             data: 'this selection is not empty !',
             tagName: 'P',
@@ -245,7 +237,7 @@ describe.skip('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic'
   it('does not dispatch hideParagraphToolbox (empty paragraph)', done => {
     const dependencies = {
       window: {
-        getSelection: jest.fn().mockReturnValue({
+        getSelection: () => ({
           anchorNode: {
             data: null,
             tagName: 'P',

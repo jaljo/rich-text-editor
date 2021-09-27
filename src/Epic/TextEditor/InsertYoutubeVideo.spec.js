@@ -29,7 +29,7 @@ beforeEach(() => {
   `;
 });
 
- describe.skip('Epic :: TextEditor :: InsertYoutubeVideo', () => {
+ describe('Epic :: TextEditor :: InsertYoutubeVideo', () => {
   it('validate a youtube url : success', done => {
     validateYoutubeUrl('https://www.youtube.com/watch?v=jadxTFqyhRM')
       .then(url => {
@@ -67,7 +67,7 @@ beforeEach(() => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: InsertYoutubeVideo :: insertYoutubeVideoEpic', () => {
+describe('Epic :: TextEditor :: InsertYoutubeVideo :: insertYoutubeVideoEpic', () => {
   const state$ = new StateObservable(new Subject(), {
     TextEditor: {
       ParagraphToolbox: {
@@ -109,7 +109,7 @@ describe.skip('Epic :: TextEditor :: InsertYoutubeVideo :: insertYoutubeVideoEpi
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpic', () => {
+describe('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpic', () => {
   it('disatches closeInsertYoutubeVideo', () => {
     const testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);

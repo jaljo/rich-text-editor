@@ -18,12 +18,13 @@ div[data-is="video-picker"] {
 
   .right {
     right: 0px;
-  }  
+  }
 
-  .container.videos {
+  .videos {
     overflow-x: hidden;
     overflow-y:hidden;
-    padding-bottom: $size-7;
+    margin: $size-5 auto;
+    padding: 0 $size-1;
     height: 400px;
 
     div.videos-wrapper {

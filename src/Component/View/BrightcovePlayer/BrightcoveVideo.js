@@ -3,7 +3,7 @@ import uniqid from 'uniqid'
 import { isNil } from 'ramda'
 
 //  BrightcoveVideo :: Props -> React.Component
-export default ({
+const BrightcoveVideo = ({
   isReady,
   videoId,
   playerId,
@@ -11,7 +11,6 @@ export default ({
   action,
   name,
   editable = true,
-  componentId,
 }) =>
   // brightcove SDK call wraps the video tag inside another element which breaks
   // react update. This uniqid key enforces this component to re-render itself.
@@ -43,3 +42,5 @@ export default ({
       <figcaption>{name}</figcaption>
     }
   </div>
+
+export default BrightcoveVideo;

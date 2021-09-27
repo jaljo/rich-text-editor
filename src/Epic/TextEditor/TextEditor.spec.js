@@ -30,23 +30,23 @@ import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
 
 const containerMock = {
   parentNode: {
-    closest: jest.fn(),
+    closest: () => null,
   },
 };
 const rangeMock = {
   startContainer: containerMock,
   endContainer: containerMock,
-  cloneRange: jest.fn(),
+  cloneRange: () => null,
 };
 const selectionMock = {
-  getRangeAt: jest.fn().mockReturnValue(rangeMock),
-  removeAllRanges: jest.fn(),
-  addRange: jest.fn(),
+  getRangeAt: () => rangeMock,
+  removeAllRanges: () => null,
+  addRange: () => null,
   type: 'Range',
 };
 const dependencies = {
   window: {
-    getSelection: jest.fn().mockReturnValue(selectionMock)
+    getSelection: () => selectionMock,
   }
 };
 
@@ -57,11 +57,11 @@ beforeEach(() => {
       <p>This is a little pargraph</p>
     </div>
   `;
-  document.queryCommandState = jest.fn();
-  document.execCommand = jest.fn();
+  document.queryCommandState = () => null;
+  document.execCommand = () => null;
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: saveRangeEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: saveRangeEpic', () => {
   const openLinkCreator$ = of(openLinkCreator('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
@@ -77,7 +77,7 @@ describe.skip('Epic :: TextEditor :: TextEditor :: saveRangeEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
   const state$ = new StateObservable(new Subject, {
     TextEditor: {
       TextToolbox: {
@@ -113,7 +113,7 @@ it('dispatches closeLinkCreator', done => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () => {
   it('dispatches refreshButtonsState', done => {
     const showTextToolbox$ = of(showTextToolbox('editor-name', 10));
     const mutate$ = of(mutate('editor-name')('LINK'));
@@ -134,7 +134,7 @@ describe.skip('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic',
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
   it('dispatches insertImage', done => {
     const pickImageWithCredits$ = of(
       pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name'})
@@ -158,7 +158,7 @@ describe.skip('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
   it('dispatches imageInserted', done => {
     const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
     const insertImage$ = of(insertImage('editor-name', imageMock));
@@ -183,7 +183,7 @@ describe.skip('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
   it('dispatches insertVideo', done => {
     const pickVideo$ = of(
       pickVideo("slkdhlskdg", 'TEXT_EDITOR', { editorName: 'editor-name' })
@@ -209,7 +209,7 @@ describe.skip('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
+describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
   it('dispatches videoInserted', done => {
     const videoMock = { id: "9329875", name: "test" };
     const insertVideo$ = of(insertVideo('editor-name', videoMock));

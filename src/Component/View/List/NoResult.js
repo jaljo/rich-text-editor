@@ -3,7 +3,7 @@ import { isEmpty } from 'ramda'
 import './NoResult.scss'
 
 // NoResult :: Props -> React.Component
-export default ({
+const NoResult = ({
   resource,
   collection,
   isLoading,
@@ -19,3 +19,5 @@ export default ({
     }
     {!isEmpty(collection) && children}
   </React.Fragment>
+
+export default NoResult;

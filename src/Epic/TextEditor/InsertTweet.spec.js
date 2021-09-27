@@ -24,13 +24,13 @@ beforeEach(() => {
   `;
 });
 
-describe.skip('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
+describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
   const insertTweet$ = of(insertTweet());
   const state$ = new StateObservable(new Subject(), {});
 
   it('dispatches embedTweetFetched action', done => {
     const dependencies = {
-      fetchApi: () => new Promise(resolve => resolve({ body: {}})),
+      fetchApi: () => Promise.resolve({ body: {}}),
     };
 
     fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
@@ -45,7 +45,7 @@ describe.skip('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => 
 
   it('dispatches error action', done => {
     const dependencies = {
-      fetchApi: () => new Promise((resolve, reject) => reject('fail !')),
+      fetchApi: () => Promise.reject('fail !'),
     };
 
     fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
@@ -59,7 +59,7 @@ describe.skip('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => 
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
+describe('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
   const state$ = new StateObservable(new Subject(), {
     TextEditor: {
       ParagraphToolbox: {
@@ -105,7 +105,7 @@ describe.skip('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
   }, 1000);
 });
 
-describe.skip('Epic :: TextEditor :: InsertTweet', () => {
+describe('Epic :: TextEditor :: InsertTweet', () => {
   it('dispatches renderTweet action', done => {
     const tweetInserted$ = of(tweetInserted('editor-name', '1', 'zxylog', '<p></p>'));
     const state$ = new StateObservable(new Subject(), {});
