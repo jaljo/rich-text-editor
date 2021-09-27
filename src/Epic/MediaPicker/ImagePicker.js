@@ -36,15 +36,14 @@ const fetchImages = (fetchApi, page, searchString) =>
   })
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
-export const searchImagesEpic = (action$, state$, { fetchApi }) =>
+export const searchImagesEpic = (action$, _, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_IMAGES),
-    withLatestFrom(state$),
     debounceTime(250),
-    mergeMap(([ action, state ]) => fetchImages(
+    mergeMap(({ searchString }) => fetchImages(
       fetchApi,
       1,
-      action.searchString
+      searchString
     )),
     map(pipe(
       prop('photos'),

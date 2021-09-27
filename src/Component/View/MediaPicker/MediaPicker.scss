@@ -46,24 +46,24 @@ div[data-is="media-picker"] {
     form {
       display: flex;
       flex-direction: row;
-    }
 
-    ul.picker-buttons {
-      margin-left: $size-5;
+      ul.picker-buttons {
+        margin-left: $size-5;
 
-      li {
-        display: inline-block;
-        margin-right: $size-7;
+        li {
+          display: inline-block;
+          margin-right: $size-7;
 
-        .btn-knp .icomoon-font {
-          font-size: $size-5;
-        }
+          .btn-knp .icomoon-font {
+            font-size: $size-5;
+          }
 
-        .btn-knp.active {
-          color: $black;
+          .btn-knp.active {
+            color: $black;
 
-          .icomoon-font {
-            font-weight: $weight-semibold;
+            .icomoon-font {
+              font-weight: $weight-semibold;
+            }
           }
         }
       }

@@ -42,12 +42,9 @@ const dependencies = {
 
 describe('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
   const fetchImages$ = of(fetchImages());
-  const state$ = new StateObservable(new Subject(), {
-    Router: { params: { locale: 'en' }, }
-  });
 
   it('dispatches receivedImages', done => {
-    searchImagesEpic(fetchImages$, state$, dependencies)
+    searchImagesEpic(fetchImages$, null, dependencies)
       .toPromise(Promise)
       .then(action => {
         expect(action.type).toEqual(RECEIVED_IMAGES);

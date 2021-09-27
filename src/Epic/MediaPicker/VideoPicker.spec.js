@@ -18,7 +18,6 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   it('dispatches videosReceived', done => {
     const fetchVideos$ = of(fetchVideos());
     const state$ = new StateObservable(new Subject(), {
-      Router: { params: { locale: 'en' }, },
       MediaPicker: {
         VideoPicker: {
           searchString: 'Netanyahu',

@@ -214,7 +214,6 @@ describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
     const videoMock = { id: "9329875", name: "test" };
     const insertVideo$ = of(insertVideo('editor-name', videoMock));
     const state$ = new StateObservable(new Subject(), {
-      Router: { params: { locale: 'en' }, },
       TextEditor: {
         ParagraphToolbox: {
           'editor-name': {

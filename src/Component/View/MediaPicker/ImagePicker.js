@@ -45,7 +45,7 @@ const ImagePicker = ({
     </div>
   </div>
 
-// renderImages :: (Image, Function, String, Object) -> React.Component
+// renderImages :: ([Image], Function, String, Object) -> React.Component
 const renderImages = (images, pickImage, domain, extra) => images.map(image =>
   <div key={image.id} className="image">
     <img
