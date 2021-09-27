@@ -17,18 +17,18 @@ services:
         protocol: tcp
         mode: host
 
-  # server:
-  #   image: knp-te:server-dev
-  #   build:
-  #     context: ../
-  #     dockerfile: .docker/app/Dockerfile
-  #     target: dev
-  #   command: yarn start
-  #   tty: true
-  #   volumes:
-  #     - ./../server/:/app
-  #   ports:
-  #     - published: 5001
-  #       target: 3001
-  #       protocol: tcp
-  #       mode: host
+  server:
+    image: knp-te:server-dev
+    build:
+      context: ../
+      dockerfile: .docker/app/Dockerfile
+      target: dev
+    command: yarn start
+    tty: true
+    volumes:
+      - ./../server/:/app
+    ports:
+      - published: 5001
+        target: 3001
+        protocol: tcp
+        mode: host

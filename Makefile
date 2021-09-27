@@ -12,6 +12,7 @@ start:
 .PHONY: install-deps
 install-deps:
 	docker-compose -f .docker/app.yml run --rm app yarn install
+	docker-compose -f .docker/app.yml run --rm server yarn install
 
 .PHONY: test
 test:
