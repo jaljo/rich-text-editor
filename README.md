@@ -8,11 +8,11 @@ which has been published in january 2019. At the time the article was written,
 this editor was still at experimental state. Therefore, lots of bugs and side
 effects are still to be fixed.
 
-Some features have been disabled, and need to be fixed:
-- tweet insertion
-- brightcove video insertion
-
 You can still build the projet and run it localy to test the editing features :)
+
+## Preview
+
+![](./doc/images/TEXT_EDITOR.png)
 
 ## Installation
 
