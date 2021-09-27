@@ -1,7 +1,3 @@
-import Cookies from 'universal-cookie'
-import {
-  prop
-} from 'ramda'
 import * as Util from './Util'
 
 describe('Util', () => {
@@ -26,7 +22,7 @@ describe('Util', () => {
     {id: 2, name: 'Alessandro'},
     {id: 3, name: 'Nicolas'},
   ];
-  
+
   it('can find an object identified by an id in a list', () => {
     expect(Util.findById(3, indexedListMock)).toEqual(
       {id: 3, name: 'Nicolas'},

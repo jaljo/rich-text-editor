@@ -1,7 +1,7 @@
 import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 import { logObservableError, findById } from '../../Util'
-import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
+import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap, tap } from 'ramda'
 import {
   FETCH_IMAGES,
   SCROLL_LEFT,
@@ -20,9 +20,9 @@ const formatImage = image => ({
   credit: image.photographer,
 })
 
-// fetchImages :: (String, String) -> Promise
-const fetchImages = (page, searchString) =>
-  fetch(join('', [
+// fetchImages :: (Fetch, String, String) -> Promise
+const fetchImages = (fetchApi, page, searchString) =>
+  fetchApi(join('', [
     `https://api.pexels.com/v1/search`,
     `?query=${searchString}`,
     `&per_page=10`,
@@ -33,18 +33,19 @@ const fetchImages = (page, searchString) =>
       'Authorization': process.env.REACT_APP_IMAGE_API_KEY,
     },
   })
-  .then(response => response.json())
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
-export const searchImagesEpic = (action$, state$) =>
+export const searchImagesEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_IMAGES),
     withLatestFrom(state$),
     debounceTime(250),
     mergeMap(([ action, state ]) => fetchImages(
+      fetchApi,
       1,
       action.searchString
     )),
+tap(console.warn),
     map(pipe(
       prop('photos'),
       fmap(formatImage),

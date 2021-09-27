@@ -8,7 +8,6 @@ import MediaPicker from './Container/MediaPicker/MediaPicker'
 // App :: Props -> React.Component
 export default ({
   store,
-  location,
 }) =>
   <Provider store={store}>
     <main>

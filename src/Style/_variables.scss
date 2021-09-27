@@ -7,13 +7,7 @@ $zindex-2: 2000;
 
 // colors
 $black: #1c222e;
-$blue: #07244b;
 $light-blue: #1051a8;
-$white: #fff;
-$soft-white: #f7f7f7;
+$white: #ffffff;
 $grey: #d6d6d6;
-$gray: darken($grey, 20%);
-$red: #e1151d;
-
-$color-grey-light: red;
-$color-grey-dark: green;
+$darker-grey: darken($grey, 20%);

@@ -1,5 +1,9 @@
+.PHONY cp-env:
+cp-env:
+	cp .env.dist .env
+
 .PHONY: dev
-dev: build install-deps start
+dev: cp-env build install-deps start
 
 .PHONY: start
 start:

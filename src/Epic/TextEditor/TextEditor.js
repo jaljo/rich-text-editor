@@ -61,16 +61,19 @@ const insertAfter = (el, referenceNode) =>
 
 // createImageNode :: (Image, Number, String) -> _
 const createImageNode = (image, targetIndex, editorName) => {
-  const props = { component: {
-    src: image.href,
-    title: image.legend,
-    alt: image.credit
-  } };
+  const props = {
+    component: {
+      src: image.href,
+      title: image.legend,
+      alt: image.credit
+    }
+  };
 
   // render image component using react, then convert it to a valid DOM Node
   const newNode = (new DOMParser())
     .parseFromString(renderToString(createImage(props)), 'text/html')
-    .querySelector('figure');
+    .querySelector('figure')
+  ;
 
   // insert that Node at the specified position
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
@@ -86,7 +89,8 @@ const createVideoNode = (video, targetIndex, editorName, playerId) => {
 
   const newNode = (new DOMParser())
     .parseFromString(brightCoveVideo, 'text/html')
-    .querySelector('.video-wrapper');
+    .querySelector('.video-wrapper')
+  ;
 
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
 }

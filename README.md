@@ -1,35 +1,33 @@
-# KNP Text editor
+# Rich Text editor
 
-A POC of a rich text editor based on javascript native API.
+This repository has been created on the sole purpose to illustrate the technical
+aspects of
+[this article](https://knplabs.com/fr/blog/how-we-built-a-medium-like-rich-text-editor).
+
+:warning: __It is no longer maintained.__
+
+At the moment, a few things have to be fixed:
+- Some tests are broken
+- The tweet insertion no longer works
+
+You can still build the projet and run it localy to test the editing features :)
 
 ## Installation
 
-With docker:
+You will need docker and docker-compose to run this project on your local env.
 
 ```
 $ git clone git@github.com:jaljo/rich-text-editor.git
 $ cd rich-text-editor
-```
-
-Launch the frontend development server (using swarm):
-
-```
 $ make dev
 ```
 
-Launch the frontend test daemon:
+You can now access the project by browsing [localhost:5000/](http://localhost:5000/)
+
+## Tests
+
+To run the tests localy:
 
 ```
-$ make test-dev
+$ make test
 ```
-
-## What is inside ?
-
-This is a non exhaustive list of libraries used for various purpose:
-
-- [`ramda`](http://ramdajs.com/docs/): Provide various functional helpers.
-- [`redux`](https://redux.js.org/): Handle state changement.
-- [`redux-observable`](https://redux-observable.js.org/): Provide scalable and
-  reactive tools in order to handle state changement side effects.
-- [`rxjs`](http://reactivex.io/rxjs/manual/index.html): Used by `redux-observable`.
-- [`sass`](http://sass-lang.com/): An extension of css.

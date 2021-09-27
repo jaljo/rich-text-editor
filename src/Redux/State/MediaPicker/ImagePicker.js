@@ -21,7 +21,7 @@ export const ERROR = '@knp/MediaPicker/ImagePicker/ERROR'
 export const CLEAR = '@knp/MediaPicker/ImagePicker/CLEAR'
 
 // fetchImages :: String -> Action
-export const fetchImages = (searchString = '') => ({
+export const fetchImages = (searchString = 'nature') => ({
   type: FETCH_IMAGES,
   searchString,
 })
