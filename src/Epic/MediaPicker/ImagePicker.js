@@ -1,7 +1,7 @@
 import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 import { logObservableError, findById } from '../../Util'
-import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap, tap } from 'ramda'
+import { apply, isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
 import {
   FETCH_IMAGES,
   SCROLL_LEFT,
@@ -45,7 +45,6 @@ export const searchImagesEpic = (action$, state$, { fetchApi }) =>
       1,
       action.searchString
     )),
-tap(console.warn),
     map(pipe(
       prop('photos'),
       fmap(formatImage),
