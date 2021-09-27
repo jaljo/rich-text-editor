@@ -1,5 +1,5 @@
 import React from 'react'
-import './MediaPicker.css'
+import './MediaPicker.scss'
 import ImagePicker from '../../Container/MediaPicker/ImagePicker'
 import VideoPicker from '../../Container/MediaPicker/VideoPicker'
 

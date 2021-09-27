@@ -61,16 +61,19 @@ const insertAfter = (el, referenceNode) =>
 
 // createImageNode :: (Image, Number, String) -> _
 const createImageNode = (image, targetIndex, editorName) => {
-  const props = { component: {
-    src: image.href,
-    title: image.legend,
-    alt: image.credit
-  } };
+  const props = {
+    component: {
+      src: image.href,
+      title: image.legend,
+      alt: image.credit
+    }
+  };
 
   // render image component using react, then convert it to a valid DOM Node
   const newNode = (new DOMParser())
     .parseFromString(renderToString(createImage(props)), 'text/html')
-    .querySelector('figure');
+    .querySelector('figure')
+  ;
 
   // insert that Node at the specified position
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
@@ -86,7 +89,8 @@ const createVideoNode = (video, targetIndex, editorName, playerId) => {
 
   const newNode = (new DOMParser())
     .parseFromString(brightCoveVideo, 'text/html')
-    .querySelector('.video-wrapper');
+    .querySelector('.video-wrapper')
+  ;
 
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
 }
@@ -103,7 +107,8 @@ const createAndFocusEmptyParagraph = previousNode => {
 
 // insertNewParagraphEpic :: Observable Action Error -> _
 const insertNewParagraphEpic = (action$, state$, { window }) =>
-  action$.ofType(KEY_DOWN).pipe(
+  action$.pipe(
+    ofType(KEY_DOWN),
     filter(compose(equals(13), prop('keyCode'))),
     tap(() => {
       const editedNode = window.getSelection().anchorNode;
@@ -147,7 +152,8 @@ const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
 
 // saveRangeEpic :: Observable Action Error -> Observable Action _
 export const saveRangeEpic = (action$, state$, { window }) =>
-  action$.ofType(OPEN_LINK_CREATOR).pipe(
+  action$.pipe(
+    ofType(OPEN_LINK_CREATOR),
     map(action => [
       action.editorName,
       window.getSelection().getRangeAt(0).cloneRange(),
@@ -158,7 +164,8 @@ export const saveRangeEpic = (action$, state$, { window }) =>
 
 // createLinkEpic :: (Observable Action Error, Observale State Error) -> Observable Action _
 export const createLinkEpic = (action$, state$, { window }) =>
-  action$.ofType(MUTATE).pipe(
+  action$.pipe(
+    ofType(MUTATE),
     filter(compose(equals('LINK'), prop('mutation'))),
     withLatestFrom(state$),
     // we first need to recover selction here for the mutation to apply
@@ -191,7 +198,8 @@ const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
 
 // mutationEpic :: Observable Action Error -> Observable Action _
 const mutationEpic = action$ =>
-  action$.ofType(MUTATE).pipe(
+  action$.pipe(
+    ofType(MUTATE),
     map(prop('mutation')),
     filter(complement(equals('LINK'))),
     tap(cond([
@@ -264,7 +272,8 @@ export const pickImageEpic = (action$, state$) =>
 
 // insertImageEpic :: (Observable Action Error, Observable State Error) _
 export const insertImageEpic = (action$, state$) =>
-  action$.ofType(INSERT_IMAGE).pipe(
+  action$.pipe(
+    ofType(INSERT_IMAGE),
     withLatestFrom(state$),
     tap(([ action, state ]) => createImageNode(
       action.image,
@@ -291,7 +300,8 @@ export const pickVideoEpic = (action$, state$) =>
 
 // insertVideoEpic :: (Observable Action Error, Observable State Error) -> Observable Action.VIDEO_INSERTED
 export const insertVideoEpic = (action$, state$) =>
-  action$.ofType(INSERT_VIDEO).pipe(
+  action$.pipe(
+    ofType(INSERT_VIDEO),
     withLatestFrom(state$),
     tap(([ action, state]) => createVideoNode(
       action.video,

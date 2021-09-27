@@ -16,50 +16,19 @@ services:
         target: 3000
         protocol: tcp
         mode: host
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          cpus: '1'
-          memory: 800M
 
-  server:
-    image: knp-te:server-dev
-    build:
-      context: ../
-      dockerfile: .docker/app/Dockerfile
-      target: dev
-    command: yarn start
-    tty: true
-    volumes:
-      - ./../server/:/app
-    ports:
-      - published: 5001
-        target: 3001
-        protocol: tcp
-        mode: host
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
-  test:
-    image: knp-te:test-dev
-    build:
-      context: ../
-      dockerfile: .docker/app/Dockerfile
-      target: dev
-    command: 'yarn test'
-    tty: true
-    environment:
-      - NODE_ENV=test
-    volumes:
-      - ./../:/app
-    deploy:
-      # scale it up to run the tests on your dev machine or use docker-compose
-      # to run this service
-      replicas: 0
-      restart_policy:
-        condition: 'none'
+  # server:
+  #   image: knp-te:server-dev
+  #   build:
+  #     context: ../
+  #     dockerfile: .docker/app/Dockerfile
+  #     target: dev
+  #   command: yarn start
+  #   tty: true
+  #   volumes:
+  #     - ./../server/:/app
+  #   ports:
+  #     - published: 5001
+  #       target: 3001
+  #       protocol: tcp
+  #       mode: host

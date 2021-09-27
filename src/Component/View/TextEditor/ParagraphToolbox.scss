@@ -41,14 +41,14 @@
         cursor: pointer;
         padding: 0 5px 0 5px;
         margin: 0;
-        color: $color-grey-light;
-        font-size: $font-xxl;
+        color: $darker-grey;
+        font-size: $size-5;
         border: none;
         background-color: $white;
         outline: none;
 
         &:hover {
-          color: $color-grey-dark;
+          color: $black;
         }
 
         &.active {

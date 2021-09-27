@@ -5,4 +5,4 @@ import { compose, F } from 'ramda'
 // Widget :: Props -> React.Component
 export default compose(
   shouldComponentUpdate(F),
-)(Widget);
+)(Widget)

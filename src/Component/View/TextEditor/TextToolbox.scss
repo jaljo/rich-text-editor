@@ -26,10 +26,10 @@
         cursor: pointer;
         background-color: $grey-darker;
         border: none;
-        font-size: $font-xxl;
+        font-size: $size-4;
         margin: 0;
         padding: 5px;
-        color: $gray;
+        color: $darker-grey;
         outline: none;
 
         &:hover {
@@ -68,7 +68,7 @@
 
     button.close {
       display: inline-block;
-      color: $gray;
+      color: $darker-grey;
       cursor: pointer;
       font-size: .75rem;
       background-color: $grey-darker;

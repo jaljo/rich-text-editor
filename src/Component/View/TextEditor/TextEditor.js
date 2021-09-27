@@ -1,7 +1,7 @@
 import TextToolbox from '../../Container/TextEditor/TextToolbox'
 import ParagraphToolbox from '../../Container/TextEditor/ParagraphToolbox'
 import React from 'react'
-import './TextEditor.css'
+import './TextEditor.scss'
 
 // TextEditor :: Props -> React.Component
 export default ({
