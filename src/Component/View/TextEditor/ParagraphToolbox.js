@@ -35,13 +35,13 @@ const ParagraphToolbox = ({
           onClick={() => openMediaPicker('TEXT_EDITOR', { editorName }, 'videoPicker')}
         >3</button>
       </li>
+      */}
       <li>
         <button
           className={`btn-knp icomoon-font ${insertTweetOpened ? 'active' : ''}`}
           onClick={ insertTweetOpened ? closeInsertTweet : openInsertTweet}
         >0</button>
       </li>
-      */}
       <li>
         <button
           className={`btn-knp icomoon-font ${insertYoutubeVideoOpened ? 'active' : ''}`}
