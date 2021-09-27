@@ -17,16 +17,30 @@ import {
 } from './ImagePicker'
 
 const imagesMock = [
-  {id: 33, legend: 'a image mock'},
-  {id: 34, legend: 'another image mock'},
+  {
+    id: 1,
+    src: {
+      medium: "href"
+    },
+    photographer_url: "photographer url",
+    photographer: "photographer",
+  },
+];
+const transformedImages = [
+  {
+    id: 1,
+    href: "href",
+    legend: "photographer url",
+    credit: "photographer",
+  }
 ];
 const dependencies = {
-  fetchApi: () => new Promise((resolve, reject) => resolve({
-    body: imagesMock,
-  })),
+  fetchApi: () => Promise.resolve({
+    photos: imagesMock,
+  }),
 };
 
-describe.skip('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
+describe('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
   const fetchImages$ = of(fetchImages());
   const state$ = new StateObservable(new Subject(), {
     Router: { params: { locale: 'en' }, }
@@ -37,18 +51,17 @@ describe.skip('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
       .toPromise(Promise)
       .then(action => {
         expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(imagesMock);
+        expect(action.images).toEqual(transformedImages);
         done();
       })
       .catch(error => { console.error(error); done(); });
   }, 1000);
 });
 
-describe.skip('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
+describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
   const scrollLeft$ = of(scrollLeft());
   const scrollRight$ = of(scrollRight());
   const state$ = new StateObservable(new Subject(), {
-    Router: { params: { locale: 'en' }, },
     MediaPicker: {
       ImagePicker: {
         page: 1,
@@ -63,7 +76,7 @@ describe.skip('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
       .toPromise(Promise)
       .then(action => {
         expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(imagesMock);
+        expect(action.images).toEqual(transformedImages);
         done();
       })
       .catch(error => { console.error(error); done(); });
@@ -74,14 +87,14 @@ describe.skip('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
       .toPromise(Promise)
       .then(action => {
         expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(imagesMock);
+        expect(action.images).toEqual(transformedImages);
         done();
       })
       .catch(error => { console.error(error); done(); });
   }, 1000);
 });
 
-describe.skip('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic', () => {
+describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic', () => {
   const state$ = new StateObservable(new Subject(), {
     MediaPicker: {
       ImagePicker: {

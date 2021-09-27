@@ -34,3 +34,11 @@ div.text-editor {
 [contenteditable="true"]:focus {
   outline: none;
 }
+
+.container {
+  max-width: 960px!important;
+}
+
+.btn-knp {
+  cursor: pointer;
+}

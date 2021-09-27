@@ -54,15 +54,15 @@ export const searchImagesEpic = (action$, state$, { fetchApi }) =>
   )
 
 // changePageEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
-export const changePageEpic = (action$, state$) =>
+export const changePageEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(SCROLL_RIGHT, SCROLL_LEFT),
     withLatestFrom(state$),
-    map(([ action, state ]) => [
+    mergeMap(([ _, state ]) => fetchImages(
+      fetchApi,
       state.MediaPicker.ImagePicker.page,
       state.MediaPicker.ImagePicker.searchString,
-    ]),
-    mergeMap(apply(fetchImages)),
+    )),
     map(pipe(
       prop('photos'),
       fmap(formatImage),
