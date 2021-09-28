@@ -5,7 +5,7 @@ services:
     image: knp-te:app-dev
     build:
       context: ./../
-      dockerfile: .docker/app/Dockerfile
+      dockerfile: .docker/Dockerfile
       target: dev
     command: yarn start
     tty: true
@@ -21,7 +21,7 @@ services:
     image: knp-te:server-dev
     build:
       context: ./../
-      dockerfile: .docker/app/Dockerfile
+      dockerfile: .docker/Dockerfile
       target: dev
     command: yarn start
     tty: true
