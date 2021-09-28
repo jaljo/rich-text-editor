@@ -2,31 +2,31 @@
   "name": "te-front",
   "version": "0.1.0",
   "dependencies": {
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
     "autoprefixer": "^8.6.4",
     "bulma": "^0.7.1",
     "crocks": "^0.9.4",
+    "node-sass": "^6.0.1",
     "ramda": "^0.25.0",
+    "react-dom": "^17.0.2",
     "react-functional-lifecycle": "^3.0.0",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.1",
+    "react-scripts": "4.0.3",
+    "react": "^17.0.2",
     "redux-observable": "^2.0.0",
+    "redux": "^4.1.1",
     "rxjs": "^7.3.0",
     "uniqid": "^5.0.3",
     "url-parse": "^1.4.1"
   },
-  "scripts": {
-    "lint": "eslint \"**/*.{jsx,js}\"",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
   "devDependencies": {
     "react-test-renderer": "^16.4.1"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"**/*.{jsx,js}\"",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
