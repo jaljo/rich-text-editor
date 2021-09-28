@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "A little server for twitter and brightcove.",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "node-fetch": "^2.3.0"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "node index.js"

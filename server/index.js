@@ -1,7 +1,10 @@
-const express = require('express')
-const fetch = require("node-fetch");
-const app = express()
-require('dotenv').config()
+import express from 'express';
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -13,7 +16,7 @@ app.get('/twitter', function (req, res) {
   fetch(`https://publish.twitter.com/oembed?url=${req.query.url}`)
     .then(response => response.json())
     .then(embedTweet => res.send(embedTweet));
-})
+});
 
 app.get('/videos', function (req, res) {
   const offset = (req.query.page - 1) * req.query.limit;
@@ -35,5 +38,5 @@ app.get('/videos', function (req, res) {
 })
 
 app.listen(3001, function () {
-  console.log('Server running on port 3001!')
-})
+  console.log('Server running on port 3001!');
+});
