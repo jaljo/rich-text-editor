@@ -1,16 +1,25 @@
-import { T, always, cond, equals } from 'ramda'
-import { createReducer } from '../../../Util'
-import { combineReducers } from 'redux'
+import {
+  always,
+  cond,
+  equals,
+  T,
+} from 'ramda'
+import {
+  combineReducers,
+} from 'redux'
+import {
+  createReducer,
+} from '../../../Util'
 import ImagePicker from './ImagePicker'
 import VideoPicker from './VideoPicker'
 
 // media picker initial state
 export const INITIAL_STATE = {
-  opened: false,
-  imagePickerOpened: false,
-  videoPickerOpened: false,
   domain: null,
   extra: null,
+  imagePickerOpened: false,
+  opened: false,
+  videoPickerOpened: false,
 }
 
 // media picker action types
@@ -22,12 +31,12 @@ export const CLEAR = '@knp/MediaPicker/CLEAR'
 
 // open :: (String, Object, String) -> Action
 export const open = (domain, extra, defaultOpenedComponent) => ({
-  type: OPEN,
+  // component opened when opening the mediapicker (i.e. "videoPicker", "imageUploader")
+  defaultOpenedComponent,
   domain,
   // any extra values related to the given domain
   extra,
-  // component opened when opening the mediapicker (i.e. "videoPicker", "imageUploader")
-  defaultOpenedComponent,
+  type: OPEN,
 })
 
 // close :: () -> Action
@@ -40,32 +49,36 @@ export const openImagePicker = always({ type: OPEN_IMAGE_PICKER })
 export const openVideoPicker = always({ type: OPEN_VIDEO_PICKER })
 
 // clear :: () -> Action.CLEAR
-export const clear = always({ type: CLEAR})
+export const clear = always({ type: CLEAR })
 
 // Display :: (State, Action *) -> State
 export const Display = createReducer(INITIAL_STATE, {
+  [CLEAR]: always(INITIAL_STATE),
+
+  [CLOSE]: always(INITIAL_STATE),
+
   [OPEN]: (state, { domain, extra, defaultOpenedComponent }) => ({
     ...state,
-    opened: true,
     domain,
     extra,
+    opened: true,
     ...cond([
       [equals('videoPicker'), always({ videoPickerOpened: true })],
       [T, always({ imagePickerOpened: true })],
     ])(defaultOpenedComponent),
   }),
-  [CLOSE]: always(INITIAL_STATE),
+
   [OPEN_IMAGE_PICKER]: state => ({
     ...state,
     imagePickerOpened: true,
     videoPickerOpened: false,
   }),
+
   [OPEN_VIDEO_PICKER]: state => ({
     ...state,
     imagePickerOpened: false,
     videoPickerOpened: true,
   }),
-  [CLEAR]: always(INITIAL_STATE),
 })
 
 // MediaPicker :: (State, Action *) -> State

@@ -1,10 +1,10 @@
 import {
-  default as reducer,
+  clear,
   INITIAL_STATE,
+  default as reducer,
   RENDER_TWEET,
   renderTweet,
   tweetRendered,
-  clear,
 } from './Tweet'
 
 describe('Redux :: State :: Tweet', () => {
@@ -14,10 +14,10 @@ describe('Redux :: State :: Tweet', () => {
       'uid',
       '<markup />'
     )).toEqual({
-      type: RENDER_TWEET,
-      tweetId: '1234',
-      uid: 'uid',
       originalHtmlMarkup: '<markup />',
+      tweetId: '1234',
+      type: RENDER_TWEET,
+      uid: 'uid',
     });
   })
 

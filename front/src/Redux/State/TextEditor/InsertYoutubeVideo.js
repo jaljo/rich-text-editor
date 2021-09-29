@@ -1,5 +1,9 @@
-import { createReducer } from '../../../Util'
-import { omit } from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
+import {
+  omit,
+} from 'ramda'
 
 export const INITIAL_STATE = {}
 
@@ -17,39 +21,49 @@ export const ERROR = '@knp/TextEditor/InsertYoutbe/ERROR'
 
 // insertYoutubeVideo :: (String, String)  -> Action.INSERT_YOUTUBE_VIDEO
 export const insertYoutubeVideo = (editorName, url) => ({
-  type: INSERT_YOUTUBE_VIDEO,
   editorName,
+  type: INSERT_YOUTUBE_VIDEO,
   url,
 })
 
 // youtubeVideoInserted :: String -> Action.YOUTUBE_VIDEO_INSERTED
 export const youtubeVideoInserted = editorName => ({
-  type: YOUTUBE_VIDEO_INSERTED,
   editorName,
+  type: YOUTUBE_VIDEO_INSERTED,
 })
 
 // initialize :: String -> Action.INITIALIZE
 export const initialize = editorName => ({
-  type: INITIALIZE,
   editorName,
+  type: INITIALIZE,
 })
 
 // error :: String -> Action.ERROR
 export const error = editorName => ({
-  type: ERROR,
   editorName,
+  type: ERROR,
 })
 
 // clear :: String -> Action.CLEAR
 export const clear = editorName => ({
-  type: CLEAR,
   editorName,
+  type: CLEAR,
 })
 // InsertYoutube :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
+  [CLEAR]: (state, { editorName }) => omit([editorName], state),
+
+  [ERROR]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: {
+      ...state[editorName],
+      error: true,
+    },
+  }),
+
   [INITIALIZE]: (state, { editorName }) => ({
     ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE},
+    [editorName]: { ...INSTANCE_INITIAL_STATE },
   }),
 
   [INSERT_YOUTUBE_VIDEO]: (state, { editorName }) => ({
@@ -67,14 +81,4 @@ export default createReducer(INITIAL_STATE, {
       error: false,
     },
   }),
-
-  [ERROR]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {
-      ...state[editorName],
-      error: true,
-    },
-  }),
-
-  [CLEAR]: (state, { editorName }) => omit([editorName], state),
 })

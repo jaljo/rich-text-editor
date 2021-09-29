@@ -1,8 +1,12 @@
-import { createReducer } from '../../Util'
-import { always } from 'ramda'
+import {
+  always,
+} from 'ramda'
+import {
+  createReducer,
+} from '../../Util'
 
+// key: tweetId, value: originalHtmlMarkup
 export const INITIAL_STATE = {
-  // key: tweetId, value: originalHtmlMarkup
   renderedTweets: {},
 }
 
@@ -12,17 +16,17 @@ export const CLEAR = '@knp/Tweet/CLEAR'
 
 // renderTweet :: (String, String, String) -> Action
 export const renderTweet = (tweetId, uid, originalHtmlMarkup) => ({
-  type: RENDER_TWEET,
-  tweetId,
-  uid,
   originalHtmlMarkup,
+  tweetId,
+  type: RENDER_TWEET,
+  uid,
 })
 
 // tweetRendered :: (String, String) -> Action
 export const tweetRendered = (tweetId, originalHtmlMarkup) => ({
-  type: TWEET_RENDERED,
-  tweetId,
   originalHtmlMarkup,
+  tweetId,
+  type: TWEET_RENDERED,
 })
 
 // clear :: () -> Action
@@ -30,6 +34,8 @@ export const clear = always({ type: CLEAR })
 
 // Tweet :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
+  [CLEAR]: always(INITIAL_STATE),
+
   [TWEET_RENDERED]: (state, { tweetId, originalHtmlMarkup }) => ({
     ...state,
     renderedTweets: {
@@ -37,6 +43,4 @@ export default createReducer(INITIAL_STATE, {
       [tweetId]: originalHtmlMarkup,
     },
   }),
-
-  [CLEAR]: always(INITIAL_STATE),
 })

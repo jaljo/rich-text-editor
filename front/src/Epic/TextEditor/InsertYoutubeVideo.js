@@ -1,20 +1,44 @@
-import { ofType, combineEpics } from 'redux-observable'
-import { logObservableError } from '../../Util'
-import { map, withLatestFrom, mergeMap, catchError } from 'rxjs/operators'
-import { compose, prop, pipe, equals, ifElse, path } from 'ramda'
-import { insertNewNodeAtIndex } from './TextEditor'
-import { from, of } from 'rxjs'
 import {
-  INSERT_YOUTUBE_VIDEO,
-  YOUTUBE_VIDEO_INSERTED,
-  youtubeVideoInserted,
-  error,
-} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+  catchError,
+  map,
+  mergeMap,
+  withLatestFrom,
+} from 'rxjs/operators'
 import {
   closeInsertYoutubeVideo,
   OPEN_INSERT_TWEET,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
-import { OPEN as OPEN_MEDIAPICKER } from '../../Redux/State/MediaPicker/MediaPicker'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  compose,
+  equals,
+  ifElse,
+  path,
+  pipe,
+  prop,
+} from 'ramda'
+import {
+  error,
+  INSERT_YOUTUBE_VIDEO,
+  YOUTUBE_VIDEO_INSERTED,
+  youtubeVideoInserted,
+} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+import {
+  from,
+  of,
+} from 'rxjs'
+import {
+  insertNewNodeAtIndex,
+} from './TextEditor'
+import {
+  logObservableError,
+} from '../../Util'
+import {
+  OPEN as OPEN_MEDIAPICKER,
+} from '../../Redux/State/MediaPicker/MediaPicker'
 
 // insertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
 export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(

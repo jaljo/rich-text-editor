@@ -1,16 +1,35 @@
-import { ofType, combineEpics } from 'redux-observable'
-import { merge } from 'rxjs'
-import { map, withLatestFrom, mergeMap, debounceTime, filter } from 'rxjs/operators'
-import { logObservableError } from '../../Util'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  compose,
+  join,
+  length,
+  lte,
+  prop,
+} from 'ramda'
+import {
+  debounceTime,
+  filter,
+  map,
+  mergeMap,
+  withLatestFrom,
+} from 'rxjs/operators'
 import {
   FETCH_VIDEOS,
-  SEARCH_VIDEOS,
+  fetchVideos,
   SCROLL_LEFT,
   SCROLL_RIGHT,
-  fetchVideos,
+  SEARCH_VIDEOS,
   videosReceived,
 } from '../../Redux/State/MediaPicker/VideoPicker'
-import { join, prop, compose, lte, length } from 'ramda'
+import {
+  logObservableError,
+} from '../../Util'
+import {
+  merge,
+} from 'rxjs'
 
 // fetchVideosEpic :: Epic -> Observable Action
 export const fetchVideosEpic = (action$, state$, { fetchApi }) =>

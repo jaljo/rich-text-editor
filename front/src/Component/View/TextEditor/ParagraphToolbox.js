@@ -1,7 +1,7 @@
-import React from 'react'
+import './ParagraphToolbox.scss'
 import InsertTweet from '../../Container/TextEditor/InsertTweet'
 import InsertYoutubeVideo from '../../Container/TextEditor/InsertYoutubeVideo'
-import './ParagraphToolbox.scss'
+import React from 'react'
 
 // ParagraphToolbox :: Props -> React.Component
 const ParagraphToolbox = ({
@@ -19,7 +19,7 @@ const ParagraphToolbox = ({
 }) =>
   <aside
     className={`paragraph-toolbox ${isVisible ? 'visible' : ''}`}
-    style={{top: top - 5 + 'px'}}
+    style={{ top: top - 5 + 'px' }}
   >
     <ul>
       <li>

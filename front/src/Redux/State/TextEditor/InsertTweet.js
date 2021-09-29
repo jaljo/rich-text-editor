@@ -1,5 +1,9 @@
-import { createReducer } from '../../../Util'
-import { omit } from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
+import {
+  omit,
+} from 'ramda'
 
 // InsertTweet initial state
 export const INSTANCE_INITIAL_STATE = {
@@ -19,61 +23,49 @@ export const CLEAR = '@knp/TextEditor/InsertTweet/CLEAR'
 
 // initialize :: String -> Action
 export const initialize = editorName => ({
-  type: INITIALIZE,
   editorName,
+  type: INITIALIZE,
 })
 
 // insertTweet :: (String, String) -> Action
 export const insertTweet = (editorName, url) => ({
-  type: INSERT_TWEET,
   editorName,
+  type: INSERT_TWEET,
   url,
 })
 
 // embedTweetFetched :: (String, String, String) -> Action.EMBED_TWEET_FETCHED
 export const embedTweetFetched = (editorName, html, url) => ({
-  type: EMBED_TWEET_FETCHED,
   editorName,
   html,
+  type: EMBED_TWEET_FETCHED,
   url,
 })
 
 // tweetInserted :: (String, String, String, String) -> Action
 export const tweetInserted = (editorName, tweetId, uid, originalHtmlMarkup) => ({
-  type: TWEET_INSERTED,
   editorName,
-  tweetId,
-  uid,
   originalHtmlMarkup,
+  tweetId,
+  type: TWEET_INSERTED,
+  uid,
 })
 
 // error :: String -> Action
 export const error = editorName => ({
-  type: ERROR,
   editorName,
+  type: ERROR,
 })
 
 // clear :: String -> Action
 export const clear = editorName => ({
-  type: CLEAR,
   editorName,
+  type: CLEAR,
 })
 
 // InsertTweet :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
-  [INITIALIZE]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE},
-  }),
-
-  [INSERT_TWEET]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {
-      ...state[editorName],
-      error: false,
-      fetching: true,
-    },
-  }),
+  [CLEAR]: (state, { editorName }) => omit([editorName], state),
 
   [EMBED_TWEET_FETCHED]: (state, { editorName }) => ({
     ...state,
@@ -92,5 +84,17 @@ export default createReducer(INITIAL_STATE, {
     },
   }),
 
-  [CLEAR]: (state, { editorName }) => omit([editorName], state),
+  [INITIALIZE]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: { ...INSTANCE_INITIAL_STATE },
+  }),
+
+  [INSERT_TWEET]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: {
+      ...state[editorName],
+      error: false,
+      fetching: true,
+    },
+  }),
 })

@@ -1,21 +1,3 @@
-import { ofType, combineEpics } from 'redux-observable'
-import { map, mergeMap, tap, ignoreElements } from 'rxjs/operators'
-import { isEmptyParagraph } from './ToolBoxes'
-import {
-  logObservableError,
-  logObservableErrorAndTriggerAction,
-} from '../../Util'
-import {
-  textPasted,
-  pasteGranted,
-  displayClipboardWarning,
-  displayClipboardSupportError,
-  PASTE_GRANTED,
-  DISPLAY_CLIPBOARD_WARNING,
-  DISPLAY_CLIPBOARD_SUPPORT_ERROR,
-  PASTE,
-  TEXT_PASTED,
-} from '../../Redux/State/TextEditor/TextEditor'
 import {
   allPass,
   compose,
@@ -27,11 +9,39 @@ import {
   tap as rtap,
   when,
 } from 'ramda'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  DISPLAY_CLIPBOARD_SUPPORT_ERROR,
+  DISPLAY_CLIPBOARD_WARNING,
+  displayClipboardSupportError,
+  displayClipboardWarning,
+  PASTE,
+  PASTE_GRANTED,
+  pasteGranted,
+  TEXT_PASTED,
+  textPasted,
+} from '../../Redux/State/TextEditor/TextEditor'
+import {
+  ignoreElements,
+  map,
+  mergeMap,
+  tap,
+} from 'rxjs/operators'
+import {
+  logObservableError,
+  logObservableErrorAndTriggerAction,
+} from '../../Util'
+import {
+  isEmptyParagraph,
+} from './ToolBoxes'
 
 // checkClipboardAccessEpic :: Epic -> Observable Action.PASTE_GRANTED Action.DISPLAY_CLIPBOARD_WARNING
 const checkClipboardAccessEpic = action$ => action$.pipe(
   ofType(PASTE),
-  mergeMap(() => navigator.permissions.query({'name': 'clipboard-read'})),
+  mergeMap(() => navigator.permissions.query({ 'name': 'clipboard-read' })),
   mergeMap(ifElse(
     isClipboardAccessGranted,
     () => navigator.clipboard.readText().then(pasteGranted),
@@ -58,9 +68,9 @@ const pasteCopiedTextEpic = (action$, state$, { window }) =>
 const displayClipboardWarningEpic = action$ => action$.pipe(
   ofType(DISPLAY_CLIPBOARD_WARNING),
   tap(() => ({
-    message: `Please enable clipboard access on your browser. See https://support.google.com/chrome/answer/114662`,
-    level: 'warning',
     duration: 5000,
+    level: 'warning',
+    message: `Please enable clipboard access on your browser. See https://support.google.com/chrome/answer/114662`,
   })),
   logObservableError(),
 )
@@ -69,9 +79,9 @@ const displayClipboardWarningEpic = action$ => action$.pipe(
 const displayClipboardSupportErrorEpic = action$ => action$.pipe(
   ofType(DISPLAY_CLIPBOARD_SUPPORT_ERROR),
   tap(() => ({
-    message: `Your browser does not support clipboard read access. Consider to use Google Chrome which supports it.`,
-    level: 'error',
     duration: 5000,
+    level: 'error',
+    message: `Your browser does not support clipboard read access. Consider to use Google Chrome which supports it.`,
   })),
   logObservableError(),
 )

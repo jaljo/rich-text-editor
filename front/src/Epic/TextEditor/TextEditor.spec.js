@@ -1,32 +1,41 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
 import {
-  saveRangeEpic,
-  createLinkEpic,
-  refreshTextToolboxStateEpic,
-  pickImageEpic,
-  insertImageEpic,
-  pickVideoEpic,
-  insertVideoEpic,
-} from './TextEditor'
-import {
-  insertImage,
-  insertVideo,
-  IMAGE_INSERTED,
-  INSERT_IMAGE,
-  INSERT_VIDEO,
-  VIDEO_INSERTED,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
-import {
-  show as showTextToolbox,
+  CLOSE_LINK_CREATOR,
   mutate,
   openLinkCreator,
   REFRESH_BUTTONS_STATE,
-  CLOSE_LINK_CREATOR,
   SAVE_RANGE,
+  show as showTextToolbox,
 } from '../../Redux/State/TextEditor/TextToolbox'
-import { pickImageWithCredits } from '../../Redux/State/MediaPicker/ImagePicker'
-import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  createLinkEpic,
+  insertImageEpic,
+  insertVideoEpic,
+  pickImageEpic,
+  pickVideoEpic,
+  refreshTextToolboxStateEpic,
+  saveRangeEpic,
+} from './TextEditor'
+import {
+  IMAGE_INSERTED,
+  INSERT_IMAGE,
+  INSERT_VIDEO,
+  insertImage,
+  insertVideo,
+  VIDEO_INSERTED,
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  pickImageWithCredits,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  pickVideo,
+} from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  StateObservable,
+} from 'redux-observable'
 
 const containerMock = {
   parentNode: {
@@ -34,14 +43,14 @@ const containerMock = {
   },
 };
 const rangeMock = {
-  startContainer: containerMock,
-  endContainer: containerMock,
   cloneRange: () => null,
+  endContainer: containerMock,
+  startContainer: containerMock,
 };
 const selectionMock = {
+  addRange: () => null,
   getRangeAt: () => rangeMock,
   removeAllRanges: () => null,
-  addRange: () => null,
   type: 'Range',
 };
 const dependencies = {
@@ -84,7 +93,7 @@ describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
   });
 
   it('dispatches closeLinkCreator', async () => {
-    const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
+    const mutate$ = of(mutate('editor-name')('LINK', { href: '' }));
 
     const action = await createLinkEpic(mutate$, state$, dependencies)
       .toPromise(Promise)
@@ -124,12 +133,12 @@ describe('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () =
 describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
   it('dispatches insertImage', async () => {
     const pickImageWithCredits$ = of(
-      pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name'})
+      pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name' })
     );
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         ImagePicker: {
-          images: [{id: 1}],
+          images: [{ id: 1 }],
         },
       },
     });
@@ -144,7 +153,7 @@ describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
 
 describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
   it('dispatches imageInserted', async () => {
-    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
+    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel' };
     const insertImage$ = of(insertImage('editor-name', imageMock));
     const state$ = new StateObservable(new Subject, {
       TextEditor: {
@@ -174,7 +183,7 @@ describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
       MediaPicker: {
         VideoPicker: {
           videos: [
-            { id: "slkdhlskdg", name: "test"},
+            { id: "slkdhlskdg", name: "test" },
           ],
         },
       },

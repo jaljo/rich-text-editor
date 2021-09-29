@@ -1,33 +1,46 @@
-import TextToolbox from '../../View/TextEditor/TextToolbox'
-import { connect } from 'react-redux'
-import { compose, equals, ifElse, pipe, prop } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { whenValid } from '../../../Util'
 import {
-  initialize,
   clear,
-  openLinkCreator,
   closeLinkCreator,
+  initialize,
   mutate,
+  openLinkCreator,
 } from '../../../Redux/State/TextEditor/TextToolbox'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+  equals,
+  ifElse,
+  pipe,
+  prop,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
+import TextToolbox from '../../View/TextEditor/TextToolbox'
+import {
+  whenValid,
+} from '../../../Util'
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({
-  isVisible: prop('visible', state.TextEditor.TextToolbox[props.editorName]),
-  top: prop('top', state.TextEditor.TextToolbox[props.editorName]),
-  isLinkCreatorOpened: prop('isLinkCreatorOpened', state.TextEditor.TextToolbox[props.editorName]),
   isBold: prop('isBold', state.TextEditor.TextToolbox[props.editorName]),
   isItalic: prop('isItalic', state.TextEditor.TextToolbox[props.editorName]),
-  isUnderline: prop('isUnderline', state.TextEditor.TextToolbox[props.editorName]),
-  isTitle: prop('isTitle', state.TextEditor.TextToolbox[props.editorName]),
-  isQuote: prop('isQuote', state.TextEditor.TextToolbox[props.editorName]),
   isLink: prop('isLink', state.TextEditor.TextToolbox[props.editorName]),
+  isLinkCreatorOpened: prop('isLinkCreatorOpened', state.TextEditor.TextToolbox[props.editorName]),
+  isQuote: prop('isQuote', state.TextEditor.TextToolbox[props.editorName]),
+  isTitle: prop('isTitle', state.TextEditor.TextToolbox[props.editorName]),
+  isUnderline: prop('isUnderline', state.TextEditor.TextToolbox[props.editorName]),
+  isVisible: prop('visible', state.TextEditor.TextToolbox[props.editorName]),
+  top: prop('top', state.TextEditor.TextToolbox[props.editorName]),
 })
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
-  initialize: () => dispatch(initialize(props.editorName)),
   clear: () => dispatch(clear(props.editorName)),
+  closeLinkCreator: () => dispatch(closeLinkCreator(props.editorName)),
   handleLinkButton: pipe(
     ifElse(
       equals('LINK'),
@@ -41,7 +54,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     data => mutate(props.editorName)('LINK', data),
     dispatch,
   )),
-  closeLinkCreator: () => dispatch(closeLinkCreator(props.editorName)),
+  initialize: () => dispatch(initialize(props.editorName)),
   mutate: compose(dispatch, mutate(props.editorName)),
 })
 

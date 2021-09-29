@@ -1,6 +1,6 @@
-import React from 'react'
 import './MediaPicker.scss'
 import ImagePicker from '../../Container/MediaPicker/ImagePicker'
+import React from 'react'
 import VideoPicker from '../../Container/MediaPicker/VideoPicker'
 
 // MediaPicker :: Props -> React.Component

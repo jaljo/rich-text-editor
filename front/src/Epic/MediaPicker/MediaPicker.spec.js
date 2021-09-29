@@ -1,12 +1,23 @@
-import { TestScheduler } from 'rxjs/testing'
-import { pickImageWithCredits } from '../../Redux/State/MediaPicker/ImagePicker'
-import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
-import { CLOSE, open } from '../../Redux/State/MediaPicker/MediaPicker'
-import { closeMediaPickerEpic } from './MediaPicker'
+import {
+  CLOSE,
+  open,
+} from '../../Redux/State/MediaPicker/MediaPicker'
 import {
   openInsertTweet,
   openInsertYoutubeVideo,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
+import {
+  closeMediaPickerEpic,
+} from './MediaPicker'
+import {
+  pickImageWithCredits,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  pickVideo,
+} from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  TestScheduler,
+} from 'rxjs/testing'
 
 describe('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
 

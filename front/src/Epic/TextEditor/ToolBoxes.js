@@ -1,6 +1,3 @@
-import { combineEpics, ofType } from 'redux-observable'
-import { map, filter, switchMap, mergeMap, takeUntil } from 'rxjs/operators'
-import { merge, fromEvent } from 'rxjs'
 import {
   allPass,
   apply,
@@ -16,37 +13,62 @@ import {
   prop,
 } from 'ramda'
 import {
-  INITIALIZE,
   CLEAR,
   CLICK,
+  INITIALIZE,
   SELECT_TEXT,
   TEXT_PASTED,
 } from '../../Redux/State/TextEditor/TextEditor'
 import {
-  closeLinkCreator,
-  hideAll as hideAllTextToolboxes,
-  show as showTextToolbox,
-  CLEAR as CLEAR_TEXT_TOOLBOX,
-  CLOSE_LINK_CREATOR,
-  OPEN_LINK_CREATOR,
-} from '../../Redux/State/TextEditor/TextToolbox'
-import {
-  closeInsertTweet,
-  closeInsertYoutubeVideo,
-  hideAll as hideAllParagraphToolboxes,
-  show as showParagraphToolbox,
   CLEAR as CLEAR_PARAGRAPH_TOOLBOX,
   CLOSE_INSERT_TWEET,
   CLOSE_INSERT_YOUTUBE_VIDEO,
+  closeInsertTweet,
+  closeInsertYoutubeVideo,
+  hideAll as hideAllParagraphToolboxes,
   IMAGE_INSERTED,
   OPEN_INSERT_TWEET,
   OPEN_INSERT_YOUTUBE_VIDEO,
+  show as showParagraphToolbox,
   VIDEO_INSERTED,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
-import { TWEET_INSERTED } from '../../Redux/State/TextEditor/InsertTweet'
-import { YOUTUBE_VIDEO_INSERTED } from '../../Redux/State/TextEditor/InsertYoutubeVideo'
-import { logObservableError, closestHavingClass, isEscapeKey } from '../../Util'
-import { getRootNodesAsArray } from './TextEditor'
+import {
+  CLEAR as CLEAR_TEXT_TOOLBOX,
+  CLOSE_LINK_CREATOR,
+  closeLinkCreator,
+  hideAll as hideAllTextToolboxes,
+  OPEN_LINK_CREATOR,
+  show as showTextToolbox,
+} from '../../Redux/State/TextEditor/TextToolbox'
+import {
+  closestHavingClass,
+  isEscapeKey,
+  logObservableError,
+} from '../../Util'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  takeUntil,
+} from 'rxjs/operators'
+import {
+  fromEvent,
+  merge,
+} from 'rxjs'
+import {
+  getRootNodesAsArray,
+} from './TextEditor'
+import {
+  TWEET_INSERTED,
+} from '../../Redux/State/TextEditor/InsertTweet'
+import {
+  YOUTUBE_VIDEO_INSERTED,
+} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
 
 
 // isRange :: Selection -> Boolean

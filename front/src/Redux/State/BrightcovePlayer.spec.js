@@ -1,8 +1,8 @@
 import {
   INITIAL_STATE,
   playerLoaded,
-  videoRendered,
   default as reducer,
+  videoRendered,
 } from './BrightcovePlayer'
 
 describe('Redux :: State :: BrightcovePlayer', () => {
@@ -35,7 +35,7 @@ describe('Redux :: State :: BrightcovePlayer', () => {
     ).toEqual({
       ...INITIAL_STATE,
       renderedVideos: [
-        {id: 12, originalHtmlMarkup: '<video id="1234"></video>'},
+        { id: 12, originalHtmlMarkup: '<video id="1234"></video>' },
       ],
     });
   });

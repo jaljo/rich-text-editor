@@ -1,13 +1,20 @@
-import { omit, always, compose } from 'ramda'
-import { createReducer, hideObjects } from '../../../Util'
+import {
+  always,
+  compose,
+  omit,
+} from 'ramda'
+import {
+  createReducer,
+  hideObjects,
+} from '../../../Util'
 
 // paragraph toolbox initial state
 export const INSTANCE_INITIAL_STATE = {
   insertTweetOpened: false,
-  visible: false,
-  top: 0,
-  targetNodeIndex: null,
   insertYoutubeVideoOpened: false,
+  targetNodeIndex: null,
+  top: 0,
+  visible: false,
 }
 
 export const INITIAL_STATE = {}
@@ -28,28 +35,28 @@ export const VIDEO_INSERTED = '@knp/TextEditor/ParagraphToolbox/VIDEO_INSERTED'
 
 // initialize :: String -> Action
 export const initialize = editorName => ({
-  type: INITIALIZE,
   editorName,
+  type: INITIALIZE,
 })
 
 // openInsertTweet :: String -> Action
 export const openInsertTweet = editorName => ({
-  type: OPEN_INSERT_TWEET,
   editorName,
+  type: OPEN_INSERT_TWEET,
 })
 
 // closeInsertTweet :: String -> Action
 export const closeInsertTweet = editorName => ({
-  type: CLOSE_INSERT_TWEET,
   editorName,
+  type: CLOSE_INSERT_TWEET,
 })
 
 // show :: (String, Number, Number) -> Action.SHOW
 export const show = (editorName, top, targetNodeIndex) => ({
-  type: SHOW,
   editorName,
-  top,
   targetNodeIndex,
+  top,
+  type: SHOW,
 })
 
 // hideAll :: () -> Action.HIDE_ALL
@@ -57,77 +64,52 @@ export const hideAll = always({ type: HIDE_ALL })
 
 // insertImage :: (String, Image) -> Action.INSERT_IMAGE
 export const insertImage = (editorName, image) => ({
-  type: INSERT_IMAGE,
   editorName,
   image,
+  type: INSERT_IMAGE,
 })
 
 // imageInserted :: String -> Action.IMAGE_INSERTED
 export const imageInserted = editorName => ({
-  type: IMAGE_INSERTED,
   editorName,
+  type: IMAGE_INSERTED,
 })
 
 // clear :: String -> Action
 export const clear = editorName => ({
-  type: CLEAR,
   editorName,
+  type: CLEAR,
 })
 
 // openInsertYoutubeVideo :: () -> Action.OPEN_INSERT_YOUTUBE
 export const openInsertYoutubeVideo = editorName => ({
-  type: OPEN_INSERT_YOUTUBE_VIDEO,
   editorName,
+  type: OPEN_INSERT_YOUTUBE_VIDEO,
 })
 
 // closeInsertYoutubeVideo :: () -> Action.CLOSE_INSERT_YOUTUBE
 export const closeInsertYoutubeVideo = editorName => ({
-  type: CLOSE_INSERT_YOUTUBE_VIDEO,
   editorName,
+  type: CLOSE_INSERT_YOUTUBE_VIDEO,
 })
 
 // insertVideo :: (String, Video) -> Action.INSERT_VIDEO
 export const insertVideo = (editorName, video) => ({
-  type: INSERT_VIDEO,
   editorName,
+  type: INSERT_VIDEO,
   video,
 })
 
 // videoInserted :: (String, String) -> Action.VIDEO_INSERTED
 export const videoInserted = (editorName, id) => ({
-  type: VIDEO_INSERTED,
   editorName,
   id,
+  type: VIDEO_INSERTED,
 })
 
 // ParagraphToolbox :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
-  [INITIALIZE]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE},
-  }),
-
-  [SHOW]: (state, { editorName, top, targetNodeIndex }) => ({
-    [editorName]: {
-      ...state[editorName],
-      visible: true,
-      insertTweetOpened: false,
-      insertYoutubeVideoOpened: false, 
-      top,
-      targetNodeIndex,
-    },
-    ...compose(hideObjects, omit([editorName]))(state),
-  }),
-
-  [HIDE_ALL]: state => hideObjects(state),
-
-  [OPEN_INSERT_TWEET]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {
-      ...state[editorName],
-      insertTweetOpened: true,
-    },
-  }),
+  [CLEAR]: (state, { editorName }) => omit([editorName], state),
 
   [CLOSE_INSERT_TWEET]: (state, { editorName }) => ({
     ...state,
@@ -137,7 +119,28 @@ export default createReducer(INITIAL_STATE, {
     },
   }),
 
-  [CLEAR]: (state, { editorName }) => omit([editorName], state),
+  [CLOSE_INSERT_YOUTUBE_VIDEO]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: {
+      ...state[editorName],
+      insertYoutubeVideoOpened: false,
+    },
+  }),
+
+  [HIDE_ALL]: state => hideObjects(state),
+
+  [INITIALIZE]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: { ...INSTANCE_INITIAL_STATE },
+  }),
+
+  [OPEN_INSERT_TWEET]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: {
+      ...state[editorName],
+      insertTweetOpened: true,
+    },
+  }),
 
   [OPEN_INSERT_YOUTUBE_VIDEO]: (state, { editorName }) => ({
     ...state,
@@ -147,11 +150,15 @@ export default createReducer(INITIAL_STATE, {
     },
   }),
 
-  [CLOSE_INSERT_YOUTUBE_VIDEO]: (state, { editorName }) => ({
-    ...state,
+  [SHOW]: (state, { editorName, top, targetNodeIndex }) => ({
     [editorName]: {
       ...state[editorName],
+      insertTweetOpened: false,
       insertYoutubeVideoOpened: false,
+      targetNodeIndex,
+      top,
+      visible: true,
     },
+    ...compose(hideObjects, omit([editorName]))(state),
   }),
 })

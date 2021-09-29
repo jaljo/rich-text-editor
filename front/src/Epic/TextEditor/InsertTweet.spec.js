@@ -1,19 +1,26 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
+import {
+  EMBED_TWEET_FETCHED,
+  embedTweetFetched,
+  ERROR,
+  insertTweet,
+  TWEET_INSERTED,
+  tweetInserted,
+} from '../../Redux/State/TextEditor/InsertTweet'
 import {
   fetchEmbedTweetEpic,
   insertTweetEpic,
   renderInsertedTweetEpic,
 } from './InsertTweet'
 import {
-  insertTweet,
-  tweetInserted,
-  embedTweetFetched,
-  TWEET_INSERTED,
-  EMBED_TWEET_FETCHED,
-  ERROR,
-} from '../../Redux/State/TextEditor/InsertTweet'
-import { RENDER_TWEET } from '../../Redux/State/Tweet'
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  RENDER_TWEET,
+} from '../../Redux/State/Tweet'
+import {
+  StateObservable,
+} from 'redux-observable'
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -30,7 +37,7 @@ describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
 
   it('dispatches embedTweetFetched action', async () => {
     const dependencies = {
-      fetchApi: () => Promise.resolve({ body: {}}),
+      fetchApi: () => Promise.resolve({ body: {} }),
     };
 
     const action = await fetchEmbedTweetEpic(insertTweet$, state$, dependencies)

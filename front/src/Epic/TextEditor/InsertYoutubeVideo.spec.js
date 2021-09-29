@@ -1,24 +1,31 @@
 import {
-  validateYoutubeUrl,
-  insertYoutubeVideoEpic,
-  closeInsertYoutubeVideoEpic,
-} from './InsertYoutubeVideo'
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
-import { TestScheduler } from 'rxjs/testing'
-import {
-  insertYoutubeVideo,
-  youtubeVideoInserted,
-  YOUTUBE_VIDEO_INSERTED,
-  ERROR,
-} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
-import {
   CLOSE_INSERT_YOUTUBE_VIDEO,
   openInsertTweet,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
 import {
+  closeInsertYoutubeVideoEpic,
+  insertYoutubeVideoEpic,
+  validateYoutubeUrl,
+} from './InsertYoutubeVideo'
+import {
+  ERROR,
+  insertYoutubeVideo,
+  YOUTUBE_VIDEO_INSERTED,
+  youtubeVideoInserted,
+} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
   open as openMediapicker,
 } from '../../Redux/State/MediaPicker/MediaPicker'
+import {
+  StateObservable,
+} from 'redux-observable'
+import {
+  TestScheduler,
+} from 'rxjs/testing'
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -101,13 +108,16 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpi
       const action$ = hot('a-b-c', {
         a: youtubeVideoInserted('editor-name'),
         b: openInsertTweet('editor-name'),
-        c: openMediapicker('TEXT_EDITOR', { editorName: 'editor-name'}),
+        c: openMediapicker('TEXT_EDITOR', { editorName: 'editor-name' }),
       });
 
       expectObservable(
         closeInsertYoutubeVideoEpic(action$)
       ).toBe('a-a-a', {
-        a: { type: CLOSE_INSERT_YOUTUBE_VIDEO, editorName: 'editor-name' },
+        a: {
+          editorName: 'editor-name',
+          type: CLOSE_INSERT_YOUTUBE_VIDEO,
+        },
       });
     });
   });

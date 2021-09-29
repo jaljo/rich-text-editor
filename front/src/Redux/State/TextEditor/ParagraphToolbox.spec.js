@@ -1,13 +1,13 @@
 import {
   clear,
   closeInsertTweet,
-  default as reducer,
   hideAll,
-  initialize,
-  openInsertTweet,
-  show,
   INITIAL_STATE,
+  initialize,
   INSTANCE_INITIAL_STATE,
+  openInsertTweet,
+  default as reducer,
+  show,
 } from './ParagraphToolbox'
 
 const instanceExists = {
@@ -50,11 +50,11 @@ describe('Redux :: State :: TextEditor :: ParagraphToolbox', () => {
       'instance-b': { ...INSTANCE_INITIAL_STATE, visible: false },
       'instance-c': {
         ...INSTANCE_INITIAL_STATE,
-        visible: true,
-        top: 20,
-        targetNodeIndex: 2,
         insertTweetOpened: false,
         insertYoutubeVideoOpened: false,
+        targetNodeIndex: 2,
+        top: 20,
+        visible: true,
       },
       'instance-d': { ...INSTANCE_INITIAL_STATE, visible: false },
     });

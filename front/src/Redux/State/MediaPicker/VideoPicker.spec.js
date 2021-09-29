@@ -1,12 +1,12 @@
 import {
-  fetchVideos,
-  searchVideos,
-  videosReceived,
-  scrollLeft,
-  scrollRight,
   clear,
+  fetchVideos,
   INITIAL_STATE,
   default as reducer,
+  scrollLeft,
+  scrollRight,
+  searchVideos,
+  videosReceived,
 } from './VideoPicker'
 
 describe('Redux :: State :: MediaPicker :: VideoPicker', () => {

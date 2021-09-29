@@ -1,23 +1,41 @@
-import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import { logObservableError, findById } from '../../Util'
-import { isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
 import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  debounceTime,
+  map,
+  mergeMap,
+  withLatestFrom,
+} from 'rxjs/operators'
+import {
+  error,
   FETCH_IMAGES,
+  PICK_IMAGE,
+  pickImageWithCredits,
+  receivedImages,
   SCROLL_LEFT,
   SCROLL_RIGHT,
-  PICK_IMAGE,
-  receivedImages,
-  pickImageWithCredits,
-  error,
 } from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  findById,
+  logObservableError,
+} from '../../Util'
+import {
+  map as fmap,
+  ifElse,
+  isEmpty,
+  join,
+  pipe,
+  prop,
+} from 'ramda'
 
 // formatImage :: PexelsImage -> Image
 const formatImage = image => ({
-  id: image.id,
-  href: image.src.medium,
-  legend: image.photographer_url,
   credit: image.photographer,
+  href: image.src.medium,
+  id: image.id,
+  legend: image.photographer_url,
 })
 
 // fetchImages :: (Fetch, String, String) -> Promise
@@ -29,10 +47,10 @@ const fetchImages = (fetchApi, page, searchString) =>
     `&per_page=10`,
     `&page=${page}`,
   ]), {
-    method: 'GET',
     headers: {
       'Authorization': process.env.REACT_APP_IMAGE_API_KEY,
     },
+    method: 'GET',
   })
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _

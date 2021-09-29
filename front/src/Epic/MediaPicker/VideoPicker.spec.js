@@ -1,18 +1,25 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
-import { TestScheduler } from 'rxjs/testing'
 import {
-  fetchVideosEpic,
-  searchVideosEpic,
-} from './VideoPicker'
-import {
+  FETCH_VIDEOS,
   fetchVideos,
   scrollLeft,
   scrollRight,
   searchVideos,
   VIDEOS_RECEIVED,
-  FETCH_VIDEOS,
 } from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  fetchVideosEpic,
+  searchVideosEpic,
+} from './VideoPicker'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  StateObservable,
+} from 'redux-observable'
+import {
+  TestScheduler,
+} from 'rxjs/testing'
 
 describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   it('dispatches videosReceived', async () => {
@@ -20,9 +27,9 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         VideoPicker: {
-          searchString: 'Netanyahu',
-          page: 12,
           limit: 10,
+          page: 12,
+          searchString: 'Netanyahu',
         },
       },
     });

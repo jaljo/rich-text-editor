@@ -1,7 +1,16 @@
-import React from 'react'
-import { map, isNil, isEmpty, compose, nth } from 'ramda'
-import { splitMedias, containsTenItems } from '../../../Util'
 import './VideoPicker.scss'
+import {
+  compose,
+  isEmpty,
+  isNil,
+  map,
+  nth,
+} from 'ramda'
+import {
+  containsTenItems,
+  splitMedias,
+} from '../../../Util'
+import React from 'react'
 
 // VideoPicker :: Props -> React.Component
 const VideoPicker = ({

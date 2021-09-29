@@ -1,9 +1,15 @@
-import React from 'react'
-import uniqid from 'uniqid'
-import { cond, T, always } from 'ramda'
-import { indexedMap } from '../../../Util'
-import TwitterWidget from '../../Container/Tweet/Tweet'
+import {
+  always,
+  cond,
+  T,
+} from 'ramda'
 import BrightcoveVideo from '../../Container/BrightcovePlayer/BrightcoveVideo'
+import {
+  indexedMap,
+} from '../../../Util'
+import React from 'react'
+import TwitterWidget from '../../Container/Tweet/Tweet'
+import uniqid from 'uniqid'
 
 // is :: String -> Props -> Boolean
 const is = type => ({ component }) => type === component.component

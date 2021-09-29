@@ -1,10 +1,27 @@
-import { RENDER_TWEET, clear, tweetRendered } from './../Redux/State/Tweet'
-import { ofType } from 'redux-observable'
-import { filter, mergeMap, map } from 'rxjs/operators'
-import { combineEpics } from 'redux-observable'
-import { prop } from 'ramda'
-import { logObservableError } from '../Util'
-import { CLEAR } from './../Redux/State/TextEditor/TextEditor'
+import {
+  clear,
+  RENDER_TWEET,
+  tweetRendered,
+} from './../Redux/State/Tweet'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  filter,
+  map,
+  mergeMap,
+} from 'rxjs/operators'
+import {
+  CLEAR,
+} from './../Redux/State/TextEditor/TextEditor'
+import {
+  logObservableError,
+} from '../Util'
+import {
+  prop,
+} from 'ramda'
+
 
 // renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
 export const renderTweetEpic = (action$, state$, { window }) =>

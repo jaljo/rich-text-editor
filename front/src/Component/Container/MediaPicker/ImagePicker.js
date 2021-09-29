@@ -1,32 +1,39 @@
-import { connect } from 'react-redux'
-import { compose } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import ImagePicker from '../../View/MediaPicker/ImagePicker'
 import {
+  clear,
   fetchImages,
+  pickImage,
   scrollLeft,
   scrollRight,
-  pickImage,
-  clear,
 } from '../../../Redux/State/MediaPicker/ImagePicker'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
+import ImagePicker from '../../View/MediaPicker/ImagePicker'
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
-  images: state.MediaPicker.ImagePicker.images,
-  page: state.MediaPicker.ImagePicker.page,
   domain: state.MediaPicker.Display.domain,
-  extra: state.MediaPicker.Display.extra,
   error: state.MediaPicker.ImagePicker.error,
+  extra: state.MediaPicker.Display.extra,
+  images: state.MediaPicker.ImagePicker.images,
   isFetching: state.MediaPicker.ImagePicker.isFetching,
+  page: state.MediaPicker.ImagePicker.page,
 })
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
+  clear: compose(dispatch, clear),
   initialLoad: compose(dispatch, fetchImages),
+  pickImage: compose (dispatch, pickImage),
   scrollLeft: compose(dispatch, scrollLeft),
   scrollRight: compose(dispatch, scrollRight),
-  pickImage: compose (dispatch, pickImage),
-  clear: compose(dispatch, clear),
 })
 
 // onMount :: Props -> Action

@@ -1,18 +1,25 @@
-import { always, omit, compose } from 'ramda'
-import { createReducer, hideObjects } from '../../../Util'
+import {
+  always,
+  compose,
+  omit,
+} from 'ramda'
+import {
+  createReducer,
+  hideObjects,
+} from '../../../Util'
 
 // text toolbox initial state
 export const INSTANCE_INITIAL_STATE = {
-  visible: false,
-  top: 0,
-  isLinkCreatorOpened: false,
-  range: null,
   isBold: false,
   isItalic: false,
-  isUnderline: false,
-  isTitle: false,
-  isQuote: false,
   isLink: false,
+  isLinkCreatorOpened: false,
+  isQuote: false,
+  isTitle: false,
+  isUnderline: false,
+  range: null,
+  top: 0,
+  visible: false,
 }
 
 export const INITIAL_STATE = {}
@@ -30,21 +37,21 @@ export const REFRESH_BUTTONS_STATE = '@knp/TextEditor/TextToolbox/REFRESH_BUTTON
 
 // initialize :: String -> Action.INITIALIZE
 export const initialize = editorName => ({
-  type: INITIALIZE,
   editorName,
+  type: INITIALIZE,
 })
 
 // clear :: String -> Action.CLEAR
 export const clear = editorName => ({
-  type: CLEAR,
   editorName,
+  type: CLEAR,
 })
 
 // show :: String -> Number -> Action.SHOW
 export const show = (editorName, top) => ({
-  type: SHOW,
   editorName,
   top,
+  type: SHOW,
 })
 
 // hideAll :: () -> Action.HIDE_ALL
@@ -52,22 +59,22 @@ export const hideAll = always({ type: HIDE_ALL })
 
 // mutate :: String -> (String, Object) -> Action.MUTATE
 export const mutate = editorName => (mutation, options = null) => ({
-  type: MUTATE,
   editorName,
   mutation,
   options,
+  type: MUTATE,
 })
 
 // openLinkCreator :: String -> Action.OPEN_LINK_CREATOR
 export const openLinkCreator = editorName => ({
-  type: OPEN_LINK_CREATOR,
   editorName,
+  type: OPEN_LINK_CREATOR,
 })
 
 // closeLinkCreator :: String -> Action.CLOSE_LINK_CREATOR
 export const closeLinkCreator = editorName => ({
-  type: CLOSE_LINK_CREATOR,
   editorName,
+  type: CLOSE_LINK_CREATOR,
 })
 
 /**
@@ -76,50 +83,48 @@ export const closeLinkCreator = editorName => ({
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Range
  */
 export const saveRange = (editorName, range) => ({
-  type: SAVE_RANGE,
   editorName,
   range,
+  type: SAVE_RANGE,
 })
 
 // refreshButtonsState :: (String, Object) -> Action.REFRESH_BUTTONS_STATE
 export const refreshButtonsState = (editorName, {
   isBold,
   isItalic,
-  isUnderline,
-  isTitle,
-  isQuote,
   isLink,
+  isQuote,
+  isTitle,
+  isUnderline,
 }) => ({
-  type: REFRESH_BUTTONS_STATE,
   editorName,
   isBold,
   isItalic,
-  isUnderline,
-  isTitle,
-  isQuote,
   isLink,
+  isQuote,
+  isTitle,
+  isUnderline,
+  type: REFRESH_BUTTONS_STATE,
 })
 
 // TextToolbox :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
-  [INITIALIZE]: (state, { editorName }) => ({
-    ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE},
-  }),
-
   [CLEAR]: (state, { editorName }) => omit([editorName], state),
 
-  [SHOW]: (state, { editorName, top }) => ({
+  [CLOSE_LINK_CREATOR]: (state, { editorName }) => ({
+    ...state,
     [editorName]: {
       ...state[editorName],
-      visible: true,
       isLinkCreatorOpened: false,
-      top,
     },
-    ...compose(hideObjects, omit([editorName]))(state),
   }),
 
   [HIDE_ALL]: state => hideObjects(state),
+
+  [INITIALIZE]: (state, { editorName }) => ({
+    ...state,
+    [editorName]: { ...INSTANCE_INITIAL_STATE },
+  }),
 
   [OPEN_LINK_CREATOR]: (state, { editorName }) => ({
     ...state,
@@ -129,11 +134,24 @@ export default createReducer(INITIAL_STATE, {
     },
   }),
 
-  [CLOSE_LINK_CREATOR]: (state, { editorName }) => ({
+  [REFRESH_BUTTONS_STATE]: (state, {
+    editorName,
+    isBold,
+    isItalic,
+    isLink,
+    isQuote,
+    isTitle,
+    isUnderline,
+  }) => ({
     ...state,
     [editorName]: {
       ...state[editorName],
-      isLinkCreatorOpened: false,
+      isBold,
+      isItalic,
+      isLink,
+      isQuote,
+      isTitle,
+      isUnderline,
     },
   }),
 
@@ -145,24 +163,13 @@ export default createReducer(INITIAL_STATE, {
     },
   }),
 
-  [REFRESH_BUTTONS_STATE]: (state, {
-    editorName,
-    isBold,
-    isItalic,
-    isUnderline,
-    isTitle,
-    isQuote,
-    isLink,
-  }) => ({
-    ...state,
+  [SHOW]: (state, { editorName, top }) => ({
     [editorName]: {
       ...state[editorName],
-      isBold,
-      isItalic,
-      isUnderline,
-      isTitle,
-      isQuote,
-      isLink,
+      isLinkCreatorOpened: false,
+      top,
+      visible: true,
     },
+    ...compose(hideObjects, omit([editorName]))(state),
   }),
 })

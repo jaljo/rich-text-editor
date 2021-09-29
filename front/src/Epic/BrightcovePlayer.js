@@ -1,17 +1,39 @@
-import { combineEpics, ofType } from 'redux-observable'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  complement,
+  compose,
+  isNil,
+  join,
+  pathOr,
+  prop,
+} from 'ramda'
+import {
+  filter,
+  map,
+  mergeMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators'
 import {
   LOAD_PLAYER,
-  RENDER_VIDEO,
-  REMOVE_VIDEO,
   playerLoaded,
-  videoRendered,
+  REMOVE_VIDEO,
+  RENDER_VIDEO,
   videoRemoved,
+  videoRendered,
 } from '../Redux/State/BrightcovePlayer'
-import { VIDEO_INSERTED } from '../Redux/State/TextEditor/ParagraphToolbox'
-import { map, mergeMap, withLatestFrom, filter, tap } from 'rxjs/operators'
-import { logObservableError } from '../Util'
-import { brightcovePlayerIds } from '../Const'
-import { compose, prop, complement, isNil, join, pathOr } from 'ramda'
+import {
+  brightcovePlayerIds,
+} from '../Const'
+import {
+  logObservableError,
+} from '../Util'
+import {
+  VIDEO_INSERTED,
+} from '../Redux/State/TextEditor/ParagraphToolbox'
 
 // getPlayer :: String -> String
 const getPlayer = locale => join('', [
@@ -51,9 +73,9 @@ export const renderVideoEpic = (action$, state$, { window }) =>
     // brightcove SDK is loaded from the loadPlayerEpic above
     filter(() => !isNil(window['bc'])),
     map(([ video ]) => ({
-      video,
       id: pathOr(null, ['dataset', 'videoId'], video),
       originalHtmlMarkup: video.outerHTML,
+      video,
     })),
     tap(({ video }) => window['bc'](video)),
     map(({ id, originalHtmlMarkup }) => videoRendered(id, originalHtmlMarkup)),
@@ -74,6 +96,6 @@ export const removeVideoEpic = (action$, state$, { window }) =>
 
 export default combineEpics(
   loadPlayerEpic,
-  renderVideoEpic,
   removeVideoEpic,
+  renderVideoEpic,
 )

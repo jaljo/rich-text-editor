@@ -1,14 +1,37 @@
-import { map, takeUntil, switchMap, filter } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import { logObservableError, isEscapeKey } from '../../Util'
-import { OPEN, CLOSE, close, CLEAR } from '../../Redux/State/MediaPicker/MediaPicker'
-import { PICK_IMAGE_WITH_CREDITS } from '../../Redux/State/MediaPicker/ImagePicker'
-import { PICK_VIDEO } from '../../Redux/State/MediaPicker/VideoPicker'
 import {
-  OPEN_INSERT_YOUTUBE_VIDEO,
+  CLEAR,
+  close,
+  CLOSE,
+  OPEN,
+} from '../../Redux/State/MediaPicker/MediaPicker'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+} from 'rxjs/operators'
+import {
+  fromEvent,
+  race,
+} from 'rxjs'
+import {
+  isEscapeKey,
+  logObservableError,
+} from '../../Util'
+import {
   OPEN_INSERT_TWEET,
+  OPEN_INSERT_YOUTUBE_VIDEO,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
-import { race, fromEvent } from 'rxjs'
+import {
+  PICK_IMAGE_WITH_CREDITS,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  PICK_VIDEO,
+} from '../../Redux/State/MediaPicker/VideoPicker'
 
 // closeMediaPickerEpic :: Observable Action Error -> Observable Action.CLOSE
 export const closeMediaPickerEpic = action$ => action$.pipe(

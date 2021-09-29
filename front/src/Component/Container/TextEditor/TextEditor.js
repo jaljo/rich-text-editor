@@ -1,12 +1,34 @@
+import {
+  clear,
+  click,
+  initialize,
+  keyDown,
+  paste,
+  selectText,
+} from '../../../Redux/State/TextEditor/TextEditor'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+  equals,
+  isNil,
+  pipe,
+  prop,
+  tap,
+  when,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
 import TextEditor from '../../View/TextEditor/TextEditor'
-import { connect } from 'react-redux'
-import { componentWillUnmount, componentDidMount } from 'react-functional-lifecycle'
-import { pipe, when, compose, equals, prop, tap, isNil } from 'ramda'
-import { initialize, clear, click, keyDown, paste, selectText } from '../../../Redux/State/TextEditor/TextEditor'
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
+  clear: compose(dispatch, clear),
   click: compose(dispatch, click),
+  initialize: compose(dispatch, initialize),
   keyDown: pipe(
     when(
       compose(equals(13), prop('keyCode')),
@@ -15,13 +37,11 @@ const mapDispatchToProps = (dispatch, props) => ({
     e => keyDown(props.editorName, e.keyCode),
     dispatch,
   ),
-  clear: compose(dispatch, clear),
   paste: pipe(
     tap(e => e.preventDefault()),
     paste,
     dispatch,
   ),
-  initialize: compose(dispatch, initialize),
   selectText: compose(dispatch, selectText),
 })
 

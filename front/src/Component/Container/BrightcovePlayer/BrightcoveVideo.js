@@ -1,21 +1,34 @@
+import {
+  componentDidMount,
+  componentDidUpdate,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  removeVideo,
+  renderVideo,
+} from '../../../Redux/State/BrightcovePlayer'
+import {
+  brightcovePlayerIds,
+} from '../../../Const'
 import BrightcoveVideo from '../../View/BrightcovePlayer/BrightcoveVideo'
-import { connect } from 'react-redux'
-import { brightcovePlayerIds } from '../../../Const'
-import { componentDidMount, componentDidUpdate, componentWillUnmount } from 'react-functional-lifecycle'
-import { compose } from 'ramda'
-import { renderVideo, removeVideo } from '../../../Redux/State/BrightcovePlayer'
+import {
+  compose,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
-  playerId: brightcovePlayerIds[state.Router.params.locale],
-  isReady: state.BrightcovePlayer[`${state.Router.params.locale}PlayerReady`],
   accountId: process.env.REACT_APP_BRIGHTCOVE_ACCOUNT_ID,
+  isReady: state.BrightcovePlayer[`${state.Router.params.locale}PlayerReady`],
+  playerId: brightcovePlayerIds[state.Router.params.locale],
 })
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
-  renderVideo: compose(dispatch, renderVideo),
   removeVideo: compose(dispatch, removeVideo),
+  renderVideo: compose(dispatch, renderVideo),
 })
 
 // didMountOrUpdate :: Props -> Action.VIDEO_RENDERED

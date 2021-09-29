@@ -1,6 +1,11 @@
-import { combineReducers } from 'redux'
-import { tap, pipe } from 'ramda'
+import {
+  pipe,
+  tap,
+} from 'ramda'
 import BrightcovePlayer from './BrightcovePlayer'
+import {
+  combineReducers,
+} from 'redux'
 import MediaPicker from './MediaPicker/MediaPicker'
 import TextEditor from './TextEditor/TextEditor'
 import Tweet from './Tweet'

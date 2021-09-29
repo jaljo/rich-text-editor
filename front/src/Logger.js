@@ -1,4 +1,7 @@
-import { partial, bind } from 'ramda'
+import {
+  bind,
+  partial,
+} from 'ramda'
 
 /**
  * This is a custom logger used for development purpose. If you have
@@ -27,6 +30,11 @@ export const log = partial(
   [loggerHead('LOG')],
 )
 
-const Logger = { info, error, warn, log };
+const Logger = {
+  error,
+  info,
+  log,
+  warn,
+};
 
 export default Logger

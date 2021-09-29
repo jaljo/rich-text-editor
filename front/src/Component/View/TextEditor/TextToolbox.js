@@ -1,6 +1,8 @@
-import React from 'react'
 import './TextToolbox.scss'
-import { or } from 'ramda'
+import {
+  or,
+} from 'ramda'
+import React from 'react'
 
 // TextToolbox :: Props -> React.Component
 const TextToolbox = ({
@@ -20,7 +22,7 @@ const TextToolbox = ({
 }) =>
   <aside
     className={`text-toolbox ${isVisible ? 'visible' : ''}`}
-    style={{top: top - 60 + 'px'}}
+    style={{ top: top - 60 + 'px' }}
   >
     {!isLinkCreatorOpened &&
       <ul>
