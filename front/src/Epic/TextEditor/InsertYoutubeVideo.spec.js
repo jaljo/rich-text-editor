@@ -30,40 +30,28 @@ beforeEach(() => {
 });
 
  describe('Epic :: TextEditor :: InsertYoutubeVideo', () => {
-  it('validate a youtube url : success', done => {
-    validateYoutubeUrl('https://www.youtube.com/watch?v=jadxTFqyhRM')
-      .then(url => {
-        expect(url).toEqual(
-          'https://www.youtube.com/embed/jadxTFqyhRM'
-        )
+  it('validate a youtube url : success', async () => {
+    const url = await validateYoutubeUrl('https://www.youtube.com/watch?v=jadxTFqyhRM');
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(url).toEqual(
+      'https://www.youtube.com/embed/jadxTFqyhRM'
+    );
   }, 1000);
 
-  it('validate a youtube url : failure (wrong base url)', done => {
-    validateYoutubeUrl('https://www.youtube.com/watch?v=jadx')
-      .catch(error => {
-        expect(error).toEqual(
-          'The provided URL is not a valid youtube video.'
-        )
-
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+  it('validate a youtube url : failure (wrong base url)', async () => {
+    await expect(
+      validateYoutubeUrl('https://www.youtube.com/watch?v=jadx')
+    ).rejects.toBe(
+      'The provided URL is not a valid youtube video.'
+    );
   }, 1000);
 
-  it('validate a youtube url : failure (wrong id)', done => {
-    validateYoutubeUrl('https://www.knplabs.com')
-      .catch(error => {
-        expect(error).toEqual(
-          'The provided URL is not a valid youtube video.'
-        )
-
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+  it('validate a youtube url : failure (wrong id)', async () => {
+    await expect(
+      validateYoutubeUrl('https://www.knplabs.com')
+    ).rejects.toBe(
+      'The provided URL is not a valid youtube video.'
+    );
   }, 1000);
 });
 
@@ -78,34 +66,28 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: insertYoutubeVideoEpic', (
     },
   });
 
-  it('dispatches youtubeVideoInserted', done => {
+  it('dispatches youtubeVideoInserted', async () => {
     const insertYoutubeVideo$ = of(
       insertYoutubeVideo('editor-name', 'https://www.youtube.com/watch?v=O9mxrurGTqo')
     );
 
-    insertYoutubeVideoEpic(insertYoutubeVideo$, state$)
+    const action = await insertYoutubeVideoEpic(insertYoutubeVideo$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(YOUTUBE_VIDEO_INSERTED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(YOUTUBE_VIDEO_INSERTED);
   }, 1000);
 
-  it('dispatches error', done => {
+  it('dispatches error', async () => {
     const insertYoutubeVideo$ = of(
       insertYoutubeVideo('editor-name', 'https://www.msn.com')
     );
 
-    insertYoutubeVideoEpic(insertYoutubeVideo$, state$)
+    const action = await insertYoutubeVideoEpic(insertYoutubeVideo$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(ERROR)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(ERROR);
   }, 1000);
 });
 
@@ -115,7 +97,7 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpi
       expect(actual).toEqual(expected);
     });
 
-    testScheduler.run(({ hot, cold, expectObservable }) => {
+    testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('a-b-c', {
         a: youtubeVideoInserted('editor-name'),
         b: openInsertTweet('editor-name'),

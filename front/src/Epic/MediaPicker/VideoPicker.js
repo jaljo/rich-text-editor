@@ -18,7 +18,7 @@ export const fetchVideosEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_VIDEOS),
     withLatestFrom(state$),
-    mergeMap(([ action, state ]) => fetchApi(join('', [
+    mergeMap(([ _, state ]) => fetchApi(join('', [
       `${process.env.REACT_APP_MOCK_SERVER_API_URL}/videos`,
       `?q=${state.MediaPicker.VideoPicker.searchString}`,
       `&page=${state.MediaPicker.VideoPicker.page}`,

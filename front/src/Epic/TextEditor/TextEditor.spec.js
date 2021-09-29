@@ -65,15 +65,12 @@ describe('Epic :: TextEditor :: TextEditor :: saveRangeEpic', () => {
   const openLinkCreator$ = of(openLinkCreator('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
-  it('dispatches saveRange', done => {
-    saveRangeEpic(openLinkCreator$, state$, dependencies)
+  it('dispatches saveRange', async () => {
+    const action = await saveRangeEpic(openLinkCreator$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(SAVE_RANGE)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(SAVE_RANGE);
   }, 1000);
 });
 
@@ -86,56 +83,46 @@ describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
     },
   });
 
-it('dispatches closeLinkCreator', done => {
+it('dispatches closeLinkCreator', async () => {
     const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
 
-    createLinkEpic(mutate$, state$, dependencies)
+    const action = await createLinkEpic(mutate$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(CLOSE_LINK_CREATOR)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(CLOSE_LINK_CREATOR);
   }, 1000);
 
-  it('reject others mutations', done => {
+  it('reject others mutations', async () => {
     const rejectMutate$ = of(mutate('editorName')('BOLD'));
 
-    createLinkEpic(rejectMutate$, state$, dependencies)
+    const action = await createLinkEpic(rejectMutate$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () => {
-  it('dispatches refreshButtonsState', done => {
+  it('dispatches refreshButtonsState', async () => {
     const showTextToolbox$ = of(showTextToolbox('editor-name', 10));
     const mutate$ = of(mutate('editor-name')('LINK'));
 
-    Promise.all([
+    const [a1, a2] = await Promise.all([
       refreshTextToolboxStateEpic(showTextToolbox$, null, dependencies)
         .toPromise(Promise),
       refreshTextToolboxStateEpic(mutate$, null, dependencies)
         .toPromise(Promise),
-    ])
-    .then(([a1, a2]) => {
-      expect(a1.type).toEqual(REFRESH_BUTTONS_STATE)
-      expect(a2.type).toEqual(REFRESH_BUTTONS_STATE)
+    ]);
 
-      done()
-    })
-    .catch(err => { console.error(err); done() });
+    expect(a1.type).toEqual(REFRESH_BUTTONS_STATE);
+    expect(a2.type).toEqual(REFRESH_BUTTONS_STATE);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
-  it('dispatches insertImage', done => {
+  it('dispatches insertImage', async () => {
     const pickImageWithCredits$ = of(
       pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name'})
     );
@@ -147,19 +134,16 @@ describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
       },
     });
 
-    pickImageEpic(pickImageWithCredits$, state$)
+    const action = await pickImageEpic(pickImageWithCredits$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(INSERT_IMAGE)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(INSERT_IMAGE);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
-  it('dispatches imageInserted', done => {
+  it('dispatches imageInserted', async () => {
     const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
     const insertImage$ = of(insertImage('editor-name', imageMock));
     const state$ = new StateObservable(new Subject, {
@@ -172,22 +156,20 @@ describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
       },
     });
 
-    insertImageEpic(insertImage$, state$)
+    const action = await insertImageEpic(insertImage$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(IMAGE_INSERTED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(IMAGE_INSERTED);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
-  it('dispatches insertVideo', done => {
+  it('dispatches insertVideo', async () => {
     const pickVideo$ = of(
       pickVideo("slkdhlskdg", 'TEXT_EDITOR', { editorName: 'editor-name' })
     );
+
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         VideoPicker: {
@@ -198,19 +180,16 @@ describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
       },
     });
 
-    pickVideoEpic(pickVideo$, state$)
+    const action = await pickVideoEpic(pickVideo$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(INSERT_VIDEO)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(INSERT_VIDEO);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
-  it('dispatches videoInserted', done => {
+  it('dispatches videoInserted', async () => {
     const videoMock = { id: "9329875", name: "test" };
     const insertVideo$ = of(insertVideo('editor-name', videoMock));
     const state$ = new StateObservable(new Subject(), {
@@ -223,13 +202,10 @@ describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
       },
     });
 
-    insertVideoEpic(insertVideo$, state$)
+    const action = await insertVideoEpic(insertVideo$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(VIDEO_INSERTED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(VIDEO_INSERTED);
   }, 1000);
 });

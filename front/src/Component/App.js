@@ -22,7 +22,7 @@ const App = ({
           be able to insert images or youtube videos.
         </p>
         <p>
-          I'm doing my best to have tweet insertion fixed asap. Happy testing !
+          I`&lsquo;m doing my best to have tweet insertion fixed asap. Happy testing !
         </p>
       </TextEditor>
     </main>

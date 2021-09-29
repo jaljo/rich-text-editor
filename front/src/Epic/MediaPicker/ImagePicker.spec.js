@@ -9,7 +9,6 @@ import {
   PICK_IMAGE_WITH_CREDITS,
   RECEIVED_IMAGES,
 } from '../../Redux/State/MediaPicker/ImagePicker'
-import { OPEN_IMAGE_PICKER } from '../../Redux/State/MediaPicker/MediaPicker'
 import {
   searchImagesEpic,
   changePageEpic,
@@ -43,15 +42,13 @@ const dependencies = {
 describe('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
   const fetchImages$ = of(fetchImages());
 
-  it('dispatches receivedImages', done => {
-    searchImagesEpic(fetchImages$, null, dependencies)
+  it('dispatches receivedImages', async () => {
+    const action = await searchImagesEpic(fetchImages$, null, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(transformedImages);
-        done();
-      })
-      .catch(error => { console.error(error); done(); });
+    ;
+
+    expect(action.type).toEqual(RECEIVED_IMAGES);
+    expect(action.images).toEqual(transformedImages);
   }, 1000);
 });
 
@@ -68,26 +65,22 @@ describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
   });
 
   // @TODO rewrite this using rxjs TestScheduler
-  it('dispatches receivedImages (after scrollLeft action)', done => {
-    changePageEpic(scrollLeft$, state$, dependencies)
+  it('dispatches receivedImages (after scrollLeft action)', async () => {
+    const action = await changePageEpic(scrollLeft$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(transformedImages);
-        done();
-      })
-      .catch(error => { console.error(error); done(); });
+    ;
+
+    expect(action.type).toEqual(RECEIVED_IMAGES);
+    expect(action.images).toEqual(transformedImages);
   }, 1000);
 
-  it('dispatches receivedImages (after scrollRight action)', done => {
-    changePageEpic(scrollRight$, state$, dependencies)
+  it('dispatches receivedImages (after scrollRight action)', async () => {
+   const action = await changePageEpic(scrollRight$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(RECEIVED_IMAGES);
-        expect(action.images).toEqual(transformedImages);
-        done();
-      })
-      .catch(error => { console.error(error); done(); });
+    ;
+
+    expect(action.type).toEqual(RECEIVED_IMAGES);
+    expect(action.images).toEqual(transformedImages);
   }, 1000);
 });
 
@@ -103,27 +96,23 @@ describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic'
     },
   })
 
-  it('dispatches pickImageWithCredits when image has credits', done => {
+  it('dispatches pickImageWithCredits when image has credits', async () => {
     const pickImage$ = of(pickImage(1));
 
-    ensurePickedImageHasCreditsEpic(pickImage$, state$)
+    const action = await ensurePickedImageHasCreditsEpic(pickImage$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(PICK_IMAGE_WITH_CREDITS);
-        done();
-      })
-      .catch(error => { console.error(error); done(); });
+    ;
+
+    expect(action.type).toEqual(PICK_IMAGE_WITH_CREDITS);
   }, 1000);
 
-  it('dispatches error when picked image has no credit', done => {
+  it('dispatches error when picked image has no credit', async() => {
     const pickImage$ = of(pickImage(2));
 
-    ensurePickedImageHasCreditsEpic(pickImage$, state$)
+    const action = await ensurePickedImageHasCreditsEpic(pickImage$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(ERROR);
-        done();
-      })
-      .catch(error => { console.error(error); done(); });
+    ;
+
+    expect(action.type).toEqual(ERROR);
   }, 1000);
 });

@@ -28,34 +28,28 @@ describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
   const insertTweet$ = of(insertTweet());
   const state$ = new StateObservable(new Subject(), {});
 
-  it('dispatches embedTweetFetched action', done => {
+  it('dispatches embedTweetFetched action', async () => {
     const dependencies = {
       fetchApi: () => Promise.resolve({ body: {}}),
     };
 
-    fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
+    const action = await fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(EMBED_TWEET_FETCHED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(EMBED_TWEET_FETCHED);
   }, 1000);
 
-  it('dispatches error action', done => {
+  it('dispatches error action', async () => {
     const dependencies = {
       fetchApi: () => Promise.reject('fail !'),
     };
 
-    fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
+    const action = await fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(ERROR)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(ERROR);
   }, 1000);
 });
 
@@ -70,53 +64,44 @@ describe('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
     },
   });
 
-  it('dispatches tweetInserted action', done => {
+  it('dispatches tweetInserted action', async () => {
     const embedTweetFetched$ = of(embedTweetFetched(
       'editor-name',
       '<blockquote><p>test</p></blockquote>',
       'https://twitter.com/realDonaldTrump/status/1083756525196320773'
     ));
 
-    insertTweetEpic(embedTweetFetched$, state$)
+    const action = await insertTweetEpic(embedTweetFetched$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(TWEET_INSERTED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(TWEET_INSERTED);
   }, 1000);
 
-  it('dispatches error action', done => {
+  it('dispatches error action', async () => {
     const embedTweetFetched$ = of(embedTweetFetched(
       'wrong-editor-name',
       'badly formatted html string',
       'wrong url',
     ));
 
-    insertTweetEpic(embedTweetFetched$, state$)
+    const action = await insertTweetEpic(embedTweetFetched$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(ERROR)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(ERROR);
   }, 1000);
 });
 
 describe('Epic :: TextEditor :: InsertTweet', () => {
-  it('dispatches renderTweet action', done => {
+  it('dispatches renderTweet action', async () => {
     const tweetInserted$ = of(tweetInserted('editor-name', '1', 'zxylog', '<p></p>'));
     const state$ = new StateObservable(new Subject(), {});
 
-    renderInsertedTweetEpic(tweetInserted$, state$)
+    const action = await renderInsertedTweetEpic(tweetInserted$, state$)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(RENDER_TWEET)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(RENDER_TWEET);
   }, 1000);
 });

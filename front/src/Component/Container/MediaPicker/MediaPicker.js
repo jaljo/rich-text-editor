@@ -11,8 +11,8 @@ import { searchVideos } from '../../../Redux/State/MediaPicker/VideoPicker'
 import MediaPicker from '../../View/MediaPicker/MediaPicker'
 import { componentWillUnmount } from 'react-functional-lifecycle'
 
-// mapStateToProps :: (State, Props) -> Props
-const mapStateToProps = (state, ownProps) => ({
+// mapStateToProps :: State -> Props
+const mapStateToProps = state => ({
   isOpened: state.MediaPicker.Display.opened,
   isFetchingImages: state.MediaPicker.ImagePicker.isFetching,
   isFetchingVideos: state.MediaPicker.VideoPicker.isFetching,

@@ -173,10 +173,10 @@ export const createLinkEpic = (action$, state$, { window }) =>
       action,
       state.TextEditor.TextToolbox[action.editorName].range,
     ]),
-    tap(([ action, range ]) => recoverSelection(window)(range)),
+    tap(([ _, range ]) => recoverSelection(window)(range)),
     // then we can apply the mutation
-    tap(([ action, range ]) => document.execCommand('createLink', false, action.options.href)),
-    map(([ action, range ]) => closeLinkCreator(action.editorName)),
+    tap(([ action ]) => document.execCommand('createLink', false, action.options.href)),
+    map(([ action ]) => closeLinkCreator(action.editorName)),
     logObservableError(),
   )
 
@@ -245,8 +245,8 @@ const isInParent = parentTagName => pipe(
     range.endContainer.parentNode.closest(parentTagName),
   ],
   allPass([
-    ([ startNode, endNode ]) => !isNil(startNode),
-    ([ startNode, endNode ]) => !isNil(endNode),
+    ([ startNode ]) => !isNil(startNode),
+    ([ _, endNode ]) => !isNil(endNode),
     ([ startNode, endNode ]) => equals(startNode, endNode),
   ])
 )

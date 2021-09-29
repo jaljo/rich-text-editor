@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": false,
+    "browser": true,
     "es6": true,
     "mocha": false,
     "node": true
@@ -15,32 +15,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "arrow-spacing": "error",
-    "brace-style": "error",
-    "comma-dangle": ["error", "always-multiline"],
-    "comma-spacing": ["error", { "before": false, "after": true }],
-    "indent": ["error", 2],
-    "keyword-spacing": ["error"],
-    "line-comment-position": ["error", { "position": "above" }],
-    "max-len": [
-      "error",
-      {
-        "ignoreStrings": true,
-        "ignoreRegExpLiterals": true,
-        "ignoreUrls": true,
-        "ignoreTemplateLiterals": true,
-        "code": 80
-      }
-    ],
-    "multiline-comment-style": ["error", "starred-block"],
-    "object-curly-spacing": ["error", "always"],
-    "quotes": ["error", "double"],
-    "react/jsx-curly-spacing": ["error", { "when": "always" }],
-    "react/prop-types": "off",
-    "semi": ["error", "always"],
-    "sort-imports": "error",
-    "sort-keys": "error",
-    "spaced-comment": ["error", "always"]
+    "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
+    "react/prop-types": "off"
   },
   "settings": {
     "react": {

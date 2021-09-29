@@ -48,7 +48,7 @@ export const renderVideoEpic = (action$, state$, { window }) =>
     map(compose(getVideoElement, prop('id'))),
     filter(complement(isNil)),
     withLatestFrom(state$),
-    filter(([ video, state ]) => state.BrightcovePlayer[`enPlayerReady`]),
+    filter(([ _, state ]) => state.BrightcovePlayer[`enPlayerReady`]),
     // brightcove SDK is loaded from the loadPlayerEpic above
     filter(() => !isNil(window['bc'])),
     map(([ video ]) => ({
