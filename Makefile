@@ -22,3 +22,7 @@ test:
 
 .PHONY: dev
 dev: cp-env build install-deps start
+
+.PHONY: lint-js
+lint-js:
+	docker-compose -f .docker/docker-compose.yml run --rm app yarn lint
