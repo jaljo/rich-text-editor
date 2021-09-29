@@ -1,13 +1,6 @@
 import { createReducer } from '../../../Util'
 import { always, when, lt, dec, inc } from 'ramda'
 
-// @type Video = {
-//   id :: Number,
-//   poster :: String,
-//   thumbnail :: String,
-//   name :: String,
-// }
-
 // VideoPicker initial state
 export const INITIAL_STATE = {
   isFetching: false,

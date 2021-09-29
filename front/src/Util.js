@@ -88,14 +88,20 @@ export const getEditor = editorName => document.querySelector(
 
 export const indexedMap = addIndex(map)
 
-// findById :: Number -> [Object] -> Object
-// Given the Object contains an id prop, extract that object from a list
+/**
+ * findById :: Number -> [Object] -> Object
+ *
+ * Given the Object contains an id prop, extract that object from a list
+ */
 export const findById = uncurryN(2, id => find(propEq('id')(id)))
 
-// closestHavingClass :: Element -> String -> Node|null
-// Mimics the https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
-// function. As the original function is experimental, we implement it here
-// to make it cross-browser (as a polyfill).
+/**
+ * closestHavingClass :: Element -> String -> Node|null
+ *
+ * Mimics the https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+ * function. As the original function is experimental, we implement it here
+ * to make it cross-browser (as a polyfill).
+ */
 export const closestHavingClass = className => element =>
   isNil(element.parentNode)
     ? null

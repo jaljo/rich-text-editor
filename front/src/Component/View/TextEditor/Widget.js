@@ -33,11 +33,14 @@ const Tweet = ({ component }) =>
     />
   </blockquote>
 
-// UnconnectedTwet :: (String, String) -> React.Component
-// Renders the same markup as the Tweet component, whereas it is not connected
-// to the store.
-// We use this component to manually render it when inserting a new tweet
-// during text edition.
+/**
+ * UnconnectedTwet :: (String, String) -> React.Component
+ *
+ * Renders the same markup as the Tweet component, whereas it is not connected
+ * to the store.
+ * We use this component to manually render it when inserting a new tweet
+ * during text edition.
+ */
 export const UnconnectedTweet = (tweetId, uid) =>
   <blockquote
     className="knp-rendered-tweet"
@@ -46,8 +49,11 @@ export const UnconnectedTweet = (tweetId, uid) =>
     <div id={`tweet-${uid}`}></div>
   </blockquote>
 
-// UnconnectedVideo :: (Video, String) -> React.Component
-// Same logic as above, for brightcove videos.
+/**
+ * UnconnectedVideo :: (Video, String) -> React.Component
+ *
+ * Same logic as above, for brightcove videos.
+ */
 export const UnconnectedVideo = (video, playerId, accountId) =>
   <div
     className="video-wrapper knp-rendered-video"

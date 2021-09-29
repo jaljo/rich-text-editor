@@ -208,14 +208,16 @@ const mutationEpic = action$ =>
       [equals('ITALIC'), () => document.execCommand('italic')],
       [equals('BOLD'), () => document.execCommand('bold')],
       [equals('UNDERLINE'), () => document.execCommand('underline')],
-      // @WONTFIX
-      //
-      // In Firefox, <blockquote> is the exception — it will wrap any containing block element
-      // See formatBlock at https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-      //
-      // Although this can be easily fixed using another block tag (i.e. PRE), we
-      // decided it will introduce too much legacy in the persisted data, as we
-      // should then have to parse both BC BLOCKQUOTE and PRE tags as quotes.
+      /**
+       * @wontfix in Firefox, <blockquote> is the exception — it will wrap any
+       * containing block element
+       *
+       * @see formatBlock at https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+       *
+       * Although this can be easily fixed using another block tag (i.e. PRE),
+       * we decided it will introduce too much legacy in the persisted data, as
+       * we should then have to parse both BC BLOCKQUOTE and PRE tags as quotes.
+       */
       [equals('QUOTE'), () => document.execCommand('formatblock', false, 'blockquote')],
       [equals('UNLINK'), () => document.execCommand('unlink')],
     ])),

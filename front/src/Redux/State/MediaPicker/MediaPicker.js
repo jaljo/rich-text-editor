@@ -26,8 +26,7 @@ export const open = (domain, extra, defaultOpenedComponent) => ({
   domain,
   // any extra values related to the given domain
   extra,
-  // the component opend when opening the mediapicker.
-  // valid values are "videoPicker" | "imageUploader"
+  // component opened when opening the mediapicker (i.e. "videoPicker", "imageUploader")
   defaultOpenedComponent,
 })
 

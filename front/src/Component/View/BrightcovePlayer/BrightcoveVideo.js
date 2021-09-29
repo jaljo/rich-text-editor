@@ -12,8 +12,10 @@ const BrightcoveVideo = ({
   name,
   editable = true,
 }) =>
-  // brightcove SDK call wraps the video tag inside another element which breaks
-  // react update. This uniqid key enforces this component to re-render itself.
+  /**
+   * brightcove SDK call wraps the video tag inside another element which breaks
+   * react update. This uniqid key enforces this component to re-render itself.
+   */
   <div
     className="video-wrapper knp-rendered-video"
     key={uniqid(videoId)}

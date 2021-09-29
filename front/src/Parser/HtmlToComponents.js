@@ -26,6 +26,7 @@ const toArray = nodes => Object
 
 // isHeading :: Node -> Boolean
 const isHeading = node => range(2, 7).map(x => `H${x}`).includes(node.tagName)
+
 // createHeading :: Node -> Object
 const createHeading = node => ({
   component: 'Heading',
@@ -35,6 +36,7 @@ const createHeading = node => ({
 
 // isText :: Node -> Boolean
 const isText = node => node.constructor.name === 'Text'
+
 // createText :: Node -> Object
 const createText = node => ({
   component: 'Text',
@@ -43,6 +45,7 @@ const createText = node => ({
 
 // isLink :: Node -> Boolean
 const isLink = node => node.tagName === 'A'
+
 // createLink :: Node -> Object
 const createLink = node => ({
   component: 'Link',
@@ -54,6 +57,8 @@ const createLink = node => ({
 
 // isEmphasis :: Node -> Boolean
 const isEmphasis = node => node.tagName === 'EM'
+
+// createEmphasis :: Node :: Object
 const createEmphasis = node => ({
   component: 'Emphasis',
   childComponents: createChildrenComponents(node.childNodes),
@@ -61,6 +66,8 @@ const createEmphasis = node => ({
 
 // isStrong :: Node -> Boolean
 const isStrong = node => node.tagName === 'STRONG'
+
+// createStrong :: Node -> Object
 const createStrong = node => ({
   component: 'Strong',
   childComponents: createChildrenComponents(node.childNodes),
@@ -68,6 +75,8 @@ const createStrong = node => ({
 
 // isUnderline :: Node -> Boolean
 const isUnderline = node => node.tagName === 'U'
+
+// createUnderline :: Node -> Object
 const createUnderline = node => ({
   component: 'Underline',
   childComponents: createChildrenComponents(node.childNodes),
@@ -75,6 +84,8 @@ const createUnderline = node => ({
 
 // isItalic :: Node -> Boolean
 const isItalic = node => node.tagName === 'I'
+
+// createItalic :: Node -> Object
 const createItalic = node => ({
   component: 'Italic',
   childComponents: createChildrenComponents(node.childNodes),
@@ -82,6 +93,8 @@ const createItalic = node => ({
 
 // isBold :: Node -> Boolean
 const isBold = node => node.tagName === 'B'
+
+// createBold :: Node -> Object
 const createBold = node => ({
   component: 'Bold',
   childComponents: createChildrenComponents(node.childNodes),
@@ -89,6 +102,8 @@ const createBold = node => ({
 
 // isQuote :: Node -> Boolean
 const isQuote = node => node.tagName === 'BLOCKQUOTE'
+
+// createQuote :: Node -> Object
 const createQuote = node => ({
   component: 'Quote',
   childComponents: createChildrenComponents(node.childNodes),
@@ -96,14 +111,18 @@ const createQuote = node => ({
 
 // isParagraph :: Node -> Boolean
 const isParagraph = node => node.tagName === 'P'
+
 // createParagraph :: Node -> Object
 const createParagraph = node => ({
   component: 'Paragraph',
   childComponents: createChildrenComponents(node.childNodes),
 })
 
-// indicates whether the node is an image edited by this BO or not
-// isImage :: Node -> Boolean
+/**
+ * isImage :: Node -> Boolean
+ *
+ * indicates whether the node is an image edited by this BO or not
+ */
 const isImage = node => node.tagName === 'FIGURE'
   && node.classList.contains('image-wrapper')
 // createImage :: Node -> Object
@@ -114,13 +133,21 @@ const createImage = node => ({
   description: node.childNodes[1] ? node.childNodes[1].textContent : '',
   alt: node.childNodes[0] ? node.childNodes[0].getAttribute('alt') : '',
 })
-// indicates whether the node is an image edited by the legacy BO or not
-// isLegacyImage :: Node -> Boolean
+
+/**
+ * isLegacyImage :: Node -> Boolean
+ *
+ * indicates whether the node is an image edited by the legacy BO or not
+ */
 const isLegacyImage = node => node.tagName === 'P'
   && node.childNodes.length
   && node.childNodes[0].tagName === 'IMG'
-// create an Image component from a legacy "<p><img /></p>" HTML
-// createImageBC :: Node -> Object
+
+/**
+ * createImageBC :: Node -> Object
+ *
+ * create an Image component from a legacy "<p><img /></p>" HTML
+ */
 const createImageBC = node => ({
   component: 'Image',
   src: node.childNodes[0].getAttribute('src'),
@@ -137,6 +164,7 @@ const getTweetLink = pipe(
   defaultTo({href: ''}),
   prop('href'),
 )
+
 // getTweetIdFromUrl :: Node -> String
 export const getTweetIdFromUrl = pipe(
   parseUrl,
@@ -144,9 +172,11 @@ export const getTweetIdFromUrl = pipe(
   split('/'),
   last,
 )
+
 // isTweet :: Node -> Boolean
 const isTweet = node => node.tagName === 'BLOCKQUOTE'
   && node.classList.contains('twitter-tweet')
+
 // createTweet :: Node -> Object
 const createTweet = node => ({
   component: 'Tweet',
@@ -177,9 +207,12 @@ const createBrightcoveVideo = node => ({
   videoId: node.dataset.videoId,
 })
 
-// the order of predicates in this function is important, i.e. isQuote should
-// never be before isTweet because they both check for BLOCKQUOTE tag.
-// createComponent :: Node -> Object
+/**
+ * createComponent :: Node -> Object
+ *
+ * the order of predicates in this function is important, i.e. isQuote should
+ * never be before isTweet because they both check for BLOCKQUOTE tag.
+ */
 const createComponent = cond([
   [isTweet, createTweet],
   [isImage, createImage],
@@ -207,16 +240,20 @@ const createChildrenComponents = pipe(
 
 // isDiv :: Node -> Boolean
 const isDiv = pipe(prop('tagName'), equals('DIV'))
+
 // hasSingleChild :: Node -> Boolean
 const hasSingleChild = pipe(prop('children'), prop('length'), equals(1))
+
 // firstNode :: Node -> Node
 const firstNode = pipe(prop('children'), head)
+
 // flattenDivNode :: Node -> Node
 const flattenDivNode = () => ifElse(
   both(isDiv, hasSingleChild),
   pipe(firstNode, node => flattenDivNode()(node)),
   identity,
 )
+
 // flattenNodes :: Node -> Node
 const flattenNodes = pipe(prop('childNodes'), map(flattenDivNode()))
 
@@ -229,11 +266,7 @@ const createRootNode = body => {
   return flattenNodes(rootNode);
 }
 
-// default :: String -> [ComponentInfo]
-// ComponentInfo : {
-//  component: String,
-//  ...any
-// }
+// HtmlToComponent :: String -> [HtmlToComponent]
 export default pipe(
   createRootNode,
   createChildrenComponents,

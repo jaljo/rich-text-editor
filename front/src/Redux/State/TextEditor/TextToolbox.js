@@ -70,8 +70,11 @@ export const closeLinkCreator = editorName => ({
   editorName,
 })
 
-// saveRange :: (String, Range) -> Action.SAVE_SELECTION
-// @SEE https://developer.mozilla.org/en-US/docs/Web/API/Range
+/**
+ * saveRange :: (String, Range) -> Action.SAVE_SELECTION
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Range
+ */
 export const saveRange = (editorName, range) => ({
   type: SAVE_RANGE,
   editorName,
