@@ -4,14 +4,14 @@ import React from 'react'
 const InsertYoutubeVideo = ({
   submit,
 }) =>
-  <form className="insert-youtube" onSubmit={submit}>
+  <form className="insert-youtube" onSubmit={ submit }>
     <div className="control">
       <input
         className="input"
         type="url"
         name="youtubeLink"
         placeholder="Youtube link"
-        autoFocus={true}
+        autoFocus={ true }
       />
     </div>
   </form>

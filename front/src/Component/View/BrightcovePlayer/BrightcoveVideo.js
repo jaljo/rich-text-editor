@@ -20,30 +20,30 @@ const BrightcoveVideo = ({
    */
   <div
     className="video-wrapper knp-rendered-video"
-    key={uniqid(videoId)}
-    data-video-id={videoId}
-    contentEditable={false}
+    key={ uniqid(videoId) }
+    data-video-id={ videoId }
+    contentEditable={ false }
   >
-    {editable &&
+    { editable &&
       <p
         className="knp-btn icomoon-font replace-video"
-        onClick={action}
+        onClick={ action }
       >p</p>
     }
-    {isReady &&
+    { isReady &&
       <video
         className="video-js"
         data-embed="default"
-        data-video-id={videoId}
-        data-player={playerId}
-        data-account={accountId}
-        data-application-id={true}
-        controls={true}
-        autoPlay={false}
+        data-video-id={ videoId }
+        data-player={ playerId }
+        data-account={ accountId }
+        data-application-id={ true }
+        controls={ true }
+        autoPlay={ false }
       ></video>
     }
-    {!isNil(name) &&
-      <figcaption>{name}</figcaption>
+    { !isNil(name) &&
+      <figcaption>{ name }</figcaption>
     }
   </div>
 
