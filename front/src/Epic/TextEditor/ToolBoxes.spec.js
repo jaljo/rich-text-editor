@@ -64,7 +64,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   it('dont dispatches showTextToolbox (empty selection)', async () => {
     const dependencies = {
       window: {
-        getSelection: () => ({ type: 'Char'}),
+        getSelection: () => ({ type: 'Char' }),
       },
     };
 
@@ -91,7 +91,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () => {
   it('dispatches hideTextToolbox', async () => {
     const dependencies = {
       window: {
-        getSelection: () => ({ type: 'Char'}),
+        getSelection: () => ({ type: 'Char' }),
       },
     };
 

@@ -18,14 +18,14 @@ describe('Util', () => {
   });
 
   const indexedListMock = [
-    {id: 1, name: 'Joris'},
-    {id: 2, name: 'Alessandro'},
-    {id: 3, name: 'Nicolas'},
+    { id: 1, name: 'Joris' },
+    { id: 2, name: 'Alessandro' },
+    { id: 3, name: 'Nicolas' },
   ];
 
   it('can find an object identified by an id in a list', () => {
     expect(Util.findById(3, indexedListMock)).toEqual(
-      {id: 3, name: 'Nicolas'},
+      { id: 3, name: 'Nicolas' },
     )
   });
 });

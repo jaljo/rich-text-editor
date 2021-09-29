@@ -24,6 +24,7 @@
     "line-comment-position": ["error", { "position": "above" }],
     "multiline-comment-style": ["error", "starred-block"],
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
+    "object-curly-spacing": ["error", "always"],
     "react/prop-types": "off",
     "spaced-comment": ["error", "always"]
   },

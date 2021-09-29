@@ -58,7 +58,7 @@ export const insertTweetEpic = (action$, state$) => action$.pipe(
 // renderInsertedTweetEpic :: Observable Action Error -> Observable Action _
 export const renderInsertedTweetEpic = action$ => action$.pipe(
   ofType(TWEET_INSERTED),
-  map(({tweetId, uid, originalHtmlMarkup}) => renderTweet(tweetId, uid, originalHtmlMarkup)),
+  map(({ tweetId, uid, originalHtmlMarkup }) => renderTweet(tweetId, uid, originalHtmlMarkup)),
   logObservableError(),
 )
 

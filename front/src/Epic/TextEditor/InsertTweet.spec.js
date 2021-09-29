@@ -30,7 +30,7 @@ describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
 
   it('dispatches embedTweetFetched action', async () => {
     const dependencies = {
-      fetchApi: () => Promise.resolve({ body: {}}),
+      fetchApi: () => Promise.resolve({ body: {} }),
     };
 
     const action = await fetchEmbedTweetEpic(insertTweet$, state$, dependencies)

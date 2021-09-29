@@ -31,7 +31,7 @@ import {
 // checkClipboardAccessEpic :: Epic -> Observable Action.PASTE_GRANTED Action.DISPLAY_CLIPBOARD_WARNING
 const checkClipboardAccessEpic = action$ => action$.pipe(
   ofType(PASTE),
-  mergeMap(() => navigator.permissions.query({'name': 'clipboard-read'})),
+  mergeMap(() => navigator.permissions.query({ 'name': 'clipboard-read' })),
   mergeMap(ifElse(
     isClipboardAccessGranted,
     () => navigator.clipboard.readText().then(pasteGranted),

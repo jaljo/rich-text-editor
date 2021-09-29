@@ -95,11 +95,11 @@ describe('Redux :: State :: TextEditor :: TextToolbox', () => {
 
   it('reduces saveRange', () => {
     expect(
-      reducer(instanceExists, saveRange('editor-name', { anchorNode: 'text'}))
+      reducer(instanceExists, saveRange('editor-name', { anchorNode: 'text' }))
     ).toEqual({
       'editor-name': {
         ...INSTANCE_INITIAL_STATE,
-        range: { anchorNode: 'text'},
+        range: { anchorNode: 'text' },
       },
     });
   });

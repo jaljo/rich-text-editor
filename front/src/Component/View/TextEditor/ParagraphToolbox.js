@@ -19,7 +19,7 @@ const ParagraphToolbox = ({
 }) =>
   <aside
     className={`paragraph-toolbox ${isVisible ? 'visible' : ''}`}
-    style={{top: top - 5 + 'px'}}
+    style={{ top: top - 5 + 'px' }}
   >
     <ul>
       <li>

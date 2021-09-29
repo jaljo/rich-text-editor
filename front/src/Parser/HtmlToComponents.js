@@ -161,7 +161,7 @@ const getTweetLink = pipe(
   filter(isLink),
   toArray,
   last,
-  defaultTo({href: ''}),
+  defaultTo({ href: '' }),
   prop('href'),
 )
 

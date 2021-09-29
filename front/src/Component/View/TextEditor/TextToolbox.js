@@ -20,7 +20,7 @@ const TextToolbox = ({
 }) =>
   <aside
     className={`text-toolbox ${isVisible ? 'visible' : ''}`}
-    style={{top: top - 60 + 'px'}}
+    style={{ top: top - 60 + 'px' }}
   >
     {!isLinkCreatorOpened &&
       <ul>

@@ -84,7 +84,7 @@ describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
   });
 
   it('dispatches closeLinkCreator', async () => {
-    const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
+    const mutate$ = of(mutate('editor-name')('LINK', { href: '' }));
 
     const action = await createLinkEpic(mutate$, state$, dependencies)
       .toPromise(Promise)
@@ -124,12 +124,12 @@ describe('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () =
 describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
   it('dispatches insertImage', async () => {
     const pickImageWithCredits$ = of(
-      pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name'})
+      pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name' })
     );
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         ImagePicker: {
-          images: [{id: 1}],
+          images: [{ id: 1 }],
         },
       },
     });
@@ -144,7 +144,7 @@ describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
 
 describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
   it('dispatches imageInserted', async () => {
-    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
+    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel' };
     const insertImage$ = of(insertImage('editor-name', imageMock));
     const state$ = new StateObservable(new Subject, {
       TextEditor: {
@@ -174,7 +174,7 @@ describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
       MediaPicker: {
         VideoPicker: {
           videos: [
-            { id: "slkdhlskdg", name: "test"},
+            { id: "slkdhlskdg", name: "test" },
           ],
         },
       },

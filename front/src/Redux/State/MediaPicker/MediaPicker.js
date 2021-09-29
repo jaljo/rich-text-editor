@@ -40,7 +40,7 @@ export const openImagePicker = always({ type: OPEN_IMAGE_PICKER })
 export const openVideoPicker = always({ type: OPEN_VIDEO_PICKER })
 
 // clear :: () -> Action.CLEAR
-export const clear = always({ type: CLEAR})
+export const clear = always({ type: CLEAR })
 
 // Display :: (State, Action *) -> State
 export const Display = createReducer(INITIAL_STATE, {

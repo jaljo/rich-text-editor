@@ -101,7 +101,7 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpi
       const action$ = hot('a-b-c', {
         a: youtubeVideoInserted('editor-name'),
         b: openInsertTweet('editor-name'),
-        c: openMediapicker('TEXT_EDITOR', { editorName: 'editor-name'}),
+        c: openMediapicker('TEXT_EDITOR', { editorName: 'editor-name' }),
       });
 
       expectObservable(

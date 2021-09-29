@@ -104,7 +104,7 @@ export const refreshButtonsState = (editorName, {
 export default createReducer(INITIAL_STATE, {
   [INITIALIZE]: (state, { editorName }) => ({
     ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE},
+    [editorName]: { ...INSTANCE_INITIAL_STATE },
   }),
 
   [CLEAR]: (state, { editorName }) => omit([editorName], state),
