@@ -20,9 +20,9 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         VideoPicker: {
-          searchString: 'Netanyahu',
-          page: 12,
           limit: 10,
+          page: 12,
+          searchString: 'Netanyahu',
         },
       },
     });

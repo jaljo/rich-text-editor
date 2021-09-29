@@ -14,10 +14,10 @@ import {
 
 // formatImage :: PexelsImage -> Image
 const formatImage = image => ({
-  id: image.id,
-  href: image.src.medium,
-  legend: image.photographer_url,
   credit: image.photographer,
+  href: image.src.medium,
+  id: image.id,
+  legend: image.photographer_url,
 })
 
 // fetchImages :: (Fetch, String, String) -> Promise
@@ -29,10 +29,10 @@ const fetchImages = (fetchApi, page, searchString) =>
     `&per_page=10`,
     `&page=${page}`,
   ]), {
-    method: 'GET',
     headers: {
       'Authorization': process.env.REACT_APP_IMAGE_API_KEY,
     },
+    method: 'GET',
   })
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _

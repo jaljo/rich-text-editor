@@ -17,21 +17,21 @@ const mapStateToProps = (state, props) => ({
   insertTweetOpened: prop('insertTweetOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
   insertYoutubeVideoOpened: prop('insertYoutubeVideoOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
   isVisible: prop('visible', state.TextEditor.ParagraphToolbox[props.editorName]),
-  top: prop('top', state.TextEditor.ParagraphToolbox[props.editorName]),
   mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === 'TEXT_EDITOR',
+  top: prop('top', state.TextEditor.ParagraphToolbox[props.editorName]),
 })
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
   clear: () => dispatch(clear(props.editorName)),
   closeInsertTweet: () => dispatch(closeInsertTweet(props.editorName)),
+  closeInsertYoutubeVideo: () => dispatch(closeInsertYoutubeVideo(props.editorName)),
   initialize: () => dispatch(initialize(props.editorName)),
+  openInsertTweet: () => dispatch(openInsertTweet(props.editorName)),
+  openInsertYoutubeVideo: () => dispatch(openInsertYoutubeVideo(props.editorName)),
   openMediaPicker: (domain, extra, defaultOpenedComponent) => dispatch(
     openMediaPicker(domain, extra, defaultOpenedComponent),
   ),
-  openInsertTweet: () => dispatch(openInsertTweet(props.editorName)),
-  openInsertYoutubeVideo: () => dispatch(openInsertYoutubeVideo(props.editorName)),
-  closeInsertYoutubeVideo: () => dispatch(closeInsertYoutubeVideo(props.editorName)),
 })
 
 // didMount :: Props -> Action.INITIALIZE

@@ -3,9 +3,9 @@ import { always, append } from 'ramda'
 
 // BrightcovePlayer initial state
 export const INITIAL_STATE = {
-  frPlayerReady: false,
-  enPlayerReady: false,
   arPlayerReady: false,
+  enPlayerReady: false,
+  frPlayerReady: false,
   renderedVideos: [],
 }
 
@@ -19,33 +19,33 @@ export const VIDEO_REMOVED = '@knp/BrightcovePlayer/VIDEO_REMOVED'
 
 // loadPlayer :: String -> Action.LOAD_PLAYER
 export const loadPlayer = locale => ({
-  type: LOAD_PLAYER,
   locale,
+  type: LOAD_PLAYER,
 })
 
 // playerLoaded :: String -> Action.PLAYER_LOADED
 export const playerLoaded = locale => ({
-  type: PLAYER_LOADED,
   locale,
+  type: PLAYER_LOADED,
 })
 
 // renderVideo :: String -> Action.RENDER_VIDEO
 export const renderVideo = id => ({
-  type: RENDER_VIDEO,
   id,
+  type: RENDER_VIDEO,
 })
 
 // removeVideo :: String -> Action.REMOVE_VIDEO
 export const removeVideo = id => ({
-  type: REMOVE_VIDEO,
   id,
+  type: REMOVE_VIDEO,
 })
 
 // videoRendered :: (String, String) -> Action.VIDEO_RENDERED
 export const videoRendered = (id, originalHtmlMarkup) => ({
-  type: VIDEO_RENDERED,
   id,
   originalHtmlMarkup,
+  type: VIDEO_RENDERED,
 })
 
 // videoRemoved :: () -> Action.VIDEO_REMOVED

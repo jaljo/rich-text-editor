@@ -18,18 +18,18 @@ describe('Redux :: State :: MediaPicker :: MediaPicker', () => {
       reducer(INITIAL_STATE, open('mock-domain', { editor: 'test' }))
     ).toEqual({
       ...INITIAL_STATE,
-      opened: true,
       domain: 'mock-domain',
-      imagePickerOpened: true,
       extra: { editor: 'test' },
+      imagePickerOpened: true,
+      opened: true,
     });
 
     expect(
       reducer(INITIAL_STATE, open('mock-domain', null, 'videoPicker'))
     ).toEqual({
       ...INITIAL_STATE,
-      opened: true,
       domain: 'mock-domain',
+      opened: true,
       videoPickerOpened: true,
     });
   });

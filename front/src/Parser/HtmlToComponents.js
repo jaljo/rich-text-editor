@@ -29,9 +29,9 @@ const isHeading = node => range(2, 7).map(x => `H${x}`).includes(node.tagName)
 
 // createHeading :: Node -> Object
 const createHeading = node => ({
+  childComponents: createChildrenComponents(node.childNodes),
   component: 'Heading',
   size: last(node.tagName),
-  childComponents: createChildrenComponents(node.childNodes),
 })
 
 // isText :: Node -> Boolean
@@ -48,11 +48,11 @@ const isLink = node => node.tagName === 'A'
 
 // createLink :: Node -> Object
 const createLink = node => ({
+  childComponents: createChildrenComponents(node.childNodes),
   component: 'Link',
   href: node.getAttribute('href'),
-  title: node.getAttribute('title'),
   target: node.getAttribute('target'),
-  childComponents: createChildrenComponents(node.childNodes),
+  title: node.getAttribute('title'),
 })
 
 // isEmphasis :: Node -> Boolean
@@ -60,8 +60,8 @@ const isEmphasis = node => node.tagName === 'EM'
 
 // createEmphasis :: Node :: Object
 const createEmphasis = node => ({
-  component: 'Emphasis',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Emphasis',
 })
 
 // isStrong :: Node -> Boolean
@@ -69,8 +69,8 @@ const isStrong = node => node.tagName === 'STRONG'
 
 // createStrong :: Node -> Object
 const createStrong = node => ({
-  component: 'Strong',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Strong',
 })
 
 // isUnderline :: Node -> Boolean
@@ -78,8 +78,8 @@ const isUnderline = node => node.tagName === 'U'
 
 // createUnderline :: Node -> Object
 const createUnderline = node => ({
-  component: 'Underline',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Underline',
 })
 
 // isItalic :: Node -> Boolean
@@ -87,8 +87,8 @@ const isItalic = node => node.tagName === 'I'
 
 // createItalic :: Node -> Object
 const createItalic = node => ({
-  component: 'Italic',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Italic',
 })
 
 // isBold :: Node -> Boolean
@@ -96,8 +96,8 @@ const isBold = node => node.tagName === 'B'
 
 // createBold :: Node -> Object
 const createBold = node => ({
-  component: 'Bold',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Bold',
 })
 
 // isQuote :: Node -> Boolean
@@ -105,8 +105,8 @@ const isQuote = node => node.tagName === 'BLOCKQUOTE'
 
 // createQuote :: Node -> Object
 const createQuote = node => ({
-  component: 'Quote',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Quote',
 })
 
 // isParagraph :: Node -> Boolean
@@ -114,8 +114,8 @@ const isParagraph = node => node.tagName === 'P'
 
 // createParagraph :: Node -> Object
 const createParagraph = node => ({
-  component: 'Paragraph',
   childComponents: createChildrenComponents(node.childNodes),
+  component: 'Paragraph',
 })
 
 /**
@@ -127,11 +127,11 @@ const isImage = node => node.tagName === 'FIGURE'
   && node.classList.contains('image-wrapper')
 // createImage :: Node -> Object
 const createImage = node => ({
+  alt: node.childNodes[0] ? node.childNodes[0].getAttribute('alt') : '',
   component: 'Image',
+  description: node.childNodes[1] ? node.childNodes[1].textContent : '',
   src: node.childNodes[0] ? node.childNodes[0].getAttribute('src') : '',
   title: node.childNodes[2] ? node.childNodes[2].textContent : '',
-  description: node.childNodes[1] ? node.childNodes[1].textContent : '',
-  alt: node.childNodes[0] ? node.childNodes[0].getAttribute('alt') : '',
 })
 
 /**
@@ -149,11 +149,11 @@ const isLegacyImage = node => node.tagName === 'P'
  * create an Image component from a legacy "<p><img /></p>" HTML
  */
 const createImageBC = node => ({
+  alt: node.childNodes[0].getAttribute('alt'),
   component: 'Image',
+  description: node.childNodes[0].getAttribute('longdesc'),
   src: node.childNodes[0].getAttribute('src'),
   title: node.childNodes[0].getAttribute('title'),
-  description: node.childNodes[0].getAttribute('longdesc'),
-  alt: node.childNodes[0].getAttribute('alt'),
 })
 
 // getTweetLink :: Node -> String
@@ -180,11 +180,11 @@ const isTweet = node => node.tagName === 'BLOCKQUOTE'
 // createTweet :: Node -> Object
 const createTweet = node => ({
   component: 'Tweet',
+  originalHtmlMarkup: node.outerHTML,
   tweetId: pipe(
     getTweetLink,
     getTweetIdFromUrl,
   )(node.childNodes),
-  originalHtmlMarkup: node.outerHTML,
 })
 
 // isYoutubeVideo :: Node -> Boolean

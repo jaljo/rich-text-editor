@@ -52,9 +52,9 @@ describe('Redux :: State :: TextEditor :: TextToolbox', () => {
       'instance-b': { ...INSTANCE_INITIAL_STATE, visible: false },
       'instance-c': {
         ...INSTANCE_INITIAL_STATE,
-        visible: true,
-        top: 350,
         isLinkCreatorOpened: false,
+        top: 350,
+        visible: true,
       },
       'instance-d': { ...INSTANCE_INITIAL_STATE, visible: false },
     });
@@ -109,20 +109,20 @@ describe('Redux :: State :: TextEditor :: TextToolbox', () => {
       reducer(instanceExists, refreshButtonsState('editor-name', {
         isBold: false,
         isItalic: true,
-        isUnderline: true,
-        isTitle: false,
-        isQuote: false,
         isLink: false,
+        isQuote: false,
+        isTitle: false,
+        isUnderline: true,
       }))
     ).toEqual({
       'editor-name': {
         ...INSTANCE_INITIAL_STATE,
         isBold: false,
         isItalic: true,
-        isUnderline: true,
-        isTitle: false,
-        isQuote: false,
         isLink: false,
+        isQuote: false,
+        isTitle: false,
+        isUnderline: true,
       },
     });
   });

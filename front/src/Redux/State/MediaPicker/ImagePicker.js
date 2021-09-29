@@ -3,11 +3,11 @@ import { createReducer } from '../../../Util'
 
 // image picker initial state
 export const INITIAL_STATE = {
-  isFetching: false,
+  error: null,
   images: [],
+  isFetching: false,
   page: 1,
   searchString: '',
-  error: null,
 }
 
 // image picker action types
@@ -22,14 +22,14 @@ export const CLEAR = '@knp/MediaPicker/ImagePicker/CLEAR'
 
 // fetchImages :: String -> Action
 export const fetchImages = (searchString = '') => ({
-  type: FETCH_IMAGES,
   searchString,
+  type: FETCH_IMAGES,
 })
 
 // receivedImages :: [Image] -> Action
 export const receivedImages = images => ({
-  type: RECEIVED_IMAGES,
   images: images || [],
+  type: RECEIVED_IMAGES,
 })
 
 // scrollLeft :: () -> Action
@@ -40,25 +40,25 @@ export const scrollRight = always({ type: SCROLL_RIGHT })
 
 // pickImage :: (Number, String, Object) -> Action
 export const pickImage = (imageId, domain, extra) => ({
-  type: PICK_IMAGE,
-  imageId,
   domain,
   // any extra values related to the given domain
   extra,
+  imageId,
+  type: PICK_IMAGE,
 })
 
 // pickImageWithCredits :: (Number, String, Object) -> Action
 export const pickImageWithCredits = (imageId, domain, extra) => ({
-  type: PICK_IMAGE_WITH_CREDITS,
-  imageId,
   domain,
   extra,
+  imageId,
+  type: PICK_IMAGE_WITH_CREDITS,
 })
 
 // error :: String -> Action.ERROR
 export const error = message => ({
-  type: ERROR,
   message,
+  type: ERROR,
 })
 
 // clear :: () -> Action.CLEAR
@@ -66,45 +66,52 @@ export const clear = always({ type: CLEAR })
 
 // ImagePicker :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
+  [CLEAR]: always(INITIAL_STATE),
+
+  [ERROR]: (state, { message }) => ({
+    ...state,
+    error: message,
+  }),
+
   [FETCH_IMAGES]: (state, { searchString }) => ({
     ...state,
+    error: null,
     isFetching: true,
     page: 1,
     searchString,
+  }),
+
+  [PICK_IMAGE]: state => ({
+    ...state,
     error: null,
   }),
+
+  [PICK_IMAGE_WITH_CREDITS]: state => ({
+    ...state,
+    error: null,
+  }),
+
   [RECEIVED_IMAGES]: (state, { images }) => ({
     ...state,
-    isFetching: false,
-    images,
     error: null,
+    images,
+    isFetching: false,
   }),
+
   [SCROLL_LEFT]: state => ({
     ...state,
+    error: null,
     isFetching: true,
     page: when(
       lt(1),
       dec,
     )(state.page),
-    error: null,
   }),
+
   [SCROLL_RIGHT]: state => ({
     ...state,
+    error: null,
     isFetching: true,
     page: inc(state.page),
-    error: null,
   }),
-  [PICK_IMAGE]: state => ({
-    ...state,
-    error: null,
-  }),
-  [PICK_IMAGE_WITH_CREDITS]: state => ({
-    ...state,
-    error: null,
-  }),
-  [ERROR]: (state, { message }) => ({
-    ...state,
-    error: message,
-  }),
-  [CLEAR]: always(INITIAL_STATE),
 })

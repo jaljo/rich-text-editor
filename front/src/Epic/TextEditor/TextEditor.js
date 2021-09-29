@@ -63,9 +63,9 @@ const insertAfter = (el, referenceNode) =>
 const createImageNode = (image, targetIndex, editorName) => {
   const props = {
     component: {
+      alt: image.credit,
       src: image.href,
       title: image.legend,
-      alt: image.credit,
     },
   };
 
@@ -231,10 +231,10 @@ export const refreshTextToolboxStateEpic = (action$, state$, { window }) => acti
   map(([ action, range ]) => [ action.editorName, ({
     isBold: document.queryCommandState('bold'),
     isItalic: document.queryCommandState('italic'),
-    isUnderline: document.queryCommandState('underline'),
-    isTitle: isInParent('h2')(range),
-    isQuote: isInParent('blockquote')(range),
     isLink: isInParent('a')(range),
+    isQuote: isInParent('blockquote')(range),
+    isTitle: isInParent('h2')(range),
+    isUnderline: document.queryCommandState('underline'),
   })]),
   map(apply(refreshButtonsState)),
   logObservableError(),

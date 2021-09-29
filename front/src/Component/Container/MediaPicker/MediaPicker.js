@@ -13,21 +13,21 @@ import { componentWillUnmount } from 'react-functional-lifecycle'
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
-  isOpened: state.MediaPicker.Display.opened,
   isFetchingImages: state.MediaPicker.ImagePicker.isFetching,
   isFetchingVideos: state.MediaPicker.VideoPicker.isFetching,
   isImagePickerOpened: state.MediaPicker.Display.imagePickerOpened,
+  isOpened: state.MediaPicker.Display.opened,
   isVideoPickerOpened: state.MediaPicker.Display.videoPickerOpened,
 })
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
+  clear: compose(dispatch, clear),
   close: compose(dispatch, close),
+  openImagePicker: compose(dispatch, openImagePicker),
+  openVideoPicker: compose(dispatch, openVideoPicker),
   searchImages: compose(dispatch, fetchImages, path(['target', 'value'])),
   searchVideos: compose(dispatch, searchVideos, path(['target', 'value'])),
-  openImagePicker: compose(dispatch, openImagePicker),
-  clear: compose(dispatch, clear),
-  openVideoPicker: compose(dispatch, openVideoPicker),
 })
 
 // willUnmount :: Props -> Action.CLEAR

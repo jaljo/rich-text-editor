@@ -18,19 +18,17 @@ import {
 const imagesMock = [
   {
     id: 1,
-    src: {
-      medium: "href",
-    },
-    photographer_url: "photographer url",
     photographer: "photographer",
+    photographer_url: "photographer url",
+    src: { medium: "href" },
   },
 ];
 const transformedImages = [
   {
-    id: 1,
-    href: "href",
-    legend: "photographer url",
     credit: "photographer",
+    href: "href",
+    id: 1,
+    legend: "photographer url",
   },
 ];
 const dependencies = {
@@ -89,8 +87,16 @@ describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic'
     MediaPicker: {
       ImagePicker: {
         images: [
-          { id: 1, legend: 'This image has credit', credit: 'AFP' },
-          { id: 2, legend: 'This one does not', credit: '' },
+          {
+            credit: 'AFP',
+            id: 1,
+            legend: 'This image has credit',
+          },
+          {
+            credit: '',
+            id: 2,
+            legend: 'This one does not',
+          },
         ],
       },
     },

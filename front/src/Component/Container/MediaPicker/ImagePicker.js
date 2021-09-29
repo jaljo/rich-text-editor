@@ -12,21 +12,21 @@ import {
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
-  images: state.MediaPicker.ImagePicker.images,
-  page: state.MediaPicker.ImagePicker.page,
   domain: state.MediaPicker.Display.domain,
-  extra: state.MediaPicker.Display.extra,
   error: state.MediaPicker.ImagePicker.error,
+  extra: state.MediaPicker.Display.extra,
+  images: state.MediaPicker.ImagePicker.images,
   isFetching: state.MediaPicker.ImagePicker.isFetching,
+  page: state.MediaPicker.ImagePicker.page,
 })
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
+  clear: compose(dispatch, clear),
   initialLoad: compose(dispatch, fetchImages),
+  pickImage: compose (dispatch, pickImage),
   scrollLeft: compose(dispatch, scrollLeft),
   scrollRight: compose(dispatch, scrollRight),
-  pickImage: compose (dispatch, pickImage),
-  clear: compose(dispatch, clear),
 })
 
 // onMount :: Props -> Action

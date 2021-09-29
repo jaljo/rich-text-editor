@@ -107,7 +107,10 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: closeInsertYoutubeVideoEpi
       expectObservable(
         closeInsertYoutubeVideoEpic(action$)
       ).toBe('a-a-a', {
-        a: { type: CLOSE_INSERT_YOUTUBE_VIDEO, editorName: 'editor-name' },
+        a: {
+          editorName: 'editor-name',
+          type: CLOSE_INSERT_YOUTUBE_VIDEO,
+        },
       });
     });
   });

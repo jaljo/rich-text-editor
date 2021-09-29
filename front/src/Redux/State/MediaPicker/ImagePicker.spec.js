@@ -21,10 +21,10 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       reducer(INITIAL_STATE, fetchImages('merkel'))
     ).toEqual({
       ...INITIAL_STATE,
+      error: null,
       isFetching: true,
       page: 1,
       searchString: 'merkel',
-      error: null,
     });
   });
 
@@ -33,9 +33,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       reducer(INITIAL_STATE, receivedImages([{ id: 1 }, { id: 2 }]))
     ).toEqual({
       ...INITIAL_STATE,
-      isFetching: false,
-      images: [{ id: 1 }, { id: 2 }],
       error: null,
+      images: [{ id: 1 }, { id: 2 }],
+      isFetching: false,
     });
   });
 
@@ -44,9 +44,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       reducer(INITIAL_STATE, scrollLeft())
     ).toEqual({
       ...INITIAL_STATE,
+      error: null,
       isFetching: true,
       page: 1,
-      error: null,
     });
   })
 
@@ -55,9 +55,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       reducer({ ...INITIAL_STATE, page: 9 }, scrollLeft())
     ).toEqual({
       ...INITIAL_STATE,
+      error: null,
       isFetching: true,
       page: 8,
-      error: null,
     });
   })
 
@@ -66,9 +66,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       reducer(INITIAL_STATE, scrollRight())
     ).toEqual({
       ...INITIAL_STATE,
+      error: null,
       isFetching: true,
       page: 2,
-      error: null,
     });
   });
 

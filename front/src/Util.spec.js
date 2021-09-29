@@ -3,8 +3,8 @@ import * as Util from './Util'
 describe('Util', () => {
   it('can create easy reducer', () => {
     const reducer      = Util.createReducer(false, {
-      ['ON']:  () => true,
       ['OFF']: () => false,
+      ['ON']:  () => true,
     });
     const initialState = reducer();
     const on           = { type: 'ON' };

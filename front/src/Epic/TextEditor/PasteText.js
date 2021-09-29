@@ -58,9 +58,9 @@ const pasteCopiedTextEpic = (action$, state$, { window }) =>
 const displayClipboardWarningEpic = action$ => action$.pipe(
   ofType(DISPLAY_CLIPBOARD_WARNING),
   tap(() => ({
-    message: `Please enable clipboard access on your browser. See https://support.google.com/chrome/answer/114662`,
-    level: 'warning',
     duration: 5000,
+    level: 'warning',
+    message: `Please enable clipboard access on your browser. See https://support.google.com/chrome/answer/114662`,
   })),
   logObservableError(),
 )
@@ -69,9 +69,9 @@ const displayClipboardWarningEpic = action$ => action$.pipe(
 const displayClipboardSupportErrorEpic = action$ => action$.pipe(
   ofType(DISPLAY_CLIPBOARD_SUPPORT_ERROR),
   tap(() => ({
-    message: `Your browser does not support clipboard read access. Consider to use Google Chrome which supports it.`,
-    level: 'error',
     duration: 5000,
+    level: 'error',
+    message: `Your browser does not support clipboard read access. Consider to use Google Chrome which supports it.`,
   })),
   logObservableError(),
 )

@@ -20,17 +20,17 @@ import { selectText } from '../../Redux/State/TextEditor/TextEditor'
 import { tweetInserted } from '../../Redux/State/TextEditor/InsertTweet'
 
 const rangeMock = {
-  startContainer: {},
-  endContainer: {},
   cloneRange: () => null,
+  endContainer: {},
+  startContainer: {},
 };
 const selectionMock = {
-  getRangeAt: () => rangeMock,
-  type: 'Range',
   anchorNode: {
     data: 'bla bla',
     tagName: 'FIGURE',
   },
+  getRangeAt: () => rangeMock,
+  type: 'Range',
 };
 const dependencies = {
   window: {

@@ -51,9 +51,9 @@ export const renderVideoEpic = (action$, state$, { window }) =>
     // brightcove SDK is loaded from the loadPlayerEpic above
     filter(() => !isNil(window['bc'])),
     map(([ video ]) => ({
-      video,
       id: pathOr(null, ['dataset', 'videoId'], video),
       originalHtmlMarkup: video.outerHTML,
+      video,
     })),
     tap(({ video }) => window['bc'](video)),
     map(({ id, originalHtmlMarkup }) => videoRendered(id, originalHtmlMarkup)),
@@ -74,6 +74,6 @@ export const removeVideoEpic = (action$, state$, { window }) =>
 
 export default combineEpics(
   loadPlayerEpic,
-  renderVideoEpic,
   removeVideoEpic,
+  renderVideoEpic,
 )

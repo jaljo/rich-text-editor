@@ -4,10 +4,10 @@ import { always, when, lt, dec, inc } from 'ramda'
 // VideoPicker initial state
 export const INITIAL_STATE = {
   isFetching: false,
-  videos: [],
+  limit: 10,
   page: 1,
   searchString: '',
-  limit: 10,
+  videos: [],
 }
 
 // VideoPicker action types
@@ -24,8 +24,8 @@ export const fetchVideos = always({ type: FETCH_VIDEOS })
 
 // searchVideos :: String -> Action.SEARCH_VIDEOS
 export const searchVideos = (searchString = '') => ({
-  type: SEARCH_VIDEOS,
   searchString,
+  type: SEARCH_VIDEOS,
 })
 
 // videosReceived :: [Video] -> Action.VIDEOS_RECEIVED
@@ -42,11 +42,11 @@ export const scrollRight = always({ type: SCROLL_RIGHT })
 
 // pickVideo :: (Number, String, Object) -> Action.PICK_VIDEO
 export const pickVideo = (videoId, domain, extra) => ({
-  type: PICK_VIDEO,
-  videoId,
   domain,
   // any extra values related to the given domain
   extra,
+  type: PICK_VIDEO,
+  videoId,
 })
 
 // clear :: () -> Action.CLEAR
@@ -54,9 +54,21 @@ export const clear = always({ type: CLEAR })
 
 // VideoPicker :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
+  [CLEAR]: always(INITIAL_STATE),
+
   [FETCH_VIDEOS]: state => ({
     ...state,
     isFetching: true,
+  }),
+
+  [SCROLL_LEFT]: state => ({
+    ...state,
+    page: when(lt(1), dec)(state.page),
+  }),
+
+  [SCROLL_RIGHT]: state => ({
+    ...state,
+    page: inc(state.page),
   }),
 
   [SEARCH_VIDEOS]: (state, { searchString }) => ({
@@ -70,16 +82,4 @@ export default createReducer(INITIAL_STATE, {
     isFetching: false,
     videos,
   }),
-
-  [SCROLL_LEFT]: state => ({
-    ...state,
-    page: when(lt(1), dec)(state.page),
-  }),
-
-  [SCROLL_RIGHT]: state => ({
-    ...state,
-    page: inc(state.page),
-  }),
-
-  [CLEAR]: always(INITIAL_STATE),
 })

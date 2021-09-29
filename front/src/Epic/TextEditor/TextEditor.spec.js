@@ -34,14 +34,14 @@ const containerMock = {
   },
 };
 const rangeMock = {
-  startContainer: containerMock,
-  endContainer: containerMock,
   cloneRange: () => null,
+  endContainer: containerMock,
+  startContainer: containerMock,
 };
 const selectionMock = {
+  addRange: () => null,
   getRangeAt: () => rangeMock,
   removeAllRanges: () => null,
-  addRange: () => null,
   type: 'Range',
 };
 const dependencies = {
