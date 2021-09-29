@@ -2,7 +2,6 @@ import {
   clear,
   closeLinkCreator,
   default as reducer,
-  hide,
   initialize,
   openLinkCreator,
   refreshButtonsState,

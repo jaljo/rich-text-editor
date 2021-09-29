@@ -53,32 +53,26 @@ describe('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   const selectText$ = of(selectText('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
-  it('dispatches showTextToolbox', done => {
-    showTextToolboxEpic(selectText$, state$, dependencies)
+  it('dispatches showTextToolbox', async () => {
+    const action = await showTextToolboxEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(SHOW_TEXT_TOOLBOX)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(SHOW_TEXT_TOOLBOX);
   }, 1000);
 
-  it('dont dispatches showTextToolbox (empty selection)', done => {
+  it('dont dispatches showTextToolbox (empty selection)', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({ type: 'Char'})
       }
     };
 
-    showTextToolboxEpic(selectText$, state$, dependencies)
+    const action = await showTextToolboxEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 });
 
@@ -94,32 +88,26 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () => {
     },
   });
 
-  it('dispatches hideTextToolbox', done => {
+  it('dispatches hideTextToolbox', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({ type: 'Char'})
       }
     };
 
-    hideAllTextToolboxesEpic(selectText$, state$, dependencies)
+    const action = await hideAllTextToolboxesEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(HIDE_TEXT_TOOLBOX)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(HIDE_TEXT_TOOLBOX);
   }, 1000);
 
-  it('dont dispatches hideTextToolbox (not empty selection)', done => {
-    hideAllTextToolboxesEpic(selectText$, state$, dependencies)
+  it('dont dispatches hideTextToolbox (not empty selection)', async () => {
+    const action = await hideAllTextToolboxesEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 });
 
@@ -127,7 +115,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
   const selectText$ = of(selectText('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
-  it('dispatches showParagraphToolbox', done => {
+  it('dispatches showParagraphToolbox', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({
@@ -139,17 +127,14 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
       },
     };
 
-    showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(SHOW_PARAGRAPH_TOOLBOX)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(SHOW_PARAGRAPH_TOOLBOX);
   }, 1000);
 
-  it('does not dispatch showParagraphToolbox (not empty paragraph)', done => {
+  it('does not dispatch showParagraphToolbox (not empty paragraph)', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({
@@ -161,17 +146,14 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
       },
     };
 
-    showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 
-  it('does not dispatch showParagraphToolbox (not in a paragraph)', done => {
+  it('does not dispatch showParagraphToolbox (not in a paragraph)', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({
@@ -183,14 +165,11 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
       },
     };
 
-    showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 });
 
@@ -198,7 +177,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
   const state$ = new StateObservable(new Subject(), {});
   const selectText$ = of(selectText('editor-name'));
 
-  it('dispatches hideParagraphToolbox', done => {
+  it('dispatches hideParagraphToolbox', async () => {
     const tweetInserted$ = of(tweetInserted('editor-name'));
     const imageInseretd$ = of(imageInserted('editor-name'));
     const videoInserted$ = of(videoInserted('editor-name'))
@@ -213,7 +192,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
       },
     };
 
-    Promise.all([
+    const [a1, a2, a3, a4] = await Promise.all([
       hideAllParagraphToolboxesEpic(selectText$, state$, dependencies)
         .toPromise(Promise),
       hideAllParagraphToolboxesEpic(tweetInserted$, state$, dependencies)
@@ -222,19 +201,15 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
         .toPromise(Promise),
       hideAllParagraphToolboxesEpic(videoInserted$, state$, dependencies)
         .toPromise(Promise),
-    ])
-    .then(([a1, a2, a3, a4]) => {
-      expect(a1.type).toEqual(HIDE_PARAGRAPH_TOOLBOX)
-      expect(a2.type).toEqual(HIDE_PARAGRAPH_TOOLBOX)
-      expect(a3.type).toEqual(HIDE_PARAGRAPH_TOOLBOX)
-      expect(a4.type).toEqual(HIDE_PARAGRAPH_TOOLBOX)
+    ]);
 
-      done()
-    })
-    .catch(err => { console.error(err); done() });
+    expect(a1.type).toEqual(HIDE_PARAGRAPH_TOOLBOX);
+    expect(a2.type).toEqual(HIDE_PARAGRAPH_TOOLBOX);
+    expect(a3.type).toEqual(HIDE_PARAGRAPH_TOOLBOX);
+    expect(a4.type).toEqual(HIDE_PARAGRAPH_TOOLBOX);
   }, 1000);
 
-  it('does not dispatch hideParagraphToolbox (empty paragraph)', done => {
+  it('does not dispatch hideParagraphToolbox (empty paragraph)', async () => {
     const dependencies = {
       window: {
         getSelection: () => ({
@@ -246,13 +221,10 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
       },
     };
 
-    hideAllParagraphToolboxesEpic(selectText$, state$, dependencies)
+    const action = await hideAllParagraphToolboxesEpic(selectText$, state$, dependencies)
       .toPromise(Promise)
-      .then(result => {
-        expect(result).toEqual(undefined)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action).toEqual(undefined);
   }, 1000);
 });

@@ -14,7 +14,6 @@ const MediaPicker = ({
   searchImages,
   searchVideos,
   openImagePicker,
-  openVideoPicker,
 }) =>
   <div data-is="media-picker" className={`${!isOpened ? 'closed' : ''}`}>
     <div className="search-images">

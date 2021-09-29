@@ -22,7 +22,7 @@ import parseUrl from 'url-parse'
 // toArray :: [Node] -> [Object]
 const toArray = nodes => Object
   .values(nodes)
-  .reduce((dest, node, i) => append(node, dest), [])
+  .reduce((dest, node) => append(node, dest), [])
 
 // isHeading :: Node -> Boolean
 const isHeading = node => range(2, 7).map(x => `H${x}`).includes(node.tagName)
