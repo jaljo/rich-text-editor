@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   closeInsertTweet: () => dispatch(closeInsertTweet(props.editorName)),
   initialize: () => dispatch(initialize(props.editorName)),
   openMediaPicker: (domain, extra, defaultOpenedComponent) => dispatch(
-    openMediaPicker(domain, extra, defaultOpenedComponent)
+    openMediaPicker(domain, extra, defaultOpenedComponent),
   ),
   openInsertTweet: () => dispatch(openInsertTweet(props.editorName)),
   openInsertYoutubeVideo: () => dispatch(openInsertYoutubeVideo(props.editorName)),

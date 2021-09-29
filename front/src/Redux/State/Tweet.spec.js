@@ -29,12 +29,12 @@ describe('Redux :: State :: Tweet', () => {
     expect(
       reducer(INITIAL_STATE, tweetRendered('1234', '<p>tweet</p>'))
     )
-    .toEqual({
-      ...INITIAL_STATE,
-      renderedTweets: {
-        '1234': '<p>tweet</p>',
-      },
-    })
+      .toEqual({
+        ...INITIAL_STATE,
+        renderedTweets: {
+          '1234': '<p>tweet</p>',
+        },
+      })
   })
 
   it('reduces CLEAR action', () => {

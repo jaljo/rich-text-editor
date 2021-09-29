@@ -53,7 +53,7 @@ export const Display = createReducer(INITIAL_STATE, {
     ...cond([
       [equals('videoPicker'), always({ videoPickerOpened: true })],
       [T, always({ imagePickerOpened: true })],
-    ])(defaultOpenedComponent)
+    ])(defaultOpenedComponent),
   }),
   [CLOSE]: always(INITIAL_STATE),
   [OPEN_IMAGE_PICKER]: state => ({

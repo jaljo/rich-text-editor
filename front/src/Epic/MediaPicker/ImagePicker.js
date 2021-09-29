@@ -43,7 +43,7 @@ export const searchImagesEpic = (action$, _, { fetchApi }) =>
     mergeMap(({ searchString }) => fetchImages(
       fetchApi,
       1,
-      searchString
+      searchString,
     )),
     map(pipe(
       prop('photos'),

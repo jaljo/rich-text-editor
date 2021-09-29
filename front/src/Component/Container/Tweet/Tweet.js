@@ -7,7 +7,7 @@ import { renderTweet } from '../../../Redux/State/Tweet'
 // mapDispatchToProps :: Function -> Props
 const mapDispatchToProps = dispatch => ({
   renderTweet: (tweetId, uid, originalHtmlMarkup) => dispatch(
-    renderTweet(tweetId, uid, originalHtmlMarkup)
+    renderTweet(tweetId, uid, originalHtmlMarkup),
   ),
 })
 

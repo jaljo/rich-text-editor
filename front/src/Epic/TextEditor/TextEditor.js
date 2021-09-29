@@ -65,8 +65,8 @@ const createImageNode = (image, targetIndex, editorName) => {
     component: {
       src: image.href,
       title: image.legend,
-      alt: image.credit
-    }
+      alt: image.credit,
+    },
   };
 
   // render image component using react, then convert it to a valid DOM Node
@@ -113,7 +113,7 @@ const insertNewParagraphEpic = (action$, state$, { window }) =>
     tap(() => {
       const editedNode = window.getSelection().anchorNode;
 
-      if(
+      if (
         // edition of an empty paragraph
         editedNode.tagName === 'P'
         // edition of a paragraph containing a TextNode
@@ -142,7 +142,7 @@ const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
   // get lastly inserted element
   map(([ action, state ]) => nth(
     state.TextEditor.ParagraphToolbox[action.editorName].targetNodeIndex,
-    getRootNodesAsArray(action.editorName)
+    getRootNodesAsArray(action.editorName),
   )),
   // create and focus a new paragraph after that node
   tap(createAndFocusEmptyParagraph),
@@ -188,13 +188,13 @@ const recoverSelection = window => range => {
 
 // closeLinkCreatorEpic :: Observable Action Error -> _
 const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
-    ofType(CLOSE_LINK_CREATOR),
-    withLatestFrom(state$),
-    map(([ action, state ]) => state.TextEditor.TextToolbox[action.editorName].range),
-    tap(recoverSelection(window)),
-    ignoreElements(),
-    logObservableError(),
-  )
+  ofType(CLOSE_LINK_CREATOR),
+  withLatestFrom(state$),
+  map(([ action, state ]) => state.TextEditor.TextToolbox[action.editorName].range),
+  tap(recoverSelection(window)),
+  ignoreElements(),
+  logObservableError(),
+)
 
 // mutationEpic :: Observable Action Error -> Observable Action _
 const mutationEpic = action$ =>
@@ -224,19 +224,19 @@ const mutationEpic = action$ =>
 
 // refreshTextToolboxStateEpic :: Observable Action Error -> Observable Action _
 export const refreshTextToolboxStateEpic = (action$, state$, { window }) => action$.pipe(
-    ofType(SHOW_TEXT_TOOLBOX, MUTATE),
-    map(action => [ action, window.getSelection().getRangeAt(0) ]),
-    map(([ action, range ]) => [ action.editorName, ({
-      isBold: document.queryCommandState('bold'),
-      isItalic: document.queryCommandState('italic'),
-      isUnderline: document.queryCommandState('underline'),
-      isTitle: isInParent('h2')(range),
-      isQuote: isInParent('blockquote')(range),
-      isLink: isInParent('a')(range),
-    })]),
-    map(apply(refreshButtonsState)),
-    logObservableError(),
-  )
+  ofType(SHOW_TEXT_TOOLBOX, MUTATE),
+  map(action => [ action, window.getSelection().getRangeAt(0) ]),
+  map(([ action, range ]) => [ action.editorName, ({
+    isBold: document.queryCommandState('bold'),
+    isItalic: document.queryCommandState('italic'),
+    isUnderline: document.queryCommandState('underline'),
+    isTitle: isInParent('h2')(range),
+    isQuote: isInParent('blockquote')(range),
+    isLink: isInParent('a')(range),
+  })]),
+  map(apply(refreshButtonsState)),
+  logObservableError(),
+)
 
 // isInParent :: String -> Range -> Boolean
 const isInParent = parentTagName => pipe(
@@ -248,7 +248,7 @@ const isInParent = parentTagName => pipe(
     ([ startNode ]) => !isNil(startNode),
     ([ _, endNode ]) => !isNil(endNode),
     ([ startNode, endNode ]) => equals(startNode, endNode),
-  ])
+  ]),
 )
 
 // pickImageEpic :: (Observable Action Error, Observable State Error) -> Observable Action _

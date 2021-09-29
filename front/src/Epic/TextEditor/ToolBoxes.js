@@ -60,9 +60,11 @@ const getParagraphTopPosition = pipe(
   prop('anchorNode'),
   ifElse(
     isTextNode,
-    path(['parentElement', 'offsetTop']), // nodeType === Node.TEXT_NODE
-    prop('offsetTop'),                    // nodeType === Node.ELEMENT_NODE
-  )
+    // nodeType === Node.TEXT_NODE
+    path(['parentElement', 'offsetTop']),
+    // nodeType === Node.ELEMENT_NODE
+    prop('offsetTop'),
+  ),
 )
 
 // isEmptyParagraph :: Selection -> Boolean
@@ -70,14 +72,14 @@ export const isEmptyParagraph = pipe(
   prop('anchorNode'),
   both(
     compose(isNil, prop('data')),
-    compose(equals('P'), prop('tagName'))
+    compose(equals('P'), prop('tagName')),
   ),
 )
 
 // getNodeIndex :: (String, Node) -> Number
 const getNodeIndex = (editorName, node) =>
   getRootNodesAsArray(editorName)
-  .indexOf(node)
+    .indexOf(node)
 
 // notExcluded :: Node -> Boolean
 const notExcluded = allPass([
@@ -124,16 +126,16 @@ export const showParagraphToolboxEpic = (action$, state$, { window }) =>
 
 // showParagraphToolboxToReplaceElementEpic :: Epic -> Observable Action _
 const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
-    ofType(CLICK),
-    filter(compose(equals('IMG'), path(['node', 'tagName']))),
-    map(action => [
-      action.editorName,
-      action.node.parentElement.offsetTop,
-      getNodeIndex(action.editorName, action.node.parentElement),
-    ]),
-    map(apply(showParagraphToolbox)),
-    logObservableError(),
-  )
+  ofType(CLICK),
+  filter(compose(equals('IMG'), path(['node', 'tagName']))),
+  map(action => [
+    action.editorName,
+    action.node.parentElement.offsetTop,
+    getNodeIndex(action.editorName, action.node.parentElement),
+  ]),
+  map(apply(showParagraphToolbox)),
+  logObservableError(),
+)
 
 // hideAllParagraphToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
 export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
@@ -168,7 +170,7 @@ const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
     filter(node => !node.classList.contains('ttbx-mutation')),
     mergeMap(() => [
       hideAllTextToolboxes(),
-      hideAllParagraphToolboxes()
+      hideAllParagraphToolboxes(),
     ]),
     logObservableError(),
   )
@@ -182,10 +184,10 @@ const closeInsertTweetFormEpic = action$ => action$.pipe(
   ).pipe(
     takeUntil(action$.pipe(ofType(
       CLOSE_INSERT_TWEET,
-      CLEAR_PARAGRAPH_TOOLBOX)
+      CLEAR_PARAGRAPH_TOOLBOX),
     )),
     map(() => closeInsertTweet(editorName)),
-  ))
+  )),
 )
 
 // closeInsertYoutubeFormEpic :: Observale Action Error -> Observable Action.CLOSE_INSERT_YOUTUBE_VIDEO
@@ -200,7 +202,7 @@ const closeInsertYoutubeFormEpic = action$ => action$.pipe(
       CLEAR_PARAGRAPH_TOOLBOX,
     ))),
     map(() => closeInsertYoutubeVideo(editorName)),
-  ))
+  )),
 )
 
 // closeLinkCreatorFormEpic :: Observable Action Error -> Observable Action.CLOSE_LINK_CREATOR
@@ -215,7 +217,7 @@ const closeLinkCreatorFormEpic = action$ => action$.pipe(
       CLEAR_TEXT_TOOLBOX,
     ))),
     map(() => closeLinkCreator(editorName)),
-  ))
+  )),
 )
 
 export default combineEpics(

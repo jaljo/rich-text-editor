@@ -19,7 +19,7 @@ const imagesMock = [
   {
     id: 1,
     src: {
-      medium: "href"
+      medium: "href",
     },
     photographer_url: "photographer url",
     photographer: "photographer",
@@ -31,7 +31,7 @@ const transformedImages = [
     href: "href",
     legend: "photographer url",
     credit: "photographer",
-  }
+  },
 ];
 const dependencies = {
   fetchApi: () => Promise.resolve({
@@ -75,7 +75,7 @@ describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
   }, 1000);
 
   it('dispatches receivedImages (after scrollRight action)', async () => {
-   const action = await changePageEpic(scrollRight$, state$, dependencies)
+    const action = await changePageEpic(scrollRight$, state$, dependencies)
       .toPromise(Promise)
     ;
 
@@ -89,8 +89,8 @@ describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic'
     MediaPicker: {
       ImagePicker: {
         images: [
-            { id: 1, legend: 'This image has credit', credit: 'AFP' },
-            { id: 2, legend: 'This one does not', credit: '' },
+          { id: 1, legend: 'This image has credit', credit: 'AFP' },
+          { id: 2, legend: 'This one does not', credit: '' },
         ],
       },
     },

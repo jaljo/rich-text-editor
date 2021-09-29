@@ -47,7 +47,7 @@ const selectionMock = {
 const dependencies = {
   window: {
     getSelection: () => selectionMock,
-  }
+  },
 };
 
 beforeEach(() => {
@@ -78,12 +78,12 @@ describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
   const state$ = new StateObservable(new Subject, {
     TextEditor: {
       TextToolbox: {
-        'editor-name': { range: rangeMock }
+        'editor-name': { range: rangeMock },
       },
     },
   });
 
-it('dispatches closeLinkCreator', async () => {
+  it('dispatches closeLinkCreator', async () => {
     const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
 
     const action = await createLinkEpic(mutate$, state$, dependencies)
@@ -150,7 +150,7 @@ describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
       TextEditor: {
         ParagraphToolbox: {
           'editor-name': {
-            targetNodeIndex: 2
+            targetNodeIndex: 2,
           },
         },
       },
@@ -196,7 +196,7 @@ describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
       TextEditor: {
         ParagraphToolbox: {
           'editor-name': {
-            targetNodeIndex: 2
+            targetNodeIndex: 2,
           },
         },
       },

@@ -52,7 +52,7 @@ const renderVideos = props => map(video =>
       src={video.poster}
       alt={video.name}
     />
-  </div>
+  </div>,
 )
 
 export default VideoPicker;

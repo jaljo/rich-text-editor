@@ -64,6 +64,6 @@ const lifecycles = compose(
 
 // TextToolbox :: Props -> React.Component
 export default connect(
-   mapStateToProps,
-   mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(lifecycles)

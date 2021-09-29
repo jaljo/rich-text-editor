@@ -123,7 +123,7 @@ export default createReducer(INITIAL_STATE, {
     [editorName]: {
       ...state[editorName],
       isLinkCreatorOpened: true,
-    }
+    },
   }),
 
   [CLOSE_LINK_CREATOR]: (state, { editorName }) => ({
@@ -131,7 +131,7 @@ export default createReducer(INITIAL_STATE, {
     [editorName]: {
       ...state[editorName],
       isLinkCreatorOpened: false,
-    }
+    },
   }),
 
   [SAVE_RANGE]: (state, { editorName, range }) => ({
@@ -160,6 +160,6 @@ export default createReducer(INITIAL_STATE, {
       isTitle,
       isQuote,
       isLink,
-    }
+    },
   }),
 })

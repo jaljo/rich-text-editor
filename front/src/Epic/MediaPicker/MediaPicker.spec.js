@@ -24,7 +24,7 @@ describe('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
         g: open(),
         h: openInsertTweet(),
         i: open(),
-        j: pickVideo()
+        j: pickVideo(),
       });
 
       expectObservable(

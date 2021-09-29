@@ -85,7 +85,7 @@ const moveCarretAfterPastedTextEpic = (action$, state$, { window }) =>
       selection => window.getSelection().collapse(selection.anchorNode, 1),
       selection => window.getSelection().collapse(
         selection.anchorNode,
-        selection.anchorNode.textContent.search(text) + text.length
+        selection.anchorNode.textContent.search(text) + text.length,
       ),
     )(window.getSelection())),
     ignoreElements(),
@@ -124,8 +124,8 @@ const pasteTextInExistingText = textToBePasted => pipe(
       s.anchorNode.data.slice(0, s.anchorOffset),
       textToBePasted,
       s.anchorNode.data.slice(s.anchorOffset),
-    ])
-  ))
+    ]),
+  )),
 )
 
 export default combineEpics(

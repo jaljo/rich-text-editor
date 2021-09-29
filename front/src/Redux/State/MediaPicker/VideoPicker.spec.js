@@ -35,11 +35,11 @@ describe('Redux :: State :: MediaPicker :: VideoPicker', () => {
 
   it('reduces videosReceived', () => {
     expect(
-      reducer(INITIAL_STATE, videosReceived([1,2,3]))
+      reducer(INITIAL_STATE, videosReceived([1, 2, 3]))
     ).toEqual({
       ...INITIAL_STATE,
       isFetching: false,
-      videos: [1,2,3],
+      videos: [1, 2, 3],
     });
   });
 
