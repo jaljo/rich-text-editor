@@ -1,22 +1,22 @@
-import { TestScheduler } from "rxjs/testing"
-import { pickImageWithCredits } from "../../Redux/State/MediaPicker/ImagePicker"
-import { pickVideo } from "../../Redux/State/MediaPicker/VideoPicker"
-import { CLOSE, open } from "../../Redux/State/MediaPicker/MediaPicker"
-import { closeMediaPickerEpic } from "./MediaPicker"
+import { TestScheduler } from 'rxjs/testing'
+import { pickImageWithCredits } from '../../Redux/State/MediaPicker/ImagePicker'
+import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
+import { CLOSE, open } from '../../Redux/State/MediaPicker/MediaPicker'
+import { closeMediaPickerEpic } from './MediaPicker'
 import {
   openInsertTweet,
   openInsertYoutubeVideo,
-} from "../../Redux/State/TextEditor/ParagraphToolbox"
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
 
-describe("Epic :: ArticleEditor :: closeMediaPickerEpic", () => {
+describe('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
 
-  it("dispatches close", () => {
+  it('dispatches close', () => {
     const testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
     });
 
     testScheduler.run(({ hot, cold, expectObservable }) => {
-      const action$ = hot("ab-ef-gh-ij", {
+      const action$ = hot('ab-ef-gh-ij', {
         a: open(),
         b: pickImageWithCredits(),
         e: open(),
@@ -29,7 +29,7 @@ describe("Epic :: ArticleEditor :: closeMediaPickerEpic", () => {
 
       expectObservable(
         closeMediaPickerEpic(action$, null)
-      ).toBe("-a--a--a--a", {
+      ).toBe('-a--a--a--a', {
         a : { type: CLOSE },
       });
     });

@@ -1,9 +1,9 @@
-import { connect } from "react-redux"
-import { loadPlayer } from "../../../Redux/State/BrightcovePlayer"
-import { componentDidMount } from "react-functional-lifecycle"
-import { locales } from "../../../Const"
-import { compose, map } from "ramda"
-import React from "react"
+import { connect } from 'react-redux'
+import { loadPlayer } from '../../../Redux/State/BrightcovePlayer'
+import { componentDidMount } from 'react-functional-lifecycle'
+import { locales } from '../../../Const'
+import { compose, map } from 'ramda'
+import React from 'react'
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({

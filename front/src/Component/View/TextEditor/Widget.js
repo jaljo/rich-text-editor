@@ -1,9 +1,9 @@
-import React from "react"
-import uniqid from "uniqid"
-import { cond, T, always, pipe } from "ramda"
-import { indexedMap } from "../../../Util"
-import TwitterWidget from "../../Container/Tweet/Tweet"
-import BrightcoveVideo from "../../Container/BrightcovePlayer/BrightcoveVideo"
+import React from 'react'
+import uniqid from 'uniqid'
+import { cond, T, always, pipe } from 'ramda'
+import { indexedMap } from '../../../Util'
+import TwitterWidget from '../../Container/Tweet/Tweet'
+import BrightcoveVideo from '../../Container/BrightcovePlayer/BrightcoveVideo'
 
 // is :: String -> Props -> Boolean
 const is = type => ({ component }) => type === component.component
@@ -142,20 +142,20 @@ const Quote = ({ component, id }) =>
 
 // Widget :: Props -> React.Component
 const Widget = cond([
-  [is("Emphasis"), Emphasis],
-  [is("Heading"), Heading],
-  [is("Image"), Image],
-  [is("Link"), Link],
-  [is("Paragraph"), Paragraph],
-  [is("Text"), Text],
-  [is("Tweet"), Tweet],
-  [is("Italic"), Italic],
-  [is("Bold"), Bold],
-  [is("Underline"), Underline],
-  [is("Quote"), Quote],
-  [is("Strong"), Strong],
-  [is("YoutubeVideo"), YoutubeVideo],
-  [is("BrightcoveVideo"), BrightcoveVideoWidget],
+  [is('Emphasis'), Emphasis],
+  [is('Heading'), Heading],
+  [is('Image'), Image],
+  [is('Link'), Link],
+  [is('Paragraph'), Paragraph],
+  [is('Text'), Text],
+  [is('Tweet'), Tweet],
+  [is('Italic'), Italic],
+  [is('Bold'), Bold],
+  [is('Underline'), Underline],
+  [is('Quote'), Quote],
+  [is('Strong'), Strong],
+  [is('YoutubeVideo'), YoutubeVideo],
+  [is('BrightcoveVideo'), BrightcoveVideoWidget],
   [T, always(null)],
 ])
 

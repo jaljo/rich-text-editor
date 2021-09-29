@@ -7,14 +7,14 @@ import {
   clear,
   INITIAL_STATE,
   default as reducer,
-} from "./VideoPicker"
+} from './VideoPicker'
 
-describe("Redux :: State :: MediaPicker :: VideoPicker", () => {
-  it("reduces to initial state by default", () => {
+describe('Redux :: State :: MediaPicker :: VideoPicker', () => {
+  it('reduces to initial state by default', () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
 
-  it("reduces fetchVideos", () => {
+  it('reduces fetchVideos', () => {
     expect(
       reducer(INITIAL_STATE, fetchVideos())
     ).toEqual({
@@ -23,17 +23,17 @@ describe("Redux :: State :: MediaPicker :: VideoPicker", () => {
     });
   });
 
-  it("reduces searchVideos", () => {
+  it('reduces searchVideos', () => {
     expect(
-      reducer(INITIAL_STATE, searchVideos("Netanyahu"))
+      reducer(INITIAL_STATE, searchVideos('Netanyahu'))
     ).toEqual({
       ...INITIAL_STATE,
       page: 1,
-      searchString: "Netanyahu",
+      searchString: 'Netanyahu',
     });
   });
 
-  it("reduces videosReceived", () => {
+  it('reduces videosReceived', () => {
     expect(
       reducer(INITIAL_STATE, videosReceived([1,2,3]))
     ).toEqual({
@@ -43,13 +43,13 @@ describe("Redux :: State :: MediaPicker :: VideoPicker", () => {
     });
   });
 
-  it("reduces scrollLeft :: from page 1", () => {
+  it('reduces scrollLeft :: from page 1', () => {
     expect(
       reducer(INITIAL_STATE, scrollLeft())
     ).toEqual(INITIAL_STATE);
   });
 
-  it("reduces scrollLeft :: from page > 1", () => {
+  it('reduces scrollLeft :: from page > 1', () => {
     expect(
       reducer({ ...INITIAL_STATE, page: 13 }, scrollLeft())
     ).toEqual({
@@ -58,7 +58,7 @@ describe("Redux :: State :: MediaPicker :: VideoPicker", () => {
     });
   });
 
-  it("reduces scrollRight", () => {
+  it('reduces scrollRight', () => {
     expect(
       reducer(INITIAL_STATE, scrollRight())
     ).toEqual({
@@ -67,7 +67,7 @@ describe("Redux :: State :: MediaPicker :: VideoPicker", () => {
     });
   });
 
-  it("reduces clear", () => {
+  it('reduces clear', () => {
     expect(
       reducer(INITIAL_STATE, clear())
     ).toEqual(INITIAL_STATE);

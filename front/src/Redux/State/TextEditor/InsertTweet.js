@@ -1,5 +1,5 @@
-import { createReducer } from "../../../Util"
-import { omit } from "ramda"
+import { createReducer } from '../../../Util'
+import { omit } from 'ramda'
 
 // InsertTweet initial state
 export const INSTANCE_INITIAL_STATE = {
@@ -10,12 +10,12 @@ export const INSTANCE_INITIAL_STATE = {
 export const INITIAL_STATE = {}
 
 // InsertTweet action types
-export const INITIALIZE = "@knp/TextEditor/InsertTweet/INITIALIZE"
-export const INSERT_TWEET = "@knp/TextEditor/InsertTweet/INSERT_TWEET"
-export const EMBED_TWEET_FETCHED = "@knp/TextEditor/InsertTweet/EMBED_TWEET_FETCHED"
-export const TWEET_INSERTED = "@knp/TextEditor/InsertTweet/TWEET_INSERTED"
-export const ERROR = "@knp/TextEditor/InsertTweet/ERROR"
-export const CLEAR = "@knp/TextEditor/InsertTweet/CLEAR"
+export const INITIALIZE = '@knp/TextEditor/InsertTweet/INITIALIZE'
+export const INSERT_TWEET = '@knp/TextEditor/InsertTweet/INSERT_TWEET'
+export const EMBED_TWEET_FETCHED = '@knp/TextEditor/InsertTweet/EMBED_TWEET_FETCHED'
+export const TWEET_INSERTED = '@knp/TextEditor/InsertTweet/TWEET_INSERTED'
+export const ERROR = '@knp/TextEditor/InsertTweet/ERROR'
+export const CLEAR = '@knp/TextEditor/InsertTweet/CLEAR'
 
 // initialize :: String -> Action
 export const initialize = editorName => ({

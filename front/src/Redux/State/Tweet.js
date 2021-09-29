@@ -1,13 +1,13 @@
-import { createReducer } from "../../Util"
-import { always } from "ramda"
+import { createReducer } from '../../Util'
+import { always } from 'ramda'
 
 export const INITIAL_STATE = {
   renderedTweets: {}, // key: tweetId, value: originalHtmlMarkup
 }
 
-export const RENDER_TWEET = "@knp/Tweet/RENDER_TWEET"
-export const TWEET_RENDERED = "@knp/Tweet/TWEET_RENDERED"
-export const CLEAR = "@knp/Tweet/CLEAR"
+export const RENDER_TWEET = '@knp/Tweet/RENDER_TWEET'
+export const TWEET_RENDERED = '@knp/Tweet/TWEET_RENDERED'
+export const CLEAR = '@knp/Tweet/CLEAR'
 
 // renderTweet :: (String, String, String) -> Action
 export const renderTweet = (tweetId, uid, originalHtmlMarkup) => ({

@@ -1,5 +1,5 @@
-import { StateObservable } from "redux-observable"
-import { of, Subject } from "rxjs"
+import { StateObservable } from 'redux-observable'
+import { of, Subject } from 'rxjs'
 import {
   saveRangeEpic,
   createLinkEpic,
@@ -8,7 +8,7 @@ import {
   insertImageEpic,
   pickVideoEpic,
   insertVideoEpic,
-} from "./TextEditor"
+} from './TextEditor'
 import {
   insertImage,
   insertVideo,
@@ -16,7 +16,7 @@ import {
   INSERT_IMAGE,
   INSERT_VIDEO,
   VIDEO_INSERTED,
-} from "../../Redux/State/TextEditor/ParagraphToolbox"
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
 import {
   show as showTextToolbox,
   mutate,
@@ -24,9 +24,9 @@ import {
   REFRESH_BUTTONS_STATE,
   CLOSE_LINK_CREATOR,
   SAVE_RANGE,
-} from "../../Redux/State/TextEditor/TextToolbox"
-import { pickImageWithCredits } from "../../Redux/State/MediaPicker/ImagePicker"
-import { pickVideo } from "../../Redux/State/MediaPicker/VideoPicker"
+} from '../../Redux/State/TextEditor/TextToolbox'
+import { pickImageWithCredits } from '../../Redux/State/MediaPicker/ImagePicker'
+import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
 
 const containerMock = {
   parentNode: {
@@ -42,7 +42,7 @@ const selectionMock = {
   getRangeAt: () => rangeMock,
   removeAllRanges: () => null,
   addRange: () => null,
-  type: "Range",
+  type: 'Range',
 };
 const dependencies = {
   window: {
@@ -61,11 +61,11 @@ beforeEach(() => {
   document.execCommand = () => null;
 });
 
-describe("Epic :: TextEditor :: TextEditor :: saveRangeEpic", () => {
-  const openLinkCreator$ = of(openLinkCreator("editor-name"));
+describe('Epic :: TextEditor :: TextEditor :: saveRangeEpic', () => {
+  const openLinkCreator$ = of(openLinkCreator('editor-name'));
   const state$ = new StateObservable(new Subject(), {});
 
-  it("dispatches saveRange", done => {
+  it('dispatches saveRange', done => {
     saveRangeEpic(openLinkCreator$, state$, dependencies)
       .toPromise(Promise)
       .then(action => {
@@ -77,17 +77,17 @@ describe("Epic :: TextEditor :: TextEditor :: saveRangeEpic", () => {
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: createLinkEpic", () => {
+describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
   const state$ = new StateObservable(new Subject, {
     TextEditor: {
       TextToolbox: {
-        "editor-name": { range: rangeMock }
+        'editor-name': { range: rangeMock }
       },
     },
   });
 
-it("dispatches closeLinkCreator", done => {
-    const mutate$ = of(mutate("editor-name")("LINK", { href: ""}));
+it('dispatches closeLinkCreator', done => {
+    const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
 
     createLinkEpic(mutate$, state$, dependencies)
       .toPromise(Promise)
@@ -99,8 +99,8 @@ it("dispatches closeLinkCreator", done => {
       .catch(err => { console.error(err); done() });
   }, 1000);
 
-  it("reject others mutations", done => {
-    const rejectMutate$ = of(mutate("editorName")("BOLD"));
+  it('reject others mutations', done => {
+    const rejectMutate$ = of(mutate('editorName')('BOLD'));
 
     createLinkEpic(rejectMutate$, state$, dependencies)
       .toPromise(Promise)
@@ -113,10 +113,10 @@ it("dispatches closeLinkCreator", done => {
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic", () => {
-  it("dispatches refreshButtonsState", done => {
-    const showTextToolbox$ = of(showTextToolbox("editor-name", 10));
-    const mutate$ = of(mutate("editor-name")("LINK"));
+describe('Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic', () => {
+  it('dispatches refreshButtonsState', done => {
+    const showTextToolbox$ = of(showTextToolbox('editor-name', 10));
+    const mutate$ = of(mutate('editor-name')('LINK'));
 
     Promise.all([
       refreshTextToolboxStateEpic(showTextToolbox$, null, dependencies)
@@ -134,10 +134,10 @@ describe("Epic :: TextEditor :: TextEditor :: refreshTextToolboxStateEpic", () =
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: pickImageEpic", () => {
-  it("dispatches insertImage", done => {
+describe('Epic :: TextEditor :: TextEditor :: pickImageEpic', () => {
+  it('dispatches insertImage', done => {
     const pickImageWithCredits$ = of(
-      pickImageWithCredits(1, "TEXT_EDITOR", { editorName: "editor-name"})
+      pickImageWithCredits(1, 'TEXT_EDITOR', { editorName: 'editor-name'})
     );
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
@@ -158,14 +158,14 @@ describe("Epic :: TextEditor :: TextEditor :: pickImageEpic", () => {
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: insertImageEpic", () => {
-  it("dispatches imageInserted", done => {
-    const imageMock = { href: "http://imagelibmock.org/test.png", legend: "merkel"};
-    const insertImage$ = of(insertImage("editor-name", imageMock));
+describe('Epic :: TextEditor :: TextEditor :: insertImageEpic', () => {
+  it('dispatches imageInserted', done => {
+    const imageMock = { href: 'http://imagelibmock.org/test.png', legend: 'merkel'};
+    const insertImage$ = of(insertImage('editor-name', imageMock));
     const state$ = new StateObservable(new Subject, {
       TextEditor: {
         ParagraphToolbox: {
-          "editor-name": {
+          'editor-name': {
             targetNodeIndex: 2
           },
         },
@@ -183,10 +183,10 @@ describe("Epic :: TextEditor :: TextEditor :: insertImageEpic", () => {
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: pickVideoEpic", () => {
-  it("dispatches insertVideo", done => {
+describe('Epic :: TextEditor :: TextEditor :: pickVideoEpic', () => {
+  it('dispatches insertVideo', done => {
     const pickVideo$ = of(
-      pickVideo("slkdhlskdg", "TEXT_EDITOR", { editorName: "editor-name" })
+      pickVideo("slkdhlskdg", 'TEXT_EDITOR', { editorName: 'editor-name' })
     );
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
@@ -209,14 +209,14 @@ describe("Epic :: TextEditor :: TextEditor :: pickVideoEpic", () => {
   }, 1000);
 });
 
-describe("Epic :: TextEditor :: TextEditor :: insertVideoEpic", () => {
-  it("dispatches videoInserted", done => {
+describe('Epic :: TextEditor :: TextEditor :: insertVideoEpic', () => {
+  it('dispatches videoInserted', done => {
     const videoMock = { id: "9329875", name: "test" };
-    const insertVideo$ = of(insertVideo("editor-name", videoMock));
+    const insertVideo$ = of(insertVideo('editor-name', videoMock));
     const state$ = new StateObservable(new Subject(), {
       TextEditor: {
         ParagraphToolbox: {
-          "editor-name": {
+          'editor-name': {
             targetNodeIndex: 2
           },
         },

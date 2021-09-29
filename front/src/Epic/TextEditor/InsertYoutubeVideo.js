@@ -1,20 +1,20 @@
-import { ofType, combineEpics } from "redux-observable"
-import { logObservableError } from "../../Util"
-import { map, withLatestFrom, mergeMap, catchError } from "rxjs/operators"
-import { compose, prop, nth, equals, length, ifElse, path } from "ramda"
-import { insertNewNodeAtIndex } from "./TextEditor"
-import { from, of } from "rxjs"
+import { ofType, combineEpics } from 'redux-observable'
+import { logObservableError } from '../../Util'
+import { map, withLatestFrom, mergeMap, catchError } from 'rxjs/operators'
+import { compose, prop, nth, equals, length, ifElse, path } from 'ramda'
+import { insertNewNodeAtIndex } from './TextEditor'
+import { from, of } from 'rxjs'
 import {
   INSERT_YOUTUBE_VIDEO,
   YOUTUBE_VIDEO_INSERTED,
   youtubeVideoInserted,
   error,
-} from "../../Redux/State/TextEditor/InsertYoutubeVideo"
+} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
 import {
   closeInsertYoutubeVideo,
   OPEN_INSERT_TWEET,
-} from "../../Redux/State/TextEditor/ParagraphToolbox"
-import { OPEN as OPEN_MEDIAPICKER } from "../../Redux/State/MediaPicker/MediaPicker"
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
+import { OPEN as OPEN_MEDIAPICKER } from '../../Redux/State/MediaPicker/MediaPicker'
 
 // insertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
 export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(
@@ -43,9 +43,9 @@ export const closeInsertYoutubeVideoEpic = action$ => action$.pipe(
     OPEN_MEDIAPICKER,
   ),
   map(ifElse(
-    compose(equals(OPEN_MEDIAPICKER), prop("type")),
-    path(["extra", "editorName"]),
-    prop("editorName"),
+    compose(equals(OPEN_MEDIAPICKER), prop('type')),
+    path(['extra', 'editorName']),
+    prop('editorName'),
   )),
   map(closeInsertYoutubeVideo),
   logObservableError(),
@@ -63,17 +63,17 @@ export const validateYoutubeUrl = url => {
   return new Promise((resolve, reject) =>
     match && compose(equals(11), length, nth(2))(match)
       ? resolve(`https://www.youtube.com/embed/${nth(2, match)}`)
-      : reject("The provided URL is not a valid youtube video.")
+      : reject('The provided URL is not a valid youtube video.')
   );
 }
 
 // createYoutubeIframe :: String -> Node.IFRAME
 const createYoutubeIframe = url => {
-  const iframe = document.createElement("iframe");
-  iframe.classList.add("youtube-embed");
-  iframe.setAttribute("src", url);
-  iframe.setAttribute("allowfullscreen", true);
-  iframe.setAttribute("contentEditable", false);
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('youtube-embed');
+  iframe.setAttribute('src', url);
+  iframe.setAttribute('allowfullscreen', true);
+  iframe.setAttribute('contentEditable', false);
 
   return iframe;
 };
