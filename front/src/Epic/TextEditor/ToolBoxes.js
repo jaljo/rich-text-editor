@@ -77,7 +77,7 @@ export const isEmptyParagraph = pipe(
 // getNodeIndex :: (String, Node) -> Number
 const getNodeIndex = (editorName, node) =>
   getRootNodesAsArray(editorName)
-  .indexOf(node)
+    .indexOf(node)
 
 // notExcluded :: Node -> Boolean
 const notExcluded = allPass([
@@ -124,16 +124,16 @@ export const showParagraphToolboxEpic = (action$, state$, { window }) =>
 
 // showParagraphToolboxToReplaceElementEpic :: Epic -> Observable Action _
 const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
-    ofType(CLICK),
-    filter(compose(equals('IMG'), path(['node', 'tagName']))),
-    map(action => [
-      action.editorName,
-      action.node.parentElement.offsetTop,
-      getNodeIndex(action.editorName, action.node.parentElement),
-    ]),
-    map(apply(showParagraphToolbox)),
-    logObservableError(),
-  )
+  ofType(CLICK),
+  filter(compose(equals('IMG'), path(['node', 'tagName']))),
+  map(action => [
+    action.editorName,
+    action.node.parentElement.offsetTop,
+    getNodeIndex(action.editorName, action.node.parentElement),
+  ]),
+  map(apply(showParagraphToolbox)),
+  logObservableError(),
+)
 
 // hideAllParagraphToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
 export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>

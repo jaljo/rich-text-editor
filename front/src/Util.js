@@ -69,12 +69,12 @@ export const isEscapeKey = ifElse(
 // createReducer :: (State, Object) -> (State, Action) -> State
 export const createReducer =
   (initialState, handlers) =>
-  (state = initialState, action = {}) =>
-  propOr(
-    identity,
-    prop('type', action),
-    handlers
-  )(state, action)
+    (state = initialState, action = {}) =>
+      propOr(
+        identity,
+        prop('type', action),
+        handlers
+      )(state, action)
 
 // hide -> [Object] -> [Object]
 export const hideObjects = mapObjIndexed(

@@ -19,6 +19,7 @@
     "brace-style": "error",
     "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": ["error", { "before": false, "after": true }],
+    "indent": ["error", 2],
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "react/prop-types": "off"
   },

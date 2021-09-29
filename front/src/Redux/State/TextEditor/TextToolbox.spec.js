@@ -22,9 +22,9 @@ describe('Redux :: State :: TextEditor :: TextToolbox', () => {
   });
 
   it('reduces initialize (create anamed instance)', () => {
-      expect(
-        reducer(INITIAL_STATE, initialize('editor-name'))
-      ).toEqual(instanceExists);
+    expect(
+      reducer(INITIAL_STATE, initialize('editor-name'))
+    ).toEqual(instanceExists);
   });
 
   it('reduces clear (remove anamed instance)', () => {

@@ -45,7 +45,7 @@ export const clear = editorName => ({
   type: CLEAR,
   editorName,
 })
- // InsertYoutube :: (State, Action *) -> State
+// InsertYoutube :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
   [INITIALIZE]: (state, { editorName }) => ({
     ...state,

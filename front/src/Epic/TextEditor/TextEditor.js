@@ -188,13 +188,13 @@ const recoverSelection = window => range => {
 
 // closeLinkCreatorEpic :: Observable Action Error -> _
 const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
-    ofType(CLOSE_LINK_CREATOR),
-    withLatestFrom(state$),
-    map(([ action, state ]) => state.TextEditor.TextToolbox[action.editorName].range),
-    tap(recoverSelection(window)),
-    ignoreElements(),
-    logObservableError(),
-  )
+  ofType(CLOSE_LINK_CREATOR),
+  withLatestFrom(state$),
+  map(([ action, state ]) => state.TextEditor.TextToolbox[action.editorName].range),
+  tap(recoverSelection(window)),
+  ignoreElements(),
+  logObservableError(),
+)
 
 // mutationEpic :: Observable Action Error -> Observable Action _
 const mutationEpic = action$ =>
@@ -224,19 +224,19 @@ const mutationEpic = action$ =>
 
 // refreshTextToolboxStateEpic :: Observable Action Error -> Observable Action _
 export const refreshTextToolboxStateEpic = (action$, state$, { window }) => action$.pipe(
-    ofType(SHOW_TEXT_TOOLBOX, MUTATE),
-    map(action => [ action, window.getSelection().getRangeAt(0) ]),
-    map(([ action, range ]) => [ action.editorName, ({
-      isBold: document.queryCommandState('bold'),
-      isItalic: document.queryCommandState('italic'),
-      isUnderline: document.queryCommandState('underline'),
-      isTitle: isInParent('h2')(range),
-      isQuote: isInParent('blockquote')(range),
-      isLink: isInParent('a')(range),
-    })]),
-    map(apply(refreshButtonsState)),
-    logObservableError(),
-  )
+  ofType(SHOW_TEXT_TOOLBOX, MUTATE),
+  map(action => [ action, window.getSelection().getRangeAt(0) ]),
+  map(([ action, range ]) => [ action.editorName, ({
+    isBold: document.queryCommandState('bold'),
+    isItalic: document.queryCommandState('italic'),
+    isUnderline: document.queryCommandState('underline'),
+    isTitle: isInParent('h2')(range),
+    isQuote: isInParent('blockquote')(range),
+    isLink: isInParent('a')(range),
+  })]),
+  map(apply(refreshButtonsState)),
+  logObservableError(),
+)
 
 // isInParent :: String -> Range -> Boolean
 const isInParent = parentTagName => pipe(

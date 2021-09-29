@@ -29,7 +29,7 @@ beforeEach(() => {
   `;
 });
 
- describe('Epic :: TextEditor :: InsertYoutubeVideo', () => {
+describe('Epic :: TextEditor :: InsertYoutubeVideo', () => {
   it('validate a youtube url : success', async () => {
     const url = await validateYoutubeUrl('https://www.youtube.com/watch?v=jadxTFqyhRM');
 

@@ -83,7 +83,7 @@ describe('Epic :: TextEditor :: TextEditor :: createLinkEpic', () => {
     },
   });
 
-it('dispatches closeLinkCreator', async () => {
+  it('dispatches closeLinkCreator', async () => {
     const mutate$ = of(mutate('editor-name')('LINK', { href: ''}));
 
     const action = await createLinkEpic(mutate$, state$, dependencies)

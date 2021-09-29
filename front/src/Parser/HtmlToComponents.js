@@ -83,15 +83,15 @@ const createItalic = node => ({
 // isBold :: Node -> Boolean
 const isBold = node => node.tagName === 'B'
 const createBold = node => ({
-    component: 'Bold',
-    childComponents: createChildrenComponents(node.childNodes),
+  component: 'Bold',
+  childComponents: createChildrenComponents(node.childNodes),
 })
 
 // isQuote :: Node -> Boolean
 const isQuote = node => node.tagName === 'BLOCKQUOTE'
 const createQuote = node => ({
-    component: 'Quote',
-    childComponents: createChildrenComponents(node.childNodes),
+  component: 'Quote',
+  childComponents: createChildrenComponents(node.childNodes),
 })
 
 // isParagraph :: Node -> Boolean
