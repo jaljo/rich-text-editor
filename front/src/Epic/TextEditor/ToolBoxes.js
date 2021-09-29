@@ -64,7 +64,7 @@ const getParagraphTopPosition = pipe(
     path(['parentElement', 'offsetTop']),
     // nodeType === Node.ELEMENT_NODE
     prop('offsetTop'),
-  )
+  ),
 )
 
 // isEmptyParagraph :: Selection -> Boolean
@@ -72,7 +72,7 @@ export const isEmptyParagraph = pipe(
   prop('anchorNode'),
   both(
     compose(isNil, prop('data')),
-    compose(equals('P'), prop('tagName'))
+    compose(equals('P'), prop('tagName')),
   ),
 )
 
@@ -184,10 +184,10 @@ const closeInsertTweetFormEpic = action$ => action$.pipe(
   ).pipe(
     takeUntil(action$.pipe(ofType(
       CLOSE_INSERT_TWEET,
-      CLEAR_PARAGRAPH_TOOLBOX)
+      CLEAR_PARAGRAPH_TOOLBOX),
     )),
     map(() => closeInsertTweet(editorName)),
-  ))
+  )),
 )
 
 // closeInsertYoutubeFormEpic :: Observale Action Error -> Observable Action.CLOSE_INSERT_YOUTUBE_VIDEO
@@ -202,7 +202,7 @@ const closeInsertYoutubeFormEpic = action$ => action$.pipe(
       CLEAR_PARAGRAPH_TOOLBOX,
     ))),
     map(() => closeInsertYoutubeVideo(editorName)),
-  ))
+  )),
 )
 
 // closeLinkCreatorFormEpic :: Observable Action Error -> Observable Action.CLOSE_LINK_CREATOR
@@ -217,7 +217,7 @@ const closeLinkCreatorFormEpic = action$ => action$.pipe(
       CLEAR_TEXT_TOOLBOX,
     ))),
     map(() => closeLinkCreator(editorName)),
-  ))
+  )),
 )
 
 export default combineEpics(

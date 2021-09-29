@@ -42,9 +42,9 @@ export const logObservableErrorAndTriggerAction = action => catchError(
   (err, source) => pipe(
     tap(Logger.error),
     () => of(action(err)).pipe(
-      merge(source)
+      merge(source),
     ),
-  )(err)
+  )(err),
 )
 
 // half :: Int -> Float
@@ -73,17 +73,17 @@ export const createReducer =
       propOr(
         identity,
         prop('type', action),
-        handlers
+        handlers,
       )(state, action)
 
 // hide -> [Object] -> [Object]
 export const hideObjects = mapObjIndexed(
-  evolve({ visible: always(false) })
+  evolve({ visible: always(false) }),
 )
 
 // getEditor :: String -> Node
 export const getEditor = editorName => document.querySelector(
-  `.edited-text-root[data-editor-name="${editorName}"]`
+  `.edited-text-root[data-editor-name="${editorName}"]`,
 )
 
 export const indexedMap = addIndex(map)

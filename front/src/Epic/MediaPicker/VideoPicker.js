@@ -37,7 +37,7 @@ export const searchVideosEpic = action$ => merge(
     filter(compose(lte(3), length, prop('searchString'))),
     debounceTime(250),
   ),
-  action$.pipe(ofType(SCROLL_LEFT, SCROLL_RIGHT))
+  action$.pipe(ofType(SCROLL_LEFT, SCROLL_RIGHT)),
 ).pipe(
   map(fetchVideos),
 )

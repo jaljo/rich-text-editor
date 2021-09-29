@@ -8,7 +8,7 @@ import React from 'react'
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
   loadAllPlayers: map(
-    compose(dispatch, loadPlayer)
+    compose(dispatch, loadPlayer),
   ),
 })
 
@@ -20,7 +20,7 @@ const View = () => <span data-is="brightcove-players"/>
 
 // lifecycles :: null -> React.Component
 const lifecycles = compose(
-  componentDidMount(didMount)
+  componentDidMount(didMount),
 )(View)
 
 // BrightcovePlayer :: Props -> React.Component

@@ -142,7 +142,7 @@ const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
   // get lastly inserted element
   map(([ action, state ]) => nth(
     state.TextEditor.ParagraphToolbox[action.editorName].targetNodeIndex,
-    getRootNodesAsArray(action.editorName)
+    getRootNodesAsArray(action.editorName),
   )),
   // create and focus a new paragraph after that node
   tap(createAndFocusEmptyParagraph),
@@ -248,7 +248,7 @@ const isInParent = parentTagName => pipe(
     ([ startNode ]) => !isNil(startNode),
     ([ _, endNode ]) => !isNil(endNode),
     ([ startNode, endNode ]) => equals(startNode, endNode),
-  ])
+  ]),
 )
 
 // pickImageEpic :: (Observable Action Error, Observable State Error) -> Observable Action _

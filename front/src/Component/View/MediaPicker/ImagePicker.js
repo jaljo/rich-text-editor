@@ -53,7 +53,7 @@ const renderImages = (images, pickImage, domain, extra) => images.map(image =>
       src={image.href}
       alt={image.legend}
     />
-  </div>
+  </div>,
 )
 
 export default ImagePicker;

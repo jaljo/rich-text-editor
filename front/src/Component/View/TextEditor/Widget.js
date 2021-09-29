@@ -1,6 +1,6 @@
 import React from 'react'
 import uniqid from 'uniqid'
-import { cond, T, always, pipe } from 'ramda'
+import { cond, T, always } from 'ramda'
 import { indexedMap } from '../../../Util'
 import TwitterWidget from '../../Container/Tweet/Tweet'
 import BrightcoveVideo from '../../Container/BrightcovePlayer/BrightcoveVideo'
@@ -9,14 +9,12 @@ import BrightcoveVideo from '../../Container/BrightcovePlayer/BrightcoveVideo'
 const is = type => ({ component }) => type === component.component
 
 // renderChildren :: (String, [Children]) -> React.Component
-const renderChildren = (parentId, children) => pipe(
-  indexedMap((child, index) =>
-    <Widget
-      component={child}
-      id={`${parentId}-${index}`}
-      key={`${parentId}-${index}`}
-    />
-  )
+const renderChildren = (parentId, children) => indexedMap((child, index) =>
+  <Widget
+    component={child}
+    id={`${parentId}-${index}`}
+    key={`${parentId}-${index}`}
+  />,
 )(children)
 
 // Text :: Props -> React.Component
