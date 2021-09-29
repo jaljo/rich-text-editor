@@ -4,18 +4,18 @@ import {
   pickImage,
   scrollLeft,
   scrollRight,
-} from '../../../Redux/State/MediaPicker/ImagePicker'
+} from "../../../Redux/State/MediaPicker/ImagePicker";
 import {
   componentDidMount,
   componentWillUnmount,
-} from 'react-functional-lifecycle'
+} from "react-functional-lifecycle";
 import {
   compose,
-} from 'ramda'
+} from "ramda";
 import {
   connect,
-} from 'react-redux'
-import ImagePicker from '../../View/MediaPicker/ImagePicker'
+} from "react-redux";
+import ImagePicker from "../../View/MediaPicker/ImagePicker";
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
   images: state.MediaPicker.ImagePicker.images,
   isFetching: state.MediaPicker.ImagePicker.isFetching,
   page: state.MediaPicker.ImagePicker.page,
-})
+});
 
 // mapDispatchToProps :: (Action * -> State) -> Props
 const mapDispatchToProps = dispatch => ({
@@ -34,22 +34,22 @@ const mapDispatchToProps = dispatch => ({
   pickImage: compose (dispatch, pickImage),
   scrollLeft: compose(dispatch, scrollLeft),
   scrollRight: compose(dispatch, scrollRight),
-})
+});
 
 // onMount :: Props -> Action
-const onMount = ({ initialLoad }) => initialLoad()
+const onMount = ({ initialLoad }) => initialLoad();
 
 // willUnmount :: Props -> Action
-const willUnmount = ({ clear }) => clear()
+const willUnmount = ({ clear }) => clear();
 
 // imagePickerLifecycles :: React.Component -> React.Component
 const imagePickerLifecycles = compose(
   componentDidMount(onMount),
   componentWillUnmount(willUnmount),
-)(ImagePicker)
+)(ImagePicker);
 
 // MediaPicker :: Props -> React.Component
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(imagePickerLifecycles)
+)(imagePickerLifecycles);

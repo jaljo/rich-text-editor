@@ -1,9 +1,9 @@
-import './ImagePicker.scss'
+import "./ImagePicker.scss";
 import {
   containsTenItems,
-} from '../../../Util'
-import NoResult from '../List/NoResult'
-import React from 'react'
+} from "../../../Util";
+import NoResult from "../List/NoResult";
+import React from "react";
 
 // ImagePicker :: Props -> React.Component
 const ImagePicker = ({
@@ -20,14 +20,14 @@ const ImagePicker = ({
     {/* scroll left */}
     <p
       onClick={ scrollLeft }
-      className={ `btn-knp left is-pulled-left is-hidden-mobile ${ page > 1 ? 'show' : '' }` }
+      className={ `btn-knp left is-pulled-left is-hidden-mobile ${ page > 1 ? "show" : "" }` }
     >
       <span className="icomoon-font">l</span>
     </p>
     {/* scroll right */}
     <p
       onClick={ scrollRight }
-      className={ `btn-knp right is-pulled-right is-hidden-mobile ${ containsTenItems(images) ? 'show' : '' }` }
+      className={ `btn-knp right is-pulled-right is-hidden-mobile ${ containsTenItems(images) ? "show" : "" }` }
     >
       <span className="icomoon-font">r</span>
     </p>
@@ -45,7 +45,7 @@ const ImagePicker = ({
         </div>
       </NoResult>
     </div>
-  </div>
+  </div>;
 
 // renderImages :: ([Image], Function, String, Object) -> React.Component
 const renderImages = (images, pickImage, domain, extra) => images.map(image =>
@@ -56,6 +56,6 @@ const renderImages = (images, pickImage, domain, extra) => images.map(image =>
       alt={ image.legend }
     />
   </div>,
-)
+);
 
 export default ImagePicker;

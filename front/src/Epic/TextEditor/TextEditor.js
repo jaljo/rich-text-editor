@@ -9,7 +9,7 @@ import {
   nth,
   pipe,
   prop,
-} from 'ramda'
+} from "ramda";
 import {
   CLOSE_LINK_CREATOR,
   closeLinkCreator,
@@ -18,27 +18,27 @@ import {
   refreshButtonsState,
   saveRange,
   SHOW as SHOW_TEXT_TOOLBOX,
-} from '../../Redux/State/TextEditor/TextToolbox'
+} from "../../Redux/State/TextEditor/TextToolbox";
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   Image as createImage,
   UnconnectedVideo,
-} from '../../Component/View/TextEditor/Widget'
+} from "../../Component/View/TextEditor/Widget";
 import {
   filter,
   ignoreElements,
   map,
   tap,
   withLatestFrom,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   findById,
   getEditor,
   logObservableError,
-} from '../../Util'
+} from "../../Util";
 import {
   imageInserted,
   INSERT_IMAGE,
@@ -47,33 +47,33 @@ import {
   insertVideo,
   VIDEO_INSERTED,
   videoInserted,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../Redux/State/TextEditor/ParagraphToolbox";
 import {
   brightcovePlayerIds,
-} from '../../Const'
+} from "../../Const";
 import {
   KEY_DOWN,
-} from '../../Redux/State/TextEditor/TextEditor'
+} from "../../Redux/State/TextEditor/TextEditor";
 import {
   PICK_IMAGE_WITH_CREDITS,
-} from '../../Redux/State/MediaPicker/ImagePicker'
+} from "../../Redux/State/MediaPicker/ImagePicker";
 import {
   PICK_VIDEO,
-} from '../../Redux/State/MediaPicker/VideoPicker'
+} from "../../Redux/State/MediaPicker/VideoPicker";
 import {
   renderToString,
-} from 'react-dom/server'
+} from "react-dom/server";
 import {
   TWEET_INSERTED,
-} from '../../Redux/State/TextEditor/InsertTweet'
+} from "../../Redux/State/TextEditor/InsertTweet";
 import {
   YOUTUBE_VIDEO_INSERTED,
-} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+} from "../../Redux/State/TextEditor/InsertYoutubeVideo";
 
 // getRootNodesAsArray :: String -> [Node]
 export const getRootNodesAsArray = editorName => Array.from(
   getEditor(editorName).childNodes,
-)
+);
 
 // insertNewNodeAtIndex :: (Element, Number, String) -> _
 export const insertNewNodeAtIndex = (newNode, targetIndex, editorName) =>
@@ -84,7 +84,7 @@ export const insertNewNodeAtIndex = (newNode, targetIndex, editorName) =>
 
 // insertAfter :: (Node, Node) -> _
 const insertAfter = (el, referenceNode) =>
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling)
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 
 // createImageNode :: (Image, Number, String) -> _
 const createImageNode = (image, targetIndex, editorName) => {
@@ -98,13 +98,13 @@ const createImageNode = (image, targetIndex, editorName) => {
 
   // render image component using react, then convert it to a valid DOM Node
   const newNode = (new DOMParser())
-    .parseFromString(renderToString(createImage(props)), 'text/html')
-    .querySelector('figure')
+    .parseFromString(renderToString(createImage(props)), "text/html")
+    .querySelector("figure")
   ;
 
   // insert that Node at the specified position
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
-}
+};
 
 // createVideoNode :: (Video, Number, String, String) -> _
 const createVideoNode = (video, targetIndex, editorName, playerId) => {
@@ -115,41 +115,41 @@ const createVideoNode = (video, targetIndex, editorName, playerId) => {
   ));
 
   const newNode = (new DOMParser())
-    .parseFromString(brightCoveVideo, 'text/html')
-    .querySelector('.video-wrapper')
+    .parseFromString(brightCoveVideo, "text/html")
+    .querySelector(".video-wrapper")
   ;
 
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
-}
+};
 
 // createAndFocusEmptyParagraph :: Node -> _
 const createAndFocusEmptyParagraph = previousNode => {
-  const newParagraph = document.createElement('p');
+  const newParagraph = document.createElement("p");
   insertAfter(newParagraph, previousNode);
 
   const range = document.createRange();
   range.setStart(newParagraph, 0);
   recoverSelection(window)(range);
-}
+};
 
 // insertNewParagraphEpic :: Observable Action Error -> _
 const insertNewParagraphEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(KEY_DOWN),
-    filter(compose(equals(13), prop('keyCode'))),
+    filter(compose(equals(13), prop("keyCode"))),
     tap(() => {
       const editedNode = window.getSelection().anchorNode;
 
       if (
         // edition of an empty paragraph
-        editedNode.tagName === 'P'
+        editedNode.tagName === "P"
         // edition of a paragraph containing a TextNode
-        || editedNode.parentNode.tagName === 'P'
+        || editedNode.parentNode.tagName === "P"
       ) {
-        document.execCommand('insertParagraph');
-        document.execCommand('formatBlock', false, 'p');
+        document.execCommand("insertParagraph");
+        document.execCommand("formatBlock", false, "p");
       } else {
-        const previousNode = editedNode.parentNode.tagName === 'FIGCAPTION'
+        const previousNode = editedNode.parentNode.tagName === "FIGCAPTION"
           // edition of the FIGCAPTION of an inserted image
           ? editedNode.parentNode.parentElement
           // edition of a BLOCKQUOTE or H2 element
@@ -160,7 +160,7 @@ const insertNewParagraphEpic = (action$, state$, { window }) =>
       }
     }),
     ignoreElements(),
-  )
+  );
 
 // insertParagraphAfterInsertedMediaEpic :: (Observable Action Error, Observable State, Error) -> _
 const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
@@ -175,7 +175,7 @@ const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
   tap(createAndFocusEmptyParagraph),
   ignoreElements(),
   logObservableError(),
-)
+);
 
 // saveRangeEpic :: Observable Action Error -> Observable Action _
 export const saveRangeEpic = (action$, state$, { window }) =>
@@ -187,13 +187,13 @@ export const saveRangeEpic = (action$, state$, { window }) =>
     ]),
     map(apply(saveRange)),
     logObservableError(),
-  )
+  );
 
 // createLinkEpic :: (Observable Action Error, Observale State Error) -> Observable Action _
 export const createLinkEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(MUTATE),
-    filter(compose(equals('LINK'), prop('mutation'))),
+    filter(compose(equals("LINK"), prop("mutation"))),
     withLatestFrom(state$),
     // we first need to recover selction here for the mutation to apply
     map(([ action, state ]) => [
@@ -202,16 +202,16 @@ export const createLinkEpic = (action$, state$, { window }) =>
     ]),
     tap(([ _, range ]) => recoverSelection(window)(range)),
     // then we can apply the mutation
-    tap(([ action ]) => document.execCommand('createLink', false, action.options.href)),
+    tap(([ action ]) => document.execCommand("createLink", false, action.options.href)),
     map(([ action ]) => closeLinkCreator(action.editorName)),
     logObservableError(),
-  )
+  );
 
 // recoverSelection :: Window -> Range -> _
 const recoverSelection = window => range => {
   window.getSelection().removeAllRanges();
   window.getSelection().addRange(range);
-}
+};
 
 // closeLinkCreatorEpic :: Observable Action Error -> _
 const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
@@ -221,20 +221,20 @@ const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
   tap(recoverSelection(window)),
   ignoreElements(),
   logObservableError(),
-)
+);
 
 // mutationEpic :: Observable Action Error -> Observable Action _
 const mutationEpic = action$ =>
   action$.pipe(
     ofType(MUTATE),
-    map(prop('mutation')),
-    filter(complement(equals('LINK'))),
+    map(prop("mutation")),
+    filter(complement(equals("LINK"))),
     tap(cond([
-      [equals('TITLE'), () => document.execCommand('formatBlock', false, 'h2')],
-      [equals('PARAGRAPH'), () => document.execCommand('formatBlock', false, 'p')],
-      [equals('ITALIC'), () => document.execCommand('italic')],
-      [equals('BOLD'), () => document.execCommand('bold')],
-      [equals('UNDERLINE'), () => document.execCommand('underline')],
+      [equals("TITLE"), () => document.execCommand("formatBlock", false, "h2")],
+      [equals("PARAGRAPH"), () => document.execCommand("formatBlock", false, "p")],
+      [equals("ITALIC"), () => document.execCommand("italic")],
+      [equals("BOLD"), () => document.execCommand("bold")],
+      [equals("UNDERLINE"), () => document.execCommand("underline")],
       /**
        * @wontfix in Firefox, <blockquote> is the exception — it will wrap any
        * containing block element
@@ -245,27 +245,27 @@ const mutationEpic = action$ =>
        * we decided it will introduce too much legacy in the persisted data, as
        * we should then have to parse both BC BLOCKQUOTE and PRE tags as quotes.
        */
-      [equals('QUOTE'), () => document.execCommand('formatblock', false, 'blockquote')],
-      [equals('UNLINK'), () => document.execCommand('unlink')],
+      [equals("QUOTE"), () => document.execCommand("formatblock", false, "blockquote")],
+      [equals("UNLINK"), () => document.execCommand("unlink")],
     ])),
     ignoreElements(),
-  )
+  );
 
 // refreshTextToolboxStateEpic :: Observable Action Error -> Observable Action _
 export const refreshTextToolboxStateEpic = (action$, state$, { window }) => action$.pipe(
   ofType(SHOW_TEXT_TOOLBOX, MUTATE),
   map(action => [ action, window.getSelection().getRangeAt(0) ]),
   map(([ action, range ]) => [ action.editorName, ({
-    isBold: document.queryCommandState('bold'),
-    isItalic: document.queryCommandState('italic'),
-    isLink: isInParent('a')(range),
-    isQuote: isInParent('blockquote')(range),
-    isTitle: isInParent('h2')(range),
-    isUnderline: document.queryCommandState('underline'),
+    isBold: document.queryCommandState("bold"),
+    isItalic: document.queryCommandState("italic"),
+    isLink: isInParent("a")(range),
+    isQuote: isInParent("blockquote")(range),
+    isTitle: isInParent("h2")(range),
+    isUnderline: document.queryCommandState("underline"),
   })]),
   map(apply(refreshButtonsState)),
   logObservableError(),
-)
+);
 
 // isInParent :: String -> Range -> Boolean
 const isInParent = parentTagName => pipe(
@@ -278,13 +278,13 @@ const isInParent = parentTagName => pipe(
     ([ _, endNode ]) => !isNil(endNode),
     ([ startNode, endNode ]) => equals(startNode, endNode),
   ]),
-)
+);
 
 // pickImageEpic :: (Observable Action Error, Observable State Error) -> Observable Action _
 export const pickImageEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_IMAGE_WITH_CREDITS),
-    filter(compose(equals('TEXT_EDITOR'), prop('domain'))),
+    filter(compose(equals("TEXT_EDITOR"), prop("domain"))),
     withLatestFrom(state$),
     map(([ action, state ]) => ({
       action,
@@ -297,7 +297,7 @@ export const pickImageEpic = (action$, state$) =>
     })),
     map(({ action, image }) => insertImage(action.extra.editorName, image)),
     logObservableError(),
-  )
+  );
 
 // insertImageEpic :: (Observable Action Error, Observable State Error) _
 export const insertImageEpic = (action$, state$) =>
@@ -311,13 +311,13 @@ export const insertImageEpic = (action$, state$) =>
     )),
     map(([ action ]) => imageInserted(action.editorName)),
     logObservableError(),
-  )
+  );
 
 // pickVideoEpic :: (Observable Action Error, Observable State Error) -> Observable Action.INSERT_VIDEO
 export const pickVideoEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_VIDEO),
-    filter(compose(equals('TEXT_EDITOR'), prop('domain'))),
+    filter(compose(equals("TEXT_EDITOR"), prop("domain"))),
     withLatestFrom(state$),
     map(([ action, state ]) => ({
       action,
@@ -325,7 +325,7 @@ export const pickVideoEpic = (action$, state$) =>
     })),
     map(({ action, video }) => insertVideo(action.extra.editorName, video)),
     logObservableError(),
-  )
+  );
 
 // insertVideoEpic :: (Observable Action Error, Observable State Error) -> Observable Action.VIDEO_INSERTED
 export const insertVideoEpic = (action$, state$) =>
@@ -336,11 +336,11 @@ export const insertVideoEpic = (action$, state$) =>
       action.video,
       state.TextEditor.ParagraphToolbox[action.editorName].targetNodeIndex,
       action.editorName,
-      brightcovePlayerIds['en'],
+      brightcovePlayerIds["en"],
     )),
     map(([ action ]) => videoInserted(action.editorName, action.video.id)),
     logObservableError(),
-  )
+  );
 
 export default combineEpics(
   closeLinkCreatorEpic,
@@ -354,4 +354,4 @@ export default combineEpics(
   pickVideoEpic,
   refreshTextToolboxStateEpic,
   saveRangeEpic,
-)
+);

@@ -5,31 +5,31 @@ import {
   scrollRight,
   searchVideos,
   VIDEOS_RECEIVED,
-} from '../../Redux/State/MediaPicker/VideoPicker'
+} from "../../Redux/State/MediaPicker/VideoPicker";
 import {
   fetchVideosEpic,
   searchVideosEpic,
-} from './VideoPicker'
+} from "./VideoPicker";
 import {
   of,
   Subject,
-} from 'rxjs'
+} from "rxjs";
 import {
   StateObservable,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   TestScheduler,
-} from 'rxjs/testing'
+} from "rxjs/testing";
 
-describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
-  it('dispatches videosReceived', async () => {
+describe("Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic", () => {
+  it("dispatches videosReceived", async () => {
     const fetchVideos$ = of(fetchVideos());
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         VideoPicker: {
           limit: 10,
           page: 12,
-          searchString: 'Netanyahu',
+          searchString: "Netanyahu",
         },
       },
     });
@@ -45,22 +45,22 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: MediaPicker :: VideoPicker :: searchVideosEpic', () => {
-  it('dispatches fetchVideos', () => {
+describe("Epic :: MediaPicker :: VideoPicker :: searchVideosEpic", () => {
+  it("dispatches fetchVideos", () => {
     const testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
     });
 
     testScheduler.run(({ hot, expectObservable }) => {
-      const action$ = hot('a-b----c', {
+      const action$ = hot("a-b----c", {
         a: scrollLeft(),
         b: scrollRight(),
-        c: searchVideos('Netanyahu'),
+        c: searchVideos("Netanyahu"),
       });
 
       expectObservable(
         searchVideosEpic(action$)
-      ).toBe('a-a---- 250ms a', {
+      ).toBe("a-a---- 250ms a", {
         a: { type: FETCH_VIDEOS },
       });
     });

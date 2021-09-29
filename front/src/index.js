@@ -1,24 +1,24 @@
-import './Style/Main.scss'
+import "./Style/Main.scss";
 import {
   applyMiddleware,
   createStore,
-} from 'redux'
+} from "redux";
 import {
   debug,
   default as mainReducer,
-} from './Redux/State'
-import App from './Component/App'
+} from "./Redux/State";
+import App from "./Component/App";
 import {
   createEpicMiddleware,
-} from 'redux-observable'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import rootEpic from './Epic'
+} from "redux-observable";
+import React from "react";
+import ReactDOM from "react-dom";
+import rootEpic from "./Epic";
 
 const defaultOptions = {
   headers: {},
-  method: 'GET',
-}
+  method: "GET",
+};
 
 const fetchApi = (url, options = defaultOptions) => fetch(url, options)
   .then(response => response.json())
@@ -42,4 +42,4 @@ const store = createStore(reducer, reducer(), middleware);
 
 epicMiddleware.run(rootEpic);
 
-ReactDOM.render(<App store={ store }/>, document.getElementById('root'));
+ReactDOM.render(<App store={ store }/>, document.getElementById("root"));

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 // InsertYoutubeVideo :: Props -> React.Component
 const InsertYoutubeVideo = ({
@@ -14,6 +14,6 @@ const InsertYoutubeVideo = ({
         autoFocus={ true }
       />
     </div>
-  </form>
+  </form>;
 
 export default InsertYoutubeVideo;

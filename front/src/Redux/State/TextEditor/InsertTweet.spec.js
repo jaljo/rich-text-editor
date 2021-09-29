@@ -7,34 +7,34 @@ import {
   insertTweet,
   INSTANCE_INITIAL_STATE,
   default as reducer,
-} from './InsertTweet'
+} from "./InsertTweet";
 
 const instanceExists = {
-  'editor-name': INSTANCE_INITIAL_STATE,
-}
+  "editor-name": INSTANCE_INITIAL_STATE,
+};
 
-describe('Redux :: State :: TextEditor :: InsertTweet', () => {
-  it('reduces to initial state by default', () => {
+describe("Redux :: State :: TextEditor :: InsertTweet", () => {
+  it("reduces to initial state by default", () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
 
-  it('reduces initialize (create a named instance)', () => {
+  it("reduces initialize (create a named instance)", () => {
     expect(
-      reducer(INITIAL_STATE, initialize('editor-name'))
+      reducer(INITIAL_STATE, initialize("editor-name"))
     ).toEqual(instanceExists);
   });
 
-  it('reduces clear (remove a named instance)', () => {
+  it("reduces clear (remove a named instance)", () => {
     expect(
-      reducer(instanceExists, clear('editor-name'))
+      reducer(instanceExists, clear("editor-name"))
     ).toEqual(INITIAL_STATE);
   });
 
-  it('reduces insertTweet', () => {
+  it("reduces insertTweet", () => {
     expect(
-      reducer(instanceExists, insertTweet('editor-name', 'url'))
+      reducer(instanceExists, insertTweet("editor-name", "url"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         error: false,
         fetching: true,
@@ -42,22 +42,22 @@ describe('Redux :: State :: TextEditor :: InsertTweet', () => {
     });
   });
 
-  it('reduces tweetInserted', () => {
+  it("reduces tweetInserted", () => {
     expect(
-      reducer(instanceExists, embedTweetFetched('editor-name'))
+      reducer(instanceExists, embedTweetFetched("editor-name"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         fetching: false,
       },
     });
   });
 
-  it('reduces error', () => {
+  it("reduces error", () => {
     expect(
-      reducer(instanceExists, error('editor-name'))
+      reducer(instanceExists, error("editor-name"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         error: true,
         fetching: false,

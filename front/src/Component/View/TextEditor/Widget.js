@@ -2,17 +2,17 @@ import {
   always,
   cond,
   T,
-} from 'ramda'
-import BrightcoveVideo from '../../Container/BrightcovePlayer/BrightcoveVideo'
+} from "ramda";
+import BrightcoveVideo from "../../Container/BrightcovePlayer/BrightcoveVideo";
 import {
   indexedMap,
-} from '../../../Util'
-import React from 'react'
-import TwitterWidget from '../../Container/Tweet/Tweet'
-import uniqid from 'uniqid'
+} from "../../../Util";
+import React from "react";
+import TwitterWidget from "../../Container/Tweet/Tweet";
+import uniqid from "uniqid";
 
 // is :: String -> Props -> Boolean
-const is = type => ({ component }) => type === component.component
+const is = type => ({ component }) => type === component.component;
 
 // renderChildren :: (String, [Children]) -> React.Component
 const renderChildren = (parentId, children) => indexedMap((child, index) =>
@@ -21,10 +21,10 @@ const renderChildren = (parentId, children) => indexedMap((child, index) =>
     id={ `${ parentId }-${ index }` }
     key={ `${ parentId }-${ index }` }
   />,
-)(children)
+)(children);
 
 // Text :: Props -> React.Component
-const Text = ({ component }) => component.text
+const Text = ({ component }) => component.text;
 
 // Tweet :: Props -> React.Component
 const Tweet = ({ component }) =>
@@ -37,7 +37,7 @@ const Tweet = ({ component }) =>
       uid={ uniqid(component.tweetId) }
       originalHtmlMarkup={ component.originalHtmlMarkup }
     />
-  </blockquote>
+  </blockquote>;
 
 /**
  * UnconnectedTwet :: (String, String) -> React.Component
@@ -53,7 +53,7 @@ export const UnconnectedTweet = (tweetId, uid) =>
     data-tweet-id={ tweetId }
   >
     <div id={ `tweet-${ uid }` }></div>
-  </blockquote>
+  </blockquote>;
 
 /**
  * UnconnectedVideo :: (Video, String) -> React.Component
@@ -75,7 +75,7 @@ export const UnconnectedVideo = (video, playerId, accountId) =>
       data-application-id={ true }
       controls={ true }
     ></video>
-  </div>
+  </div>;
 
 // Paragraph :: Props -> React.Component
 const Paragraph = ({
@@ -84,13 +84,13 @@ const Paragraph = ({
 }) =>
   <p>
     { renderChildren(id, component.childComponents) }
-  </p>
+  </p>;
 
 // Link :: Props -> React.Component
 const Link = ({ component, id }) =>
   <a href={ component.href } title={ component.title } target={ component.target } className="link">
     { renderChildren(id, component.childComponents) }
-  </a>
+  </a>;
 
 // Image :: Props -> React.Component
 export const Image = ({ component }) =>
@@ -100,14 +100,14 @@ export const Image = ({ component }) =>
       { component.alt }
     </p>
     <figcaption>{ component.title }</figcaption>
-  </figure>
+  </figure>;
 
 // BrightcoveVideoWidget :: Props -> React.Component
 const BrightcoveVideoWidget = ({ component }) =>
   <BrightcoveVideo
     videoId={ component.videoId }
     editable={ false }
-  />
+  />;
 
 // YoutubeVideo :: Props -> React.Component
 const YoutubeVideo = ({ component }) =>
@@ -117,56 +117,56 @@ const YoutubeVideo = ({ component }) =>
     src={ component.src }
     allowFullScreen={ true }
     title={ uniqid() }
-  ></iframe>
+  ></iframe>;
 
 // Heading :: Props -> React.Component
 const Heading = ({ component, id }) => React.createElement(
   `h${ component.size }`,
   [],
   renderChildren(id, component.childComponents),
-)
+);
 
 // Emphasis :: Props -> React.Component
 const Emphasis = ({ component, id }) =>
-  <em>{ renderChildren(id, component.childComponents) }</em>
+  <em>{ renderChildren(id, component.childComponents) }</em>;
 
 // Strong :: Props -> React.Component
 const Strong = ({ component, id }) =>
-  <strong>{ renderChildren(id, component.childComponents) }</strong>
+  <strong>{ renderChildren(id, component.childComponents) }</strong>;
 
 // Italic :: Props -> React.Component
 const Italic = ({ component, id }) =>
-  <i>{ renderChildren(id, component.childComponents) }</i>
+  <i>{ renderChildren(id, component.childComponents) }</i>;
 
 // Bold :: Props -> React.Component
 const Bold = ({ component, id }) =>
-  <b>{ renderChildren(id, component.childComponents) }</b>
+  <b>{ renderChildren(id, component.childComponents) }</b>;
 
 // Underline :: Props -> React.Component
 const Underline = ({ component, id }) =>
-  <u>{ renderChildren(id, component.childComponents) }</u>
+  <u>{ renderChildren(id, component.childComponents) }</u>;
 
 // Quote :: Props -> React.Component
 const Quote = ({ component, id }) =>
-  <blockquote>{ renderChildren(id, component.childComponents) }</blockquote>
+  <blockquote>{ renderChildren(id, component.childComponents) }</blockquote>;
 
 // Widget :: Props -> React.Component
 const Widget = cond([
-  [is('Emphasis'), Emphasis],
-  [is('Heading'), Heading],
-  [is('Image'), Image],
-  [is('Link'), Link],
-  [is('Paragraph'), Paragraph],
-  [is('Text'), Text],
-  [is('Tweet'), Tweet],
-  [is('Italic'), Italic],
-  [is('Bold'), Bold],
-  [is('Underline'), Underline],
-  [is('Quote'), Quote],
-  [is('Strong'), Strong],
-  [is('YoutubeVideo'), YoutubeVideo],
-  [is('BrightcoveVideo'), BrightcoveVideoWidget],
+  [is("Emphasis"), Emphasis],
+  [is("Heading"), Heading],
+  [is("Image"), Image],
+  [is("Link"), Link],
+  [is("Paragraph"), Paragraph],
+  [is("Text"), Text],
+  [is("Tweet"), Tweet],
+  [is("Italic"), Italic],
+  [is("Bold"), Bold],
+  [is("Underline"), Underline],
+  [is("Quote"), Quote],
+  [is("Strong"), Strong],
+  [is("YoutubeVideo"), YoutubeVideo],
+  [is("BrightcoveVideo"), BrightcoveVideoWidget],
   [T, always(null)],
-])
+]);
 
-export default Widget
+export default Widget;

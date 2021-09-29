@@ -1,38 +1,38 @@
 import {
   createReducer,
-} from '../../../Util'
+} from "../../../Util";
 import {
   omit,
-} from 'ramda'
+} from "ramda";
 
 // InsertTweet initial state
 export const INSTANCE_INITIAL_STATE = {
   error: false,
   fetching: false,
-}
+};
 
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {};
 
 // InsertTweet action types
-export const INITIALIZE = '@knp/TextEditor/InsertTweet/INITIALIZE'
-export const INSERT_TWEET = '@knp/TextEditor/InsertTweet/INSERT_TWEET'
-export const EMBED_TWEET_FETCHED = '@knp/TextEditor/InsertTweet/EMBED_TWEET_FETCHED'
-export const TWEET_INSERTED = '@knp/TextEditor/InsertTweet/TWEET_INSERTED'
-export const ERROR = '@knp/TextEditor/InsertTweet/ERROR'
-export const CLEAR = '@knp/TextEditor/InsertTweet/CLEAR'
+export const INITIALIZE = "@knp/TextEditor/InsertTweet/INITIALIZE";
+export const INSERT_TWEET = "@knp/TextEditor/InsertTweet/INSERT_TWEET";
+export const EMBED_TWEET_FETCHED = "@knp/TextEditor/InsertTweet/EMBED_TWEET_FETCHED";
+export const TWEET_INSERTED = "@knp/TextEditor/InsertTweet/TWEET_INSERTED";
+export const ERROR = "@knp/TextEditor/InsertTweet/ERROR";
+export const CLEAR = "@knp/TextEditor/InsertTweet/CLEAR";
 
 // initialize :: String -> Action
 export const initialize = editorName => ({
   editorName,
   type: INITIALIZE,
-})
+});
 
 // insertTweet :: (String, String) -> Action
 export const insertTweet = (editorName, url) => ({
   editorName,
   type: INSERT_TWEET,
   url,
-})
+});
 
 // embedTweetFetched :: (String, String, String) -> Action.EMBED_TWEET_FETCHED
 export const embedTweetFetched = (editorName, html, url) => ({
@@ -40,7 +40,7 @@ export const embedTweetFetched = (editorName, html, url) => ({
   html,
   type: EMBED_TWEET_FETCHED,
   url,
-})
+});
 
 // tweetInserted :: (String, String, String, String) -> Action
 export const tweetInserted = (editorName, tweetId, uid, originalHtmlMarkup) => ({
@@ -49,19 +49,19 @@ export const tweetInserted = (editorName, tweetId, uid, originalHtmlMarkup) => (
   tweetId,
   type: TWEET_INSERTED,
   uid,
-})
+});
 
 // error :: String -> Action
 export const error = editorName => ({
   editorName,
   type: ERROR,
-})
+});
 
 // clear :: String -> Action
 export const clear = editorName => ({
   editorName,
   type: CLEAR,
-})
+});
 
 // InsertTweet :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
@@ -97,4 +97,4 @@ export default createReducer(INITIAL_STATE, {
       fetching: true,
     },
   }),
-})
+});

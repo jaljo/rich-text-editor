@@ -7,56 +7,56 @@ import {
   INSTANCE_INITIAL_STATE,
   default as reducer,
   youtubeVideoInserted,
-} from './InsertYoutubeVideo'
+} from "./InsertYoutubeVideo";
 
 const instanceExists = {
-  'editor-name': INSTANCE_INITIAL_STATE,
-}
+  "editor-name": INSTANCE_INITIAL_STATE,
+};
 
-describe('Redux :: State :: TextEditor :: insertYoutubeVideo', () => {
-  it('reduces to initial state by default', () => {
+describe("Redux :: State :: TextEditor :: insertYoutubeVideo", () => {
+  it("reduces to initial state by default", () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
 
-  it('reduces initialize (create a named instance)', () => {
+  it("reduces initialize (create a named instance)", () => {
     expect(
-      reducer(INITIAL_STATE, initialize('editor-name'))
+      reducer(INITIAL_STATE, initialize("editor-name"))
     ).toEqual(instanceExists);
   });
 
-  it('reduces clear (remove a named instance)', () => {
+  it("reduces clear (remove a named instance)", () => {
     expect(
-      reducer(instanceExists, clear('editor-name'))
+      reducer(instanceExists, clear("editor-name"))
     ).toEqual(INITIAL_STATE);
   });
 
-  it('reduces insertYoutubeVideo', () => {
+  it("reduces insertYoutubeVideo", () => {
     expect(
-      reducer(instanceExists, insertYoutubeVideo('editor-name', 'url'))
+      reducer(instanceExists, insertYoutubeVideo("editor-name", "url"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         error: false,
       },
     });
   });
 
-  it('reduces youtubeVideoInserted', () => {
+  it("reduces youtubeVideoInserted", () => {
     expect(
-      reducer(instanceExists, youtubeVideoInserted('editor-name'))
+      reducer(instanceExists, youtubeVideoInserted("editor-name"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         error: false,
       },
     });
   });
 
-  it('reduces error', () => {
+  it("reduces error", () => {
     expect(
-      reducer(instanceExists, error('editor-name'))
+      reducer(instanceExists, error("editor-name"))
     ).toEqual({
-      'editor-name': {
+      "editor-name": {
         ...INSTANCE_INITIAL_STATE,
         error: true,
       },
