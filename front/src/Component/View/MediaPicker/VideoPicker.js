@@ -1,7 +1,7 @@
-import React from "react"
-import { map, isNil, isEmpty, compose, nth } from "ramda"
-import { splitMedias, containsTenItems } from "../../../Util"
-import "./VideoPicker.scss"
+import React from 'react'
+import { map, isNil, isEmpty, compose, nth } from 'ramda'
+import { splitMedias, containsTenItems } from '../../../Util'
+import './VideoPicker.scss'
 
 // VideoPicker :: Props -> React.Component
 const VideoPicker = ({
@@ -15,12 +15,12 @@ const VideoPicker = ({
     {/* scroll left */}
     <p
       onClick={scrollLeft}
-      className={`btn-knp left is-pulled-left icomoon-font ${page > 1 ? "show" : ""}`}
+      className={`btn-knp left is-pulled-left icomoon-font ${page > 1 ? 'show' : ''}`}
     >l</p>
     {/* scroll right */}
     <p
       onClick={scrollRight}
-      className={`btn-knp right is-pulled-right icomoon-font ${containsTenItems(videos) ? "show" : ""}`}
+      className={`btn-knp right is-pulled-right icomoon-font ${containsTenItems(videos) ? 'show' : ''}`}
     >r</p>
 
     {/* search result container */}

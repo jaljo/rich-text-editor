@@ -1,8 +1,8 @@
-import uniqid from "uniqid"
-import { combineEpics, ofType } from "redux-observable"
-import { map, mergeMap, withLatestFrom, catchError } from "rxjs/operators"
-import { apply, ifElse, compose, prop, path, equals, pipe, tap } from "ramda"
-import { renderToString } from "react-dom/server"
+import uniqid from 'uniqid'
+import { combineEpics, ofType } from 'redux-observable'
+import { map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators'
+import { apply, ifElse, compose, prop, path, equals, pipe, tap } from 'ramda'
+import { renderToString } from 'react-dom/server'
 import {
   INSERT_TWEET,
   TWEET_INSERTED,
@@ -10,18 +10,18 @@ import {
   tweetInserted,
   embedTweetFetched,
   error,
-} from "../../Redux/State/TextEditor/InsertTweet"
+} from '../../Redux/State/TextEditor/InsertTweet'
 import {
   closeInsertTweet,
   OPEN_INSERT_YOUTUBE_VIDEO,
-} from "../../Redux/State/TextEditor/ParagraphToolbox"
-import { OPEN as OPEN_MEDIAPICKER } from "../../Redux/State/MediaPicker/MediaPicker"
-import { renderTweet } from "../../Redux/State/Tweet"
-import { logObservableError } from "../../Util"
-import { getTweetIdFromUrl } from "../../Parser/HtmlToComponents"
-import { UnconnectedTweet } from "../../Component/View/TextEditor/Widget"
-import { insertNewNodeAtIndex } from "./TextEditor"
-import { of, from } from "rxjs"
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
+import { OPEN as OPEN_MEDIAPICKER } from '../../Redux/State/MediaPicker/MediaPicker'
+import { renderTweet } from '../../Redux/State/Tweet'
+import { logObservableError } from '../../Util'
+import { getTweetIdFromUrl } from '../../Parser/HtmlToComponents'
+import { UnconnectedTweet } from '../../Component/View/TextEditor/Widget'
+import { insertNewNodeAtIndex } from './TextEditor'
+import { of, from } from 'rxjs'
 
 /**
  * Inserts an embed of tweet in the edited DOM. The embed code to insert is
@@ -71,9 +71,9 @@ const insertTweetNode = ({ editorName, url, html }, textEditor) => new Promise(r
   const uid = uniqid(tweetId);
 
   const newNode = pipe(
-    tap(e => e.innerHTML = renderToString(UnconnectedTweet(tweetId, uid), "text/html")),
-    prop("firstChild"),
-  )(document.createElement("div"));
+    tap(e => e.innerHTML = renderToString(UnconnectedTweet(tweetId, uid), 'text/html')),
+    prop('firstChild'),
+  )(document.createElement('div'));
 
   insertNewNodeAtIndex(
     newNode,
@@ -85,7 +85,7 @@ const insertTweetNode = ({ editorName, url, html }, textEditor) => new Promise(r
     tap(e => e.innerHTML = html),
     // only grab the `blockquote` tag, not the `script` tag
     e => e.firstChild.outerHTML,
-  )(document.createElement("div"));
+  )(document.createElement('div'));
 
   resolve([ editorName, tweetId, uid, originalHtmlMarkup ]);
 })
@@ -98,9 +98,9 @@ const closeInsertTweetEpic = action$ => action$.pipe(
     OPEN_MEDIAPICKER,
   ),
   map(ifElse(
-    compose(equals(OPEN_MEDIAPICKER), prop("type")),
-    path(["extra", "editorName"]),
-    prop("editorName"),
+    compose(equals(OPEN_MEDIAPICKER), prop('type')),
+    path(['extra', 'editorName']),
+    prop('editorName'),
   )),
   map(closeInsertTweet),
 )

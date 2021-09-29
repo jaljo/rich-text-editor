@@ -1,9 +1,9 @@
-import "./App.scss"
-import { Provider } from "react-redux"
-import React from "react"
-import BrightcovePlayer from "./Container/BrightcovePlayer/BrightcovePlayer"
-import TextEditor from "./Container/TextEditor/TextEditor"
-import MediaPicker from "./Container/MediaPicker/MediaPicker"
+import './App.scss'
+import { Provider } from 'react-redux'
+import React from 'react'
+import BrightcovePlayer from './Container/BrightcovePlayer/BrightcovePlayer'
+import TextEditor from './Container/TextEditor/TextEditor'
+import MediaPicker from './Container/MediaPicker/MediaPicker'
 
 // App :: Props -> React.Component
 const App = ({

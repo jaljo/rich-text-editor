@@ -1,5 +1,5 @@
-import { always, omit, compose } from "ramda"
-import { createReducer, hideObjects } from "../../../Util"
+import { always, omit, compose } from 'ramda'
+import { createReducer, hideObjects } from '../../../Util'
 
 // text toolbox initial state
 export const INSTANCE_INITIAL_STATE = {
@@ -18,15 +18,15 @@ export const INSTANCE_INITIAL_STATE = {
 export const INITIAL_STATE = {}
 
 // text toolbox action types
-export const INITIALIZE = "@knp/TextEditor/TextToolbox/INITIALIZE"
-export const CLEAR = "@knp/TextEditor/TextToolbox/CLEAR"
-export const SHOW = "@knp/TextEditor/TextToolbox/SHOW"
-export const HIDE_ALL = "@knp/TextEditor/TextToolbox/HIDE_ALL"
-export const OPEN_LINK_CREATOR = "@knp/TextEditor/TextToolbox/OPEN_LINK_CREATOR"
-export const CLOSE_LINK_CREATOR = "@knp/TextEditor/TextToolbox/CLOSE_LINK_CREATOR"
-export const MUTATE = "@knp/TextEditor/TextToolbox/MUTATE"
-export const SAVE_RANGE = "@knp/TextEditor/TextToolbox/SAVE_RANGE"
-export const REFRESH_BUTTONS_STATE = "@knp/TextEditor/TextToolbox/REFRESH_BUTTONS_STATE"
+export const INITIALIZE = '@knp/TextEditor/TextToolbox/INITIALIZE'
+export const CLEAR = '@knp/TextEditor/TextToolbox/CLEAR'
+export const SHOW = '@knp/TextEditor/TextToolbox/SHOW'
+export const HIDE_ALL = '@knp/TextEditor/TextToolbox/HIDE_ALL'
+export const OPEN_LINK_CREATOR = '@knp/TextEditor/TextToolbox/OPEN_LINK_CREATOR'
+export const CLOSE_LINK_CREATOR = '@knp/TextEditor/TextToolbox/CLOSE_LINK_CREATOR'
+export const MUTATE = '@knp/TextEditor/TextToolbox/MUTATE'
+export const SAVE_RANGE = '@knp/TextEditor/TextToolbox/SAVE_RANGE'
+export const REFRESH_BUTTONS_STATE = '@knp/TextEditor/TextToolbox/REFRESH_BUTTONS_STATE'
 
 // initialize :: String -> Action.INITIALIZE
 export const initialize = editorName => ({

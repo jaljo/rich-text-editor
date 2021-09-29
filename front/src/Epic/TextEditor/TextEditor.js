@@ -1,13 +1,13 @@
-import { renderToString } from "react-dom/server"
-import { map, filter, withLatestFrom, ignoreElements, tap } from "rxjs/operators"
-import { combineEpics, ofType } from "redux-observable"
-import { findById, logObservableError, getEditor } from "../../Util"
-import { brightcovePlayerIds } from "../../Const"
+import { renderToString } from 'react-dom/server'
+import { map, filter, withLatestFrom, ignoreElements, tap } from 'rxjs/operators'
+import { combineEpics, ofType } from 'redux-observable'
+import { findById, logObservableError, getEditor } from '../../Util'
+import { brightcovePlayerIds } from '../../Const'
 import {
   Image as createImage,
   UnconnectedVideo,
-} from "../../Component/View/TextEditor/Widget"
-import { KEY_DOWN } from "../../Redux/State/TextEditor/TextEditor"
+} from '../../Component/View/TextEditor/Widget'
+import { KEY_DOWN } from '../../Redux/State/TextEditor/TextEditor'
 import {
   allPass,
   apply,
@@ -19,7 +19,7 @@ import {
   nth,
   pipe,
   prop,
-} from "ramda"
+} from 'ramda'
 import {
   closeLinkCreator,
   saveRange,
@@ -28,7 +28,7 @@ import {
   CLOSE_LINK_CREATOR,
   MUTATE,
   SHOW as SHOW_TEXT_TOOLBOX,
-} from "../../Redux/State/TextEditor/TextToolbox"
+} from '../../Redux/State/TextEditor/TextToolbox'
 import {
   imageInserted,
   insertImage,
@@ -37,11 +37,11 @@ import {
   INSERT_IMAGE,
   INSERT_VIDEO,
   VIDEO_INSERTED,
-} from "../../Redux/State/TextEditor/ParagraphToolbox"
-import { TWEET_INSERTED } from "../../Redux/State/TextEditor/InsertTweet"
-import { YOUTUBE_VIDEO_INSERTED } from "../../Redux/State/TextEditor/InsertYoutubeVideo"
-import { PICK_IMAGE_WITH_CREDITS } from "../../Redux/State/MediaPicker/ImagePicker"
-import { PICK_VIDEO } from "../../Redux/State/MediaPicker/VideoPicker"
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
+import { TWEET_INSERTED } from '../../Redux/State/TextEditor/InsertTweet'
+import { YOUTUBE_VIDEO_INSERTED } from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+import { PICK_IMAGE_WITH_CREDITS } from '../../Redux/State/MediaPicker/ImagePicker'
+import { PICK_VIDEO } from '../../Redux/State/MediaPicker/VideoPicker'
 
 // getRootNodesAsArray :: String -> [Node]
 export const getRootNodesAsArray = editorName => Array.from(
@@ -71,8 +71,8 @@ const createImageNode = (image, targetIndex, editorName) => {
 
   // render image component using react, then convert it to a valid DOM Node
   const newNode = (new DOMParser())
-    .parseFromString(renderToString(createImage(props)), "text/html")
-    .querySelector("figure")
+    .parseFromString(renderToString(createImage(props)), 'text/html')
+    .querySelector('figure')
   ;
 
   // insert that Node at the specified position
@@ -88,8 +88,8 @@ const createVideoNode = (video, targetIndex, editorName, playerId) => {
   ));
 
   const newNode = (new DOMParser())
-    .parseFromString(brightCoveVideo, "text/html")
-    .querySelector(".video-wrapper")
+    .parseFromString(brightCoveVideo, 'text/html')
+    .querySelector('.video-wrapper')
   ;
 
   insertNewNodeAtIndex(newNode, targetIndex, editorName);
@@ -97,7 +97,7 @@ const createVideoNode = (video, targetIndex, editorName, playerId) => {
 
 // createAndFocusEmptyParagraph :: Node -> _
 const createAndFocusEmptyParagraph = previousNode => {
-  const newParagraph = document.createElement("p");
+  const newParagraph = document.createElement('p');
   insertAfter(newParagraph, previousNode);
 
   const range = document.createRange();
@@ -109,20 +109,20 @@ const createAndFocusEmptyParagraph = previousNode => {
 const insertNewParagraphEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(KEY_DOWN),
-    filter(compose(equals(13), prop("keyCode"))),
+    filter(compose(equals(13), prop('keyCode'))),
     tap(() => {
       const editedNode = window.getSelection().anchorNode;
 
       if(
         // edition of an empty paragraph
-        editedNode.tagName === "P"
+        editedNode.tagName === 'P'
         // edition of a paragraph containing a TextNode
-        || editedNode.parentNode.tagName === "P"
+        || editedNode.parentNode.tagName === 'P'
       ) {
-        document.execCommand("insertParagraph");
-        document.execCommand("formatBlock", false, "p");
+        document.execCommand('insertParagraph');
+        document.execCommand('formatBlock', false, 'p');
       } else {
-        const previousNode = editedNode.parentNode.tagName === "FIGCAPTION"
+        const previousNode = editedNode.parentNode.tagName === 'FIGCAPTION'
           // edition of the FIGCAPTION of an inserted image
           ? editedNode.parentNode.parentElement
           // edition of a BLOCKQUOTE or H2 element
@@ -166,7 +166,7 @@ export const saveRangeEpic = (action$, state$, { window }) =>
 export const createLinkEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(MUTATE),
-    filter(compose(equals("LINK"), prop("mutation"))),
+    filter(compose(equals('LINK'), prop('mutation'))),
     withLatestFrom(state$),
     // we first need to recover selction here for the mutation to apply
     map(([ action, state ]) => [
@@ -175,7 +175,7 @@ export const createLinkEpic = (action$, state$, { window }) =>
     ]),
     tap(([ action, range ]) => recoverSelection(window)(range)),
     // then we can apply the mutation
-    tap(([ action, range ]) => document.execCommand("createLink", false, action.options.href)),
+    tap(([ action, range ]) => document.execCommand('createLink', false, action.options.href)),
     map(([ action, range ]) => closeLinkCreator(action.editorName)),
     logObservableError(),
   )
@@ -200,14 +200,14 @@ const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
 const mutationEpic = action$ =>
   action$.pipe(
     ofType(MUTATE),
-    map(prop("mutation")),
-    filter(complement(equals("LINK"))),
+    map(prop('mutation')),
+    filter(complement(equals('LINK'))),
     tap(cond([
-      [equals("TITLE"), () => document.execCommand("formatBlock", false, "h2")],
-      [equals("PARAGRAPH"), () => document.execCommand("formatBlock", false, "p")],
-      [equals("ITALIC"), () => document.execCommand("italic")],
-      [equals("BOLD"), () => document.execCommand("bold")],
-      [equals("UNDERLINE"), () => document.execCommand("underline")],
+      [equals('TITLE'), () => document.execCommand('formatBlock', false, 'h2')],
+      [equals('PARAGRAPH'), () => document.execCommand('formatBlock', false, 'p')],
+      [equals('ITALIC'), () => document.execCommand('italic')],
+      [equals('BOLD'), () => document.execCommand('bold')],
+      [equals('UNDERLINE'), () => document.execCommand('underline')],
       // @WONTFIX
       //
       // In Firefox, <blockquote> is the exception — it will wrap any containing block element
@@ -216,8 +216,8 @@ const mutationEpic = action$ =>
       // Although this can be easily fixed using another block tag (i.e. PRE), we
       // decided it will introduce too much legacy in the persisted data, as we
       // should then have to parse both BC BLOCKQUOTE and PRE tags as quotes.
-      [equals("QUOTE"), () => document.execCommand("formatblock", false, "blockquote")],
-      [equals("UNLINK"), () => document.execCommand("unlink")],
+      [equals('QUOTE'), () => document.execCommand('formatblock', false, 'blockquote')],
+      [equals('UNLINK'), () => document.execCommand('unlink')],
     ])),
     ignoreElements(),
   )
@@ -227,12 +227,12 @@ export const refreshTextToolboxStateEpic = (action$, state$, { window }) => acti
     ofType(SHOW_TEXT_TOOLBOX, MUTATE),
     map(action => [ action, window.getSelection().getRangeAt(0) ]),
     map(([ action, range ]) => [ action.editorName, ({
-      isBold: document.queryCommandState("bold"),
-      isItalic: document.queryCommandState("italic"),
-      isUnderline: document.queryCommandState("underline"),
-      isTitle: isInParent("h2")(range),
-      isQuote: isInParent("blockquote")(range),
-      isLink: isInParent("a")(range),
+      isBold: document.queryCommandState('bold'),
+      isItalic: document.queryCommandState('italic'),
+      isUnderline: document.queryCommandState('underline'),
+      isTitle: isInParent('h2')(range),
+      isQuote: isInParent('blockquote')(range),
+      isLink: isInParent('a')(range),
     })]),
     map(apply(refreshButtonsState)),
     logObservableError(),
@@ -255,7 +255,7 @@ const isInParent = parentTagName => pipe(
 export const pickImageEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_IMAGE_WITH_CREDITS),
-    filter(compose(equals("TEXT_EDITOR"), prop("domain"))),
+    filter(compose(equals('TEXT_EDITOR'), prop('domain'))),
     withLatestFrom(state$),
     map(([ action, state ]) => ({
       action,
@@ -288,7 +288,7 @@ export const insertImageEpic = (action$, state$) =>
 export const pickVideoEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_VIDEO),
-    filter(compose(equals("TEXT_EDITOR"), prop("domain"))),
+    filter(compose(equals('TEXT_EDITOR'), prop('domain'))),
     withLatestFrom(state$),
     map(([ action, state ]) => ({
       action,
@@ -307,7 +307,7 @@ export const insertVideoEpic = (action$, state$) =>
       action.video,
       state.TextEditor.ParagraphToolbox[action.editorName].targetNodeIndex,
       action.editorName,
-      brightcovePlayerIds["en"],
+      brightcovePlayerIds['en'],
     )),
     map(([ action ]) => videoInserted(action.editorName, action.video.id)),
     logObservableError(),

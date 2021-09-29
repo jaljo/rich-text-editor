@@ -1,6 +1,6 @@
-import React from "react"
-import "./TextToolbox.scss"
-import { or } from "ramda"
+import React from 'react'
+import './TextToolbox.scss'
+import { or } from 'ramda'
 
 // TextToolbox :: Props -> React.Component
 const TextToolbox = ({
@@ -19,46 +19,46 @@ const TextToolbox = ({
   isLink,
 }) =>
   <aside
-    className={`text-toolbox ${isVisible ? "visible" : ""}`}
-    style={{top: top - 60 + "px"}}
+    className={`text-toolbox ${isVisible ? 'visible' : ''}`}
+    style={{top: top - 60 + 'px'}}
   >
     {!isLinkCreatorOpened &&
       <ul>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isTitle ? "active" : ""} ${isQuote ? "disabled" : ""}`}
-            onClick={() => mutate(isTitle ? "PARAGRAPH" : "TITLE")}
+            className={`ttbx-mutation icomoon-font ${isTitle ? 'active' : ''} ${isQuote ? 'disabled' : ''}`}
+            onClick={() => mutate(isTitle ? 'PARAGRAPH' : 'TITLE')}
             disabled={isQuote}
           >T</button>
         </li>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isItalic ? "active" : ""} ${or(isTitle, isQuote) ? "disabled" : ""}`}
-            onClick={() => mutate("ITALIC")}
+            className={`ttbx-mutation icomoon-font ${isItalic ? 'active' : ''} ${or(isTitle, isQuote) ? 'disabled' : ''}`}
+            onClick={() => mutate('ITALIC')}
             disabled={or(isTitle, isQuote)}
           >5</button></li>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isBold ? "active" : ""} ${isTitle ? "disabled" : ""}`}
-            onClick={() => mutate("BOLD")}
+            className={`ttbx-mutation icomoon-font ${isBold ? 'active' : ''} ${isTitle ? 'disabled' : ''}`}
+            onClick={() => mutate('BOLD')}
             disabled={isTitle}
           >4</button></li>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isUnderline ? "active" : ""} ${isTitle ? "disabled" : ""}`}
-            onClick={() => mutate("UNDERLINE")}
+            className={`ttbx-mutation icomoon-font ${isUnderline ? 'active' : ''} ${isTitle ? 'disabled' : ''}`}
+            onClick={() => mutate('UNDERLINE')}
             disabled={isTitle}
           >u</button></li>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isLink ? "active" : ""} ${isTitle ? "disabled" : ""}`}
-            onClick={() => handleLinkButton(isLink ? "UNLINK" : "LINK")}
+            className={`ttbx-mutation icomoon-font ${isLink ? 'active' : ''} ${isTitle ? 'disabled' : ''}`}
+            onClick={() => handleLinkButton(isLink ? 'UNLINK' : 'LINK')}
             disabled={isTitle}
           >L</button></li>
         <li>
           <button
-            className={`ttbx-mutation icomoon-font ${isQuote ? "active" : ""} ${isTitle ? "disabled" : ""}`}
-            onClick={() => mutate(isQuote ? "PARAGRAPH" : "QUOTE")}
+            className={`ttbx-mutation icomoon-font ${isQuote ? 'active' : ''} ${isTitle ? 'disabled' : ''}`}
+            onClick={() => mutate(isQuote ? 'PARAGRAPH' : 'QUOTE')}
             disabled={isTitle}
           >_</button></li>
       </ul>
