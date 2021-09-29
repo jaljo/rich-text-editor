@@ -113,7 +113,7 @@ const insertNewParagraphEpic = (action$, state$, { window }) =>
     tap(() => {
       const editedNode = window.getSelection().anchorNode;
 
-      if(
+      if (
         // edition of an empty paragraph
         editedNode.tagName === 'P'
         // edition of a paragraph containing a TextNode
