@@ -1,10 +1,10 @@
-import { RENDER_TWEET, clear, tweetRendered } from './../Redux/State/Tweet'
-import { ofType } from 'redux-observable'
-import { filter, mergeMap, map } from 'rxjs/operators'
-import { combineEpics } from 'redux-observable'
-import { prop } from 'ramda'
-import { logObservableError } from '../Util'
-import { CLEAR } from './../Redux/State/TextEditor/TextEditor'
+import { RENDER_TWEET, clear, tweetRendered } from "./../Redux/State/Tweet"
+import { ofType } from "redux-observable"
+import { filter, mergeMap, map } from "rxjs/operators"
+import { combineEpics } from "redux-observable"
+import { prop } from "ramda"
+import { logObservableError } from "../Util"
+import { CLEAR } from "./../Redux/State/TextEditor/TextEditor"
 
 // renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
 export const renderTweetEpic = (action$, state$, { window }) =>
@@ -15,7 +15,7 @@ export const renderTweetEpic = (action$, state$, { window }) =>
       ...action,
       element: document.getElementById(`tweet-${action.uid}`),
     })),
-    filter(prop('element')),
+    filter(prop("element")),
     mergeMap(({ tweetId, originalHtmlMarkup, element }) => Promise.all([
       tweetId,
       originalHtmlMarkup,

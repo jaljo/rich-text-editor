@@ -1,9 +1,9 @@
-import BrightcoveVideo from '../../View/BrightcovePlayer/BrightcoveVideo'
-import { connect } from 'react-redux'
-import { brightcovePlayerIds } from '../../../Const'
-import { componentDidMount, componentDidUpdate, componentWillUnmount } from 'react-functional-lifecycle'
-import { compose } from 'ramda'
-import { renderVideo, removeVideo } from '../../../Redux/State/BrightcovePlayer'
+import BrightcoveVideo from "../../View/BrightcovePlayer/BrightcoveVideo"
+import { connect } from "react-redux"
+import { brightcovePlayerIds } from "../../../Const"
+import { componentDidMount, componentDidUpdate, componentWillUnmount } from "react-functional-lifecycle"
+import { compose } from "ramda"
+import { renderVideo, removeVideo } from "../../../Redux/State/BrightcovePlayer"
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({

@@ -1,7 +1,7 @@
-import TextToolbox from '../../Container/TextEditor/TextToolbox'
-import ParagraphToolbox from '../../Container/TextEditor/ParagraphToolbox'
-import React from 'react'
-import './TextEditor.scss'
+import TextToolbox from "../../Container/TextEditor/TextToolbox"
+import ParagraphToolbox from "../../Container/TextEditor/ParagraphToolbox"
+import React from "react"
+import "./TextEditor.scss"
 
 // TextEditor :: Props -> React.Component
 const TextEditor = ({

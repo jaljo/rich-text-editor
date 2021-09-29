@@ -1,8 +1,8 @@
-import { T, always, cond, equals } from 'ramda'
-import { createReducer } from '../../../Util'
-import { combineReducers } from 'redux'
-import ImagePicker from './ImagePicker'
-import VideoPicker from './VideoPicker'
+import { T, always, cond, equals } from "ramda"
+import { createReducer } from "../../../Util"
+import { combineReducers } from "redux"
+import ImagePicker from "./ImagePicker"
+import VideoPicker from "./VideoPicker"
 
 // media picker initial state
 export const INITIAL_STATE = {
@@ -14,11 +14,11 @@ export const INITIAL_STATE = {
 }
 
 // media picker action types
-export const OPEN = '@knp/MediaPicker/OPEN'
-export const CLOSE = '@knp/MediaPicker/CLOSE'
-export const OPEN_IMAGE_PICKER = '@knp/MediaPicker/OPEN_IMAGE_PICKER'
-export const OPEN_VIDEO_PICKER = '@knp/MediaPicker/OPEN_VIDEO_PICKER'
-export const CLEAR = '@knp/MediaPicker/CLEAR'
+export const OPEN = "@knp/MediaPicker/OPEN"
+export const CLOSE = "@knp/MediaPicker/CLOSE"
+export const OPEN_IMAGE_PICKER = "@knp/MediaPicker/OPEN_IMAGE_PICKER"
+export const OPEN_VIDEO_PICKER = "@knp/MediaPicker/OPEN_VIDEO_PICKER"
+export const CLEAR = "@knp/MediaPicker/CLEAR"
 
 // open :: (String, Object, String) -> Action
 export const open = (domain, extra, defaultOpenedComponent) => ({
@@ -51,7 +51,7 @@ export const Display = createReducer(INITIAL_STATE, {
     domain,
     extra,
     ...cond([
-      [equals('videoPicker'), always({ videoPickerOpened: true })],
+      [equals("videoPicker"), always({ videoPickerOpened: true })],
       [T, always({ imagePickerOpened: true })],
     ])(defaultOpenedComponent)
   }),

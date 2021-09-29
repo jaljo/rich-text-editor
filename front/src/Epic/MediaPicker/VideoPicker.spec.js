@@ -1,10 +1,10 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
-import { TestScheduler } from 'rxjs/testing'
+import { StateObservable } from "redux-observable"
+import { of, Subject } from "rxjs"
+import { TestScheduler } from "rxjs/testing"
 import {
   fetchVideosEpic,
   searchVideosEpic,
-} from './VideoPicker'
+} from "./VideoPicker"
 import {
   fetchVideos,
   scrollLeft,
@@ -12,15 +12,15 @@ import {
   searchVideos,
   VIDEOS_RECEIVED,
   FETCH_VIDEOS,
-} from '../../Redux/State/MediaPicker/VideoPicker'
+} from "../../Redux/State/MediaPicker/VideoPicker"
 
-describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
-  it('dispatches videosReceived', done => {
+describe("Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic", () => {
+  it("dispatches videosReceived", done => {
     const fetchVideos$ = of(fetchVideos());
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
         VideoPicker: {
-          searchString: 'Netanyahu',
+          searchString: "Netanyahu",
           page: 12,
           limit: 10,
         },
@@ -41,22 +41,22 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: MediaPicker :: VideoPicker :: searchVideosEpic', () => {
-  it('dispatches fetchVideos', () => {
+describe("Epic :: MediaPicker :: VideoPicker :: searchVideosEpic", () => {
+  it("dispatches fetchVideos", () => {
     const testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
     });
 
     testScheduler.run(({ hot, cold, expectObservable }) => {
-      const action$ = hot('a-b----c', {
+      const action$ = hot("a-b----c", {
         a: scrollLeft(),
         b: scrollRight(),
-        c: searchVideos('Netanyahu'),
+        c: searchVideos("Netanyahu"),
       });
 
       expectObservable(
         searchVideosEpic(action$)
-      ).toBe('a-a---- 250ms a', {
+      ).toBe("a-a---- 250ms a", {
         a: { type: FETCH_VIDEOS },
       });
     });

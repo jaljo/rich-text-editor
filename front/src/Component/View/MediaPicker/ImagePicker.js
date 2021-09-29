@@ -1,7 +1,7 @@
-import React from 'react'
-import { containsTenItems } from '../../../Util'
-import './ImagePicker.scss'
-import NoResult from '../List/NoResult'
+import React from "react"
+import { containsTenItems } from "../../../Util"
+import "./ImagePicker.scss"
+import NoResult from "../List/NoResult"
 
 // ImagePicker :: Props -> React.Component
 const ImagePicker = ({
@@ -18,14 +18,14 @@ const ImagePicker = ({
     {/* scroll left */}
     <p
       onClick={scrollLeft}
-      className={`btn-knp left is-pulled-left is-hidden-mobile ${page > 1 ? 'show' : ''}`}
+      className={`btn-knp left is-pulled-left is-hidden-mobile ${page > 1 ? "show" : ""}`}
     >
       <span className="icomoon-font">l</span>
     </p>
     {/* scroll right */}
     <p
       onClick={scrollRight}
-      className={`btn-knp right is-pulled-right is-hidden-mobile ${containsTenItems(images) ? 'show' : ''}`}
+      className={`btn-knp right is-pulled-right is-hidden-mobile ${containsTenItems(images) ? "show" : ""}`}
     >
       <span className="icomoon-font">r</span>
     </p>

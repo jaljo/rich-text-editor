@@ -1,7 +1,7 @@
-import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import { logObservableError, findById } from '../../Util'
-import { isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
+import { map, mergeMap, debounceTime, withLatestFrom } from "rxjs/operators"
+import { combineEpics, ofType } from "redux-observable"
+import { logObservableError, findById } from "../../Util"
+import { isEmpty, join, prop, ifElse, pipe, map as fmap } from "ramda"
 import {
   FETCH_IMAGES,
   SCROLL_LEFT,
@@ -10,7 +10,7 @@ import {
   receivedImages,
   pickImageWithCredits,
   error,
-} from '../../Redux/State/MediaPicker/ImagePicker'
+} from "../../Redux/State/MediaPicker/ImagePicker"
 
 // formatImage :: PexelsImage -> Image
 const formatImage = image => ({
@@ -22,16 +22,16 @@ const formatImage = image => ({
 
 // fetchImages :: (Fetch, String, String) -> Promise
 const fetchImages = (fetchApi, page, searchString) =>
-  fetchApi(join('', [
-    `https://api.pexels.com/v1/search`,
+  fetchApi(join("", [
+    "https://api.pexels.com/v1/search",
     // pexels doesn't support empty query parameters or no query parameters
-    `?query=${searchString === '' ? 'estonia' : searchString}`,
-    `&per_page=10`,
+    `?query=${searchString === "" ? "estonia" : searchString}`,
+    "&per_page=10",
     `&page=${page}`,
   ]), {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': process.env.REACT_APP_IMAGE_API_KEY,
+      "Authorization": process.env.REACT_APP_IMAGE_API_KEY,
     },
   })
 
@@ -46,7 +46,7 @@ export const searchImagesEpic = (action$, _, { fetchApi }) =>
       searchString
     )),
     map(pipe(
-      prop('photos'),
+      prop("photos"),
       fmap(formatImage),
       receivedImages,
     )),
@@ -64,7 +64,7 @@ export const changePageEpic = (action$, state$, { fetchApi }) =>
       state.MediaPicker.ImagePicker.searchString,
     )),
     map(pipe(
-      prop('photos'),
+      prop("photos"),
       fmap(formatImage),
       receivedImages,
     )),
@@ -84,7 +84,7 @@ export const ensurePickedImageHasCreditsEpic = (action$, state$) =>
     map(([ action, image ]) => ifElse(
       image => !isEmpty(image.credit),
       () => pickImageWithCredits(action.imageId, action.domain, action.extra),
-      () => error('This image has no credits. Please fill credits before using it.'),
+      () => error("This image has no credits. Please fill credits before using it."),
     )(image)),
     logObservableError(),
   )

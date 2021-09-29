@@ -28,10 +28,10 @@ import {
   toLower,
   uncurryN,
   when,
-} from 'ramda'
-import { merge, catchError } from 'rxjs/operators'
-import Logger from './Logger'
-import { of } from 'rxjs'
+} from "ramda"
+import { merge, catchError } from "rxjs/operators"
+import Logger from "./Logger"
+import { of } from "rxjs"
 
 export const logObservableError = () => catchError((err, source) => pipe(
   tap(Logger.error),
@@ -61,8 +61,8 @@ export const splitMedias = pipe(
 
 // isEscapeKey :: KeyboardEvent -> Boolean
 export const isEscapeKey = ifElse(
-  compose(contains('key'), keysIn),
-  compose(equals('escape'), toLower, prop('key')),
+  compose(contains("key"), keysIn),
+  compose(equals("escape"), toLower, prop("key")),
   F,
 )
 
@@ -72,7 +72,7 @@ export const createReducer =
   (state = initialState, action = {}) =>
   propOr(
     identity,
-    prop('type', action),
+    prop("type", action),
     handlers
   )(state, action)
 
@@ -90,7 +90,7 @@ export const indexedMap = addIndex(map)
 
 // findById :: Number -> [Object] -> Object
 // Given the Object contains an id prop, extract that object from a list
-export const findById = uncurryN(2, id => find(propEq('id')(id)))
+export const findById = uncurryN(2, id => find(propEq("id")(id)))
 
 // closestHavingClass :: Element -> String -> Node|null
 // Mimics the https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
