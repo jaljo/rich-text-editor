@@ -4,10 +4,10 @@ import {
   inc,
   lt,
   when,
-} from 'ramda'
+} from "ramda";
 import {
   createReducer,
-} from '../../../Util'
+} from "../../../Util";
 
 // image picker initial state
 export const INITIAL_STATE = {
@@ -15,36 +15,36 @@ export const INITIAL_STATE = {
   images: [],
   isFetching: false,
   page: 1,
-  searchString: '',
-}
+  searchString: "",
+};
 
 // image picker action types
-export const FETCH_IMAGES = '@knp/MediaPicker/ImagePicker/FETCH_IMAGES'
-export const RECEIVED_IMAGES = '@knp/MediaPicker/ImagePicker/RECEIVED_IMAGES'
-export const SCROLL_LEFT = '@knp/MediaPicker/ImagePicker/SCROLL_LEFT'
-export const SCROLL_RIGHT = '@knp/MediaPicker/ImagePicker/SCROLL_RIGHT'
-export const PICK_IMAGE = '@knp/MediaPicker/ImagePicker/PICK_IMAGE'
-export const PICK_IMAGE_WITH_CREDITS = '@knp/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS'
-export const ERROR = '@knp/MediaPicker/ImagePicker/ERROR'
-export const CLEAR = '@knp/MediaPicker/ImagePicker/CLEAR'
+export const FETCH_IMAGES = "@knp/MediaPicker/ImagePicker/FETCH_IMAGES";
+export const RECEIVED_IMAGES = "@knp/MediaPicker/ImagePicker/RECEIVED_IMAGES";
+export const SCROLL_LEFT = "@knp/MediaPicker/ImagePicker/SCROLL_LEFT";
+export const SCROLL_RIGHT = "@knp/MediaPicker/ImagePicker/SCROLL_RIGHT";
+export const PICK_IMAGE = "@knp/MediaPicker/ImagePicker/PICK_IMAGE";
+export const PICK_IMAGE_WITH_CREDITS = "@knp/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS";
+export const ERROR = "@knp/MediaPicker/ImagePicker/ERROR";
+export const CLEAR = "@knp/MediaPicker/ImagePicker/CLEAR";
 
 // fetchImages :: String -> Action
-export const fetchImages = (searchString = '') => ({
+export const fetchImages = (searchString = "") => ({
   searchString,
   type: FETCH_IMAGES,
-})
+});
 
 // receivedImages :: [Image] -> Action
 export const receivedImages = images => ({
   images: images || [],
   type: RECEIVED_IMAGES,
-})
+});
 
 // scrollLeft :: () -> Action
-export const scrollLeft = always({ type: SCROLL_LEFT })
+export const scrollLeft = always({ type: SCROLL_LEFT });
 
 // scrollRight :: () -> Action
-export const scrollRight = always({ type: SCROLL_RIGHT })
+export const scrollRight = always({ type: SCROLL_RIGHT });
 
 // pickImage :: (Number, String, Object) -> Action
 export const pickImage = (imageId, domain, extra) => ({
@@ -53,7 +53,7 @@ export const pickImage = (imageId, domain, extra) => ({
   extra,
   imageId,
   type: PICK_IMAGE,
-})
+});
 
 // pickImageWithCredits :: (Number, String, Object) -> Action
 export const pickImageWithCredits = (imageId, domain, extra) => ({
@@ -61,16 +61,16 @@ export const pickImageWithCredits = (imageId, domain, extra) => ({
   extra,
   imageId,
   type: PICK_IMAGE_WITH_CREDITS,
-})
+});
 
 // error :: String -> Action.ERROR
 export const error = message => ({
   message,
   type: ERROR,
-})
+});
 
 // clear :: () -> Action.CLEAR
-export const clear = always({ type: CLEAR })
+export const clear = always({ type: CLEAR });
 
 // ImagePicker :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
@@ -122,4 +122,4 @@ export default createReducer(INITIAL_STATE, {
     isFetching: true,
     page: inc(state.page),
   }),
-})
+});

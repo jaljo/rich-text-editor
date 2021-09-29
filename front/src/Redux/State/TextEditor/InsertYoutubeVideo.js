@@ -1,54 +1,54 @@
 import {
   createReducer,
-} from '../../../Util'
+} from "../../../Util";
 import {
   omit,
-} from 'ramda'
+} from "ramda";
 
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {};
 
 // InsertYoutbe inital state
 export const INSTANCE_INITIAL_STATE = {
   error: false,
-}
+};
 
 // InsertYoutube action types
-export const INSERT_YOUTUBE_VIDEO = '@knp/TextEditor/InsertYoutube/INSERT_YOUTUBE_VIDEO'
-export const YOUTUBE_VIDEO_INSERTED = '@knp/TextEditor/InsertYoutube/YOUTUBE_VIDEO_INSERTED'
-export const INITIALIZE = '@knp/TextEditor/InsertYoutube/INITIALIZE'
-export const CLEAR = '@knp/TextEditor/InsertYoutube/CLEAR'
-export const ERROR = '@knp/TextEditor/InsertYoutbe/ERROR'
+export const INSERT_YOUTUBE_VIDEO = "@knp/TextEditor/InsertYoutube/INSERT_YOUTUBE_VIDEO";
+export const YOUTUBE_VIDEO_INSERTED = "@knp/TextEditor/InsertYoutube/YOUTUBE_VIDEO_INSERTED";
+export const INITIALIZE = "@knp/TextEditor/InsertYoutube/INITIALIZE";
+export const CLEAR = "@knp/TextEditor/InsertYoutube/CLEAR";
+export const ERROR = "@knp/TextEditor/InsertYoutbe/ERROR";
 
 // insertYoutubeVideo :: (String, String)  -> Action.INSERT_YOUTUBE_VIDEO
 export const insertYoutubeVideo = (editorName, url) => ({
   editorName,
   type: INSERT_YOUTUBE_VIDEO,
   url,
-})
+});
 
 // youtubeVideoInserted :: String -> Action.YOUTUBE_VIDEO_INSERTED
 export const youtubeVideoInserted = editorName => ({
   editorName,
   type: YOUTUBE_VIDEO_INSERTED,
-})
+});
 
 // initialize :: String -> Action.INITIALIZE
 export const initialize = editorName => ({
   editorName,
   type: INITIALIZE,
-})
+});
 
 // error :: String -> Action.ERROR
 export const error = editorName => ({
   editorName,
   type: ERROR,
-})
+});
 
 // clear :: String -> Action.CLEAR
 export const clear = editorName => ({
   editorName,
   type: CLEAR,
-})
+});
 // InsertYoutube :: (State, Action *) -> State
 export default createReducer(INITIAL_STATE, {
   [CLEAR]: (state, { editorName }) => omit([editorName], state),
@@ -81,4 +81,4 @@ export default createReducer(INITIAL_STATE, {
       error: false,
     },
   }),
-})
+});

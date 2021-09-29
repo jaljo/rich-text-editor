@@ -3,35 +3,35 @@ import {
   close,
   CLOSE,
   OPEN,
-} from '../../Redux/State/MediaPicker/MediaPicker'
+} from "../../Redux/State/MediaPicker/MediaPicker";
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   filter,
   map,
   switchMap,
   takeUntil,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   fromEvent,
   race,
-} from 'rxjs'
+} from "rxjs";
 import {
   isEscapeKey,
   logObservableError,
-} from '../../Util'
+} from "../../Util";
 import {
   OPEN_INSERT_TWEET,
   OPEN_INSERT_YOUTUBE_VIDEO,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../Redux/State/TextEditor/ParagraphToolbox";
 import {
   PICK_IMAGE_WITH_CREDITS,
-} from '../../Redux/State/MediaPicker/ImagePicker'
+} from "../../Redux/State/MediaPicker/ImagePicker";
 import {
   PICK_VIDEO,
-} from '../../Redux/State/MediaPicker/VideoPicker'
+} from "../../Redux/State/MediaPicker/VideoPicker";
 
 // closeMediaPickerEpic :: Observable Action Error -> Observable Action.CLOSE
 export const closeMediaPickerEpic = action$ => action$.pipe(
@@ -43,7 +43,7 @@ export const closeMediaPickerEpic = action$ => action$.pipe(
       OPEN_INSERT_YOUTUBE_VIDEO,
       OPEN_INSERT_TWEET,
     )),
-    fromEvent(window, 'keydown').pipe(
+    fromEvent(window, "keydown").pipe(
       filter(isEscapeKey),
     ),
   ).pipe(
@@ -51,7 +51,7 @@ export const closeMediaPickerEpic = action$ => action$.pipe(
     map(close),
   )),
   logObservableError(),
-)
+);
 export default combineEpics(
   closeMediaPickerEpic,
-)
+);

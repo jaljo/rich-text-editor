@@ -1,16 +1,16 @@
-import './VideoPicker.scss'
+import "./VideoPicker.scss";
 import {
   compose,
   isEmpty,
   isNil,
   map,
   nth,
-} from 'ramda'
+} from "ramda";
 import {
   containsTenItems,
   splitMedias,
-} from '../../../Util'
-import React from 'react'
+} from "../../../Util";
+import React from "react";
 
 // VideoPicker :: Props -> React.Component
 const VideoPicker = ({
@@ -24,12 +24,12 @@ const VideoPicker = ({
     {/* scroll left */}
     <p
       onClick={ scrollLeft }
-      className={ `btn-knp left is-pulled-left icomoon-font ${ page > 1 ? 'show' : '' }` }
+      className={ `btn-knp left is-pulled-left icomoon-font ${ page > 1 ? "show" : "" }` }
     >l</p>
     {/* scroll right */}
     <p
       onClick={ scrollRight }
-      className={ `btn-knp right is-pulled-right icomoon-font ${ containsTenItems(videos) ? 'show' : '' }` }
+      className={ `btn-knp right is-pulled-right icomoon-font ${ containsTenItems(videos) ? "show" : "" }` }
     >r</p>
 
     {/* search result container */}
@@ -50,7 +50,7 @@ const VideoPicker = ({
         </div>
       }
     </div>
-  </div>
+  </div>;
 
 // renderVideos :: Props -> [Video] -> React.Component
 const renderVideos = props => map(video =>
@@ -62,6 +62,6 @@ const renderVideos = props => map(video =>
       alt={ video.name }
     />
   </div>,
-)
+);
 
 export default VideoPicker;

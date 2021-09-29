@@ -2,7 +2,7 @@ import {
   changePageEpic,
   ensurePickedImageHasCreditsEpic,
   searchImagesEpic,
-} from './ImagePicker'
+} from "./ImagePicker";
 import {
   ERROR,
   fetchImages,
@@ -11,14 +11,14 @@ import {
   RECEIVED_IMAGES,
   scrollLeft,
   scrollRight,
-} from '../../Redux/State/MediaPicker/ImagePicker'
+} from "../../Redux/State/MediaPicker/ImagePicker";
 import {
   of,
   Subject,
-} from 'rxjs'
+} from "rxjs";
 import {
   StateObservable,
-} from 'redux-observable'
+} from "redux-observable";
 
 const imagesMock = [
   {
@@ -42,10 +42,10 @@ const dependencies = {
   }),
 };
 
-describe('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
+describe("Epic :: MediaPicker :: ImagePicker :: searchImagesEpic", () => {
   const fetchImages$ = of(fetchImages());
 
-  it('dispatches receivedImages', async () => {
+  it("dispatches receivedImages", async () => {
     const action = await searchImagesEpic(fetchImages$, null, dependencies)
       .toPromise(Promise)
     ;
@@ -55,20 +55,20 @@ describe('Epic :: MediaPicker :: ImagePicker :: searchImagesEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
+describe("Epic :: MediaPicker :: ImagePicker :: changePageEpic", () => {
   const scrollLeft$ = of(scrollLeft());
   const scrollRight$ = of(scrollRight());
   const state$ = new StateObservable(new Subject(), {
     MediaPicker: {
       ImagePicker: {
         page: 1,
-        searchString: 'mock search string',
+        searchString: "mock search string",
       },
     },
   });
 
   // @TODO rewrite this using rxjs TestScheduler
-  it('dispatches receivedImages (after scrollLeft action)', async () => {
+  it("dispatches receivedImages (after scrollLeft action)", async () => {
     const action = await changePageEpic(scrollLeft$, state$, dependencies)
       .toPromise(Promise)
     ;
@@ -77,7 +77,7 @@ describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
     expect(action.images).toEqual(transformedImages);
   }, 1000);
 
-  it('dispatches receivedImages (after scrollRight action)', async () => {
+  it("dispatches receivedImages (after scrollRight action)", async () => {
     const action = await changePageEpic(scrollRight$, state$, dependencies)
       .toPromise(Promise)
     ;
@@ -87,27 +87,27 @@ describe('Epic :: MediaPicker :: ImagePicker :: changePageEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic', () => {
+describe("Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic", () => {
   const state$ = new StateObservable(new Subject(), {
     MediaPicker: {
       ImagePicker: {
         images: [
           {
-            credit: 'AFP',
+            credit: "AFP",
             id: 1,
-            legend: 'This image has credit',
+            legend: "This image has credit",
           },
           {
-            credit: '',
+            credit: "",
             id: 2,
-            legend: 'This one does not',
+            legend: "This one does not",
           },
         ],
       },
     },
-  })
+  });
 
-  it('dispatches pickImageWithCredits when image has credits', async () => {
+  it("dispatches pickImageWithCredits when image has credits", async () => {
     const pickImage$ = of(pickImage(1));
 
     const action = await ensurePickedImageHasCreditsEpic(pickImage$, state$)
@@ -117,7 +117,7 @@ describe('Epic :: MediaPicker :: ImagePicker :: ensurePickedImageHasCreditsEpic'
     expect(action.type).toEqual(PICK_IMAGE_WITH_CREDITS);
   }, 1000);
 
-  it('dispatches error when picked image has no credit', async() => {
+  it("dispatches error when picked image has no credit", async() => {
     const pickImage$ = of(pickImage(2));
 
     const action = await ensurePickedImageHasCreditsEpic(pickImage$, state$)

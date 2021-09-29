@@ -1,13 +1,13 @@
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   debounceTime,
   map,
   mergeMap,
   withLatestFrom,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   error,
   FETCH_IMAGES,
@@ -16,11 +16,11 @@ import {
   receivedImages,
   SCROLL_LEFT,
   SCROLL_RIGHT,
-} from '../../Redux/State/MediaPicker/ImagePicker'
+} from "../../Redux/State/MediaPicker/ImagePicker";
 import {
   findById,
   logObservableError,
-} from '../../Util'
+} from "../../Util";
 import {
   map as fmap,
   ifElse,
@@ -28,7 +28,7 @@ import {
   join,
   pipe,
   prop,
-} from 'ramda'
+} from "ramda";
 
 // formatImage :: PexelsImage -> Image
 const formatImage = image => ({
@@ -36,22 +36,22 @@ const formatImage = image => ({
   href: image.src.medium,
   id: image.id,
   legend: image.photographer_url,
-})
+});
 
 // fetchImages :: (Fetch, String, String) -> Promise
 const fetchImages = (fetchApi, page, searchString) =>
-  fetchApi(join('', [
-    `https://api.pexels.com/v1/search`,
+  fetchApi(join("", [
+    "https://api.pexels.com/v1/search",
     // pexels doesn't support empty query parameters or no query parameters
-    `?query=${searchString === '' ? 'estonia' : searchString}`,
-    `&per_page=10`,
+    `?query=${searchString === "" ? "estonia" : searchString}`,
+    "&per_page=10",
     `&page=${page}`,
   ]), {
     headers: {
-      'Authorization': process.env.REACT_APP_IMAGE_API_KEY,
+      "Authorization": process.env.REACT_APP_IMAGE_API_KEY,
     },
-    method: 'GET',
-  })
+    method: "GET",
+  });
 
 // searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
 export const searchImagesEpic = (action$, _, { fetchApi }) =>
@@ -64,12 +64,12 @@ export const searchImagesEpic = (action$, _, { fetchApi }) =>
       searchString,
     )),
     map(pipe(
-      prop('photos'),
+      prop("photos"),
       fmap(formatImage),
       receivedImages,
     )),
     logObservableError(),
-  )
+  );
 
 // changePageEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
 export const changePageEpic = (action$, state$, { fetchApi }) =>
@@ -82,12 +82,12 @@ export const changePageEpic = (action$, state$, { fetchApi }) =>
       state.MediaPicker.ImagePicker.searchString,
     )),
     map(pipe(
-      prop('photos'),
+      prop("photos"),
       fmap(formatImage),
       receivedImages,
     )),
     logObservableError(),
-  )
+  );
 
 // ensurePickedImageHasCreditsEpic :: Epic -> Observable Action ERROR
 export const ensurePickedImageHasCreditsEpic = (action$, state$) =>
@@ -101,13 +101,13 @@ export const ensurePickedImageHasCreditsEpic = (action$, state$) =>
     map(([ action, image ]) => ifElse(
       image => !isEmpty(image.credit),
       () => pickImageWithCredits(action.imageId, action.domain, action.extra),
-      () => error('This image has no credits. Please fill credits before using it.'),
+      () => error("This image has no credits. Please fill credits before using it."),
     )(image)),
     logObservableError(),
-  )
+  );
 
 export default combineEpics(
   searchImagesEpic,
   changePageEpic,
   ensurePickedImageHasCreditsEpic,
-)
+);

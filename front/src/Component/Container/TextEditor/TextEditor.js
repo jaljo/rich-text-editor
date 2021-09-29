@@ -5,11 +5,11 @@ import {
   keyDown,
   paste,
   selectText,
-} from '../../../Redux/State/TextEditor/TextEditor'
+} from "../../../Redux/State/TextEditor/TextEditor";
 import {
   componentDidMount,
   componentWillUnmount,
-} from 'react-functional-lifecycle'
+} from "react-functional-lifecycle";
 import {
   compose,
   equals,
@@ -18,11 +18,11 @@ import {
   prop,
   tap,
   when,
-} from 'ramda'
+} from "ramda";
 import {
   connect,
-} from 'react-redux'
-import TextEditor from '../../View/TextEditor/TextEditor'
+} from "react-redux";
+import TextEditor from "../../View/TextEditor/TextEditor";
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   initialize: compose(dispatch, initialize),
   keyDown: pipe(
     when(
-      compose(equals(13), prop('keyCode')),
+      compose(equals(13), prop("keyCode")),
       tap(e => e.preventDefault()),
     ),
     e => keyDown(props.editorName, e.keyCode),
@@ -43,22 +43,22 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch,
   ),
   selectText: compose(dispatch, selectText),
-})
+});
 
 // didMount :: Props -> Action.INITIALIZE
-const didMount = ({ initialize }) => initialize()
+const didMount = ({ initialize }) => initialize();
 
 // willUnmount :: Props -> Action
-const willUnmount = ({ clear, main }) => !isNil(main) && clear()
+const willUnmount = ({ clear, main }) => !isNil(main) && clear();
 
 // lifecycles :: React.Component -> React.Component
 const lifecycles = compose(
   componentDidMount(didMount),
   componentWillUnmount(willUnmount),
-)(TextEditor)
+)(TextEditor);
 
 // TextEditor :: Props -> React.Component
 export default connect(
   null,
   mapDispatchToProps,
-)(lifecycles)
+)(lifecycles);

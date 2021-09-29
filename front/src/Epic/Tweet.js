@@ -2,25 +2,25 @@ import {
   clear,
   RENDER_TWEET,
   tweetRendered,
-} from './../Redux/State/Tweet'
+} from "./../Redux/State/Tweet";
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   filter,
   map,
   mergeMap,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   CLEAR,
-} from './../Redux/State/TextEditor/TextEditor'
+} from "./../Redux/State/TextEditor/TextEditor";
 import {
   logObservableError,
-} from '../Util'
+} from "../Util";
 import {
   prop,
-} from 'ramda'
+} from "ramda";
 
 
 // renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
@@ -32,7 +32,7 @@ export const renderTweetEpic = (action$, state$, { window }) =>
       ...action,
       element: document.getElementById(`tweet-${action.uid}`),
     })),
-    filter(prop('element')),
+    filter(prop("element")),
     mergeMap(({ tweetId, originalHtmlMarkup, element }) => Promise.all([
       tweetId,
       originalHtmlMarkup,
@@ -40,7 +40,7 @@ export const renderTweetEpic = (action$, state$, { window }) =>
     ])),
     map(([ tweetId, originalHtmlMarkup ]) => tweetRendered(tweetId, originalHtmlMarkup)),
     logObservableError(),
-  )
+  );
 
 /**
  * Clear the rendered tweets original markups when the text editor is unmounted.
@@ -52,9 +52,9 @@ export const clearRenderedTweetsEpic = action$ =>
     ofType(CLEAR),
     map(clear),
     logObservableError(),
-  )
+  );
 
 export default combineEpics(
   renderTweetEpic,
   clearRenderedTweetsEpic,
-)
+);

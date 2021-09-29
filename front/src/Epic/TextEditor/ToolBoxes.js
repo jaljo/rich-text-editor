@@ -11,14 +11,14 @@ import {
   path,
   pipe,
   prop,
-} from 'ramda'
+} from "ramda";
 import {
   CLEAR,
   CLICK,
   INITIALIZE,
   SELECT_TEXT,
   TEXT_PASTED,
-} from '../../Redux/State/TextEditor/TextEditor'
+} from "../../Redux/State/TextEditor/TextEditor";
 import {
   CLEAR as CLEAR_PARAGRAPH_TOOLBOX,
   CLOSE_INSERT_TWEET,
@@ -31,7 +31,7 @@ import {
   OPEN_INSERT_YOUTUBE_VIDEO,
   show as showParagraphToolbox,
   VIDEO_INSERTED,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../Redux/State/TextEditor/ParagraphToolbox";
 import {
   CLEAR as CLEAR_TEXT_TOOLBOX,
   CLOSE_LINK_CREATOR,
@@ -39,75 +39,75 @@ import {
   hideAll as hideAllTextToolboxes,
   OPEN_LINK_CREATOR,
   show as showTextToolbox,
-} from '../../Redux/State/TextEditor/TextToolbox'
+} from "../../Redux/State/TextEditor/TextToolbox";
 import {
   closestHavingClass,
   isEscapeKey,
   logObservableError,
-} from '../../Util'
+} from "../../Util";
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   filter,
   map,
   mergeMap,
   switchMap,
   takeUntil,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   fromEvent,
   merge,
-} from 'rxjs'
+} from "rxjs";
 import {
   getRootNodesAsArray,
-} from './TextEditor'
+} from "./TextEditor";
 import {
   TWEET_INSERTED,
-} from '../../Redux/State/TextEditor/InsertTweet'
+} from "../../Redux/State/TextEditor/InsertTweet";
 import {
   YOUTUBE_VIDEO_INSERTED,
-} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+} from "../../Redux/State/TextEditor/InsertYoutubeVideo";
 
 
 // isRange :: Selection -> Boolean
-const isRange = compose(equals('Range'), prop('type'))
+const isRange = compose(equals("Range"), prop("type"));
 
 // isTextNode :: Node -> Boolean
-const isTextNode = compose(equals(3), prop('nodeType'))
+const isTextNode = compose(equals(3), prop("nodeType"));
 
 // getParagraphTopPosition :: Selection -> Number
 const getParagraphTopPosition = pipe(
-  prop('anchorNode'),
+  prop("anchorNode"),
   ifElse(
     isTextNode,
     // nodeType === Node.TEXT_NODE
-    path(['parentElement', 'offsetTop']),
+    path(["parentElement", "offsetTop"]),
     // nodeType === Node.ELEMENT_NODE
-    prop('offsetTop'),
+    prop("offsetTop"),
   ),
-)
+);
 
 // isEmptyParagraph :: Selection -> Boolean
 export const isEmptyParagraph = pipe(
-  prop('anchorNode'),
+  prop("anchorNode"),
   both(
-    compose(isNil, prop('data')),
-    compose(equals('P'), prop('tagName')),
+    compose(isNil, prop("data")),
+    compose(equals("P"), prop("tagName")),
   ),
-)
+);
 
 // getNodeIndex :: (String, Node) -> Number
 const getNodeIndex = (editorName, node) =>
   getRootNodesAsArray(editorName)
-    .indexOf(node)
+    .indexOf(node);
 
 // notExcluded :: Node -> Boolean
 const notExcluded = allPass([
-  compose(isNil, closestHavingClass('image-wrapper')),
-  compose(isNil, closestHavingClass('knp-rendered-tweet')),
-])
+  compose(isNil, closestHavingClass("image-wrapper")),
+  compose(isNil, closestHavingClass("knp-rendered-tweet")),
+]);
 
 // showTextToolboxEpic :: Epic -> Observable Action.SHOW_TEXT_TOOLBOX
 export const showTextToolboxEpic = (action$, state$, { window }) =>
@@ -115,11 +115,11 @@ export const showTextToolboxEpic = (action$, state$, { window }) =>
     ofType(SELECT_TEXT),
     map(action => [ action.editorName, window.getSelection()]),
     filter(compose(isRange, last)),
-    filter(compose(notExcluded, prop('anchorNode'), last)),
+    filter(compose(notExcluded, prop("anchorNode"), last)),
     map(([ editor, selection ]) => [ editor, getParagraphTopPosition(selection) ]),
     map(apply(showTextToolbox)),
     logObservableError(),
-  )
+  );
 
 // hideAllTextToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
 export const hideAllTextToolboxesEpic = (action$, state$, { window }) =>
@@ -129,7 +129,7 @@ export const hideAllTextToolboxesEpic = (action$, state$, { window }) =>
     filter(complement(isRange)),
     map(hideAllTextToolboxes),
     logObservableError(),
-  )
+  );
 
 // showParagraphToolboxEpic :: Epic -> Observable Action.SHOW_PARAGRAPH_TOOLBOX
 export const showParagraphToolboxEpic = (action$, state$, { window }) =>
@@ -144,12 +144,12 @@ export const showParagraphToolboxEpic = (action$, state$, { window }) =>
     ]),
     map(apply(showParagraphToolbox)),
     logObservableError(),
-  )
+  );
 
 // showParagraphToolboxToReplaceElementEpic :: Epic -> Observable Action _
 const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
   ofType(CLICK),
-  filter(compose(equals('IMG'), path(['node', 'tagName']))),
+  filter(compose(equals("IMG"), path(["node", "tagName"]))),
   map(action => [
     action.editorName,
     action.node.parentElement.offsetTop,
@@ -157,7 +157,7 @@ const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
   ]),
   map(apply(showParagraphToolbox)),
   logObservableError(),
-)
+);
 
 // hideAllParagraphToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
 export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
@@ -177,31 +177,31 @@ export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
   ).pipe(
     map(hideAllParagraphToolboxes),
     logObservableError(),
-  )
+  );
 
 // hideToolboxesOnClickOusideEditorEpic :: Observable Action Error -> Observable Action _
 const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(INITIALIZE),
-    switchMap(() => fromEvent(window, 'mousedown').pipe(
+    switchMap(() => fromEvent(window, "mousedown").pipe(
       takeUntil(action$.pipe(ofType(CLEAR))),
     )),
-    map(prop('target')),
-    filter(compose(isNil, closestHavingClass('text-editor'))),
+    map(prop("target")),
+    filter(compose(isNil, closestHavingClass("text-editor"))),
     // ensure toolboxes are not hidden when a mutation button is clicked
-    filter(node => !node.classList.contains('ttbx-mutation')),
+    filter(node => !node.classList.contains("ttbx-mutation")),
     mergeMap(() => [
       hideAllTextToolboxes(),
       hideAllParagraphToolboxes(),
     ]),
     logObservableError(),
-  )
+  );
 
 // closeInsertTweetFormEpic :: Observable Action Error -> Observable Action.CLOSE_INSERT_TWEET
 const closeInsertTweetFormEpic = action$ => action$.pipe(
   ofType(OPEN_INSERT_TWEET),
-  map(prop('editorName')),
-  switchMap(editorName => fromEvent(window, 'keydown').pipe(
+  map(prop("editorName")),
+  switchMap(editorName => fromEvent(window, "keydown").pipe(
     filter(isEscapeKey),
   ).pipe(
     takeUntil(action$.pipe(ofType(
@@ -210,13 +210,13 @@ const closeInsertTweetFormEpic = action$ => action$.pipe(
     )),
     map(() => closeInsertTweet(editorName)),
   )),
-)
+);
 
 // closeInsertYoutubeFormEpic :: Observale Action Error -> Observable Action.CLOSE_INSERT_YOUTUBE_VIDEO
 const closeInsertYoutubeFormEpic = action$ => action$.pipe(
   ofType(OPEN_INSERT_YOUTUBE_VIDEO),
-  map(prop('editorName')),
-  switchMap(editorName => fromEvent(window, 'keydown').pipe(
+  map(prop("editorName")),
+  switchMap(editorName => fromEvent(window, "keydown").pipe(
     filter(isEscapeKey),
   ).pipe(
     takeUntil(action$.pipe(ofType(
@@ -225,13 +225,13 @@ const closeInsertYoutubeFormEpic = action$ => action$.pipe(
     ))),
     map(() => closeInsertYoutubeVideo(editorName)),
   )),
-)
+);
 
 // closeLinkCreatorFormEpic :: Observable Action Error -> Observable Action.CLOSE_LINK_CREATOR
 const closeLinkCreatorFormEpic = action$ => action$.pipe(
   ofType(OPEN_LINK_CREATOR),
-  map(prop('editorName')),
-  switchMap(editorName => fromEvent(window, 'keydown').pipe(
+  map(prop("editorName")),
+  switchMap(editorName => fromEvent(window, "keydown").pipe(
     filter(isEscapeKey),
   ).pipe(
     takeUntil(action$.pipe(ofType(
@@ -240,7 +240,7 @@ const closeLinkCreatorFormEpic = action$ => action$.pipe(
     ))),
     map(() => closeLinkCreator(editorName)),
   )),
-)
+);
 
 export default combineEpics(
   closeInsertTweetFormEpic,
@@ -252,4 +252,4 @@ export default combineEpics(
   showParagraphToolboxEpic,
   showParagraphToolboxToReplaceElementEpic,
   showTextToolboxEpic,
-)
+);

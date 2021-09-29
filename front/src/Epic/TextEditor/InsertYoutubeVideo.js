@@ -3,15 +3,15 @@ import {
   map,
   mergeMap,
   withLatestFrom,
-} from 'rxjs/operators'
+} from "rxjs/operators";
 import {
   closeInsertYoutubeVideo,
   OPEN_INSERT_TWEET,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../Redux/State/TextEditor/ParagraphToolbox";
 import {
   combineEpics,
   ofType,
-} from 'redux-observable'
+} from "redux-observable";
 import {
   compose,
   equals,
@@ -19,26 +19,26 @@ import {
   path,
   pipe,
   prop,
-} from 'ramda'
+} from "ramda";
 import {
   error,
   INSERT_YOUTUBE_VIDEO,
   YOUTUBE_VIDEO_INSERTED,
   youtubeVideoInserted,
-} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
+} from "../../Redux/State/TextEditor/InsertYoutubeVideo";
 import {
   from,
   of,
-} from 'rxjs'
+} from "rxjs";
 import {
   insertNewNodeAtIndex,
-} from './TextEditor'
+} from "./TextEditor";
 import {
   logObservableError,
-} from '../../Util'
+} from "../../Util";
 import {
   OPEN as OPEN_MEDIAPICKER,
-} from '../../Redux/State/MediaPicker/MediaPicker'
+} from "../../Redux/State/MediaPicker/MediaPicker";
 
 // insertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
 export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(
@@ -57,7 +57,7 @@ export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(
     catchError(() => of(error(action.editorName))),
   )),
   logObservableError(),
-)
+);
 
 // closeInsertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
 export const closeInsertYoutubeVideoEpic = action$ => action$.pipe(
@@ -67,13 +67,13 @@ export const closeInsertYoutubeVideoEpic = action$ => action$.pipe(
     OPEN_MEDIAPICKER,
   ),
   map(ifElse(
-    compose(equals(OPEN_MEDIAPICKER), prop('type')),
-    path(['extra', 'editorName']),
-    prop('editorName'),
+    compose(equals(OPEN_MEDIAPICKER), prop("type")),
+    path(["extra", "editorName"]),
+    prop("editorName"),
   )),
   map(closeInsertYoutubeVideo),
   logObservableError(),
-)
+);
 
 // validateYoutubeUrl :: String -> Promise String String
 export const validateYoutubeUrl = pipe(
@@ -81,17 +81,17 @@ export const validateYoutubeUrl = pipe(
   // matches[2] = youtube video identifier
   matches => new Promise((resolve, reject) => matches && matches[2].length === 11
     ? resolve(`https://www.youtube.com/embed/${matches[2]}`)
-    : reject('The provided URL is not a valid youtube video.'),
+    : reject("The provided URL is not a valid youtube video."),
   ),
 );
 
 // createYoutubeIframe :: String -> Node.IFRAME
 const createYoutubeIframe = url => {
-  const iframe = document.createElement('iframe');
-  iframe.classList.add('youtube-embed');
-  iframe.setAttribute('src', url);
-  iframe.setAttribute('allowfullscreen', true);
-  iframe.setAttribute('contentEditable', false);
+  const iframe = document.createElement("iframe");
+  iframe.classList.add("youtube-embed");
+  iframe.setAttribute("src", url);
+  iframe.setAttribute("allowfullscreen", true);
+  iframe.setAttribute("contentEditable", false);
 
   return iframe;
 };
@@ -99,4 +99,4 @@ const createYoutubeIframe = url => {
 export default combineEpics(
   insertYoutubeVideoEpic,
   closeInsertYoutubeVideoEpic,
-)
+);

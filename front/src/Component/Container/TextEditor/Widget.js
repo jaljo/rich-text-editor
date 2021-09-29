@@ -1,13 +1,13 @@
 import {
   compose,
   F,
-} from 'ramda'
+} from "ramda";
 import {
   shouldComponentUpdate,
-} from 'react-functional-lifecycle'
-import Widget from '../../View/TextEditor/Widget'
+} from "react-functional-lifecycle";
+import Widget from "../../View/TextEditor/Widget";
 
 // Widget :: Props -> React.Component
 export default compose(
   shouldComponentUpdate(F),
-)(Widget)
+)(Widget);

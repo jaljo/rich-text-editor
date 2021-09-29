@@ -5,31 +5,31 @@ import {
   initialize,
   openInsertTweet,
   openInsertYoutubeVideo,
-} from '../../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../../Redux/State/TextEditor/ParagraphToolbox";
 import {
   componentDidMount,
   componentWillUnmount,
-} from 'react-functional-lifecycle'
+} from "react-functional-lifecycle";
 import {
   compose,
   prop,
-} from 'ramda'
+} from "ramda";
 import {
   connect,
-} from 'react-redux'
+} from "react-redux";
 import {
   open as openMediaPicker,
-} from '../../../Redux/State/MediaPicker/MediaPicker'
-import ParagraphToolbox from '../../View/TextEditor/ParagraphToolbox'
+} from "../../../Redux/State/MediaPicker/MediaPicker";
+import ParagraphToolbox from "../../View/TextEditor/ParagraphToolbox";
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({
-  insertTweetOpened: prop('insertTweetOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
-  insertYoutubeVideoOpened: prop('insertYoutubeVideoOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
-  isVisible: prop('visible', state.TextEditor.ParagraphToolbox[props.editorName]),
-  mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === 'TEXT_EDITOR',
-  top: prop('top', state.TextEditor.ParagraphToolbox[props.editorName]),
-})
+  insertTweetOpened: prop("insertTweetOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
+  insertYoutubeVideoOpened: prop("insertYoutubeVideoOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
+  isVisible: prop("visible", state.TextEditor.ParagraphToolbox[props.editorName]),
+  mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === "TEXT_EDITOR",
+  top: prop("top", state.TextEditor.ParagraphToolbox[props.editorName]),
+});
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
@@ -42,22 +42,22 @@ const mapDispatchToProps = (dispatch, props) => ({
   openMediaPicker: (domain, extra, defaultOpenedComponent) => dispatch(
     openMediaPicker(domain, extra, defaultOpenedComponent),
   ),
-})
+});
 
 // didMount :: Props -> Action.INITIALIZE
-const didMount = ({ initialize }) => initialize()
+const didMount = ({ initialize }) => initialize();
 
 // willUnmount :: Props -> Action.CLEAR
-const willUnmount = ({ clear }) => clear()
+const willUnmount = ({ clear }) => clear();
 
 // lifecycles :: React.Component -> React.Component
 const lifecycles = compose(
   componentDidMount(didMount),
   componentWillUnmount(willUnmount),
-)(ParagraphToolbox)
+)(ParagraphToolbox);
 
 // ParagraphToolbox :: Props -> React.Component
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(lifecycles)
+)(lifecycles);

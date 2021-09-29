@@ -9,26 +9,26 @@ import {
   default as reducer,
   scrollLeft,
   scrollRight,
-} from './ImagePicker'
+} from "./ImagePicker";
 
-describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
-  it('reduces to initial state by default', () => {
+describe("Redux :: State :: MediaPicker :: ImagePicker", () => {
+  it("reduces to initial state by default", () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
 
-  it('reduces fetch images', () => {
+  it("reduces fetch images", () => {
     expect(
-      reducer(INITIAL_STATE, fetchImages('merkel'))
+      reducer(INITIAL_STATE, fetchImages("merkel"))
     ).toEqual({
       ...INITIAL_STATE,
       error: null,
       isFetching: true,
       page: 1,
-      searchString: 'merkel',
+      searchString: "merkel",
     });
   });
 
-  it('reduces images received', () => {
+  it("reduces images received", () => {
     expect(
       reducer(INITIAL_STATE, receivedImages([{ id: 1 }, { id: 2 }]))
     ).toEqual({
@@ -39,7 +39,7 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
     });
   });
 
-  it('reduces scroll left : first page', () => {
+  it("reduces scroll left : first page", () => {
     expect(
       reducer(INITIAL_STATE, scrollLeft())
     ).toEqual({
@@ -48,9 +48,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       isFetching: true,
       page: 1,
     });
-  })
+  });
 
-  it('reduces scroll left : not first page', () => {
+  it("reduces scroll left : not first page", () => {
     expect(
       reducer({ ...INITIAL_STATE, page: 9 }, scrollLeft())
     ).toEqual({
@@ -59,9 +59,9 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
       isFetching: true,
       page: 8,
     });
-  })
+  });
 
-  it('reduces scroll right', () => {
+  it("reduces scroll right", () => {
     expect(
       reducer(INITIAL_STATE, scrollRight())
     ).toEqual({
@@ -72,7 +72,7 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
     });
   });
 
-  it('reduces pick image', () => {
+  it("reduces pick image", () => {
     expect(
       reducer(INITIAL_STATE, pickImage())
     ).toEqual({
@@ -81,7 +81,7 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
     });
   });
 
-  it('reduces pick image with credits', () => {
+  it("reduces pick image with credits", () => {
     expect(
       reducer(INITIAL_STATE, pickImageWithCredits())
     ).toEqual({
@@ -90,18 +90,18 @@ describe('Redux :: State :: MediaPicker :: ImagePicker', () => {
     });
   });
 
-  it('reduces error', () => {
+  it("reduces error", () => {
     expect(
-      reducer(INITIAL_STATE, error('fail'))
+      reducer(INITIAL_STATE, error("fail"))
     ).toEqual({
       ...INITIAL_STATE,
-      error: 'fail',
+      error: "fail",
     });
   });
 
-  it('reduces clear', () => {
+  it("reduces clear", () => {
     expect(
       reducer(INITIAL_STATE, clear())
     ).toEqual(INITIAL_STATE);
   });
-})
+});

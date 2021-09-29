@@ -26,8 +26,10 @@
     "no-multiple-empty-lines": "error",
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "object-curly-spacing": ["error", "always"],
+    "quotes": ["error", "double"],
     "react/jsx-curly-spacing": ["error", { "when": "always" }],
     "react/prop-types": "off",
+    "semi": ["error", "always"],
     "sort-imports": ["error", { "ignoreCase": true }],
     "sort-keys": "error",
     "spaced-comment": ["error", "always"]

@@ -5,23 +5,23 @@ import {
   pipe,
   prop,
   tap,
-} from 'ramda'
+} from "ramda";
 import {
   clear,
   initialize,
   insertYoutubeVideo,
-} from '../../../Redux/State/TextEditor/InsertYoutubeVideo'
+} from "../../../Redux/State/TextEditor/InsertYoutubeVideo";
 import {
   componentDidMount,
   componentWillUnmount,
-} from 'react-functional-lifecycle'
-import { connect } from 'react-redux'
-import InsertYoutubeVideo from '../../View/TextEditor/InsertYoutubeVideo'
+} from "react-functional-lifecycle";
+import { connect } from "react-redux";
+import InsertYoutubeVideo from "../../View/TextEditor/InsertYoutubeVideo";
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({
-  error: prop('error', state.TextEditor.InsertYoutubeVideo[props.editorName]),
-})
+  error: prop("error", state.TextEditor.InsertYoutubeVideo[props.editorName]),
+});
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
 const mapDispatchToProps = (dispatch, props) => ({
@@ -30,26 +30,26 @@ const mapDispatchToProps = (dispatch, props) => ({
   submit: pipe(
     tap(e => e.preventDefault()),
     tap(e => e.stopPropagation()),
-    e => [ props.editorName, path(['target', 'youtubeLink', 'value'], e) ],
+    e => [ props.editorName, path(["target", "youtubeLink", "value"], e) ],
     apply(insertYoutubeVideo),
     dispatch,
   ),
-})
+});
 
 // didMount :: Props -> Action
-const didMount = ({ editorName, initialize }) => initialize(editorName)
+const didMount = ({ editorName, initialize }) => initialize(editorName);
 
 // willUnmount :: Props -> Action
-const willUnmount = ({ clear, editorName }) => clear(editorName)
+const willUnmount = ({ clear, editorName }) => clear(editorName);
 
 // lifecycles :: React.Component -> React.Component
 const lifecycles = compose(
   componentDidMount(didMount),
   componentWillUnmount(willUnmount),
-)(InsertYoutubeVideo)
+)(InsertYoutubeVideo);
 
 // InsertYoutube :: Props -> React.Component
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(lifecycles)
+)(lifecycles);

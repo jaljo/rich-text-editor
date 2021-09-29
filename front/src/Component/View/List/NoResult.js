@@ -1,8 +1,8 @@
-import './NoResult.scss'
+import "./NoResult.scss";
 import {
   isEmpty,
-} from 'ramda'
-import React from 'react'
+} from "ramda";
+import React from "react";
 
 // NoResult :: Props -> React.Component
 const NoResult = ({
@@ -20,6 +20,6 @@ const NoResult = ({
       </div>
     }
     { !isEmpty(collection) && children }
-  </React.Fragment>
+  </React.Fragment>;
 
 export default NoResult;

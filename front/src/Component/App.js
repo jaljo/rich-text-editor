@@ -1,11 +1,11 @@
-import './App.scss'
-import BrightcovePlayer from './Container/BrightcovePlayer/BrightcovePlayer'
-import MediaPicker from './Container/MediaPicker/MediaPicker'
+import "./App.scss";
+import BrightcovePlayer from "./Container/BrightcovePlayer/BrightcovePlayer";
+import MediaPicker from "./Container/MediaPicker/MediaPicker";
 import {
   Provider,
-} from 'react-redux'
-import React from 'react'
-import TextEditor from './Container/TextEditor/TextEditor'
+} from "react-redux";
+import React from "react";
+import TextEditor from "./Container/TextEditor/TextEditor";
 
 // App :: Props -> React.Component
 const App = ({
@@ -28,6 +28,6 @@ const App = ({
         </p>
       </TextEditor>
     </main>
-  </Provider>
+  </Provider>;
 
 export default App;

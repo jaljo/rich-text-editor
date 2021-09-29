@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 // InsertTweet :: Props -> React.Component
 const InsertTweet = ({
@@ -6,7 +6,7 @@ const InsertTweet = ({
   submit,
 }) =>
   <form className="insert-tweet" onSubmit={ submit }>
-    <div className={ `control ${ fetching ? 'is-loading' : '' }` }>
+    <div className={ `control ${ fetching ? "is-loading" : "" }` }>
       <input
         className="input"
         type="url"
@@ -15,6 +15,6 @@ const InsertTweet = ({
         autoFocus={ true }
       />
     </div>
-  </form>
+  </form>;
 
 export default InsertTweet;

@@ -1,8 +1,8 @@
 import {
   isNil,
-} from 'ramda'
-import React from 'react'
-import uniqid from 'uniqid'
+} from "ramda";
+import React from "react";
+import uniqid from "uniqid";
 
 //  BrightcoveVideo :: Props -> React.Component
 const BrightcoveVideo = ({
@@ -45,6 +45,6 @@ const BrightcoveVideo = ({
     { !isNil(name) &&
       <figcaption>{ name }</figcaption>
     }
-  </div>
+  </div>;
 
 export default BrightcoveVideo;
