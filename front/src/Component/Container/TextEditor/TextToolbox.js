@@ -1,15 +1,28 @@
-import TextToolbox from '../../View/TextEditor/TextToolbox'
-import { connect } from 'react-redux'
-import { compose, equals, ifElse, pipe, prop } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { whenValid } from '../../../Util'
 import {
-  initialize,
   clear,
-  openLinkCreator,
   closeLinkCreator,
+  initialize,
   mutate,
+  openLinkCreator,
 } from '../../../Redux/State/TextEditor/TextToolbox'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+  equals,
+  ifElse,
+  pipe,
+  prop,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
+import TextToolbox from '../../View/TextEditor/TextToolbox'
+import {
+  whenValid,
+} from '../../../Util'
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({

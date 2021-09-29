@@ -1,19 +1,24 @@
-import { Subject, of } from 'rxjs'
-import { StateObservable } from 'redux-observable'
 import {
-  fetchImages,
-  scrollLeft,
-  scrollRight,
-  pickImage,
-  ERROR,
-  PICK_IMAGE_WITH_CREDITS,
-  RECEIVED_IMAGES,
-} from '../../Redux/State/MediaPicker/ImagePicker'
-import {
-  searchImagesEpic,
   changePageEpic,
   ensurePickedImageHasCreditsEpic,
+  searchImagesEpic,
 } from './ImagePicker'
+import {
+  ERROR,
+  fetchImages,
+  PICK_IMAGE_WITH_CREDITS,
+  pickImage,
+  RECEIVED_IMAGES,
+  scrollLeft,
+  scrollRight,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  StateObservable,
+} from 'redux-observable'
 
 const imagesMock = [
   {

@@ -1,23 +1,32 @@
-import { StateObservable } from 'redux-observable'
-import { Subject, of } from 'rxjs'
 import {
-  showTextToolboxEpic,
-  hideAllTextToolboxesEpic,
-  showParagraphToolboxEpic,
-  hideAllParagraphToolboxesEpic,
-} from './ToolBoxes'
-import {
-  imageInserted,
-  videoInserted,
-  SHOW as SHOW_PARAGRAPH_TOOLBOX,
   HIDE_ALL as HIDE_PARAGRAPH_TOOLBOX,
+  imageInserted,
+  SHOW as SHOW_PARAGRAPH_TOOLBOX,
+  videoInserted,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
 import {
-  SHOW as SHOW_TEXT_TOOLBOX,
   HIDE_ALL as HIDE_TEXT_TOOLBOX,
+  SHOW as SHOW_TEXT_TOOLBOX,
 } from '../../Redux/State/TextEditor/TextToolbox'
-import { selectText } from '../../Redux/State/TextEditor/TextEditor'
-import { tweetInserted } from '../../Redux/State/TextEditor/InsertTweet'
+import {
+  hideAllParagraphToolboxesEpic,
+  hideAllTextToolboxesEpic,
+  showParagraphToolboxEpic,
+  showTextToolboxEpic,
+} from './ToolBoxes'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  selectText,
+} from '../../Redux/State/TextEditor/TextEditor'
+import {
+  StateObservable,
+} from 'redux-observable'
+import {
+  tweetInserted,
+} from '../../Redux/State/TextEditor/InsertTweet'
 
 const rangeMock = {
   cloneRange: () => null,

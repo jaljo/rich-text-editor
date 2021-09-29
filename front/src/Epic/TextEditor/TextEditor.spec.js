@@ -1,32 +1,41 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
 import {
-  saveRangeEpic,
-  createLinkEpic,
-  refreshTextToolboxStateEpic,
-  pickImageEpic,
-  insertImageEpic,
-  pickVideoEpic,
-  insertVideoEpic,
-} from './TextEditor'
-import {
-  insertImage,
-  insertVideo,
-  IMAGE_INSERTED,
-  INSERT_IMAGE,
-  INSERT_VIDEO,
-  VIDEO_INSERTED,
-} from '../../Redux/State/TextEditor/ParagraphToolbox'
-import {
-  show as showTextToolbox,
+  CLOSE_LINK_CREATOR,
   mutate,
   openLinkCreator,
   REFRESH_BUTTONS_STATE,
-  CLOSE_LINK_CREATOR,
   SAVE_RANGE,
+  show as showTextToolbox,
 } from '../../Redux/State/TextEditor/TextToolbox'
-import { pickImageWithCredits } from '../../Redux/State/MediaPicker/ImagePicker'
-import { pickVideo } from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  createLinkEpic,
+  insertImageEpic,
+  insertVideoEpic,
+  pickImageEpic,
+  pickVideoEpic,
+  refreshTextToolboxStateEpic,
+  saveRangeEpic,
+} from './TextEditor'
+import {
+  IMAGE_INSERTED,
+  INSERT_IMAGE,
+  INSERT_VIDEO,
+  insertImage,
+  insertVideo,
+  VIDEO_INSERTED,
+} from '../../Redux/State/TextEditor/ParagraphToolbox'
+import {
+  of,
+  Subject,
+} from 'rxjs'
+import {
+  pickImageWithCredits,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  pickVideo,
+} from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  StateObservable,
+} from 'redux-observable'
 
 const containerMock = {
   parentNode: {

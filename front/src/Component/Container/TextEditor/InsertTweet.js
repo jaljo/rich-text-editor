@@ -1,8 +1,22 @@
+import {
+  clear,
+  initialize,
+  insertTweet,
+} from '../../../Redux/State/TextEditor/InsertTweet'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+  pipe,
+  prop,
+  tap,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
 import InsertTweet from '../../View/TextEditor/InsertTweet'
-import { connect } from 'react-redux'
-import { compose, pipe, prop, tap } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { clear, initialize, insertTweet } from '../../../Redux/State/TextEditor/InsertTweet'
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({

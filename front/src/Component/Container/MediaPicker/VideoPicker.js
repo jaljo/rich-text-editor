@@ -1,14 +1,21 @@
-import VideoPicker from '../../View/MediaPicker/VideoPicker'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { compose } from 'ramda'
-import { connect } from 'react-redux'
 import {
+  clear,
   fetchVideos,
+  pickVideo,
   scrollLeft,
   scrollRight,
-  pickVideo,
-  clear,
 } from '../../../Redux/State/MediaPicker/VideoPicker'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
+import VideoPicker from '../../View/MediaPicker/VideoPicker'
 
 // mapStateToProps :: State -> Props
 const mapStateToProps = state => ({

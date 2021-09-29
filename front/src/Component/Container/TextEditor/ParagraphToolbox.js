@@ -1,16 +1,26 @@
-import ParagraphToolbox from '../../View/TextEditor/ParagraphToolbox'
-import { connect } from 'react-redux'
-import { compose, prop } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { open as openMediaPicker } from '../../../Redux/State/MediaPicker/MediaPicker'
 import {
   clear,
   closeInsertTweet,
+  closeInsertYoutubeVideo,
   initialize,
   openInsertTweet,
   openInsertYoutubeVideo,
-  closeInsertYoutubeVideo,
 } from '../../../Redux/State/TextEditor/ParagraphToolbox'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
+import {
+  compose,
+  prop,
+} from 'ramda'
+import {
+  connect,
+} from 'react-redux'
+import {
+  open as openMediaPicker,
+} from '../../../Redux/State/MediaPicker/MediaPicker'
+import ParagraphToolbox from '../../View/TextEditor/ParagraphToolbox'
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({

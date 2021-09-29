@@ -1,6 +1,8 @@
-import React from 'react'
-import { isEmpty } from 'ramda'
 import './NoResult.scss'
+import {
+  isEmpty,
+} from 'ramda'
+import React from 'react'
 
 // NoResult :: Props -> React.Component
 const NoResult = ({

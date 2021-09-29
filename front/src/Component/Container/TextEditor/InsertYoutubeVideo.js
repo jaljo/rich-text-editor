@@ -1,8 +1,22 @@
-import InsertYoutubeVideo from '../../View/TextEditor/InsertYoutubeVideo'
+import {
+  apply,
+  compose,
+  path,
+  pipe,
+  prop,
+  tap,
+} from 'ramda'
+import {
+  clear,
+  initialize,
+  insertYoutubeVideo,
+} from '../../../Redux/State/TextEditor/InsertYoutubeVideo'
+import {
+  componentDidMount,
+  componentWillUnmount,
+} from 'react-functional-lifecycle'
 import { connect } from 'react-redux'
-import { clear, initialize, insertYoutubeVideo } from '../../../Redux/State/TextEditor/InsertYoutubeVideo'
-import { apply, compose, path, pipe, tap, prop } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
+import InsertYoutubeVideo from '../../View/TextEditor/InsertYoutubeVideo'
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({

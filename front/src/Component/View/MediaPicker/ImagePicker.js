@@ -1,7 +1,9 @@
-import React from 'react'
-import { containsTenItems } from '../../../Util'
 import './ImagePicker.scss'
+import {
+  containsTenItems,
+} from '../../../Util'
 import NoResult from '../List/NoResult'
+import React from 'react'
 
 // ImagePicker :: Props -> React.Component
 const ImagePicker = ({

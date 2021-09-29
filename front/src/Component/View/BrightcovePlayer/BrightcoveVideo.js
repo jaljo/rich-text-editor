@@ -1,6 +1,8 @@
+import {
+  isNil,
+} from 'ramda'
 import React from 'react'
 import uniqid from 'uniqid'
-import { isNil } from 'ramda'
 
 //  BrightcoveVideo :: Props -> React.Component
 const BrightcoveVideo = ({
