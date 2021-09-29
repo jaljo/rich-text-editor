@@ -12,8 +12,7 @@ import {
 } from '../../Redux/State/MediaPicker/VideoPicker'
 import { join, prop, compose, lte, length } from 'ramda'
 
-// fetchVideosEpic :: (Observable Action Error, Observable State Error, Object)
-// -> Observable Action.VIDEOS_RECEIVED
+// fetchVideosEpic :: Epic -> Observable Action
 export const fetchVideosEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_VIDEOS),

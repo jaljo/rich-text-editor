@@ -40,8 +40,7 @@ export const loadPlayerEpic = action$ => action$.pipe(
 // getVideoElement :: String -> Element.VIDEO
 const getVideoElement = id => document.querySelector(`video[data-video-id="${id}"]`)
 
-// renderVideoEpic :: (Observable Action Error, Observable State Error, Object)
-// -> Observable Action.VIDEO_RENDERED
+// renderVideoEpic :: Epic -> Observable Action
 export const renderVideoEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(RENDER_VIDEO, VIDEO_INSERTED),
@@ -61,8 +60,7 @@ export const renderVideoEpic = (action$, state$, { window }) =>
     logObservableError(),
   )
 
-// removeVideoEpic :: (Observable Action Error, Observable State Error, Object)
-/// -> Observable Action.VIDEO_REMOVED
+// removeVideoEpic :: Epic -> Observable Action
 export const removeVideoEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(REMOVE_VIDEO),

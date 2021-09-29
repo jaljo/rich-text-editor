@@ -92,8 +92,11 @@ const moveCarretAfterPastedTextEpic = (action$, state$, { window }) =>
     logObservableError(),
   )
 
-// isClipboardAccessGranted :: PermissionStatus -> Boolean
-// @see https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API
+ *
+ * isClipboardAccessGranted :: PermissionStatus -> Boolean
+ */
 const isClipboardAccessGranted = compose(equals('granted'), prop('state'))
 
 // isTextHighlighted :: Selection -> Boolean

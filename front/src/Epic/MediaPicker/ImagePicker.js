@@ -71,8 +71,7 @@ export const changePageEpic = (action$, state$, { fetchApi }) =>
     logObservableError(),
   )
 
-// ensurePickedImageHasCreditsEpic :: (Observable Action Error, Observable State Error)
-// -> Maybe Observable Action.PICK_IMAGE_WITH_CREDITS Observable Action.ERROR
+// ensurePickedImageHasCreditsEpic :: Epic -> Observable Action ERROR
 export const ensurePickedImageHasCreditsEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_IMAGE),

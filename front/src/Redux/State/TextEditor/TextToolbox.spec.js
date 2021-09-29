@@ -33,8 +33,10 @@ describe('Redux :: State :: TextEditor :: TextToolbox', () => {
     ).toEqual(INITIAL_STATE);
   });
 
-  // this should never be possible to have multiple visibles instances,
-  // we only use this for test purpose.
+  /**
+   * this should never be possible to have multiple visibles instances, we only
+   * use this for test purpose.
+   */
   const multipleInstances = {
     'instance-a': { ...INSTANCE_INITIAL_STATE, visible: true },
     'instance-b': { ...INSTANCE_INITIAL_STATE, visible: true },
