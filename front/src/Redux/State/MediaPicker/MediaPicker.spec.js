@@ -6,41 +6,41 @@ import {
   openImagePicker,
   openVideoPicker,
   INITIAL_STATE,
-} from './MediaPicker'
+} from "./MediaPicker"
 
-describe('Redux :: State :: MediaPicker :: MediaPicker', () => {
-  it('reduces to initial state by default', () => {
+describe("Redux :: State :: MediaPicker :: MediaPicker", () => {
+  it("reduces to initial state by default", () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
 
-  it('reduces open', () => {
+  it("reduces open", () => {
     expect(
-      reducer(INITIAL_STATE, open('mock-domain', { editor: 'test' }))
+      reducer(INITIAL_STATE, open("mock-domain", { editor: "test" }))
     ).toEqual({
       ...INITIAL_STATE,
       opened: true,
-      domain: 'mock-domain',
+      domain: "mock-domain",
       imagePickerOpened: true,
-      extra: { editor: 'test' },
+      extra: { editor: "test" },
     });
 
     expect(
-      reducer(INITIAL_STATE, open('mock-domain', null, 'videoPicker'))
+      reducer(INITIAL_STATE, open("mock-domain", null, "videoPicker"))
     ).toEqual({
       ...INITIAL_STATE,
       opened: true,
-      domain: 'mock-domain',
+      domain: "mock-domain",
       videoPickerOpened: true,
     });
   });
 
-  it('reduces close', () => {
+  it("reduces close", () => {
     expect(
       reducer(INITIAL_STATE, close())
     ).toEqual(INITIAL_STATE);
   });
 
-  it('reduces open image picker', () => {
+  it("reduces open image picker", () => {
     expect(
       reducer(INITIAL_STATE, openImagePicker())
     ).toEqual({
@@ -49,7 +49,7 @@ describe('Redux :: State :: MediaPicker :: MediaPicker', () => {
     });
   });
 
-  it('reduces openVideoPicker', () => {
+  it("reduces openVideoPicker", () => {
     expect(
       reducer(INITIAL_STATE, openVideoPicker())
     ).toEqual({
@@ -58,7 +58,7 @@ describe('Redux :: State :: MediaPicker :: MediaPicker', () => {
     });
   });
 
-  it('reduces clear', () => {
+  it("reduces clear", () => {
     expect(
       reducer(INITIAL_STATE, clear())
     ).toEqual(INITIAL_STATE);

@@ -1,10 +1,10 @@
-import { StateObservable } from 'redux-observable'
-import { of, Subject } from 'rxjs'
+import { StateObservable } from "redux-observable"
+import { of, Subject } from "rxjs"
 import {
   fetchEmbedTweetEpic,
   insertTweetEpic,
   renderInsertedTweetEpic,
-} from './InsertTweet'
+} from "./InsertTweet"
 import {
   insertTweet,
   tweetInserted,
@@ -12,8 +12,8 @@ import {
   TWEET_INSERTED,
   EMBED_TWEET_FETCHED,
   ERROR,
-} from '../../Redux/State/TextEditor/InsertTweet'
-import { RENDER_TWEET } from '../../Redux/State/Tweet'
+} from "../../Redux/State/TextEditor/InsertTweet"
+import { RENDER_TWEET } from "../../Redux/State/Tweet"
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -24,11 +24,11 @@ beforeEach(() => {
   `;
 });
 
-describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
+describe("Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic", () => {
   const insertTweet$ = of(insertTweet());
   const state$ = new StateObservable(new Subject(), {});
 
-  it('dispatches embedTweetFetched action', done => {
+  it("dispatches embedTweetFetched action", done => {
     const dependencies = {
       fetchApi: () => Promise.resolve({ body: {}}),
     };
@@ -43,9 +43,9 @@ describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
       .catch(err => { console.error(err); done() });
   }, 1000);
 
-  it('dispatches error action', done => {
+  it("dispatches error action", done => {
     const dependencies = {
-      fetchApi: () => Promise.reject('fail !'),
+      fetchApi: () => Promise.reject("fail !"),
     };
 
     fetchEmbedTweetEpic(insertTweet$, state$, dependencies)
@@ -59,22 +59,22 @@ describe('Epic :: TextEditor :: InsertTweet :: fetchEmbedTweetEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
+describe("Epic :: TextEditor :: InsertTweet :: insertTweetEpic", () => {
   const state$ = new StateObservable(new Subject(), {
     TextEditor: {
       ParagraphToolbox: {
-        'editor-name': {
+        "editor-name": {
           targetNodeIndex: 1,
         },
       },
     },
   });
 
-  it('dispatches tweetInserted action', done => {
+  it("dispatches tweetInserted action", done => {
     const embedTweetFetched$ = of(embedTweetFetched(
-      'editor-name',
-      '<blockquote><p>test</p></blockquote>',
-      'https://twitter.com/realDonaldTrump/status/1083756525196320773'
+      "editor-name",
+      "<blockquote><p>test</p></blockquote>",
+      "https://twitter.com/realDonaldTrump/status/1083756525196320773"
     ));
 
     insertTweetEpic(embedTweetFetched$, state$)
@@ -87,11 +87,11 @@ describe('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
       .catch(err => { console.error(err); done() });
   }, 1000);
 
-  it('dispatches error action', done => {
+  it("dispatches error action", done => {
     const embedTweetFetched$ = of(embedTweetFetched(
-      'wrong-editor-name',
-      'badly formatted html string',
-      'wrong url',
+      "wrong-editor-name",
+      "badly formatted html string",
+      "wrong url",
     ));
 
     insertTweetEpic(embedTweetFetched$, state$)
@@ -105,9 +105,9 @@ describe('Epic :: TextEditor :: InsertTweet :: insertTweetEpic', () => {
   }, 1000);
 });
 
-describe('Epic :: TextEditor :: InsertTweet', () => {
-  it('dispatches renderTweet action', done => {
-    const tweetInserted$ = of(tweetInserted('editor-name', '1', 'zxylog', '<p></p>'));
+describe("Epic :: TextEditor :: InsertTweet", () => {
+  it("dispatches renderTweet action", done => {
+    const tweetInserted$ = of(tweetInserted("editor-name", "1", "zxylog", "<p></p>"));
     const state$ = new StateObservable(new Subject(), {});
 
     renderInsertedTweetEpic(tweetInserted$, state$)

@@ -1,14 +1,14 @@
-import './Style/Main.scss'
-import App from './Component/App'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import rootEpic from './Epic'
-import { applyMiddleware, createStore } from 'redux'
-import { createEpicMiddleware } from 'redux-observable'
-import { default as mainReducer, debug } from './Redux/State'
+import "./Style/Main.scss"
+import App from "./Component/App"
+import React from "react"
+import ReactDOM from "react-dom"
+import rootEpic from "./Epic"
+import { applyMiddleware, createStore } from "redux"
+import { createEpicMiddleware } from "redux-observable"
+import { default as mainReducer, debug } from "./Redux/State"
 
 const defaultOptions = {
-  method: 'GET',
+  method: "GET",
   headers: {},
 }
 
@@ -30,4 +30,4 @@ const store = createStore(reducer, reducer(), middleware);
 
 epicMiddleware.run(rootEpic);
 
-ReactDOM.render(<App store={store}/>, document.getElementById('root'));
+ReactDOM.render(<App store={store}/>, document.getElementById("root"));

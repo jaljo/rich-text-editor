@@ -1,15 +1,15 @@
-import { pipe, tap } from 'ramda'
+import { pipe, tap } from "ramda"
 
 // createWrapper :: String -> Element
 const createWrapper = body => pipe(
   tap(e => e.innerHTML = body)
-)(document.createElement('div'))
+)(document.createElement("div"))
 
 // createOriginalTweetElement :: Element, Object -> Element
 const createOriginalTweetElement = (tweetElement, originalHtmlMarkups) => pipe(
   tap(wrapper => wrapper.innerHTML = originalHtmlMarkups[tweetElement.dataset.tweetId]),
   wrapper => wrapper.firstChild,
-)(document.createElement('div'))
+)(document.createElement("div"))
 
 // sanitizeTweet :: Element, Object -> Void
 const sanitizeTweet = (tweetElement, originalHtmlMarkups) => tweetElement
@@ -23,19 +23,19 @@ const sanitizeTweet = (tweetElement, originalHtmlMarkups) => tweetElement
 // Reverts rendered tweets to their embed markup.
 const sanitizeTweets = renderedTweets => pipe(
   tap(wrapper => Array
-    .from(wrapper.getElementsByClassName('knp-rendered-tweet'))
+    .from(wrapper.getElementsByClassName("knp-rendered-tweet"))
     .reverse()
     .map(tweetElement => sanitizeTweet(tweetElement, renderedTweets))
   )
 )
 
 // sanitizeVideo :: Element -> Element
-const sanitizeVideo = videoElement => videoElement.innerHTML = ''
+const sanitizeVideo = videoElement => videoElement.innerHTML = ""
 
 // sanitizeBrightcoveVideos :: Node -> String
 const sanitizeBrightcoveVideos = pipe(
   tap(wrapper => Array
-    .from(wrapper.getElementsByClassName('knp-rendered-video'))
+    .from(wrapper.getElementsByClassName("knp-rendered-video"))
     .map(sanitizeVideo)
   )
 )

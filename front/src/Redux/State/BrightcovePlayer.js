@@ -1,5 +1,5 @@
-import { createReducer } from '../../Util'
-import { always, append } from 'ramda'
+import { createReducer } from "../../Util"
+import { always, append } from "ramda"
 
 // BrightcovePlayer initial state
 export const INITIAL_STATE = {
@@ -10,12 +10,12 @@ export const INITIAL_STATE = {
 }
 
 // BrightcovePlayer action types
-export const LOAD_PLAYER = '@knp/BrightcovePlayer/LOAD_PLAYER'
-export const PLAYER_LOADED = '@knp/BrightcovePlayer/PLAYER_LOADED'
-export const RENDER_VIDEO = '@knp/BrightcovePlayer/RENDER_VIDEO'
-export const REMOVE_VIDEO = '@knp/BrightcovePlayer/REMOVE_VIDEO'
-export const VIDEO_RENDERED = '@knp/BrightcovePlayer/VIDEO_RENDERED'
-export const VIDEO_REMOVED = '@knp/BrightcovePlayer/VIDEO_REMOVED'
+export const LOAD_PLAYER = "@knp/BrightcovePlayer/LOAD_PLAYER"
+export const PLAYER_LOADED = "@knp/BrightcovePlayer/PLAYER_LOADED"
+export const RENDER_VIDEO = "@knp/BrightcovePlayer/RENDER_VIDEO"
+export const REMOVE_VIDEO = "@knp/BrightcovePlayer/REMOVE_VIDEO"
+export const VIDEO_RENDERED = "@knp/BrightcovePlayer/VIDEO_RENDERED"
+export const VIDEO_REMOVED = "@knp/BrightcovePlayer/VIDEO_REMOVED"
 
 // loadPlayer :: String -> Action.LOAD_PLAYER
 export const loadPlayer = locale => ({

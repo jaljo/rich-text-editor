@@ -1,5 +1,5 @@
-import { createReducer } from '../../../Util'
-import { always, when, lt, dec, inc } from 'ramda'
+import { createReducer } from "../../../Util"
+import { always, when, lt, dec, inc } from "ramda"
 
 // @type Video = {
 //   id :: Number,
@@ -13,24 +13,24 @@ export const INITIAL_STATE = {
   isFetching: false,
   videos: [],
   page: 1,
-  searchString: '',
+  searchString: "",
   limit: 10,
 }
 
 // VideoPicker action types
-export const FETCH_VIDEOS = '@knp/MediaPicker/VideoPicker/FETCH_VIDEOS'
-export const SEARCH_VIDEOS = '@knp/MediaPicker/VideoPicker/SEARCH_VIDEOS'
-export const VIDEOS_RECEIVED = '@knp/MediaPicker/VideoPicker/VIDEOS_RECEIVED'
-export const SCROLL_LEFT = '@knp/MediaPicker/VideoPicker/SCROLL_LEFT'
-export const SCROLL_RIGHT = '@knp/MediaPicker/VideoPicker/SCROLL_RIGHT'
-export const PICK_VIDEO = '@knp/MediaPicker/VideoPicker/PICK_VIDEO'
-export const CLEAR = '@knp/MediaPicker/VideoPicker/CLEAR'
+export const FETCH_VIDEOS = "@knp/MediaPicker/VideoPicker/FETCH_VIDEOS"
+export const SEARCH_VIDEOS = "@knp/MediaPicker/VideoPicker/SEARCH_VIDEOS"
+export const VIDEOS_RECEIVED = "@knp/MediaPicker/VideoPicker/VIDEOS_RECEIVED"
+export const SCROLL_LEFT = "@knp/MediaPicker/VideoPicker/SCROLL_LEFT"
+export const SCROLL_RIGHT = "@knp/MediaPicker/VideoPicker/SCROLL_RIGHT"
+export const PICK_VIDEO = "@knp/MediaPicker/VideoPicker/PICK_VIDEO"
+export const CLEAR = "@knp/MediaPicker/VideoPicker/CLEAR"
 
 // fetchVideos :: () -> Action.FETCH_VIDEOS
 export const fetchVideos = always({ type: FETCH_VIDEOS })
 
 // searchVideos :: String -> Action.SEARCH_VIDEOS
-export const searchVideos = (searchString = '') => ({
+export const searchVideos = (searchString = "") => ({
   type: SEARCH_VIDEOS,
   searchString,
 })

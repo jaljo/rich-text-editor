@@ -1,8 +1,8 @@
-import ParagraphToolbox from '../../View/TextEditor/ParagraphToolbox'
-import { connect } from 'react-redux'
-import { compose, prop } from 'ramda'
-import { componentDidMount, componentWillUnmount } from 'react-functional-lifecycle'
-import { open as openMediaPicker } from '../../../Redux/State/MediaPicker/MediaPicker'
+import ParagraphToolbox from "../../View/TextEditor/ParagraphToolbox"
+import { connect } from "react-redux"
+import { compose, prop } from "ramda"
+import { componentDidMount, componentWillUnmount } from "react-functional-lifecycle"
+import { open as openMediaPicker } from "../../../Redux/State/MediaPicker/MediaPicker"
 import {
   clear,
   closeInsertTweet,
@@ -10,15 +10,15 @@ import {
   openInsertTweet,
   openInsertYoutubeVideo,
   closeInsertYoutubeVideo,
-} from '../../../Redux/State/TextEditor/ParagraphToolbox'
+} from "../../../Redux/State/TextEditor/ParagraphToolbox"
 
 // mapStateToProps :: (State, Props) -> Props
 const mapStateToProps = (state, props) => ({
-  insertTweetOpened: prop('insertTweetOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
-  insertYoutubeVideoOpened: prop('insertYoutubeVideoOpened', state.TextEditor.ParagraphToolbox[props.editorName]),
-  isVisible: prop('visible', state.TextEditor.ParagraphToolbox[props.editorName]),
-  top: prop('top', state.TextEditor.ParagraphToolbox[props.editorName]),
-  mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === 'TEXT_EDITOR',
+  insertTweetOpened: prop("insertTweetOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
+  insertYoutubeVideoOpened: prop("insertYoutubeVideoOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
+  isVisible: prop("visible", state.TextEditor.ParagraphToolbox[props.editorName]),
+  top: prop("top", state.TextEditor.ParagraphToolbox[props.editorName]),
+  mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === "TEXT_EDITOR",
 })
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props

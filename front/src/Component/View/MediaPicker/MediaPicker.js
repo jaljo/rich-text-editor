@@ -1,7 +1,7 @@
-import React from 'react'
-import './MediaPicker.scss'
-import ImagePicker from '../../Container/MediaPicker/ImagePicker'
-import VideoPicker from '../../Container/MediaPicker/VideoPicker'
+import React from "react"
+import "./MediaPicker.scss"
+import ImagePicker from "../../Container/MediaPicker/ImagePicker"
+import VideoPicker from "../../Container/MediaPicker/VideoPicker"
 
 // MediaPicker :: Props -> React.Component
 const MediaPicker = ({
@@ -16,12 +16,12 @@ const MediaPicker = ({
   openImagePicker,
   openVideoPicker,
 }) =>
-  <div data-is="media-picker" className={`${!isOpened ? 'closed' : ''}`}>
+  <div data-is="media-picker" className={`${!isOpened ? "closed" : ""}`}>
     <div className="search-images">
       <form onSubmit={e => e.preventDefault()}>
         { isImagePickerOpened &&
           <div className="field">
-            <div className={`control has-icons-left ${isFetchingImages ? 'is-loading' : ''}`}>
+            <div className={`control has-icons-left ${isFetchingImages ? "is-loading" : ""}`}>
               <input className="input" type="text" onKeyUp={searchImages} placeholder="Search images (Estonia)"/>
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
@@ -29,7 +29,7 @@ const MediaPicker = ({
         }
         { isVideoPickerOpened &&
           <div className="field">
-            <div className={`control has-icons-left ${isFetchingVideos ? 'is-loading' : ''}`}>
+            <div className={`control has-icons-left ${isFetchingVideos ? "is-loading" : ""}`}>
               <input className="input" type="text" onKeyUp={searchVideos} placeholder="Search videos"/>
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
@@ -38,7 +38,7 @@ const MediaPicker = ({
         <ul className="picker-buttons">
           <li>
             <p
-              className={`image-mode btn-knp ${isImagePickerOpened ? 'active' : ''}`}
+              className={`image-mode btn-knp ${isImagePickerOpened ? "active" : ""}`}
               onClick={e => isImagePickerOpened ? e.preventDefault() : openImagePicker()}
             ><span className="icomoon-font">c</span></p>
           </li>

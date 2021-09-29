@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { compose, F } from 'ramda'
-import { componentDidMount, shouldComponentUpdate } from 'react-functional-lifecycle'
-import { renderTweet } from '../../../Redux/State/Tweet'
+import React from "react"
+import { connect } from "react-redux"
+import { compose, F } from "ramda"
+import { componentDidMount, shouldComponentUpdate } from "react-functional-lifecycle"
+import { renderTweet } from "../../../Redux/State/Tweet"
 
 // mapDispatchToProps :: Function -> Props
 const mapDispatchToProps = dispatch => ({

@@ -1,27 +1,27 @@
-import { always, dec, inc, lt, when } from 'ramda'
-import { createReducer } from '../../../Util'
+import { always, dec, inc, lt, when } from "ramda"
+import { createReducer } from "../../../Util"
 
 // image picker initial state
 export const INITIAL_STATE = {
   isFetching: false,
   images: [],
   page: 1,
-  searchString: '',
+  searchString: "",
   error: null,
 }
 
 // image picker action types
-export const FETCH_IMAGES = '@knp/MediaPicker/ImagePicker/FETCH_IMAGES'
-export const RECEIVED_IMAGES = '@knp/MediaPicker/ImagePicker/RECEIVED_IMAGES'
-export const SCROLL_LEFT = '@knp/MediaPicker/ImagePicker/SCROLL_LEFT'
-export const SCROLL_RIGHT = '@knp/MediaPicker/ImagePicker/SCROLL_RIGHT'
-export const PICK_IMAGE = '@knp/MediaPicker/ImagePicker/PICK_IMAGE'
-export const PICK_IMAGE_WITH_CREDITS = '@knp/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS'
-export const ERROR = '@knp/MediaPicker/ImagePicker/ERROR'
-export const CLEAR = '@knp/MediaPicker/ImagePicker/CLEAR'
+export const FETCH_IMAGES = "@knp/MediaPicker/ImagePicker/FETCH_IMAGES"
+export const RECEIVED_IMAGES = "@knp/MediaPicker/ImagePicker/RECEIVED_IMAGES"
+export const SCROLL_LEFT = "@knp/MediaPicker/ImagePicker/SCROLL_LEFT"
+export const SCROLL_RIGHT = "@knp/MediaPicker/ImagePicker/SCROLL_RIGHT"
+export const PICK_IMAGE = "@knp/MediaPicker/ImagePicker/PICK_IMAGE"
+export const PICK_IMAGE_WITH_CREDITS = "@knp/MediaPicker/ImagePicker/PICK_IMAGE_WITH_CREDITS"
+export const ERROR = "@knp/MediaPicker/ImagePicker/ERROR"
+export const CLEAR = "@knp/MediaPicker/ImagePicker/CLEAR"
 
 // fetchImages :: String -> Action
-export const fetchImages = (searchString = '') => ({
+export const fetchImages = (searchString = "") => ({
   type: FETCH_IMAGES,
   searchString,
 })
