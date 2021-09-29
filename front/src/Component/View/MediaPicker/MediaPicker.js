@@ -5,31 +5,31 @@ import VideoPicker from '../../Container/MediaPicker/VideoPicker'
 
 // MediaPicker :: Props -> React.Component
 const MediaPicker = ({
-  isOpened,
   close,
   isFetchingImages,
   isFetchingVideos,
   isImagePickerOpened,
+  isOpened,
   isVideoPickerOpened,
+  openImagePicker,
   searchImages,
   searchVideos,
-  openImagePicker,
 }) =>
-  <div data-is="media-picker" className={`${!isOpened ? 'closed' : ''}`}>
+  <div data-is="media-picker" className={ `${ !isOpened ? 'closed' : '' }` }>
     <div className="search-images">
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={ e => e.preventDefault() }>
         { isImagePickerOpened &&
           <div className="field">
-            <div className={`control has-icons-left ${isFetchingImages ? 'is-loading' : ''}`}>
-              <input className="input" type="text" onKeyUp={searchImages} placeholder="Search images (Estonia)"/>
+            <div className={ `control has-icons-left ${ isFetchingImages ? 'is-loading' : '' }` }>
+              <input className="input" type="text" onKeyUp={ searchImages } placeholder="Search images (Estonia)"/>
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
           </div>
         }
         { isVideoPickerOpened &&
           <div className="field">
-            <div className={`control has-icons-left ${isFetchingVideos ? 'is-loading' : ''}`}>
-              <input className="input" type="text" onKeyUp={searchVideos} placeholder="Search videos"/>
+            <div className={ `control has-icons-left ${ isFetchingVideos ? 'is-loading' : '' }` }>
+              <input className="input" type="text" onKeyUp={ searchVideos } placeholder="Search videos"/>
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
           </div>
@@ -37,8 +37,8 @@ const MediaPicker = ({
         <ul className="picker-buttons">
           <li>
             <p
-              className={`image-mode btn-knp ${isImagePickerOpened ? 'active' : ''}`}
-              onClick={e => isImagePickerOpened ? e.preventDefault() : openImagePicker()}
+              className={ `image-mode btn-knp ${isImagePickerOpened ? 'active' : '' }` }
+              onClick={ e => isImagePickerOpened ? e.preventDefault() : openImagePicker() }
             ><span className="icomoon-font">c</span></p>
           </li>
           {/* @TODO fix this features before re-enabling
@@ -54,10 +54,10 @@ const MediaPicker = ({
     </div>
 
     { isImagePickerOpened && <ImagePicker/> }
-    { isVideoPickerOpened && <VideoPicker/>}
+    { isVideoPickerOpened && <VideoPicker/> }
 
     <p className="btn-knp close">
-      <span className="icomoon-font" onClick={close}>e</span>
+      <span className="icomoon-font" onClick={ close }>e</span>
     </p>
   </div>
 

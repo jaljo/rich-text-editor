@@ -6,20 +6,20 @@ import React from 'react'
 
 // NoResult :: Props -> React.Component
 const NoResult = ({
-  resource,
+  children,
   collection,
   isLoading,
-  children,
+  resource,
 }) =>
   <React.Fragment>
-    {(!isLoading && isEmpty(collection)) &&
+    { (!isLoading && isEmpty(collection)) &&
       <div className="message is-info">
         <div className="message-body">
-          There is no {resource} matching your search criterias.
+          There is no { resource } matching your search criterias.
         </div>
       </div>
     }
-    {!isEmpty(collection) && children}
+    { !isEmpty(collection) && children }
   </React.Fragment>
 
 export default NoResult;

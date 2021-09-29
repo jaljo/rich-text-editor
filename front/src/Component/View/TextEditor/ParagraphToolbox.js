@@ -6,26 +6,26 @@ import React from 'react'
 // ParagraphToolbox :: Props -> React.Component
 const ParagraphToolbox = ({
   closeInsertTweet,
+  closeInsertYoutubeVideo,
   editorName,
   insertTweetOpened = false,
+  insertYoutubeVideoOpened = false,
   isVisible = false,
+  mediaPickerOpened,
   openInsertTweet,
+  openInsertYoutubeVideo,
   openMediaPicker,
   top = 0,
-  insertYoutubeVideoOpened = false,
-  openInsertYoutubeVideo,
-  closeInsertYoutubeVideo,
-  mediaPickerOpened,
 }) =>
   <aside
-    className={`paragraph-toolbox ${isVisible ? 'visible' : ''}`}
-    style={{ top: top - 5 + 'px' }}
+    className={ `paragraph-toolbox ${ isVisible ? 'visible' : '' }` }
+    style={ { top: top - 5 + 'px' } }
   >
     <ul>
       <li>
         <button
-          className={`btn-knp icomoon-font ${mediaPickerOpened ? 'active' : ''}`}
-          onClick={() => openMediaPicker('TEXT_EDITOR', { editorName })}
+          className={ `btn-knp icomoon-font ${ mediaPickerOpened ? 'active' : '' }` }
+          onClick={ () => openMediaPicker('TEXT_EDITOR', { editorName }) }
         >é</button>
       </li>
       {/* @TODO fix these features before re-enabling this
@@ -38,19 +38,19 @@ const ParagraphToolbox = ({
       */}
       <li>
         <button
-          className={`btn-knp icomoon-font ${insertTweetOpened ? 'active' : ''}`}
-          onClick={ insertTweetOpened ? closeInsertTweet : openInsertTweet}
+          className={ `btn-knp icomoon-font ${ insertTweetOpened ? 'active' : '' }` }
+          onClick={ insertTweetOpened ? closeInsertTweet : openInsertTweet }
         >0</button>
       </li>
       <li>
         <button
-          className={`btn-knp icomoon-font ${insertYoutubeVideoOpened ? 'active' : ''}`}
+          className={ `btn-knp icomoon-font ${ insertYoutubeVideoOpened ? 'active' : '' }` }
           onClick={ insertYoutubeVideoOpened ? closeInsertYoutubeVideo: openInsertYoutubeVideo }
         >Y</button>
       </li>
     </ul>
-    { insertTweetOpened && <InsertTweet editorName={editorName} /> }
-    { insertYoutubeVideoOpened && <InsertYoutubeVideo editorName={editorName} /> }
+    { insertTweetOpened && <InsertTweet editorName={ editorName } /> }
+    { insertYoutubeVideoOpened && <InsertYoutubeVideo editorName={ editorName } /> }
   </aside>
 
 export default ParagraphToolbox;

@@ -5,27 +5,27 @@ import TextToolbox from '../../Container/TextEditor/TextToolbox'
 
 // TextEditor :: Props -> React.Component
 const TextEditor = ({
+  children,
   click,
   editorName,
   keyDown,
   paste,
   selectText,
-  children,
 }) =>
   <div className="text-editor">
-    <ParagraphToolbox editorName={editorName} />
-    <TextToolbox editorName={editorName} />
+    <ParagraphToolbox editorName={ editorName } />
+    <TextToolbox editorName={ editorName } />
     <article
-      data-editor-name={editorName}
+      data-editor-name={ editorName }
       className="edited-text-root"
-      contentEditable={true}
-      suppressContentEditableWarning={true}
-      onClick={e => click(editorName, e.target)}
-      onKeyDown={keyDown}
-      onPaste={paste}
-      onSelect={() => selectText(editorName)}
+      contentEditable={ true }
+      suppressContentEditableWarning={ true }
+      onClick={ e => click(editorName, e.target) }
+      onKeyDown={ keyDown }
+      onPaste={ paste }
+      onSelect={ () => selectText(editorName) }
     >
-      {children}
+      { children }
     </article>
   </div>
 

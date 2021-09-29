@@ -33,7 +33,7 @@ const didMount = ({
 const View = ({
   uid,
 }) =>
-  <div id={`tweet-${uid}`}></div>
+  <div id={ `tweet-${ uid }` }></div>
 
 // lifecycles :: React.Component -> React.Component
 const lifecycles = compose(

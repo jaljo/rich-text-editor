@@ -42,4 +42,4 @@ const store = createStore(reducer, reducer(), middleware);
 
 epicMiddleware.run(rootEpic);
 
-ReactDOM.render(<App store={store}/>, document.getElementById('root'));
+ReactDOM.render(<App store={ store }/>, document.getElementById('root'));

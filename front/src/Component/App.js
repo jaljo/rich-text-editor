@@ -11,7 +11,7 @@ import TextEditor from './Container/TextEditor/TextEditor'
 const App = ({
   store,
 }) =>
-  <Provider store={store}>
+  <Provider store={ store }>
     <main>
       <BrightcovePlayer/>
       <MediaPicker/>
