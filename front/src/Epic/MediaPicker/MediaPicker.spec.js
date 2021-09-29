@@ -15,7 +15,7 @@ describe('Epic :: ArticleEditor :: closeMediaPickerEpic', () => {
       expect(actual).toEqual(expected);
     });
 
-    testScheduler.run(({ hot, cold, expectObservable }) => {
+    testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('ab-ef-gh-ij', {
         a: open(),
         b: pickImageWithCredits(),

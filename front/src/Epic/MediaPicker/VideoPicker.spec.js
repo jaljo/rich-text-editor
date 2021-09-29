@@ -15,7 +15,7 @@ import {
 } from '../../Redux/State/MediaPicker/VideoPicker'
 
 describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
-  it('dispatches videosReceived', done => {
+  it('dispatches videosReceived', async () => {
     const fetchVideos$ = of(fetchVideos());
     const state$ = new StateObservable(new Subject(), {
       MediaPicker: {
@@ -30,14 +30,11 @@ describe('Epic :: MediaPicker :: VideoPicker :: fetchVideosEpic', () => {
       fetchApi: () =>  new Promise(resolve => resolve({})),
     };
 
-    fetchVideosEpic(fetchVideos$, state$, dependencies)
+    const action = await fetchVideosEpic(fetchVideos$, state$, dependencies)
       .toPromise(Promise)
-      .then(action => {
-        expect(action.type).toEqual(VIDEOS_RECEIVED)
+    ;
 
-        done()
-      })
-      .catch(err => { console.error(err); done() });
+    expect(action.type).toEqual(VIDEOS_RECEIVED);
   }, 1000);
 });
 
@@ -47,7 +44,7 @@ describe('Epic :: MediaPicker :: VideoPicker :: searchVideosEpic', () => {
       expect(actual).toEqual(expected);
     });
 
-    testScheduler.run(({ hot, cold, expectObservable }) => {
+    testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('a-b----c', {
         a: scrollLeft(),
         b: scrollRight(),
