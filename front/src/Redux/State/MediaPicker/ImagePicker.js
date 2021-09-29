@@ -105,5 +105,5 @@ export default createReducer(INITIAL_STATE, {
     ...state,
     error: message,
   }),
-  [CLEAR]: always(INITIAL_STATE)
+  [CLEAR]: always(INITIAL_STATE),
 })

@@ -54,7 +54,7 @@ export const renderVideoEpic = (action$, state$, { window }) =>
     map(([ video ]) => ({
       video,
       id: pathOr(null, ['dataset', 'videoId'], video),
-      originalHtmlMarkup: video.outerHTML
+      originalHtmlMarkup: video.outerHTML,
     })),
     tap(({ video }) => window['bc'](video)),
     map(({ id, originalHtmlMarkup }) => videoRendered(id, originalHtmlMarkup)),

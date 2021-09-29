@@ -17,7 +17,7 @@ import {
   openInsertTweet,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
 import {
-  open as openMediapicker
+  open as openMediapicker,
 } from '../../Redux/State/MediaPicker/MediaPicker'
 
 beforeEach(() => {
@@ -60,7 +60,7 @@ describe('Epic :: TextEditor :: InsertYoutubeVideo :: insertYoutubeVideoEpic', (
     TextEditor: {
       ParagraphToolbox: {
         'editor-name': {
-          targetNodeIndex: 1
+          targetNodeIndex: 1,
         },
       },
     },

@@ -34,8 +34,8 @@ const selectionMock = {
 };
 const dependencies = {
   window: {
-    getSelection: () => selectionMock
-  }
+    getSelection: () => selectionMock,
+  },
 };
 
 beforeEach(() => {
@@ -64,8 +64,8 @@ describe('Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic', () => {
   it('dont dispatches showTextToolbox (empty selection)', async () => {
     const dependencies = {
       window: {
-        getSelection: () => ({ type: 'Char'})
-      }
+        getSelection: () => ({ type: 'Char'}),
+      },
     };
 
     const action = await showTextToolboxEpic(selectText$, state$, dependencies)
@@ -91,8 +91,8 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic', () => {
   it('dispatches hideTextToolbox', async () => {
     const dependencies = {
       window: {
-        getSelection: () => ({ type: 'Char'})
-      }
+        getSelection: () => ({ type: 'Char'}),
+      },
     };
 
     const action = await hideAllTextToolboxesEpic(selectText$, state$, dependencies)
@@ -140,7 +140,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
         getSelection: () => ({
           anchorNode: {
             data: 'bla bla',
-            tagName: 'P'
+            tagName: 'P',
           },
         }),
       },
@@ -159,7 +159,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic', () => {
         getSelection: () => ({
           anchorNode: {
             data: null,
-            tagName: 'FIGURE'
+            tagName: 'FIGURE',
           },
         }),
       },
@@ -187,7 +187,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
           anchorNode: {
             data: 'this selection is not empty !',
             tagName: 'P',
-          }
+          },
         }),
       },
     };
@@ -216,7 +216,7 @@ describe('Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic', () 
           anchorNode: {
             data: null,
             tagName: 'P',
-          }
+          },
         }),
       },
     };

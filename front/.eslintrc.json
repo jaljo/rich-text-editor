@@ -15,6 +15,9 @@
     "sourceType": "module"
   },
   "rules": {
+    "arrow-spacing": "error",
+    "brace-style": "error",
+    "comma-dangle": ["error", "always-multiline"],
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "react/prop-types": "off"
   },

@@ -19,7 +19,7 @@ const imagesMock = [
   {
     id: 1,
     src: {
-      medium: "href"
+      medium: "href",
     },
     photographer_url: "photographer url",
     photographer: "photographer",
@@ -31,7 +31,7 @@ const transformedImages = [
     href: "href",
     legend: "photographer url",
     credit: "photographer",
-  }
+  },
 ];
 const dependencies = {
   fetchApi: () => Promise.resolve({

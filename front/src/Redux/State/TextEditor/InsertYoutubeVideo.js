@@ -49,7 +49,7 @@ export const clear = editorName => ({
 export default createReducer(INITIAL_STATE, {
   [INITIALIZE]: (state, { editorName }) => ({
     ...state,
-    [editorName]: {...INSTANCE_INITIAL_STATE}
+    [editorName]: {...INSTANCE_INITIAL_STATE},
   }),
 
   [INSERT_YOUTUBE_VIDEO]: (state, { editorName }) => ({
@@ -57,7 +57,7 @@ export default createReducer(INITIAL_STATE, {
     [editorName]: {
       ...state[editorName],
       error: false,
-    }
+    },
   }),
 
   [YOUTUBE_VIDEO_INSERTED]: (state, { editorName }) => ({
@@ -65,7 +65,7 @@ export default createReducer(INITIAL_STATE, {
     [editorName]: {
       ...state[editorName],
       error: false,
-    }
+    },
   }),
 
   [ERROR]: (state, { editorName }) => ({
@@ -73,7 +73,7 @@ export default createReducer(INITIAL_STATE, {
     [editorName]: {
       ...state[editorName],
       error: true,
-    }
+    },
   }),
 
   [CLEAR]: (state, { editorName }) => omit([editorName], state),

@@ -168,7 +168,7 @@ const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
     filter(node => !node.classList.contains('ttbx-mutation')),
     mergeMap(() => [
       hideAllTextToolboxes(),
-      hideAllParagraphToolboxes()
+      hideAllParagraphToolboxes(),
     ]),
     logObservableError(),
   )

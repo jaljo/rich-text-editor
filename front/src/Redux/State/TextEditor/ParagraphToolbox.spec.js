@@ -76,7 +76,7 @@ describe('Redux :: State :: TextEditor :: ParagraphToolbox', () => {
       'editor-name': {
         ...INSTANCE_INITIAL_STATE,
         insertTweetOpened: true,
-      }
+      },
     });
   });
 
@@ -87,7 +87,7 @@ describe('Redux :: State :: TextEditor :: ParagraphToolbox', () => {
       'editor-name': {
         ...INSTANCE_INITIAL_STATE,
         insertTweetOpened: false,
-      }
+      },
     });
   });
 });

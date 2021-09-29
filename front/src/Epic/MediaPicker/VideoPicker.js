@@ -8,7 +8,7 @@ import {
   SCROLL_LEFT,
   SCROLL_RIGHT,
   fetchVideos,
-  videosReceived
+  videosReceived,
 } from '../../Redux/State/MediaPicker/VideoPicker'
 import { join, prop, compose, lte, length } from 'ramda'
 

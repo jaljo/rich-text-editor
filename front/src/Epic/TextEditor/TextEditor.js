@@ -65,8 +65,8 @@ const createImageNode = (image, targetIndex, editorName) => {
     component: {
       src: image.href,
       title: image.legend,
-      alt: image.credit
-    }
+      alt: image.credit,
+    },
   };
 
   // render image component using react, then convert it to a valid DOM Node
