@@ -60,8 +60,10 @@ const getParagraphTopPosition = pipe(
   prop('anchorNode'),
   ifElse(
     isTextNode,
-    path(['parentElement', 'offsetTop']), // nodeType === Node.TEXT_NODE
-    prop('offsetTop'),                    // nodeType === Node.ELEMENT_NODE
+    // nodeType === Node.TEXT_NODE
+    path(['parentElement', 'offsetTop']),
+    // nodeType === Node.ELEMENT_NODE
+    prop('offsetTop'),
   )
 )
 

@@ -52,7 +52,8 @@ export const pickVideo = (videoId, domain, extra) => ({
   type: PICK_VIDEO,
   videoId,
   domain,
-  extra, // any extra values related to the given domain
+  // any extra values related to the given domain
+  extra,
 })
 
 // clear :: () -> Action.CLEAR

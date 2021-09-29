@@ -112,7 +112,7 @@ const YoutubeVideo = ({ component }) =>
 // Heading :: Props -> React.Component
 const Heading = ({ component, id }) => React.createElement(
   `h${component.size}`,
-  [], // empty props set
+  [],
   renderChildren(id, component.childComponents),
 )
 

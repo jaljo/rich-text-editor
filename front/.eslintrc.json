@@ -21,6 +21,7 @@
     "comma-spacing": ["error", { "before": false, "after": true }],
     "indent": ["error", 2],
     "keyword-spacing": ["error"],
+    "line-comment-position": ["error", { "position": "above" }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "react/prop-types": "off"
   },

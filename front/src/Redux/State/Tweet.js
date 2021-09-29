@@ -2,7 +2,8 @@ import { createReducer } from '../../Util'
 import { always } from 'ramda'
 
 export const INITIAL_STATE = {
-  renderedTweets: {}, // key: tweetId, value: originalHtmlMarkup
+  // key: tweetId, value: originalHtmlMarkup
+  renderedTweets: {},
 }
 
 export const RENDER_TWEET = '@knp/Tweet/RENDER_TWEET'

@@ -43,7 +43,8 @@ export const pickImage = (imageId, domain, extra) => ({
   type: PICK_IMAGE,
   imageId,
   domain,
-  extra, // any extra values related to the given domain
+  // any extra values related to the given domain
+  extra,
 })
 
 // pickImageWithCredits :: (Number, String, Object) -> Action
