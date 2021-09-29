@@ -1,5 +1,9 @@
-import { createReducer } from '../../../Util'
-import { omit } from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
+import {
+  omit,
+} from 'ramda'
 
 export const INITIAL_STATE = {}
 

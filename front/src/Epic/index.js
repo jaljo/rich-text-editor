@@ -1,5 +1,7 @@
-import { combineEpics } from 'redux-observable'
 import BrightcovePlayer from './BrightcovePlayer'
+import {
+  combineEpics,
+} from 'redux-observable'
 import ImagePicker from './MediaPicker/ImagePicker'
 import InsertTweet from './TextEditor/InsertTweet'
 import InsertYoutubeVideo from './TextEditor/InsertYoutubeVideo'

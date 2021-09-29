@@ -1,13 +1,13 @@
 import {
   clear,
   closeInsertTweet,
-  default as reducer,
   hideAll,
-  initialize,
-  openInsertTweet,
-  show,
   INITIAL_STATE,
+  initialize,
   INSTANCE_INITIAL_STATE,
+  openInsertTweet,
+  default as reducer,
+  show,
 } from './ParagraphToolbox'
 
 const instanceExists = {

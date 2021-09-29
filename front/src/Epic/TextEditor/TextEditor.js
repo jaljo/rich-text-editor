@@ -1,13 +1,3 @@
-import { renderToString } from 'react-dom/server'
-import { map, filter, withLatestFrom, ignoreElements, tap } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import { findById, logObservableError, getEditor } from '../../Util'
-import { brightcovePlayerIds } from '../../Const'
-import {
-  Image as createImage,
-  UnconnectedVideo,
-} from '../../Component/View/TextEditor/Widget'
-import { KEY_DOWN } from '../../Redux/State/TextEditor/TextEditor'
 import {
   allPass,
   apply,
@@ -21,27 +11,64 @@ import {
   prop,
 } from 'ramda'
 import {
-  closeLinkCreator,
-  saveRange,
-  refreshButtonsState,
-  OPEN_LINK_CREATOR,
   CLOSE_LINK_CREATOR,
+  closeLinkCreator,
   MUTATE,
+  OPEN_LINK_CREATOR,
+  refreshButtonsState,
+  saveRange,
   SHOW as SHOW_TEXT_TOOLBOX,
 } from '../../Redux/State/TextEditor/TextToolbox'
 import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  Image as createImage,
+  UnconnectedVideo,
+} from '../../Component/View/TextEditor/Widget'
+import {
+  filter,
+  ignoreElements,
+  map,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators'
+import {
+  findById,
+  getEditor,
+  logObservableError,
+} from '../../Util'
+import {
   imageInserted,
-  insertImage,
-  insertVideo,
-  videoInserted,
   INSERT_IMAGE,
   INSERT_VIDEO,
+  insertImage,
+  insertVideo,
   VIDEO_INSERTED,
+  videoInserted,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
-import { TWEET_INSERTED } from '../../Redux/State/TextEditor/InsertTweet'
-import { YOUTUBE_VIDEO_INSERTED } from '../../Redux/State/TextEditor/InsertYoutubeVideo'
-import { PICK_IMAGE_WITH_CREDITS } from '../../Redux/State/MediaPicker/ImagePicker'
-import { PICK_VIDEO } from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  brightcovePlayerIds,
+} from '../../Const'
+import {
+  KEY_DOWN,
+} from '../../Redux/State/TextEditor/TextEditor'
+import {
+  PICK_IMAGE_WITH_CREDITS,
+} from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  PICK_VIDEO,
+} from '../../Redux/State/MediaPicker/VideoPicker'
+import {
+  renderToString,
+} from 'react-dom/server'
+import {
+  TWEET_INSERTED,
+} from '../../Redux/State/TextEditor/InsertTweet'
+import {
+  YOUTUBE_VIDEO_INSERTED,
+} from '../../Redux/State/TextEditor/InsertYoutubeVideo'
 
 // getRootNodesAsArray :: String -> [Node]
 export const getRootNodesAsArray = editorName => Array.from(

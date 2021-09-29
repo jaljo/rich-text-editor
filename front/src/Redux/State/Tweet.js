@@ -1,5 +1,9 @@
-import { createReducer } from '../../Util'
-import { always } from 'ramda'
+import {
+  always,
+} from 'ramda'
+import {
+  createReducer,
+} from '../../Util'
 
 // key: tweetId, value: originalHtmlMarkup
 export const INITIAL_STATE = {

@@ -1,16 +1,34 @@
-import { map, mergeMap, debounceTime, withLatestFrom } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import { logObservableError, findById } from '../../Util'
-import { isEmpty, join, prop, ifElse, pipe, map as fmap } from 'ramda'
 import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  debounceTime,
+  map,
+  mergeMap,
+  withLatestFrom,
+} from 'rxjs/operators'
+import {
+  error,
   FETCH_IMAGES,
+  PICK_IMAGE,
+  pickImageWithCredits,
+  receivedImages,
   SCROLL_LEFT,
   SCROLL_RIGHT,
-  PICK_IMAGE,
-  receivedImages,
-  pickImageWithCredits,
-  error,
 } from '../../Redux/State/MediaPicker/ImagePicker'
+import {
+  findById,
+  logObservableError,
+} from '../../Util'
+import {
+  map as fmap,
+  ifElse,
+  isEmpty,
+  join,
+  pipe,
+  prop,
+} from 'ramda'
 
 // formatImage :: PexelsImage -> Image
 const formatImage = image => ({

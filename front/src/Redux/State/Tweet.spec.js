@@ -1,10 +1,10 @@
 import {
-  default as reducer,
+  clear,
   INITIAL_STATE,
+  default as reducer,
   RENDER_TWEET,
   renderTweet,
   tweetRendered,
-  clear,
 } from './Tweet'
 
 describe('Redux :: State :: Tweet', () => {

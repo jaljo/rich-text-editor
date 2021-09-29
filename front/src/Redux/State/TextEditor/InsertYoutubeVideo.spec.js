@@ -1,12 +1,12 @@
 import {
   clear,
-  default as reducer,
   error,
+  INITIAL_STATE,
   initialize,
   insertYoutubeVideo,
-  youtubeVideoInserted,
-  INITIAL_STATE,
   INSTANCE_INITIAL_STATE,
+  default as reducer,
+  youtubeVideoInserted,
 } from './InsertYoutubeVideo'
 
 const instanceExists = {

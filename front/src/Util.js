@@ -29,9 +29,14 @@ import {
   uncurryN,
   when,
 } from 'ramda'
-import { merge, catchError } from 'rxjs/operators'
+import {
+  catchError,
+  merge,
+} from 'rxjs/operators'
 import Logger from './Logger'
-import { of } from 'rxjs'
+import {
+  of,
+} from 'rxjs'
 
 export const logObservableError = () => catchError((err, source) => pipe(
   tap(Logger.error),

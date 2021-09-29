@@ -1,11 +1,19 @@
 import './Style/Main.scss'
+import {
+  applyMiddleware,
+  createStore,
+} from 'redux'
+import {
+  debug,
+  default as mainReducer,
+} from './Redux/State'
 import App from './Component/App'
+import {
+  createEpicMiddleware,
+} from 'redux-observable'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import rootEpic from './Epic'
-import { applyMiddleware, createStore } from 'redux'
-import { createEpicMiddleware } from 'redux-observable'
-import { default as mainReducer, debug } from './Redux/State'
 
 const defaultOptions = {
   headers: {},

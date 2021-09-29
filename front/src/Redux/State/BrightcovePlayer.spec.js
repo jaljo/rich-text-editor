@@ -1,8 +1,8 @@
 import {
   INITIAL_STATE,
   playerLoaded,
-  videoRendered,
   default as reducer,
+  videoRendered,
 } from './BrightcovePlayer'
 
 describe('Redux :: State :: BrightcovePlayer', () => {

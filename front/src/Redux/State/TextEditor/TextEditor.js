@@ -1,9 +1,13 @@
-import TextToolbox from './TextToolbox'
-import ParagraphToolbox from './ParagraphToolbox'
+import {
+  always,
+} from 'ramda'
+import {
+  combineReducers,
+} from 'redux'
 import InsertTweet from './InsertTweet'
 import InsertYoutubeVideo from './InsertYoutubeVideo'
-import { combineReducers } from 'redux'
-import { always } from 'ramda'
+import ParagraphToolbox from './ParagraphToolbox'
+import TextToolbox from './TextToolbox'
 
 // TextEditor actions types
 export const CLICK = '@knp/TextEditor/CLICK'

@@ -1,27 +1,61 @@
-import uniqid from 'uniqid'
-import { combineEpics, ofType } from 'redux-observable'
-import { map, mergeMap, withLatestFrom, catchError } from 'rxjs/operators'
-import { apply, ifElse, compose, prop, path, equals, pipe, tap } from 'ramda'
-import { renderToString } from 'react-dom/server'
 import {
-  INSERT_TWEET,
-  TWEET_INSERTED,
-  EMBED_TWEET_FETCHED,
-  tweetInserted,
-  embedTweetFetched,
-  error,
-} from '../../Redux/State/TextEditor/InsertTweet'
+  apply,
+  compose,
+  equals,
+  ifElse,
+  path,
+  pipe,
+  prop,
+  tap,
+} from 'ramda'
+import {
+  catchError,
+  map,
+  mergeMap,
+  withLatestFrom,
+} from 'rxjs/operators'
 import {
   closeInsertTweet,
   OPEN_INSERT_YOUTUBE_VIDEO,
 } from '../../Redux/State/TextEditor/ParagraphToolbox'
-import { OPEN as OPEN_MEDIAPICKER } from '../../Redux/State/MediaPicker/MediaPicker'
-import { renderTweet } from '../../Redux/State/Tweet'
-import { logObservableError } from '../../Util'
-import { getTweetIdFromUrl } from '../../Parser/HtmlToComponents'
-import { UnconnectedTweet } from '../../Component/View/TextEditor/Widget'
-import { insertNewNodeAtIndex } from './TextEditor'
-import { of, from } from 'rxjs'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  EMBED_TWEET_FETCHED,
+  embedTweetFetched,
+  error,
+  INSERT_TWEET,
+  TWEET_INSERTED,
+  tweetInserted,
+} from '../../Redux/State/TextEditor/InsertTweet'
+import {
+  from,
+  of,
+} from 'rxjs'
+import {
+  getTweetIdFromUrl,
+} from '../../Parser/HtmlToComponents'
+import {
+  insertNewNodeAtIndex,
+} from './TextEditor'
+import {
+  logObservableError,
+} from '../../Util'
+import {
+  OPEN as OPEN_MEDIAPICKER,
+} from '../../Redux/State/MediaPicker/MediaPicker'
+import {
+  renderToString,
+} from 'react-dom/server'
+import {
+  renderTweet,
+} from '../../Redux/State/Tweet'
+import {
+  UnconnectedTweet,
+} from '../../Component/View/TextEditor/Widget'
+import uniqid from 'uniqid'
 
 /**
  * Inserts an embed of tweet in the edited DOM. The embed code to insert is

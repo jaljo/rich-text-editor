@@ -1,21 +1,3 @@
-import { ofType, combineEpics } from 'redux-observable'
-import { map, mergeMap, tap, ignoreElements } from 'rxjs/operators'
-import { isEmptyParagraph } from './ToolBoxes'
-import {
-  logObservableError,
-  logObservableErrorAndTriggerAction,
-} from '../../Util'
-import {
-  textPasted,
-  pasteGranted,
-  displayClipboardWarning,
-  displayClipboardSupportError,
-  PASTE_GRANTED,
-  DISPLAY_CLIPBOARD_WARNING,
-  DISPLAY_CLIPBOARD_SUPPORT_ERROR,
-  PASTE,
-  TEXT_PASTED,
-} from '../../Redux/State/TextEditor/TextEditor'
 import {
   allPass,
   compose,
@@ -27,6 +9,34 @@ import {
   tap as rtap,
   when,
 } from 'ramda'
+import {
+  combineEpics,
+  ofType,
+} from 'redux-observable'
+import {
+  DISPLAY_CLIPBOARD_SUPPORT_ERROR,
+  DISPLAY_CLIPBOARD_WARNING,
+  displayClipboardSupportError,
+  displayClipboardWarning,
+  PASTE,
+  PASTE_GRANTED,
+  pasteGranted,
+  TEXT_PASTED,
+  textPasted,
+} from '../../Redux/State/TextEditor/TextEditor'
+import {
+  ignoreElements,
+  map,
+  mergeMap,
+  tap,
+} from 'rxjs/operators'
+import {
+  logObservableError,
+  logObservableErrorAndTriggerAction,
+} from '../../Util'
+import {
+  isEmptyParagraph,
+} from './ToolBoxes'
 
 // checkClipboardAccessEpic :: Epic -> Observable Action.PASTE_GRANTED Action.DISPLAY_CLIPBOARD_WARNING
 const checkClipboardAccessEpic = action$ => action$.pipe(

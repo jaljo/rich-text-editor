@@ -1,5 +1,9 @@
-import { createReducer } from '../../../Util'
-import { omit } from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
+import {
+  omit,
+} from 'ramda'
 
 // InsertTweet initial state
 export const INSTANCE_INITIAL_STATE = {

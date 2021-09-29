@@ -1,14 +1,14 @@
 import {
-  default as reducer,
+  clear,
+  error,
   fetchImages,
-  receivedImages,
-  scrollLeft,
-  scrollRight,
+  INITIAL_STATE,
   pickImage,
   pickImageWithCredits,
-  error,
-  clear,
-  INITIAL_STATE,
+  receivedImages,
+  default as reducer,
+  scrollLeft,
+  scrollRight,
 } from './ImagePicker'
 
 describe('Redux :: State :: MediaPicker :: ImagePicker', () => {

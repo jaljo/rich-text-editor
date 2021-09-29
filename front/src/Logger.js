@@ -1,4 +1,7 @@
-import { partial, bind } from 'ramda'
+import {
+  bind,
+  partial,
+} from 'ramda'
 
 /**
  * This is a custom logger used for development purpose. If you have

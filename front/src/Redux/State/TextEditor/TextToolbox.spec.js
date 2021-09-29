@@ -1,15 +1,15 @@
 import {
   clear,
   closeLinkCreator,
-  default as reducer,
+  hideAll,
+  INITIAL_STATE,
   initialize,
+  INSTANCE_INITIAL_STATE,
   openLinkCreator,
+  default as reducer,
   refreshButtonsState,
   saveRange,
   show,
-  hideAll,
-  INITIAL_STATE,
-  INSTANCE_INITIAL_STATE,
 } from './TextToolbox'
 
 const instanceExists = {

@@ -1,6 +1,15 @@
-import { T, always, cond, equals } from 'ramda'
-import { createReducer } from '../../../Util'
-import { combineReducers } from 'redux'
+import {
+  always,
+  cond,
+  equals,
+  T,
+} from 'ramda'
+import {
+  combineReducers,
+} from 'redux'
+import {
+  createReducer,
+} from '../../../Util'
 import ImagePicker from './ImagePicker'
 import VideoPicker from './VideoPicker'
 

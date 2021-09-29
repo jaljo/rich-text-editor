@@ -1,5 +1,13 @@
-import { always, dec, inc, lt, when } from 'ramda'
-import { createReducer } from '../../../Util'
+import {
+  always,
+  dec,
+  inc,
+  lt,
+  when,
+} from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
 
 // image picker initial state
 export const INITIAL_STATE = {

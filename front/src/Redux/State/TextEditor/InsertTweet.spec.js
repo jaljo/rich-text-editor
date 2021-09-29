@@ -1,12 +1,12 @@
 import {
   clear,
-  default as reducer,
+  embedTweetFetched,
   error,
+  INITIAL_STATE,
   initialize,
   insertTweet,
-  embedTweetFetched,
-  INITIAL_STATE,
   INSTANCE_INITIAL_STATE,
+  default as reducer,
 } from './InsertTweet'
 
 const instanceExists = {

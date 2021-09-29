@@ -1,5 +1,12 @@
-import { omit, always, compose } from 'ramda'
-import { createReducer, hideObjects } from '../../../Util'
+import {
+  always,
+  compose,
+  omit,
+} from 'ramda'
+import {
+  createReducer,
+  hideObjects,
+} from '../../../Util'
 
 // paragraph toolbox initial state
 export const INSTANCE_INITIAL_STATE = {

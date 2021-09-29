@@ -1,11 +1,11 @@
 import {
-  Display as reducer,
   clear,
   close,
+  INITIAL_STATE,
   open,
   openImagePicker,
   openVideoPicker,
-  INITIAL_STATE,
+  Display as reducer,
 } from './MediaPicker'
 
 describe('Redux :: State :: MediaPicker :: MediaPicker', () => {

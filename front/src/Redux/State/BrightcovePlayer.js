@@ -1,5 +1,10 @@
-import { createReducer } from '../../Util'
-import { always, append } from 'ramda'
+import {
+  always,
+  append,
+} from 'ramda'
+import {
+  createReducer,
+} from '../../Util'
 
 // BrightcovePlayer initial state
 export const INITIAL_STATE = {

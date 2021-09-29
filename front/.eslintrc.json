@@ -23,9 +23,11 @@
     "keyword-spacing": ["error"],
     "line-comment-position": ["error", { "position": "above" }],
     "multiline-comment-style": ["error", "starred-block"],
+    "no-multiple-empty-lines": "error",
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "object-curly-spacing": ["error", "always"],
     "react/prop-types": "off",
+    "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": false }],
     "sort-keys": "error",
     "spaced-comment": ["error", "always"]
   },

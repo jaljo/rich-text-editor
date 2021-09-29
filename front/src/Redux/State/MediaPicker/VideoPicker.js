@@ -1,5 +1,13 @@
-import { createReducer } from '../../../Util'
-import { always, when, lt, dec, inc } from 'ramda'
+import {
+  always,
+  dec,
+  inc,
+  lt,
+  when,
+} from 'ramda'
+import {
+  createReducer,
+} from '../../../Util'
 
 // VideoPicker initial state
 export const INITIAL_STATE = {
