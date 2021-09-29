@@ -88,14 +88,23 @@ const Paragraph = ({
 
 // Link :: Props -> React.Component
 const Link = ({ component, id }) =>
-  <a href={ component.href } title={ component.title } target={ component.target } className="link">
+  <a
+    href={ component.href }
+    title={ component.title }
+    target={ component.target }
+    className="link"
+  >
     { renderChildren(id, component.childComponents) }
   </a>;
 
 // Image :: Props -> React.Component
 export const Image = ({ component }) =>
   <figure className="image-wrapper">
-    <img src={ component.src } alt={ component.alt || component.title || component.description } title={ component.title } />
+    <img
+      src={ component.src }
+      alt={ component.alt || component.title || component.description }
+      title={ component.title }
+    />
     <p className="credit" contentEditable={ false }>
       { component.alt }
     </p>

@@ -48,7 +48,7 @@ export const fetchVideosEpic = (action$, state$, { fetchApi }) =>
     logObservableError(),
   );
 
-// searchVideosEpic :: Observable Action Error -> Observable Action.FETCH_VIDEOS
+// searchVideosEpic :: Epic -> Observable Action
 export const searchVideosEpic = action$ => merge(
   action$.pipe(
     ofType(SEARCH_VIDEOS),

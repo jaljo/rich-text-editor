@@ -23,7 +23,7 @@ import {
 } from "ramda";
 
 
-// renderTweetEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
+// renderTweetEpic :: Epic -> Observable Action
 export const renderTweetEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(RENDER_TWEET),
@@ -38,7 +38,10 @@ export const renderTweetEpic = (action$, state$, { window }) =>
       originalHtmlMarkup,
       window.twttr.widgets.createTweet(tweetId, element),
     ])),
-    map(([ tweetId, originalHtmlMarkup ]) => tweetRendered(tweetId, originalHtmlMarkup)),
+    map(([ tweetId, originalHtmlMarkup ]) => tweetRendered(
+      tweetId,
+      originalHtmlMarkup,
+    )),
     logObservableError(),
   );
 

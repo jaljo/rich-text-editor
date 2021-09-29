@@ -33,7 +33,7 @@ import {
   PICK_VIDEO,
 } from "../../Redux/State/MediaPicker/VideoPicker";
 
-// closeMediaPickerEpic :: Observable Action Error -> Observable Action.CLOSE
+// closeMediaPickerEpic :: Epic -> Observable Action
 export const closeMediaPickerEpic = action$ => action$.pipe(
   ofType(OPEN),
   switchMap(() => race(

@@ -38,7 +38,7 @@ import {
   isEmptyParagraph,
 } from "./ToolBoxes";
 
-// checkClipboardAccessEpic :: Epic -> Observable Action.PASTE_GRANTED Action.DISPLAY_CLIPBOARD_WARNING
+// checkClipboardAccessEpic :: Epic -> Observable Action
 const checkClipboardAccessEpic = action$ => action$.pipe(
   ofType(PASTE),
   mergeMap(() => navigator.permissions.query({ "name": "clipboard-read" })),
@@ -50,7 +50,7 @@ const checkClipboardAccessEpic = action$ => action$.pipe(
   logObservableErrorAndTriggerAction(displayClipboardSupportError),
 );
 
-// pasteCopiedTextEpic :: Epic -> Observable Action.TEXT_PASTED
+// pasteCopiedTextEpic :: Epic -> Observable Action
 const pasteCopiedTextEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(PASTE_GRANTED),

@@ -21,7 +21,12 @@ const MediaPicker = ({
         { isImagePickerOpened &&
           <div className="field">
             <div className={ `control has-icons-left ${ isFetchingImages ? "is-loading" : "" }` }>
-              <input className="input" type="text" onKeyUp={ searchImages } placeholder="Search images (Estonia)"/>
+              <input
+                className="input"
+                type="text"
+                onKeyUp={ searchImages }
+                placeholder="Search images (Estonia)"
+              />
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
           </div>
@@ -29,7 +34,12 @@ const MediaPicker = ({
         { isVideoPickerOpened &&
           <div className="field">
             <div className={ `control has-icons-left ${ isFetchingVideos ? "is-loading" : "" }` }>
-              <input className="input" type="text" onKeyUp={ searchVideos } placeholder="Search videos"/>
+              <input
+                className="input"
+                type="text"
+                onKeyUp={ searchVideos }
+                placeholder="Search videos"
+              />
               <span className="icomoon-font icon is-small is-left">s</span>
             </div>
           </div>
@@ -38,8 +48,13 @@ const MediaPicker = ({
           <li>
             <p
               className={ `image-mode btn-knp ${isImagePickerOpened ? "active" : "" }` }
-              onClick={ e => isImagePickerOpened ? e.preventDefault() : openImagePicker() }
-            ><span className="icomoon-font">c</span></p>
+              onClick={ e => isImagePickerOpened
+                ? e.preventDefault()
+                : openImagePicker()
+              }
+            >
+              <span className="icomoon-font">c</span>
+            </p>
           </li>
           {/* @TODO fix this features before re-enabling
           <li>

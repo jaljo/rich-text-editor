@@ -132,8 +132,8 @@ const createAndFocusEmptyParagraph = previousNode => {
   recoverSelection(window)(range);
 };
 
-// insertNewParagraphEpic :: Observable Action Error -> _
-const insertNewParagraphEpic = (action$, state$, { window }) =>
+// insertNewParagraphEpic :: Epic -> _
+const insertNewParagraphEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(KEY_DOWN),
     filter(compose(equals(13), prop("keyCode"))),
@@ -162,7 +162,7 @@ const insertNewParagraphEpic = (action$, state$, { window }) =>
     ignoreElements(),
   );
 
-// insertParagraphAfterInsertedMediaEpic :: (Observable Action Error, Observable State, Error) -> _
+// insertParagraphAfterInsertedMediaEpic :: Epic -> _
 const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
   ofType(YOUTUBE_VIDEO_INSERTED, TWEET_INSERTED, VIDEO_INSERTED),
   withLatestFrom(state$),
@@ -177,8 +177,8 @@ const insertParagraphAfterInsertedMediaEpic = (action$, state$) => action$.pipe(
   logObservableError(),
 );
 
-// saveRangeEpic :: Observable Action Error -> Observable Action _
-export const saveRangeEpic = (action$, state$, { window }) =>
+// saveRangeEpic :: Epic -> Observable Action
+export const saveRangeEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(OPEN_LINK_CREATOR),
     map(action => [
@@ -189,7 +189,7 @@ export const saveRangeEpic = (action$, state$, { window }) =>
     logObservableError(),
   );
 
-// createLinkEpic :: (Observable Action Error, Observale State Error) -> Observable Action _
+// createLinkEpic :: Epic -> Observable Action
 export const createLinkEpic = (action$, state$, { window }) =>
   action$.pipe(
     ofType(MUTATE),
@@ -202,7 +202,11 @@ export const createLinkEpic = (action$, state$, { window }) =>
     ]),
     tap(([ _, range ]) => recoverSelection(window)(range)),
     // then we can apply the mutation
-    tap(([ action ]) => document.execCommand("createLink", false, action.options.href)),
+    tap(([ action ]) => document.execCommand(
+      "createLink",
+      false,
+      action.options.href,
+    )),
     map(([ action ]) => closeLinkCreator(action.editorName)),
     logObservableError(),
   );
@@ -213,17 +217,17 @@ const recoverSelection = window => range => {
   window.getSelection().addRange(range);
 };
 
-// closeLinkCreatorEpic :: Observable Action Error -> _
+// closeLinkCreatorEpic :: Epic -> _
 const closeLinkCreatorEpic = (action$, state$, { window }) => action$.pipe(
   ofType(CLOSE_LINK_CREATOR),
   withLatestFrom(state$),
-  map(([ action, state ]) => state.TextEditor.TextToolbox[action.editorName].range),
+  map(([ act, state ]) => state.TextEditor.TextToolbox[act.editorName].range),
   tap(recoverSelection(window)),
   ignoreElements(),
   logObservableError(),
 );
 
-// mutationEpic :: Observable Action Error -> Observable Action _
+// mutationEpic :: Epic -> Observable Action
 const mutationEpic = action$ =>
   action$.pipe(
     ofType(MUTATE),
@@ -239,7 +243,8 @@ const mutationEpic = action$ =>
        * @wontfix in Firefox, <blockquote> is the exception — it will wrap any
        * containing block element
        *
-       * @see formatBlock at https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+       * @see formatBlock at
+       * https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
        *
        * Although this can be easily fixed using another block tag (i.e. PRE),
        * we decided it will introduce too much legacy in the persisted data, as
@@ -251,21 +256,22 @@ const mutationEpic = action$ =>
     ignoreElements(),
   );
 
-// refreshTextToolboxStateEpic :: Observable Action Error -> Observable Action _
-export const refreshTextToolboxStateEpic = (action$, state$, { window }) => action$.pipe(
-  ofType(SHOW_TEXT_TOOLBOX, MUTATE),
-  map(action => [ action, window.getSelection().getRangeAt(0) ]),
-  map(([ action, range ]) => [ action.editorName, ({
-    isBold: document.queryCommandState("bold"),
-    isItalic: document.queryCommandState("italic"),
-    isLink: isInParent("a")(range),
-    isQuote: isInParent("blockquote")(range),
-    isTitle: isInParent("h2")(range),
-    isUnderline: document.queryCommandState("underline"),
-  })]),
-  map(apply(refreshButtonsState)),
-  logObservableError(),
-);
+// refreshTextToolboxStateEpic :: Epic -> Observable Action
+export const refreshTextToolboxStateEpic = (action$, _, { window }) =>
+  action$.pipe(
+    ofType(SHOW_TEXT_TOOLBOX, MUTATE),
+    map(action => [ action, window.getSelection().getRangeAt(0) ]),
+    map(([ action, range ]) => [ action.editorName, ({
+      isBold: document.queryCommandState("bold"),
+      isItalic: document.queryCommandState("italic"),
+      isLink: isInParent("a")(range),
+      isQuote: isInParent("blockquote")(range),
+      isTitle: isInParent("h2")(range),
+      isUnderline: document.queryCommandState("underline"),
+    })]),
+    map(apply(refreshButtonsState)),
+    logObservableError(),
+  );
 
 // isInParent :: String -> Range -> Boolean
 const isInParent = parentTagName => pipe(
@@ -280,7 +286,7 @@ const isInParent = parentTagName => pipe(
   ]),
 );
 
-// pickImageEpic :: (Observable Action Error, Observable State Error) -> Observable Action _
+// pickImageEpic :: Epic -> Observable Action
 export const pickImageEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_IMAGE_WITH_CREDITS),
@@ -299,7 +305,7 @@ export const pickImageEpic = (action$, state$) =>
     logObservableError(),
   );
 
-// insertImageEpic :: (Observable Action Error, Observable State Error) _
+// insertImageEpic :: Epic -> Observable Action
 export const insertImageEpic = (action$, state$) =>
   action$.pipe(
     ofType(INSERT_IMAGE),
@@ -313,7 +319,7 @@ export const insertImageEpic = (action$, state$) =>
     logObservableError(),
   );
 
-// pickVideoEpic :: (Observable Action Error, Observable State Error) -> Observable Action.INSERT_VIDEO
+// pickVideoEpic :: Epic -> Observable Action
 export const pickVideoEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_VIDEO),
@@ -327,7 +333,7 @@ export const pickVideoEpic = (action$, state$) =>
     logObservableError(),
   );
 
-// insertVideoEpic :: (Observable Action Error, Observable State Error) -> Observable Action.VIDEO_INSERTED
+// insertVideoEpic :: Epic -> Observable Action
 export const insertVideoEpic = (action$, state$) =>
   action$.pipe(
     ofType(INSERT_VIDEO),

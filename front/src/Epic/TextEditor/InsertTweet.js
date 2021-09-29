@@ -63,7 +63,7 @@ import uniqid from "uniqid";
  *
  * @see https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview
  */
-export const fetchEmbedTweetEpic = (action$, state$, { fetchApi }) => action$.pipe(
+export const fetchEmbedTweetEpic = (action$, _, { fetchApi }) => action$.pipe(
   ofType(INSERT_TWEET),
   mergeMap(action => from(fetchApi(
     `${process.env.REACT_APP_MOCK_SERVER_API_URL}/twitter?url=${action.url}`,
@@ -77,7 +77,7 @@ export const fetchEmbedTweetEpic = (action$, state$, { fetchApi }) => action$.pi
   )),
 );
 
-// insertTweetEpic :: Epic -> Observable Action.TWEET_INSERTED Action.ERROR
+// insertTweetEpic :: Epic -> Observable Action
 export const insertTweetEpic = (action$, state$) => action$.pipe(
   ofType(EMBED_TWEET_FETCHED),
   withLatestFrom(state$),
@@ -89,39 +89,44 @@ export const insertTweetEpic = (action$, state$) => action$.pipe(
   )),
 );
 
-// renderInsertedTweetEpic :: Observable Action Error -> Observable Action _
+// renderInsertedTweetEpic :: Epic -> Observable Action
 export const renderInsertedTweetEpic = action$ => action$.pipe(
   ofType(TWEET_INSERTED),
-  map(({ tweetId, uid, originalHtmlMarkup }) => renderTweet(tweetId, uid, originalHtmlMarkup)),
+  map(({ tweetId, uid, originalHtmlMarkup }) => renderTweet(
+    tweetId,
+    uid,
+    originalHtmlMarkup,
+  )),
   logObservableError(),
 );
 
 // insertTweetNode :: (Object, State.TextEditor) -> Promise
-const insertTweetNode = ({ editorName, url, html }, textEditor) => new Promise(resolve => {
-  const tweetId = getTweetIdFromUrl(url);
-  const uid = uniqid(tweetId);
+const insertTweetNode = ({ editorName, url, html }, textEditor) =>
+  new Promise(resolve => {
+    const tweetId = getTweetIdFromUrl(url);
+    const uid = uniqid(tweetId);
 
-  const newNode = pipe(
-    tap(e => e.innerHTML = renderToString(UnconnectedTweet(tweetId, uid), "text/html")),
-    prop("firstChild"),
-  )(document.createElement("div"));
+    const newNode = pipe(
+      tap(e => e.innerHTML = renderToString(UnconnectedTweet(tweetId, uid), "text/html")),
+      prop("firstChild"),
+    )(document.createElement("div"));
 
-  insertNewNodeAtIndex(
-    newNode,
-    textEditor.ParagraphToolbox[editorName].targetNodeIndex,
-    editorName,
-  );
+    insertNewNodeAtIndex(
+      newNode,
+      textEditor.ParagraphToolbox[editorName].targetNodeIndex,
+      editorName,
+    );
 
-  const originalHtmlMarkup = pipe(
-    tap(e => e.innerHTML = html),
-    // only grab the `blockquote` tag, not the `script` tag
-    e => e.firstChild.outerHTML,
-  )(document.createElement("div"));
+    const originalHtmlMarkup = pipe(
+      tap(e => e.innerHTML = html),
+      // only grab the `blockquote` tag, not the `script` tag
+      e => e.firstChild.outerHTML,
+    )(document.createElement("div"));
 
-  resolve([ editorName, tweetId, uid, originalHtmlMarkup ]);
-});
+    resolve([ editorName, tweetId, uid, originalHtmlMarkup ]);
+  });
 
-// closeInsertTweetEpic :: Observable Action Error -> Observable Action _
+// closeInsertTweetEpic :: Epic -> Observable Action
 const closeInsertTweetEpic = action$ => action$.pipe(
   ofType(
     TWEET_INSERTED,

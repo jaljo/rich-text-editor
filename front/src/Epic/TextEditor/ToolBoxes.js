@@ -109,20 +109,22 @@ const notExcluded = allPass([
   compose(isNil, closestHavingClass("knp-rendered-tweet")),
 ]);
 
-// showTextToolboxEpic :: Epic -> Observable Action.SHOW_TEXT_TOOLBOX
-export const showTextToolboxEpic = (action$, state$, { window }) =>
+// showTextToolboxEpic :: Epic -> Observable Action
+export const showTextToolboxEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(SELECT_TEXT),
     map(action => [ action.editorName, window.getSelection()]),
     filter(compose(isRange, last)),
     filter(compose(notExcluded, prop("anchorNode"), last)),
-    map(([ editor, selection ]) => [ editor, getParagraphTopPosition(selection) ]),
-    map(apply(showTextToolbox)),
+    map(([ editor, selection ]) => showTextToolbox(
+      editor,
+      getParagraphTopPosition(selection),
+    )),
     logObservableError(),
   );
 
-// hideAllTextToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
-export const hideAllTextToolboxesEpic = (action$, state$, { window }) =>
+// hideAllTextToolboxesEpic :: Epic -> Observable Action
+export const hideAllTextToolboxesEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(SELECT_TEXT),
     map(() => window.getSelection()),
@@ -132,7 +134,7 @@ export const hideAllTextToolboxesEpic = (action$, state$, { window }) =>
   );
 
 // showParagraphToolboxEpic :: Epic -> Observable Action.SHOW_PARAGRAPH_TOOLBOX
-export const showParagraphToolboxEpic = (action$, state$, { window }) =>
+export const showParagraphToolboxEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(SELECT_TEXT),
     map(action => [ action.editorName, window.getSelection()]),
@@ -146,7 +148,7 @@ export const showParagraphToolboxEpic = (action$, state$, { window }) =>
     logObservableError(),
   );
 
-// showParagraphToolboxToReplaceElementEpic :: Epic -> Observable Action _
+// showParagraphToolboxToReplaceElementEpic :: Epic -> Observable Action
 const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
   ofType(CLICK),
   filter(compose(equals("IMG"), path(["node", "tagName"]))),
@@ -159,8 +161,8 @@ const showParagraphToolboxToReplaceElementEpic = action$ => action$.pipe(
   logObservableError(),
 );
 
-// hideAllParagraphToolboxesEpic :: Epic -> Observable Action.HIDE_ALL
-export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
+// hideAllParagraphToolboxesEpic :: Epic -> Observable Action
+export const hideAllParagraphToolboxesEpic = (action$, _, { window }) =>
   merge(
     action$.pipe(
       ofType(SELECT_TEXT),
@@ -179,8 +181,8 @@ export const hideAllParagraphToolboxesEpic = (action$, state$, { window }) =>
     logObservableError(),
   );
 
-// hideToolboxesOnClickOusideEditorEpic :: Observable Action Error -> Observable Action _
-const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
+// hideToolboxesOnClickOusideEditorEpic :: Epic -> Observable Action
+const hideToolboxesOnClickOusideEditorEpic = (action$, _, { window }) =>
   action$.pipe(
     ofType(INITIALIZE),
     switchMap(() => fromEvent(window, "mousedown").pipe(
@@ -197,7 +199,7 @@ const hideToolboxesOnClickOusideEditorEpic = (action$, state$, { window }) =>
     logObservableError(),
   );
 
-// closeInsertTweetFormEpic :: Observable Action Error -> Observable Action.CLOSE_INSERT_TWEET
+// closeInsertTweetFormEpic :: Epic -> Observable Action
 const closeInsertTweetFormEpic = action$ => action$.pipe(
   ofType(OPEN_INSERT_TWEET),
   map(prop("editorName")),
@@ -212,7 +214,7 @@ const closeInsertTweetFormEpic = action$ => action$.pipe(
   )),
 );
 
-// closeInsertYoutubeFormEpic :: Observale Action Error -> Observable Action.CLOSE_INSERT_YOUTUBE_VIDEO
+// closeInsertYoutubeFormEpic :: Epic -> Observable Action
 const closeInsertYoutubeFormEpic = action$ => action$.pipe(
   ofType(OPEN_INSERT_YOUTUBE_VIDEO),
   map(prop("editorName")),
@@ -227,7 +229,7 @@ const closeInsertYoutubeFormEpic = action$ => action$.pipe(
   )),
 );
 
-// closeLinkCreatorFormEpic :: Observable Action Error -> Observable Action.CLOSE_LINK_CREATOR
+// closeLinkCreatorFormEpic :: Epic -> Observable Action
 const closeLinkCreatorFormEpic = action$ => action$.pipe(
   ofType(OPEN_LINK_CREATOR),
   map(prop("editorName")),

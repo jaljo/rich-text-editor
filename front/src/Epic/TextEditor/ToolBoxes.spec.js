@@ -59,11 +59,11 @@ beforeEach(() => {
 });
 
 describe("Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic", () => {
-  const selectText$ = of(selectText("editor-name"));
+  const select$ = of(selectText("editor-name"));
   const state$ = new StateObservable(new Subject(), {});
 
   it("dispatches showTextToolbox", async () => {
-    const action = await showTextToolboxEpic(selectText$, state$, dependencies)
+    const action = await showTextToolboxEpic(select$, state$, dependencies)
       .toPromise(Promise)
     ;
 
@@ -77,7 +77,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic", () => {
       },
     };
 
-    const action = await showTextToolboxEpic(selectText$, state$, dependencies)
+    const action = await showTextToolboxEpic(select$, state$, dependencies)
       .toPromise(Promise)
     ;
 
@@ -86,7 +86,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showTextToolboxEpic", () => {
 });
 
 describe("Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic", () => {
-  const selectText$ = of(selectText("editor-name"));
+  const select$ = of(selectText("editor-name"));
   const state$ = new StateObservable(new Subject(), {
     TextEditor: {
       TextToolbox: {
@@ -98,21 +98,21 @@ describe("Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic", () => {
   });
 
   it("dispatches hideTextToolbox", async () => {
-    const dependencies = {
+    const deps = {
       window: {
         getSelection: () => ({ type: "Char" }),
       },
     };
 
-    const action = await hideAllTextToolboxesEpic(selectText$, state$, dependencies)
+    const action = await hideAllTextToolboxesEpic(select$, state$, deps)
       .toPromise(Promise)
     ;
 
     expect(action.type).toEqual(HIDE_TEXT_TOOLBOX);
   }, 1000);
 
-  it("dont dispatches hideTextToolbox (not empty selection)", async () => {
-    const action = await hideAllTextToolboxesEpic(selectText$, state$, dependencies)
+  it("doesn't dispatches hideTextToolbox (not empty selection)", async () => {
+    const action = await hideAllTextToolboxesEpic(select$, state$, dependencies)
       .toPromise(Promise)
     ;
 
@@ -121,11 +121,11 @@ describe("Epic :: TextEditor :: ToolBoxes :: hideAllTextToolboxesEpic", () => {
 });
 
 describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
-  const selectText$ = of(selectText("editor-name"));
+  const select$ = of(selectText("editor-name"));
   const state$ = new StateObservable(new Subject(), {});
 
   it("dispatches showParagraphToolbox", async () => {
-    const dependencies = {
+    const deps = {
       window: {
         getSelection: () => ({
           anchorNode: {
@@ -136,7 +136,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
       },
     };
 
-    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(select$, state$, deps)
       .toPromise(Promise)
     ;
 
@@ -144,7 +144,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
   }, 1000);
 
   it("does not dispatch showParagraphToolbox (not empty paragraph)", async () => {
-    const dependencies = {
+    const deps = {
       window: {
         getSelection: () => ({
           anchorNode: {
@@ -155,15 +155,15 @@ describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
       },
     };
 
-    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(select$, state$, deps)
       .toPromise(Promise)
     ;
 
     expect(action).toEqual(undefined);
   }, 1000);
 
-  it("does not dispatch showParagraphToolbox (not in a paragraph)", async () => {
-    const dependencies = {
+  it("doesn't dispatch showParagraphToolbox (not in a paragraph)", async () => {
+    const deps = {
       window: {
         getSelection: () => ({
           anchorNode: {
@@ -174,7 +174,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
       },
     };
 
-    const action = await showParagraphToolboxEpic(selectText$, state$, dependencies)
+    const action = await showParagraphToolboxEpic(select$, state$, deps)
       .toPromise(Promise)
     ;
 
@@ -184,7 +184,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: showParagraphToolboxEpic", () => {
 
 describe("Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic", () => {
   const state$ = new StateObservable(new Subject(), {});
-  const selectText$ = of(selectText("editor-name"));
+  const select$ = of(selectText("editor-name"));
 
   it("dispatches hideParagraphToolbox", async () => {
     const tweetInserted$ = of(tweetInserted("editor-name"));
@@ -202,7 +202,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic", () 
     };
 
     const [a1, a2, a3, a4] = await Promise.all([
-      hideAllParagraphToolboxesEpic(selectText$, state$, dependencies)
+      hideAllParagraphToolboxesEpic(select$, state$, dependencies)
         .toPromise(Promise),
       hideAllParagraphToolboxesEpic(tweetInserted$, state$, dependencies)
         .toPromise(Promise),
@@ -219,7 +219,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic", () 
   }, 1000);
 
   it("does not dispatch hideParagraphToolbox (empty paragraph)", async () => {
-    const dependencies = {
+    const deps = {
       window: {
         getSelection: () => ({
           anchorNode: {
@@ -230,7 +230,7 @@ describe("Epic :: TextEditor :: ToolBoxes :: hideAllParagraphToolboxesEpic", () 
       },
     };
 
-    const action = await hideAllParagraphToolboxesEpic(selectText$, state$, dependencies)
+    const action = await hideAllParagraphToolboxesEpic(select$, state$, deps)
       .toPromise(Promise)
     ;
 

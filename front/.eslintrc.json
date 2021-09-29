@@ -22,6 +22,16 @@
     "indent": ["error", 2],
     "keyword-spacing": ["error"],
     "line-comment-position": ["error", { "position": "above" }],
+    "max-len": [
+      1,
+      {
+        "ignoreStrings": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "code": 80
+      }
+    ],
     "multiline-comment-style": ["error", "starred-block"],
     "no-multiple-empty-lines": "error",
     "no-unused-vars": ["error", { "argsIgnorePattern": "_" }],

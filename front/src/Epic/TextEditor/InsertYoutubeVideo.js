@@ -40,7 +40,7 @@ import {
   OPEN as OPEN_MEDIAPICKER,
 } from "../../Redux/State/MediaPicker/MediaPicker";
 
-// insertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
+// insertYoutubeVideoEpic :: Epic -> Observable Action
 export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(
   ofType(INSERT_YOUTUBE_VIDEO),
   withLatestFrom(state$),
@@ -59,7 +59,7 @@ export const insertYoutubeVideoEpic = (action$, state$) => action$.pipe(
   logObservableError(),
 );
 
-// closeInsertYoutubeVideoEpic :: Observable Action Error -> Observable Action _
+// closeInsertYoutubeVideoEpic :: Epic -> Observable Action
 export const closeInsertYoutubeVideoEpic = action$ => action$.pipe(
   ofType(
     YOUTUBE_VIDEO_INSERTED,
@@ -75,12 +75,12 @@ export const closeInsertYoutubeVideoEpic = action$ => action$.pipe(
   logObservableError(),
 );
 
-// validateYoutubeUrl :: String -> Promise String String
+// validateYoutubeUrl :: String -> Promise<String>
 export const validateYoutubeUrl = pipe(
   url => url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/),
-  // matches[2] = youtube video identifier
-  matches => new Promise((resolve, reject) => matches && matches[2].length === 11
-    ? resolve(`https://www.youtube.com/embed/${matches[2]}`)
+  // parts[2] = youtube video identifier
+  parts => new Promise((resolve, reject) => parts && parts[2].length === 11
+    ? resolve(`https://www.youtube.com/embed/${parts[2]}`)
     : reject("The provided URL is not a valid youtube video."),
   ),
 );

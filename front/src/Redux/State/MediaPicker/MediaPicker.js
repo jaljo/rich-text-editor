@@ -31,7 +31,10 @@ export const CLEAR = "@knp/MediaPicker/CLEAR";
 
 // open :: (String, Object, String) -> Action
 export const open = (domain, extra, defaultOpenedComponent) => ({
-  // component opened when opening the mediapicker (i.e. "videoPicker", "imageUploader")
+  /**
+   * component opened when opening the mediapicker
+   * (i.e. "videoPicker", "imageUploader")
+   */
   defaultOpenedComponent,
   domain,
   // any extra values related to the given domain

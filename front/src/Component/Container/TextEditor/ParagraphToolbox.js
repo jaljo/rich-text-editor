@@ -23,22 +23,34 @@ import {
 import ParagraphToolbox from "../../View/TextEditor/ParagraphToolbox";
 
 // mapStateToProps :: (State, Props) -> Props
-const mapStateToProps = (state, props) => ({
-  insertTweetOpened: prop("insertTweetOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
-  insertYoutubeVideoOpened: prop("insertYoutubeVideoOpened", state.TextEditor.ParagraphToolbox[props.editorName]),
-  isVisible: prop("visible", state.TextEditor.ParagraphToolbox[props.editorName]),
-  mediaPickerOpened: state.MediaPicker.Display.opened && state.MediaPicker.Display.domain === "TEXT_EDITOR",
-  top: prop("top", state.TextEditor.ParagraphToolbox[props.editorName]),
+const mapStateToProps = (state, { editorName }) => ({
+  insertTweetOpened: prop(
+    "insertTweetOpened",
+    state.TextEditor.ParagraphToolbox[editorName],
+  ),
+  insertYoutubeVideoOpened: prop(
+    "insertYoutubeVideoOpened",
+    state.TextEditor.ParagraphToolbox[editorName],
+  ),
+  isVisible: prop(
+    "visible",
+    state.TextEditor.ParagraphToolbox[editorName],
+  ),
+  mediaPickerOpened:
+    state.MediaPicker.Display.opened
+    && state.MediaPicker.Display.domain === "TEXT_EDITOR"
+  ,
+  top: prop("top", state.TextEditor.ParagraphToolbox[editorName]),
 });
 
 // mapDispatchToProps :: (Action * -> State, Props) -> Props
-const mapDispatchToProps = (dispatch, props) => ({
-  clear: () => dispatch(clear(props.editorName)),
-  closeInsertTweet: () => dispatch(closeInsertTweet(props.editorName)),
-  closeInsertYoutubeVideo: () => dispatch(closeInsertYoutubeVideo(props.editorName)),
-  initialize: () => dispatch(initialize(props.editorName)),
-  openInsertTweet: () => dispatch(openInsertTweet(props.editorName)),
-  openInsertYoutubeVideo: () => dispatch(openInsertYoutubeVideo(props.editorName)),
+const mapDispatchToProps = (dispatch, { editorName }) => ({
+  clear: () => dispatch(clear(editorName)),
+  closeInsertTweet: () => dispatch(closeInsertTweet(editorName)),
+  closeInsertYoutubeVideo: () => dispatch(closeInsertYoutubeVideo(editorName)),
+  initialize: () => dispatch(initialize(editorName)),
+  openInsertTweet: () => dispatch(openInsertTweet(editorName)),
+  openInsertYoutubeVideo: () => dispatch(openInsertYoutubeVideo(editorName)),
   openMediaPicker: (domain, extra, defaultOpenedComponent) => dispatch(
     openMediaPicker(domain, extra, defaultOpenedComponent),
   ),

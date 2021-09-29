@@ -43,7 +43,7 @@ const getPlayer = locale => join("", [
   "index.min.js",
 ]);
 
-// loadPlayerEpic :: Observable Action Error -> Observable Action.PLAYER_LOADED
+// loadPlayerEpic :: Epic -> Observable Action
 export const loadPlayerEpic = action$ => action$.pipe(
   ofType(LOAD_PLAYER),
   mergeMap(({ locale }) => new Promise(resolve => {

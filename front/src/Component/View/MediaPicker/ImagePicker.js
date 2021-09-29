@@ -20,14 +20,14 @@ const ImagePicker = ({
     {/* scroll left */}
     <p
       onClick={ scrollLeft }
-      className={ `btn-knp left is-pulled-left is-hidden-mobile ${ page > 1 ? "show" : "" }` }
+      className={ `btn-knp left is-pulled-left ${ page > 1 ? "show" : "" }` }
     >
       <span className="icomoon-font">l</span>
     </p>
     {/* scroll right */}
     <p
       onClick={ scrollRight }
-      className={ `btn-knp right is-pulled-right is-hidden-mobile ${ containsTenItems(images) ? "show" : "" }` }
+      className={ `btn-knp right is-pulled-right ${ containsTenItems(images) ? "show" : "" }` }
     >
       <span className="icomoon-font">r</span>
     </p>

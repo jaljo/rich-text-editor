@@ -53,7 +53,7 @@ const fetchImages = (fetchApi, page, searchString) =>
     method: "GET",
   });
 
-// searchImagesEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
+// searchImagesEpic :: Epic -> Observable Action
 export const searchImagesEpic = (action$, _, { fetchApi }) =>
   action$.pipe(
     ofType(FETCH_IMAGES),
@@ -71,7 +71,7 @@ export const searchImagesEpic = (action$, _, { fetchApi }) =>
     logObservableError(),
   );
 
-// changePageEpic :: (Observable Action Error, Observable State Error, Object) -> Observable Action _
+// changePageEpic :: Epic -> Observable Action
 export const changePageEpic = (action$, state$, { fetchApi }) =>
   action$.pipe(
     ofType(SCROLL_RIGHT, SCROLL_LEFT),
@@ -89,7 +89,7 @@ export const changePageEpic = (action$, state$, { fetchApi }) =>
     logObservableError(),
   );
 
-// ensurePickedImageHasCreditsEpic :: Epic -> Observable Action ERROR
+// ensurePickedImageHasCreditsEpic :: Epic -> Observable Action
 export const ensurePickedImageHasCreditsEpic = (action$, state$) =>
   action$.pipe(
     ofType(PICK_IMAGE),

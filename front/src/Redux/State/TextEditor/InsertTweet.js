@@ -43,9 +43,9 @@ export const embedTweetFetched = (editorName, html, url) => ({
 });
 
 // tweetInserted :: (String, String, String, String) -> Action
-export const tweetInserted = (editorName, tweetId, uid, originalHtmlMarkup) => ({
+export const tweetInserted = (editorName, tweetId, uid, markup) => ({
   editorName,
-  originalHtmlMarkup,
+  originalHtmlMarkup: markup,
   tweetId,
   type: TWEET_INSERTED,
   uid,

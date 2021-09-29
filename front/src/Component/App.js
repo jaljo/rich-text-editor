@@ -19,12 +19,13 @@ const App = ({
         <h2>Hello there !</h2>
         <p>
           I hope you are having a <b>good time</b> trying this text editor :)
-          To begin, try to select text and apply some modifications. If you focus
-          an empty paragraph (i.e. press enter at the end of a line), you will
-          be able to insert images or youtube videos.
+          To begin, try to select text and apply some modifications. If you
+          focus an empty paragraph (i.e. press enter at the end of a line), you
+          will be able to insert images, tweets or youtube videos.
         </p>
         <p>
-          I`&lsquo;m doing my best to have tweet insertion fixed asap. Happy testing !
+          I`&lsquo;m doing my best to have other videos insertion fixed asap.
+          Happy testing !
         </p>
       </TextEditor>
     </main>

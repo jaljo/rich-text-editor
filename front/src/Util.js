@@ -106,6 +106,8 @@ export const findById = uncurryN(2, id => find(propEq("id")(id)));
  * Mimics the https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
  * function. As the original function is experimental, we implement it here
  * to make it cross-browser (as a polyfill).
+ *
+ * wtf wtf wtf
  */
 export const closestHavingClass = className => element =>
   isNil(element.parentNode)
